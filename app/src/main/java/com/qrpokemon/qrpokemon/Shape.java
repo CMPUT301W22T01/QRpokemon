@@ -2,7 +2,7 @@ package com.qrpokemon.qrpokemon;
 
 
 public abstract class Shape {
-    String color = "yellow";
+    String color = "black";
     int x;
     int y;
 }
