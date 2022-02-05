@@ -23,9 +23,9 @@
      inkscape:pagecheckerboard="0"
      inkscape:document-units="mm"
      showgrid="false"
-     inkscape:zoom="0.90332492"
-     inkscape:cx="430.63132"
-     inkscape:cy="690.22783"
+     inkscape:zoom="1.2774943"
+     inkscape:cx="248.53339"
+     inkscape:cy="698.24185"
      inkscape:window-width="3840"
      inkscape:window-height="2098"
      inkscape:window-x="0"
@@ -121,7 +121,8 @@
          width="82.961128"
          height="25.463638"
          x="59.494083"
-         y="205.90269" />
+         y="205.90269"
+         ry="12.731819" />
       <text
          xml:space="preserve"
          style="font-size:12.7px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;stroke-width:0.264583"
@@ -151,28 +152,32 @@
        width="98.327637"
        height="15.951817"
        x="59.01923"
-       y="85.164673" />
+       y="85.164673"
+       ry="1.8889308" />
     <rect
        style="fill:#ececec;stroke:none;stroke-width:1"
        id="rect79785-2"
        width="98.327637"
        height="15.951817"
        x="59.01923"
-       y="114.7137" />
+       y="114.7137"
+       ry="1.666209" />
     <rect
        style="fill:#ececec;stroke:none;stroke-width:1"
        id="rect79785-2-3"
        width="98.327637"
        height="15.951817"
        x="59.01923"
-       y="145.80644" />
+       y="145.80644"
+       ry="2.0639427" />
     <rect
        style="fill:#ececec;stroke:none;stroke-width:1"
        id="rect79785-2-7"
        width="98.327637"
        height="15.951817"
        x="59.01923"
-       y="174.52036" />
+       y="174.52036"
+       ry="2.1363902" />
     <text
        xml:space="preserve"
        style="font-size:8.46667px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;stroke-width:0.264583"
