@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 210 297"
+   version="1.1"
+   id="svg5"
+   inkscape:export-filename="/home/michael/bitmap.png"
+   inkscape:export-xdpi="300"
+   inkscape:export-ydpi="300"
+   inkscape:version="1.1.1 (3bf5ae0d25, 2021-09-20, custom)"
+   sodipodi:docname="start.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:pageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="mm"
+     showgrid="false"
+     showguides="true"
+     inkscape:guide-bbox="true"
+     inkscape:zoom="1.2774943"
+     inkscape:cx="412.1349"
+     inkscape:cy="524.85555"
+     inkscape:window-width="3840"
+     inkscape:window-height="2098"
+     inkscape:window-x="0"
+     inkscape:window-y="62"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer2">
+    <sodipodi:guide
+       position="55.797336,292.31362"
+       orientation="1,0"
+       id="guide6606" />
+    <sodipodi:guide
+       position="147.33908,293.97057"
+       orientation="1,0"
+       id="guide6608" />
+  </sodipodi:namedview>
+  <defs
+     id="defs2" />
+  <g
+     inkscape:label="Background"
+     inkscape:groupmode="layer"
+     id="layer1"
+     sodipodi:insensitive="true"
+     style="display:inline">
+    <rect
+       style="fill:#ffffff;stroke:#ffffff;stroke-width:0.499999"
+       id="rect854"
+       width="209.84608"
+       height="297.9021"
+       x="0.26311606"
+       y="-0.55316401" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer4"
+     inkscape:label="Header"
+     sodipodi:insensitive="true">
+    <text
+       xml:space="preserve"
+       style="font-size:19.05px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#ffffff;stroke-width:0.264583"
+       x="8.8610182"
+       y="20.190762"
+       id="text14901"><tspan
+         sodipodi:role="line"
+         id="tspan14899"
+         style="font-size:19.05px;fill:#ffffff;stroke-width:0.264583"
+         x="8.8610182"
+         y="20.190762">QRpokemon</tspan></text>
+    <rect
+       style="display:inline;fill:#0078ff;fill-opacity:1;stroke:#0078ff;stroke-width:0.75;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect20236"
+       width="209.84608"
+       height="26.459934"
+       x="0.26312777"
+       y="-0.55316401" />
+    <text
+       xml:space="preserve"
+       style="font-size:19.05px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#ffffff;stroke-width:0.264583"
+       x="7.7768183"
+       y="18.404842"
+       id="text22968"><tspan
+         sodipodi:role="line"
+         id="tspan22966"
+         style="font-size:19.05px;fill:#ffffff;stroke-width:0.264583"
+         x="7.7768183"
+         y="18.404842">QRpokemon</tspan></text>
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="Start"
+     style="display:inline"
+     sodipodi:insensitive="true">
+    <g
+       id="g9923"
+       transform="translate(2.7558629,-20.466052)"
+       style="stroke:none;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1">
+      <rect
+         style="fill:#c6e9af;stroke:none;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         id="rect6654"
+         width="45.009407"
+         height="15.053488"
+         x="75.568222"
+         y="111.96017" />
+    </g>
+    <text
+       xml:space="preserve"
+       style="font-size:8.46667px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke-width:0.264583"
+       x="89.719048"
+       y="101.53909"
+       id="text8520"><tspan
+         sodipodi:role="line"
+         id="tspan8518"
+         style="font-size:8.46667px;fill:#000000;fill-opacity:1;stroke-width:0.264583"
+         x="89.719048"
+         y="101.53909">Login</tspan></text>
+    <g
+       id="g9923-5"
+       transform="translate(2.5107352,5.2543255)"
+       style="stroke:none;stroke-opacity:1">
+      <rect
+         style="fill:#c6e9af;stroke:none;stroke-width:0.394073;stroke-opacity:1"
+         id="rect6654-3"
+         width="45.009407"
+         height="15.053488"
+         x="75.568222"
+         y="111.96017" />
+    </g>
+    <text
+       xml:space="preserve"
+       style="font-size:8.46667px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke-width:0.264583"
+       x="85.15226"
+       y="127.61807"
+       id="text8520-5"><tspan
+         sodipodi:role="line"
+         id="tspan8518-6"
+         style="font-size:8.46667px;fill:#000000;fill-opacity:1;stroke-width:0.264583"
+         x="85.15226"
+         y="127.61807">Sign Up</tspan></text>
+  </g>
+</svg>
