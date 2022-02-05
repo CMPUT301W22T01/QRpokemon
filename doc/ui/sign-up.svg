@@ -24,8 +24,8 @@
      inkscape:document-units="mm"
      showgrid="false"
      inkscape:zoom="0.90332492"
-     inkscape:cx="147.23384"
-     inkscape:cy="668.08741"
+     inkscape:cx="430.63132"
+     inkscape:cy="690.22783"
      inkscape:window-width="3840"
      inkscape:window-height="2098"
      inkscape:window-x="0"
@@ -46,6 +46,10 @@
        position="59.019229,234.17308"
        orientation="1,0"
        id="guide79891" />
+    <sodipodi:guide
+       position="55.357987,249.5503"
+       orientation="1,0"
+       id="guide87887" />
   </sodipodi:namedview>
   <defs
      id="defs58173" />
@@ -183,35 +187,35 @@
     <text
        xml:space="preserve"
        style="font-size:8.46667px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;stroke-width:0.264583"
-       x="16.690935"
-       y="123.50009"
+       x="27.87714"
+       y="125.41254"
        id="text81052-5"><tspan
          sodipodi:role="line"
          id="tspan81050-9"
          style="font-size:8.46667px;stroke-width:0.264583"
-         x="16.690935"
-         y="123.50009">Detail 1</tspan></text>
+         x="27.87714"
+         y="125.41254">Detail 1</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:8.46667px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;stroke-width:0.264583"
-       x="16.567579"
-       y="156.02434"
+       x="26.909731"
+       y="157.64577"
        id="text81052-5-2"><tspan
          sodipodi:role="line"
          id="tspan81050-9-2"
          style="font-size:8.46667px;stroke-width:0.264583"
-         x="16.567579"
-         y="156.02434">Detail 2</tspan></text>
+         x="26.909731"
+         y="157.64577">Detail 2</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:8.46667px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;stroke-width:0.264583"
-       x="17.237185"
-       y="185.27917"
+       x="26.965614"
+       y="186.04442"
        id="text81052-5-8"><tspan
          sodipodi:role="line"
          id="tspan81050-9-9"
          style="font-size:8.46667px;stroke-width:0.264583"
-         x="17.237185"
-         y="185.27917">Detail 3</tspan></text>
+         x="26.965614"
+         y="186.04442">Detail 3</tspan></text>
   </g>
 </svg>
