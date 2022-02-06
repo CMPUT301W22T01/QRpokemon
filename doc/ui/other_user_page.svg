@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 210 297"
+   version="1.1"
+   id="svg5"
+   inkscape:export-filename="/home/michael/bitmap.png"
+   inkscape:export-xdpi="300"
+   inkscape:export-ydpi="300"
+   inkscape:version="1.1.1 (3bf5ae0d25, 2021-09-20)"
+   sodipodi:docname="other_user_page.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:pageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="mm"
+     showgrid="false"
+     showguides="true"
+     inkscape:guide-bbox="true"
+     inkscape:zoom="1.2774943"
+     inkscape:cx="232.48636"
+     inkscape:cy="755.38498"
+     inkscape:window-width="1515"
+     inkscape:window-height="1030"
+     inkscape:window-x="2977"
+     inkscape:window-y="133"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="layer4">
+    <sodipodi:guide
+       position="55.797336,292.31362"
+       orientation="1,0"
+       id="guide6606" />
+    <sodipodi:guide
+       position="147.33908,293.97057"
+       orientation="1,0"
+       id="guide6608" />
+  </sodipodi:namedview>
+  <defs
+     id="defs2" />
+  <g
+     inkscape:label="Background"
+     inkscape:groupmode="layer"
+     id="layer1"
+     sodipodi:insensitive="true"
+     style="display:inline">
+    <rect
+       style="fill:#ffffff;stroke:#ffffff;stroke-width:0.499999"
+       id="rect854"
+       width="209.84608"
+       height="297.9021"
+       x="0.26311606"
+       y="-0.55316401" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer4"
+     inkscape:label="Header">
+    <text
+       xml:space="preserve"
+       style="font-size:19.05px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#ffffff;stroke-width:0.264583"
+       x="8.8610182"
+       y="20.190762"
+       id="text14901"><tspan
+         sodipodi:role="line"
+         id="tspan14899"
+         style="font-size:19.05px;fill:#ffffff;stroke-width:0.264583"
+         x="8.8610182"
+         y="20.190762">QRpokemon</tspan></text>
+    <rect
+       style="display:inline;fill:#0078ff;fill-opacity:1;stroke:#0078ff;stroke-width:0.818217;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect20236"
+       width="209.77786"
+       height="31.50246"
+       x="0.29723629"
+       y="-0.51905549" />
+    <text
+       xml:space="preserve"
+       style="font-size:19.05px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#ffffff;stroke-width:0.264583"
+       x="6.6782341"
+       y="21.673599"
+       id="text22968"><tspan
+         sodipodi:role="line"
+         id="tspan22966"
+         style="font-size:19.05px;fill:#ffffff;stroke-width:0.264583"
+         x="6.6782341"
+         y="21.673599">QRpokemon</tspan></text>
+    <rect
+       style="fill:#fff7d4;fill-opacity:1;stroke:#000000;stroke-width:0.264999;stroke-opacity:0.571429"
+       id="rect106959"
+       width="210.31404"
+       height="86.320198"
+       x="0.29723629"
+       y="30.983404" />
+    <rect
+       style="fill:#82e3e0;fill-opacity:0.352941;stroke:#000000;stroke-width:0.264999;stroke-opacity:0.571429"
+       id="rect107480"
+       width="209.94827"
+       height="41.33128"
+       x="0.29723629"
+       y="117.3036" />
+    <rect
+       style="fill:#82e3e0;fill-opacity:0.352941;stroke:#000000;stroke-width:0.264999;stroke-opacity:0.571429"
+       id="rect107480-0"
+       width="209.94827"
+       height="41.33128"
+       x="0.29723629"
+       y="158.63487" />
+    <rect
+       style="fill:#82e3e0;fill-opacity:0.352941;stroke:#000000;stroke-width:0.264999;stroke-opacity:0.571429"
+       id="rect107480-5"
+       width="209.94827"
+       height="41.33128"
+       x="0.29723629"
+       y="199.96616" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.5833px;line-height:1.25;font-family:sans-serif;fill:#000087;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="3.0838747"
+       y="45.241413"
+       id="text142034"><tspan
+         sodipodi:role="line"
+         style="fill:#000087;fill-opacity:1;stroke-width:0.264583"
+         x="3.0838747"
+         y="45.241413"
+         id="tspan165134">Username: </tspan><tspan
+         sodipodi:role="line"
+         style="fill:#000087;fill-opacity:1;stroke-width:0.264583"
+         x="3.0838747"
+         y="58.470539"
+         id="tspan151658" /><tspan
+         sodipodi:role="line"
+         style="fill:#000087;fill-opacity:1;stroke-width:0.264583"
+         x="3.0838747"
+         y="71.699661"
+         id="tspan142036">Contact information:</tspan><tspan
+         sodipodi:role="line"
+         style="fill:#000087;fill-opacity:1;stroke-width:0.264583"
+         x="3.0838747"
+         y="84.92878"
+         id="tspan153250" /><tspan
+         sodipodi:role="line"
+         style="fill:#000087;fill-opacity:1;stroke-width:0.264583"
+         x="3.0838747"
+         y="98.157906"
+         id="tspan149340">Total score:  </tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:8.46667px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="4.4282126"
+       y="126.04935"
+       id="text186306"><tspan
+         sodipodi:role="line"
+         id="tspan186304"
+         style="font-size:8.46667px;stroke-width:0.264583"
+         x="4.4282126"
+         y="126.04935">QR code 1:</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:8.46667px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="4.6353235"
+       y="168.30003"
+       id="text186306-1"><tspan
+         sodipodi:role="line"
+         id="tspan186304-4"
+         style="font-size:8.46667px;stroke-width:0.264583"
+         x="4.6353235"
+         y="168.30003">QR code 2:</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:8.46667px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="5.6708789"
+       y="210.75781"
+       id="text186306-9"><tspan
+         sodipodi:role="line"
+         id="tspan186304-2"
+         style="font-size:8.46667px;stroke-width:0.264583"
+         x="5.6708789"
+         y="210.75781">QR code 3:</tspan></text>
+    <rect
+       style="fill:#000087;fill-opacity:1;stroke:#000000;stroke-width:0.264999;stroke-opacity:0.571429"
+       id="rect166110"
+       width="58.156403"
+       height="12.435961"
+       x="147.33908"
+       y="143.52339" />
+    <rect
+       style="fill:#000087;fill-opacity:1;stroke:#000000;stroke-width:0.264999;stroke-opacity:0.571429"
+       id="rect166110-3"
+       width="58.156403"
+       height="12.435961"
+       x="147.33908"
+       y="184.73851" />
+    <rect
+       style="fill:#000087;fill-opacity:1;stroke:#000000;stroke-width:0.264999;stroke-opacity:0.571429"
+       id="rect166110-6"
+       width="58.156403"
+       height="12.435961"
+       x="147.33908"
+       y="225.74652" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:6.35px;line-height:1.25;font-family:sans-serif;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="151.78157"
+       y="152.31268"
+       id="text173421"><tspan
+         sodipodi:role="line"
+         id="tspan173419"
+         style="font-size:6.35px;fill:#ffffff;stroke-width:0.264583"
+         x="151.78157"
+         y="152.31268">add comment</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:6.35px;line-height:1.25;font-family:sans-serif;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="152.40291"
+       y="193.11357"
+       id="text173421-5"><tspan
+         sodipodi:role="line"
+         id="tspan173419-7"
+         style="font-size:6.35px;fill:#ffffff;stroke-width:0.264583"
+         x="152.40291"
+         y="193.11357">add comment</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:6.35px;line-height:1.25;font-family:sans-serif;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="151.78156"
+       y="234.12158"
+       id="text173421-3"><tspan
+         sodipodi:role="line"
+         id="tspan173419-4"
+         style="font-size:6.35px;fill:#ffffff;stroke-width:0.264583"
+         x="151.78156"
+         y="234.12158">add comment</tspan></text>
+  </g>
+</svg>
