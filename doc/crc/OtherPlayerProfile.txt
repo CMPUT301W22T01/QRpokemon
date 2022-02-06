@@ -1,0 +1,4 @@
+Class: OtherPlayerProfile
+Collaborator: Account_activity
+Responsibility: Add comment on other player's QRcode scanned
+Responsibility: Display other player's stats

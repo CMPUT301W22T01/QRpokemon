@@ -1,0 +1,27 @@
+Class: MyProfile
+Collaborator: Account_activity, LoginQRCode, StatusQRCode, DeleteProfile
+Responsibility: display current player's stats
+Responsibility: open login QR code
+Responsibility: open status QR code
+Responsibility: Let user to logout
+Responsibility: Let user to delete his/her account
+
+Class: LoginQRCode
+Collaborator: MyProfile, Photos
+Responsibility: display user's login QRcode
+Responsibility: access Photos
+
+Class: Photos
+Collaborator: LoginQRCod, StatusQRCode
+Responsibility: Display user's login QRcode
+Responsibility: Display user's status QRcode
+
+Class: StatusQRCode
+Collaborator: MyProfile, Photos
+Responsibility: display StatusQRCode 
+Responsibility: access Photos
+
+Class: DeleteProfile
+Collaborator: Account_activity, Start_activity
+Responsibility: delete current account
+Responsibility: back to start Start_activity

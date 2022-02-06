@@ -1,0 +1,8 @@
+Class: Qr_inventory
+Collaborator: Account_activity
+Responsibility: Display all QR code(s) user scanned.
+Responsibility: Display total of codes scanned.
+Responsibility: Display if a QR code is scanned
+Responsibility: Display highest of QRcode(s)/scores scanned
+Responsibility: Display total score
+Responsibility: Let user select a QR code to remove
