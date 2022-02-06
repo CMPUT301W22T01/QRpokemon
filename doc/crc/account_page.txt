@@ -1,0 +1,18 @@
+Class: Account_activity
+Collaborator: Search,  Camera, Friends, Rank, MyProfile, Qr_inventory, OtherPlayerProfile
+Responsibility: open Camera_for_activity_page
+Responsibility: open search page
+Responsibility: open the MyProfile page
+Responsibility: open Rank
+Responsibility: open qr_inventory page
+Responsibility: check if the QR code scanned
+Responsibility: analyze QR code scanned from Camera
+
+Class: Camera
+Collaborator: Account_activity
+Responsibility: take photo
+Responsibility: save photo
+
+Class: Logout
+Collaborator: Start_activity
+Responsibility: go back to start page

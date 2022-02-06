@@ -1,0 +1,19 @@
+Class: Login
+Collaborator: Start_activity, Camera, Photos
+Responsibility: open camera
+Responsibility: scan code
+Responsibility: analyse the QR code 
+Responsibility: launch to the database
+Responsibility: check username
+Responsibility: access photos from File Explorer
+
+Class: Camera
+Collaborator: Login
+Responsibility: take picture
+Responsibility: save picture
+
+Class: Photos
+Collaborator: Login
+Responsibility: Open album
+Responsibility: Let user select a photo
+Responsibility: Pass the photo back to Login
