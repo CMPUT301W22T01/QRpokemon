@@ -1,0 +1,6 @@
+Class: Start_activity
+Collaborator: Login, Signup
+Responsibility: handle signup
+Responsibility: handle login
+Responsibility: display title
+Responsibility: exit the program

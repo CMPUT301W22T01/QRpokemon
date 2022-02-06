@@ -1,0 +1,6 @@
+Class: World_activity
+Collaborator: Account_activity
+Responsibility: obtain gamewide user total scores.
+Responsibility: display rank of current player among leader board.
+Responsibility: display rank of current player.
+Responsibility: display high score

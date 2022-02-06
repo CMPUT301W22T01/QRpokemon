@@ -1,0 +1,3 @@
+Class: Search
+Collaborator: Account_activity
+Responsibility: search player by name
