@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 210 297"
+   version="1.1"
+   id="svg80980"
+   inkscape:version="1.1.1 (3bf5ae0d25, 2021-09-20, custom)"
+   sodipodi:docname="qr-interface.svg"
+   inkscape:export-filename="/home/michael/bitmap.png"
+   inkscape:export-xdpi="300"
+   inkscape:export-ydpi="300"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview80982"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:pageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="mm"
+     showgrid="false"
+     showguides="true"
+     inkscape:guide-bbox="true"
+     inkscape:zoom="1.8066498"
+     inkscape:cx="394.65312"
+     inkscape:cy="367.25434"
+     inkscape:window-width="3840"
+     inkscape:window-height="2098"
+     inkscape:window-x="0"
+     inkscape:window-y="62"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer17">
+    <sodipodi:guide
+       position="15.332812,304.17617"
+       orientation="1,0"
+       id="guide81353" />
+    <sodipodi:guide
+       position="63.55917,252.1864"
+       orientation="0,-1"
+       id="guide81377" />
+    <sodipodi:guide
+       position="94.313607,247.13388"
+       orientation="1,0"
+       id="guide90054" />
+    <sodipodi:guide
+       position="116.69662,238.6377"
+       orientation="0,-1"
+       id="guide99098" />
+    <sodipodi:guide
+       position="196.7556,281.67378"
+       orientation="1,0"
+       id="guide115864" />
+    <sodipodi:guide
+       position="20.136834,159.26406"
+       orientation="1,0"
+       id="guide140646" />
+    <sodipodi:guide
+       position="47.083579,163.95045"
+       orientation="0,-1"
+       id="guide140648" />
+  </sodipodi:namedview>
+  <defs
+     id="defs80977" />
+  <g
+     inkscape:label="Background"
+     inkscape:groupmode="layer"
+     id="layer1"
+     sodipodi:insensitive="true">
+    <g
+       id="g81351"
+       transform="translate(-0.10230365,0.76149319)">
+      <g
+         inkscape:label="Background"
+         id="layer1-1"
+         style="display:inline">
+        <rect
+           style="fill:#ffffff;stroke:#ffffff;stroke-width:0.499999"
+           id="rect854"
+           width="209.84608"
+           height="297.9021"
+           x="0.26311606"
+           y="-0.55316401" />
+      </g>
+      <g
+         id="layer4"
+         inkscape:label="Header">
+        <text
+           xml:space="preserve"
+           style="font-size:19.05px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#ffffff;stroke-width:0.264583"
+           x="8.8610182"
+           y="20.190762"
+           id="text14901"><tspan
+             sodipodi:role="line"
+             id="tspan14899"
+             style="font-size:19.05px;fill:#ffffff;stroke-width:0.264583"
+             x="8.8610182"
+             y="20.190762">QRpokemon</tspan></text>
+        <rect
+           style="display:inline;fill:#0078ff;fill-opacity:1;stroke:#0078ff;stroke-width:0.818217;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           id="rect20236"
+           width="209.77786"
+           height="31.50246"
+           x="0.29723629"
+           y="-0.51905549" />
+        <text
+           xml:space="preserve"
+           style="font-size:19.05px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#ffffff;stroke-width:0.264583"
+           x="6.6782341"
+           y="21.673599"
+           id="text22968"><tspan
+             sodipodi:role="line"
+             id="tspan22966"
+             style="font-size:19.05px;fill:#ffffff;stroke-width:0.264583"
+             x="6.6782341"
+             y="21.673599">QRpokemon</tspan></text>
+      </g>
+    </g>
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer17"
+     inkscape:label="QR">
+    <rect
+       style="fill:#000000;stroke:#000000;stroke-width:0.413844"
+       id="rect81481"
+       width="65.491241"
+       height="65.491241"
+       x="15.332812"
+       y="44.813602" />
+    <text
+       xml:space="preserve"
+       style="font-size:4.23333px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;stroke-width:0.264583"
+       x="15.367797"
+       y="115.38836"
+       id="text83208"><tspan
+         sodipodi:role="line"
+         id="tspan83206"
+         style="font-size:4.23333px;stroke-width:0.264583"
+         x="15.367797"
+         y="115.38836">Hash: 1234567890abcdefghijklmnopqrstuvwxyz1b2b</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:4.23333px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;stroke-width:0.264583"
+       x="38.853798"
+       y="117.6058"
+       id="text95994"><tspan
+         sodipodi:role="line"
+         id="tspan95992"
+         style="font-size:4.23333px;stroke-width:0.264583"
+         x="38.853798"
+         y="117.6058" /></text>
+    <text
+       xml:space="preserve"
+       style="font-size:8.46667px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;stroke-width:0.264583"
+       x="93.70636"
+       y="71.299629"
+       id="text102204"><tspan
+         sodipodi:role="line"
+         id="tspan102202"
+         style="font-size:8.46667px;stroke-width:0.264583"
+         x="93.70636"
+         y="71.299629">Location: Edmonton</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:16.9333px;line-height:1.25;font-family:sans-serif;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#ffffff;stroke-width:0.264583"
+       x="48.838486"
+       y="73.945389"
+       id="text117711"><tspan
+         sodipodi:role="line"
+         id="tspan117709"
+         style="font-size:16.9333px;text-align:center;text-anchor:middle;fill:#ffffff;stroke-width:0.264583"
+         x="48.838486"
+         y="73.945389">QR</tspan><tspan
+         sodipodi:role="line"
+         style="font-size:16.9333px;text-align:center;text-anchor:middle;fill:#ffffff;stroke-width:0.264583"
+         x="48.838486"
+         y="95.112015"
+         id="tspan117713">Code</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:8.46667px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;stroke-width:0.264583"
+       x="93.686279"
+       y="85.36898"
+       id="text123873"><tspan
+         sodipodi:role="line"
+         id="tspan123871"
+         style="font-size:8.46667px;stroke-width:0.264583"
+         x="93.686279"
+         y="85.36898">Time: 02-02-22 | 00:00:00</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:8.46667px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;stroke-width:0.264583"
+       x="93.967598"
+       y="58.125965"
+       id="text156085"><tspan
+         sodipodi:role="line"
+         id="tspan156083"
+         style="font-size:8.46667px;stroke-width:0.264583"
+         x="93.967598"
+         y="58.125965">Score: 999</tspan></text>
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer20"
+     inkscape:label="Return Button"
+     sodipodi:insensitive="true">
+    <rect
+       style="fill:#aaffaa;stroke:#aaffaa;stroke-width:0.264999"
+       id="rect124754"
+       width="77.338333"
+       height="13.93303"
+       x="68.261711"
+       y="272.52625" />
+    <text
+       xml:space="preserve"
+       style="font-size:7.05556px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;stroke-width:0.264583"
+       x="73.776459"
+       y="282.00983"
+       id="text126760"><tspan
+         sodipodi:role="line"
+         id="tspan126758"
+         style="font-size:7.05556px;stroke-width:0.264583"
+         x="73.776459"
+         y="282.00983">Return to Main Menu</tspan></text>
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer18"
+     inkscape:label="Comment Box"
+     style="display:inline"
+     sodipodi:insensitive="true">
+    <rect
+       style="fill:#e6e6e6;stroke:#e6e6e6;stroke-width:0.264999"
+       id="rect115866"
+       width="181.42279"
+       height="128.26555"
+       x="15.332812"
+       y="128.88383" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer19"
+     inkscape:label="Default comment"
+     style="display:inline"
+     sodipodi:insensitive="true">
+    <text
+       xml:space="preserve"
+       style="font-size:8.46667px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#f9f9f9;stroke-width:0.264583"
+       x="19.783014"
+       y="139.47923"
+       id="text136330"><tspan
+         sodipodi:role="line"
+         id="tspan136328"
+         style="font-size:8.46667px;fill:#f9f9f9;stroke-width:0.264583"
+         x="19.783014"
+         y="139.47923">Comment</tspan></text>
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer21"
+     inkscape:label="Example Comment"
+     style="display:none"
+     sodipodi:insensitive="true">
+    <text
+       xml:space="preserve"
+       style="font-size:8.46667px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;stroke-width:0.264583"
+       x="20.020687"
+       y="139.2838"
+       id="text141594"><tspan
+         sodipodi:role="line"
+         id="tspan141592"
+         style="font-size:8.46667px;stroke-width:0.264583"
+         x="20.020687"
+         y="139.2838">Test Comment</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:2.11667px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;stroke-width:0.264583"
+       x="25.613956"
+       y="124.98563"
+       id="text146653"><tspan
+         sodipodi:role="line"
+         id="tspan146651"
+         style="stroke-width:0.264583"
+         x="25.613956"
+         y="124.98563"></tspan></text>
+  </g>
+</svg>
