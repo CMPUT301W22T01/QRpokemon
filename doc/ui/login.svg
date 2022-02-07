@@ -9,6 +9,9 @@
    id="svg25842"
    sodipodi:docname="login.svg"
    inkscape:version="1.1.1 (3bf5ae0d25, 2021-09-20, custom)"
+   inkscape:export-filename="/home/michael/dev/301/login.png"
+   inkscape:export-xdpi="24"
+   inkscape:export-ydpi="24"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
@@ -25,15 +28,15 @@
      showgrid="false"
      showguides="true"
      inkscape:guide-bbox="true"
-     inkscape:zoom="0.90332492"
-     inkscape:cx="157.75055"
-     inkscape:cy="640.96538"
+     inkscape:zoom="1.2774944"
+     inkscape:cx="292.76059"
+     inkscape:cy="509.98268"
      inkscape:window-width="3840"
      inkscape:window-height="2098"
      inkscape:window-x="0"
      inkscape:window-y="62"
      inkscape:window-maximized="1"
-     inkscape:current-layer="layer5">
+     inkscape:current-layer="layer2">
     <sodipodi:guide
        position="51.550295,234.90533"
        orientation="1,0"
@@ -103,7 +106,8 @@
   <g
      inkscape:groupmode="layer"
      id="layer5"
-     inkscape:label="Base UI">
+     inkscape:label="Base UI"
+     sodipodi:insensitive="true">
     <text
        xml:space="preserve"
        style="font-size:11.2889px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;stroke-width:0.264583"
@@ -168,6 +172,39 @@
   </g>
   <g
      inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="Submit"
+     sodipodi:insensitive="true">
+    <g
+       id="g52392-6"
+       transform="translate(27.621071,129.10192)">
+      <g
+         id="g9692"
+         transform="matrix(0.64869979,0,0,0.64869979,25.426659,28.058619)">
+        <rect
+           style="fill:#aaeeff;fill-opacity:1;stroke:none;stroke-width:1"
+           id="rect37865-7-7"
+           width="101.78125"
+           height="26.065149"
+           x="23.929224"
+           y="79.870773"
+           ry="0" />
+        <text
+           xml:space="preserve"
+           style="font-size:9.87778px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;stroke-width:0.264583"
+           x="58.140717"
+           y="95.920845"
+           id="text39409-9-5"><tspan
+             sodipodi:role="line"
+             id="tspan39407-2-3"
+             style="font-size:9.87778px;stroke-width:0.264583"
+             x="58.140717"
+             y="95.920845">Submit</tspan></text>
+      </g>
+    </g>
+  </g>
+  <g
+     inkscape:groupmode="layer"
      id="layer7"
      inkscape:label="Filename"
      style="display:inline"
@@ -176,12 +213,12 @@
        xml:space="preserve"
        style="font-size:5.64444px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;stroke-width:0.264583"
        x="51.550293"
-       y="200.32881"
+       y="191.43832"
        id="text57211"><tspan
          sodipodi:role="line"
          id="tspan57209"
          style="stroke-width:0.264583"
          x="51.550293"
-         y="200.32881">Opened file: &lt;filename&gt;</tspan></text>
+         y="191.43832">Opened file: &lt;filename&gt;</tspan></text>
   </g>
 </svg>
