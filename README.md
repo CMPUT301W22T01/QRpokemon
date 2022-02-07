@@ -1,3 +1,5 @@
 # QRPokemon - CMPUT301W22T01
 
-Repository for Team 1.
+Repository for QRpokemon (Team 1).
+
+Please see the wiki for list of members and contributing guidelines.
