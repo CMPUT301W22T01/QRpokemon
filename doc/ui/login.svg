@@ -29,14 +29,14 @@
      showguides="true"
      inkscape:guide-bbox="true"
      inkscape:zoom="1.2774944"
-     inkscape:cx="292.76059"
-     inkscape:cy="509.98268"
+     inkscape:cx="577.69336"
+     inkscape:cy="506.06877"
      inkscape:window-width="3840"
      inkscape:window-height="2098"
      inkscape:window-x="0"
      inkscape:window-y="62"
      inkscape:window-maximized="1"
-     inkscape:current-layer="layer2">
+     inkscape:current-layer="layer3">
     <sodipodi:guide
        position="51.550295,234.90533"
        orientation="1,0"
@@ -220,5 +220,23 @@
          style="stroke-width:0.264583"
          x="51.550293"
          y="191.43832">Opened file: &lt;filename&gt;</tspan></text>
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer3"
+     inkscape:label="Login Failed"
+     sodipodi:insensitive="true"
+     style="display:none">
+    <text
+       xml:space="preserve"
+       style="font-size:4.23333px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ff2a2a;stroke-width:0.264583"
+       x="68.388206"
+       y="236.49272"
+       id="text15222"><tspan
+         sodipodi:role="line"
+         id="tspan15220"
+         style="font-size:4.23333px;fill:#ff2a2a;stroke-width:0.264583"
+         x="68.388206"
+         y="236.49272">Login Failed: User does not exist</tspan></text>
   </g>
 </svg>
