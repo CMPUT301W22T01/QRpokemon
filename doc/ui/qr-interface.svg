@@ -29,14 +29,14 @@
      showguides="true"
      inkscape:guide-bbox="true"
      inkscape:zoom="1.8066498"
-     inkscape:cx="394.65312"
-     inkscape:cy="367.25434"
+     inkscape:cx="399.63473"
+     inkscape:cy="860.43239"
      inkscape:window-width="3840"
      inkscape:window-height="2098"
      inkscape:window-x="0"
      inkscape:window-y="62"
      inkscape:window-maximized="1"
-     inkscape:current-layer="layer17">
+     inkscape:current-layer="layer20">
     <sodipodi:guide
        position="15.332812,304.17617"
        orientation="1,0"
@@ -221,14 +221,15 @@
     <text
        xml:space="preserve"
        style="font-size:7.05556px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;stroke-width:0.264583"
-       x="73.776459"
-       y="282.00983"
-       id="text126760"><tspan
+       x="71.964333"
+       y="282.40414"
+       id="text126760"
+       inkscape:transform-center-y="-0.59546143"><tspan
          sodipodi:role="line"
          id="tspan126758"
          style="font-size:7.05556px;stroke-width:0.264583"
-         x="73.776459"
-         y="282.00983">Return to Main Menu</tspan></text>
+         x="71.964333"
+         y="282.40414">Return to Main Menu</tspan></text>
   </g>
   <g
      inkscape:groupmode="layer"
@@ -289,6 +290,6 @@
          id="tspan146651"
          style="stroke-width:0.264583"
          x="25.613956"
-         y="124.98563"></tspan></text>
+         y="124.98563" /></text>
   </g>
 </svg>
