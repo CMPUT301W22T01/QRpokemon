@@ -1,0 +1,20 @@
+@startuml
+skinparam dpi 300
+
+start
+
+:<img:resources/start.png{scale=0.5}>;
+switch ()
+case (Login)
+    :<img:resources/login.png{scale=0.5}>;
+    repeat :Upload QR code;
+        backward:<img:resources/login-failed-zoomed.png{scale=0.5}>;
+    repeat while (Verification) is (invalid)
+    ->valid;
+case (Sign Up)
+    :<img:resources/sign-up.png{scale=0.5}>;
+case (Exit)
+    end
+endswitch
+:<img:resources/main-ui.png{scale=0.5}>;
+@enduml
