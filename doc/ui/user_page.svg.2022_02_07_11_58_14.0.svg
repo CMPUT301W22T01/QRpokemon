@@ -38,11 +38,11 @@
      inkscape:window-maximized="0"
      inkscape:current-layer="layer4">
     <sodipodi:guide
-       position="28.118343,143.60983"
+       position="55.65089,96.949697"
        orientation="1,0"
        id="guide6606" />
     <sodipodi:guide
-       position="174.13403,143.22781"
+       position="147.33908,293.97057"
        orientation="1,0"
        id="guide6608" />
   </sodipodi:namedview>
@@ -117,36 +117,36 @@
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:10.5833px;line-height:1.25;font-family:sans-serif;fill:#999999;fill-opacity:1;stroke:none;stroke-width:0.264583"
-       x="22.445171"
-       y="46.903625"
+       x="8.9717979"
+       y="45.732029"
        id="text65235"><tspan
          sodipodi:role="line"
          id="tspan65233"
          style="fill:#999999;stroke-width:0.264583"
-         x="22.445171"
-         y="46.903625">Username</tspan></text>
+         x="8.9717979"
+         y="45.732029">Username</tspan></text>
     <rect
        style="fill:#e3dbdb;fill-rule:evenodd;stroke-width:0.264583"
        id="rect68715"
        width="42.459743"
        height="38.076923"
-       x="28.118343"
-       y="57.994083" />
+       x="13.19115"
+       y="55.06509" />
     <text
        xml:space="preserve"
        style="font-size:7.76111px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
-       x="33.390533"
-       y="73.810646"
+       x="19.91716"
+       y="72.639046"
        id="text73141"><tspan
          sodipodi:role="line"
          id="tspan73139"
          style="font-size:7.76111px;stroke-width:0.264583"
-         x="33.390533"
-         y="73.810646">User</tspan><tspan
+         x="19.91716"
+         y="72.639046">User</tspan><tspan
          sodipodi:role="line"
          style="font-size:7.76111px;stroke-width:0.264583"
-         x="33.390533"
-         y="83.512032"
+         x="19.91716"
+         y="82.340431"
          id="tspan77841">QRcode</tspan></text>
     <text
        xml:space="preserve"
@@ -159,28 +159,12 @@
        id="text96671"
        style="line-height:1.25;font-family:sans-serif;font-size:13.33333333px;white-space:pre;shape-inside:url(#rect96673)" />
     <rect
-       style="fill:#cccccc;fill-rule:evenodd;stroke-width:0.268694"
+       style="fill:#cccccc;fill-rule:evenodd;stroke-width:0.36565"
        id="rect100109"
-       width="49.51067"
+       width="91.688187"
        height="24.01775"
-       x="28.118343"
-       y="129.37242"
-       ry="8.6313801" />
-    <rect
-       style="fill:#cccccc;fill-rule:evenodd;stroke-width:0.268694"
-       id="rect100109-5"
-       width="49.51067"
-       height="24.01775"
-       x="124.62337"
-       y="129.75444"
-       ry="8.6313801" />
-    <rect
-       style="fill:#cccccc;fill-rule:evenodd;stroke-width:0.268694"
-       id="rect100109-5-5"
-       width="49.51067"
-       height="24.01775"
-       x="27.966558"
-       y="179.54735"
+       x="55.65089"
+       y="133.38394"
        ry="8.6313801" />
     <text
        xml:space="preserve"
@@ -206,126 +190,129 @@
          y="147.03551" /></text>
     <text
        xml:space="preserve"
+       style="font-size:7.05556px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+       x="74.396454"
+       y="145.39284"
+       id="text115724"><tspan
+         sodipodi:role="line"
+         id="tspan115722"
+         style="font-size:7.05556px;stroke-width:0.264583"
+         x="74.396454"
+         y="145.39284">My QR inventory</tspan></text>
+    <rect
+       style="fill:#cccccc;fill-rule:evenodd;stroke-width:0.392455"
+       id="rect151003"
+       width="91.688187"
+       height="21.088758"
+       x="55.65089"
+       y="172.04668"
+       ry="8.9221668" />
+    <text
+       xml:space="preserve"
        style="font-size:8.46667px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
-       x="38.36982"
-       y="194.98192"
+       x="84.062126"
+       y="184.93425"
        id="text155447"><tspan
          sodipodi:role="line"
          id="tspan155445"
          style="stroke-width:0.264583"
-         x="38.36982"
-         y="194.98192">Search</tspan></text>
+         x="84.062126"
+         y="184.93425">Search</tspan></text>
+    <rect
+       style="fill:#cccccc;fill-rule:evenodd;stroke-width:0.361089"
+       id="rect158361"
+       width="91.688194"
+       height="20.982403"
+       x="55.65089"
+       y="233.45808"
+       ry="8.2430973" />
     <text
        xml:space="preserve"
        style="font-size:8.46667px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
-       x="125.36095"
-       y="144.8961"
+       x="72.639061"
+       y="248.5825"
        id="text165791"><tspan
          sodipodi:role="line"
          id="tspan165789"
          style="stroke-width:0.264583"
-         x="125.36095"
-         y="144.8961">Check Rank</tspan></text>
+         x="72.639061"
+         y="248.5825">Check Rank</tspan></text>
+    <rect
+       style="fill:#cccccc;fill-rule:evenodd;stroke-width:0.385074"
+       id="rect169521"
+       width="91.688194"
+       height="20.413872"
+       x="55.65089"
+       y="200.05031"
+       ry="9.4632969" />
+    <text
+       xml:space="preserve"
+       style="font-size:8.46667px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+       x="90.505928"
+       y="213.72751"
+       id="text174893"><tspan
+         sodipodi:role="line"
+         id="tspan174891"
+         style="stroke-width:0.264583"
+         x="90.505928"
+         y="213.72751">Map</tspan></text>
     <rect
        style="font-variation-settings:normal;opacity:1;vector-effect:none;fill:#e6e6e6;fill-opacity:1;fill-rule:evenodd;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none;stop-color:#000000;stop-opacity:1"
        id="rect229"
        width="17.270395"
        height="18.159763"
-       x="174.13403"
-       y="46.863907"
+       x="174.28583"
+       y="52.136097"
        ry="2.4825537"
        inkscape:transform-center-x="0.58579884"
        inkscape:transform-center-y="-2.3431954" />
     <text
        xml:space="preserve"
        style="font-size:8.46667px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
-       x="173.54823"
-       y="59.165676"
+       x="174.28583"
+       y="61.508877"
        id="text7745"
        inkscape:transform-center-x="3.2141256"
        inkscape:transform-center-y="-4.6899304"><tspan
          sodipodi:role="line"
          id="tspan7743"
          style="stroke-width:0.264583"
-         x="173.54823"
-         y="59.165676">  +</tspan></text>
+         x="174.28583"
+         y="61.508877">  +</tspan></text>
     <text
        xml:space="preserve"
        transform="scale(0.26458333)"
        id="text16831"
        style="line-height:1.25;font-family:sans-serif;font-size:32px;white-space:pre;shape-inside:url(#rect16833)" />
-    <text
-       xml:space="preserve"
-       style="font-size:8.46667px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
-       x="23.431948"
-       y="143.52072"
-       id="text6882"><tspan
-         sodipodi:role="line"
-         id="tspan6880"
-         style="stroke-width:0.264583"
-         x="23.431948"
-         y="143.52072">QR Invertary</tspan><tspan
-         sodipodi:role="line"
-         style="stroke-width:0.264583"
-         x="23.431948"
-         y="154.10406"
-         id="tspan7016" /></text>
     <rect
-       style="fill:#cccccc;fill-rule:evenodd;stroke-width:0.268694"
-       id="rect100109-5-8"
-       width="49.51067"
-       height="24.01775"
-       x="124.62337"
-       y="179.54732"
-       ry="8.6313801" />
+       style="fill:#cccccc;fill-rule:evenodd;stroke-width:0.361089"
+       id="rect158361-3"
+       width="91.688194"
+       height="20.982403"
+       x="55.65089"
+       y="267.91388"
+       ry="8.2430973" />
     <text
        xml:space="preserve"
        style="font-size:8.46667px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
-       x="142.64203"
-       y="194.9819"
-       id="text174893"><tspan
+       x="72.639053"
+       y="283.03827"
+       id="text165791-8"><tspan
          sodipodi:role="line"
-         id="tspan174891"
+         id="tspan165789-0"
          style="stroke-width:0.264583"
-         x="142.64203"
-         y="194.9819">Map</tspan></text>
-    <rect
-       style="fill:#cccccc;fill-rule:evenodd;stroke-width:0.268694"
-       id="rect100109-5-1"
-       width="49.511002"
-       height="24.01775"
-       x="28.118343"
-       y="228.16864"
-       ry="8.6313801" />
-    <rect
-       style="fill:#cccccc;fill-rule:evenodd;stroke-width:0.268694"
-       id="rect100109-5-4"
-       width="49.51067"
-       height="24.01775"
-       x="124.62336"
-       y="228.16864"
-       ry="8.6313801" />
+         x="72.639053"
+         y="283.03827">      </tspan></text>
     <text
        xml:space="preserve"
        style="font-size:8.46667px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
-       x="31.784922"
-       y="243.69231"
-       id="text25228"><tspan
+       x="82.011833"
+       y="281.7692"
+       id="text7020"><tspan
          sodipodi:role="line"
-         id="tspan25226"
+         id="tspan7018"
          style="stroke-width:0.264583"
-         x="31.784922"
-         y="243.69231">My Friend</tspan></text>
-    <text
-       xml:space="preserve"
-       style="font-size:8.46667px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
-       x="133.56213"
-       y="243.10652"
-       id="text33826"><tspan
-         sodipodi:role="line"
-         id="tspan33824"
-         style="stroke-width:0.264583"
-         x="133.56213"
-         y="243.10652">sign out</tspan></text>
+         x="82.011833"
+         y="281.7692">sign out</tspan></text>
   </g>
 </svg>
