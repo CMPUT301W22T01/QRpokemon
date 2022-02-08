@@ -3,7 +3,8 @@ skinparam dpi 300
 
 start
 
-:<img:resources/start.png{scale=0.5}>;
+repeat :<img:resources/start.png{scale=0.5}>;
+
 switch ()
 case (Login)
     :<img:resources/login.png{scale=0.5}>;
@@ -16,5 +17,129 @@ case (Sign Up)
 case (Exit)
     end
 endswitch
+
 :<img:resources/main-ui.png{scale=0.5}>;
+note right
+All following activites
+may return here
+end note
+
+backward:Return to start screen;
+repeat while (Logout?) is (yes)
+->no;
+
+switch()
+
+case (My QR Inventory)
+    while ()
+    :My QR Inventory;
+    switch(Delete QR Code from Inventory?)
+    case (yes)
+        :QR Code Removed from Inventory;
+    case (no)
+        :;
+    endswitch
+    endwhile
+    -[hidden]->
+    detach
+
+case (Search)
+    :<img:resources/search.png{scale=0.5}>;
+
+    while ()
+    switch()
+    case (Search by username)
+        repeat
+        :<img:resources/search-username.png{scale=0.5}>;
+        note left
+        App will search as
+        user enters characters
+        end note
+        backward:<img:resources/view-profile.png{scale=0.4}>;
+        repeat while (View User Profile?) is (yes)
+    case (Search by geolocation)
+        :<img:resources/search-geolocation.png{scale=0.5}>;
+    endswitch
+
+    endwhile
+    -[hidden]->
+    detach
+
+case (Map)
+    :Map;
+    while()
+    switch()
+    case (Add as Friend)
+        switch()
+        case (Player Selected)
+            :Successfully added;
+        case (No Player Selected)
+            :A player needs to be selected;
+        endswitch
+    case (Select Player from Map)
+        :Highlight Selected Player;
+    endswitch
+
+    endwhile
+    -[hidden]->
+    detach
+
+case (Friends)
+    while ()
+    :Friends;
+    :Open Friend Profile;
+    :User Profile;
+    endwhile
+    -[hidden]->
+    detach
+
+case (Check Rank)
+    :<img:resources/leaderboard.png{scale=0.5}>;
+    while ()
+    :<img:resources/leaderboard-sort-by.png{scale=0.5}>;
+    switch()
+    case (Sort by High Scores)
+        :<img:resources/leaderboard.png{scale=0.5}>;
+    case (Sort by Highest Unique)
+        :<img:resources/leaderboard-highest-unique.png{scale=0.5}>;
+    case (Sort by Total Scanned)
+        :<img:resources/leaderboard-total-scanned.png{scale=0.5}>;
+    case (Sort by Total Sum of Scores)
+        :<img:resources/leaderboard-total-sum-of-scores.png{scale=0.5}>;
+    endswitch
+    endwhile
+    -[hidden]->
+    detach
+
+case (Scan New QR)
+    :Open Camera;
+
+    switch(User Scanned QR Code?)
+    case (yes)
+        :Show Scan Results;
+        note left
+        User can toggle saving
+        geolocation data and the
+        QR code
+        end note
+        
+        switch(Save Image?)
+        case (Save)
+            :QR Inventory;
+            note right
+            See QR Inventory Diagram
+            for more detail
+            end note
+            stop
+        case (Back)
+            :Activity Quits to Main Menu;
+            stop
+        endswitch
+
+    case (no)
+        :Activity Quits to Main Menu;
+        stop
+    endswitch
+endswitch
+
 @enduml
