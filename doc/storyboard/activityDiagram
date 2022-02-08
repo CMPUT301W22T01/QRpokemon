@@ -23,6 +23,7 @@ skinparam dpi 300
 
 ' QR Inventory Screen
 !$qr_inventory = "qr_inventory.png"
+!$qr_inventory_after_delete = "qr-inventory-after-delete.png"
 
 ' Search Screens
 !$search = "search.png"
@@ -33,7 +34,7 @@ skinparam dpi 300
 !$map = "map.png"
 
 ' Friend List
-!$friends = "friends.png"
+!$friend_list = "friend_list.png"
 
 ' Leaderboard
 !$leaderboard = "leaderboard.png"
@@ -87,10 +88,10 @@ switch()
 
 case (My QR Inventory)
     while ()
-    :My QR Inventory;
+    :<img:$resource_dir/$qr_inventory{scale=0.5}>;
     switch(Delete QR Code from Inventory?)
     case (yes)
-        :QR Code Removed from Inventory;
+        :<img:$resource_dir/$qr_inventory_after_delete{scale=0.5}>;
     case (no)
         ' We need this node to link the entire switch back
         :;
@@ -123,7 +124,7 @@ case (Search)
     detach
 
 case (Map)
-    :Map;
+    :<img:$resource_dir/$map{scale=0.5}>;
     while()
         switch()
         case (Add as Friend)
@@ -144,9 +145,9 @@ case (Map)
 
 case (Friends)
     while ()
-        :Friends;
+        :<img:$resource_dir/$friend_list{scale=0.5}>;
         :Open Friend Profile;
-        :User Profile;
+        :<img:$resource_dir/$view_profile{scale=0.5}>;
     endwhile
     -[hidden]->
     detach
@@ -183,7 +184,7 @@ case (Scan New QR)
         
         switch(Save Image?)
         case (Save)
-            :QR Inventory;
+            :<img:$resource_dir/$qr_inventory{scale=0.5}>;
             note right
             See QR Inventory Diagram
             for more detail
