@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 210 297"
+   version="1.1"
+   id="svg5"
+   inkscape:export-filename="/home/michael/bitmap.png"
+   inkscape:export-xdpi="300"
+   inkscape:export-ydpi="300"
+   inkscape:version="1.1.1 (3bf5ae0d25, 2021-09-20)"
+   sodipodi:docname="new QR scanned.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:pageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="mm"
+     showgrid="false"
+     showguides="true"
+     inkscape:guide-bbox="true"
+     inkscape:zoom="1.2774943"
+     inkscape:cx="264.97183"
+     inkscape:cy="625.4431"
+     inkscape:window-width="2560"
+     inkscape:window-height="1417"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer4">
+    <sodipodi:guide
+       position="55.797336,292.31362"
+       orientation="1,0"
+       id="guide6606" />
+    <sodipodi:guide
+       position="147.33908,293.97057"
+       orientation="1,0"
+       id="guide6608" />
+  </sodipodi:namedview>
+  <defs
+     id="defs2" />
+  <g
+     inkscape:label="Background"
+     inkscape:groupmode="layer"
+     id="layer1"
+     sodipodi:insensitive="true"
+     style="display:inline">
+    <rect
+       style="fill:#ffffff;stroke:#ffffff;stroke-width:0.499999"
+       id="rect854"
+       width="209.84608"
+       height="297.9021"
+       x="0.26311606"
+       y="-0.55316401" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer4"
+     inkscape:label="Header">
+    <text
+       xml:space="preserve"
+       style="font-size:19.05px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#ffffff;stroke-width:0.264583"
+       x="8.8610182"
+       y="20.190762"
+       id="text14901"><tspan
+         sodipodi:role="line"
+         id="tspan14899"
+         style="font-size:19.05px;fill:#ffffff;stroke-width:0.264583"
+         x="8.8610182"
+         y="20.190762">QRpokemon</tspan></text>
+    <rect
+       style="display:inline;fill:#0078ff;fill-opacity:1;stroke:#0078ff;stroke-width:0.818217;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect20236"
+       width="209.77786"
+       height="31.50246"
+       x="0.29723629"
+       y="-0.51905549" />
+    <text
+       xml:space="preserve"
+       style="font-size:19.05px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#ffffff;stroke-width:0.264583"
+       x="6.6782341"
+       y="21.673599"
+       id="text22968"><tspan
+         sodipodi:role="line"
+         id="tspan22966"
+         style="font-size:19.05px;fill:#ffffff;stroke-width:0.264583"
+         x="6.6782341"
+         y="21.673599">QRpokemon</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:7.24115px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.181029"
+       x="15.792024"
+       y="52.328888"
+       id="text2460"><tspan
+         sodipodi:role="line"
+         id="tspan2458"
+         style="stroke-width:0.181029"
+         x="15.792024"
+         y="52.328888">Yay! You've found a QR with ___ points!</tspan></text>
+    <rect
+       style="fill:#000080;fill-opacity:0.447581;stroke:#666666;stroke-width:0.246542"
+       id="rect8870"
+       width="124.28474"
+       height="124.28474"
+       x="38.513653"
+       y="61.71011" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.5833px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="94.856911"
+       y="125.30225"
+       id="text9834"><tspan
+         sodipodi:role="line"
+         id="tspan9832"
+         style="stroke-width:0.264583"
+         x="94.856911"
+         y="125.30225">QR</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.58199px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.11455"
+       x="41.801182"
+       y="217.04935"
+       id="text13372"><tspan
+         sodipodi:role="line"
+         id="tspan13370"
+         style="stroke-width:0.11455"
+         x="41.801182"
+         y="217.04935">Disable Geolocation</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:5.23249px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.21802"
+       x="117.33406"
+       y="217.44614"
+       id="text18824"><tspan
+         sodipodi:role="line"
+         id="tspan18822"
+         style="font-size:5.23249px;stroke-width:0.21802"
+         x="117.33406"
+         y="217.44614">Don't Save QR</tspan></text>
+    <rect
+       style="fill:#0000ff;fill-opacity:0.447581;stroke:#666666;stroke-width:0.264583"
+       id="rect23020"
+       width="57.784012"
+       height="15.533337"
+       x="38.936897"
+       y="247.91206" />
+    <rect
+       style="fill:#0000ff;fill-opacity:0.447581;stroke:#666666;stroke-width:0.264583"
+       id="rect23020-2"
+       width="57.784012"
+       height="15.533337"
+       x="105.10892"
+       y="247.8085" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:8.01604px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.200401"
+       x="108.69423"
+       y="258.59534"
+       id="text24996"><tspan
+         sodipodi:role="line"
+         id="tspan24994"
+         style="stroke-width:0.200401"
+         x="108.69423"
+         y="258.59534">Save &amp; Back</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:8.69339px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.217335"
+       x="43.523266"
+       y="259.15881"
+       id="text44502"><tspan
+         sodipodi:role="line"
+         id="tspan44500"
+         style="stroke-width:0.217335"
+         x="43.523266"
+         y="259.15881">Don't Save</tspan></text>
+    <rect
+       style="fill:#f2f2f2;fill-opacity:0.447581;stroke:#666666;stroke-width:0.210099"
+       id="rect54134"
+       width="28.017199"
+       height="11.534636"
+       x="46.365662"
+       y="195.39665"
+       ry="4.3752069" />
+    <rect
+       style="fill:#00ff00;fill-opacity:0.447581;stroke:#666666;stroke-width:0.210099"
+       id="rect54134-8"
+       width="28.017199"
+       height="11.534636"
+       x="119.32188"
+       y="195.75185"
+       ry="4.3752069" />
+    <ellipse
+       style="fill:#666666;fill-opacity:0.447581;stroke:#666666;stroke-width:0.252766"
+       id="path54180"
+       cx="50.784451"
+       cy="201.10495"
+       rx="4.6045718"
+       ry="5.5979133" />
+    <ellipse
+       style="fill:#666666;fill-opacity:0.447581;stroke:#666666;stroke-width:0.252766"
+       id="path54180-4"
+       cx="142.90671"
+       cy="201.51917"
+       rx="4.6045718"
+       ry="5.5979133" />
+  </g>
+</svg>
