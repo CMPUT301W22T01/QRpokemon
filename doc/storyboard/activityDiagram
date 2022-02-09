@@ -22,7 +22,7 @@ skinparam dpi 300
 !$main_ui = "main-ui.png"
 
 ' QR Inventory Screen
-!$qr_inventory = "qr_inventory.png"
+!$qr_inventory = "qr-inventory.png"
 !$qr_inventory_after_delete = "qr-inventory-after-delete.png"
 
 ' Search Screens
@@ -34,7 +34,7 @@ skinparam dpi 300
 !$map = "map.png"
 
 ' Friend List
-!$friend_list = "friend_list.png"
+!$friend_list = "friend-list.png"
 
 ' Leaderboard
 !$leaderboard = "leaderboard.png"
@@ -43,8 +43,9 @@ skinparam dpi 300
 !$leaderboard_total_scanned = "leaderboard-total-scanned.png"
 !$leaderboard_total_sum_of_scores = "leaderboard-total-sum-of-scores.png"
 
-' Camera
-!$camera = "camera.png"
+' Scan QR Codes
+!$switch_off = "switch-off.png"
+!$switch_on = "switch-on.png"
 
 ' Viewing a Someone's
 !$view_profile = "view-profile.png"
@@ -175,11 +176,12 @@ case (Scan New QR)
 
     switch(User Scanned QR Code?)
     case (yes)
-        :Show Scan Results;
+        :<img:$resource_dir/$switch_off{scale=0.5}>;
         note left
         User can toggle saving
         geolocation data and the
         QR code
+        <img:$resource_dir/$switch_on{scale=0.15}>
         end note
         
         switch(Save Image?)
