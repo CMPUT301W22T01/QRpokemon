@@ -1,0 +1,492 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 210 297"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.1.2 (b8e25be8, 2022-02-05)"
+   sodipodi:docname="search.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:pageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="mm"
+     showgrid="true"
+     showguides="true"
+     inkscape:guide-bbox="true"
+     inkscape:zoom="0.80327238"
+     inkscape:cx="242.75701"
+     inkscape:cy="154.36856"
+     inkscape:window-width="1437"
+     inkscape:window-height="840"
+     inkscape:window-x="75"
+     inkscape:window-y="38"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="g984">
+    <sodipodi:guide
+       position="29.58284,279.86539"
+       orientation="1,0"
+       id="guide1377" />
+    <sodipodi:guide
+       position="180.2815,243.65005"
+       orientation="1,0"
+       id="guide1379" />
+    <sodipodi:guide
+       position="38.369822,234.31953"
+       orientation="1,0"
+       id="guide8639" />
+    <sodipodi:guide
+       position="83.03698,224.5074"
+       orientation="0,-1"
+       id="guide10247" />
+    <sodipodi:guide
+       position="41.664941,174.97079"
+       orientation="1,0"
+       id="guide8850" />
+    <sodipodi:guide
+       position="31.596524,173.06694"
+       orientation="1,0"
+       id="guide8852" />
+    <sodipodi:guide
+       position="185.20833,270.54167"
+       orientation="1,0"
+       id="guide8854" />
+    <inkscape:grid
+       type="xygrid"
+       id="grid5464" />
+  </sodipodi:namedview>
+  <defs
+     id="defs2" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <g
+       id="g984"
+       transform="translate(-0.02443188,0.54538945)">
+      <g
+         inkscape:label="Background"
+         id="layer1-5"
+         style="display:inline">
+        <rect
+           style="fill:#ffffff;stroke:#ffffff;stroke-width:0.499999"
+           id="rect854"
+           width="209.84608"
+           height="297.9021"
+           x="0.26311606"
+           y="-0.55316401" />
+      </g>
+      <text
+         xml:space="preserve"
+         style="font-size:16.9333px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+         x="73.968788"
+         y="26.593266"
+         id="text6766"><tspan
+           sodipodi:role="line"
+           id="tspan6764"
+           style="stroke-width:0.264583"
+           x="73.968788"
+           y="26.593266">Search</tspan></text>
+      <path
+         id="primary"
+         d="m 20.743866,14.477122 -5.814013,3.908493 a 0.77183582,0.83641799 0 0 0 0,1.391427 l 5.814013,3.908493 a 0.72134187,0.78169904 0 0 0 1.053161,-0.984941 l -0.605928,-2.079317 h 5.65532 a 0.72134187,0.78169904 0 0 0 0.721343,-0.781701 V 18.27618 a 0.72134187,0.78169904 0 0 0 -0.721343,-0.781701 h -5.65532 l 0.605928,-2.079318 a 0.72134187,0.78169904 0 0 0 -1.053161,-0.938039 z"
+         style="fill:none;stroke:#000000;stroke-width:1.50183px;stroke-linecap:round;stroke-linejoin:round" />
+    </g>
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="Search Bar">
+    <rect
+       style="fill:#ececec;stroke:#ffffff;stroke-width:0.508084"
+       id="rect1031"
+       width="150.82722"
+       height="24.328564"
+       x="29.454273"
+       y="53.620914"
+       ry="12.164282" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer5"
+     inkscape:label="Default Search Text"
+     style="display:inline">
+    <text
+       xml:space="preserve"
+       style="font-size:16.9333px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#f9f9f9;stroke-width:0.264583"
+       x="37.303047"
+       y="72.081871"
+       id="text3231"><tspan
+         sodipodi:role="line"
+         id="tspan3229"
+         style="font-size:16.9333px;fill:#f9f9f9;stroke-width:0.264583"
+         x="37.303047"
+         y="72.081871">Search</tspan></text>
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer3"
+     inkscape:label="Username Search"
+     style="display:none">
+    <text
+       xml:space="preserve"
+       style="font-size:16.9333px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ffffff;stroke-width:0.264583"
+       x="37.627792"
+       y="71.908897"
+       id="text3231-3"><tspan
+         sodipodi:role="line"
+         id="tspan3229-5"
+         style="font-size:16.9333px;fill:#ffffff;stroke-width:0.264583"
+         x="37.627792"
+         y="71.908897">Userna...</tspan></text>
+    <rect
+       style="fill:#ececec;stroke:#ffffff;stroke-width:0.499999"
+       id="rect18157"
+       width="150.69867"
+       height="54.718719"
+       x="29.58284"
+       y="93.779427" />
+    <text
+       xml:space="preserve"
+       style="font-size:8.46667px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ffffff;stroke-width:0.264583"
+       x="42.157642"
+       y="130.0072"
+       id="text21769"><tspan
+         sodipodi:role="line"
+         id="tspan21767"
+         style="font-size:8.46667px;fill:#ffffff;stroke-width:0.264583"
+         x="42.157642"
+         y="130.0072">User 1</tspan></text>
+    <rect
+       style="fill:#ff8080;stroke:#ffffff;stroke-width:0.396896"
+       id="rect28713"
+       width="25.160734"
+       height="22.33091"
+       x="41.906071"
+       y="100.3399" />
+    <text
+       xml:space="preserve"
+       style="font-size:12.7px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ffffff;stroke-width:0.264583"
+       x="125.67621"
+       y="117.88591"
+       id="text34547"><tspan
+         sodipodi:role="line"
+         style="font-size:12.7px;fill:#ffffff;stroke-width:0.264583"
+         x="125.67621"
+         y="117.88591"
+         id="tspan36119">User</tspan><tspan
+         sodipodi:role="line"
+         style="font-size:12.7px;fill:#ffffff;stroke-width:0.264583"
+         x="125.67621"
+         y="133.76091"
+         id="tspan37766">Details</tspan></text>
+    <g
+       id="g8848"
+       transform="translate(0.09277577,-0.66877126)">
+      <rect
+         style="fill:#aaffaa;stroke:#aaffaa;stroke-width:0.264999"
+         id="rect3621"
+         width="26.66011"
+         height="8.8867044"
+         x="41.000374"
+         y="134.09666" />
+      <text
+         xml:space="preserve"
+         style="font-size:3.52778px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;stroke-width:0.264583"
+         x="42.631908"
+         y="139.83154"
+         id="text5891"><tspan
+           sodipodi:role="line"
+           id="tspan5889"
+           style="font-size:3.52778px;stroke-width:0.264583"
+           x="42.631908"
+           y="139.83154">Add to Friends</tspan></text>
+    </g>
+    <rect
+       style="fill:#ececec;stroke:#ffffff;stroke-width:0.499999"
+       id="rect18157-5"
+       width="150.69867"
+       height="54.718719"
+       x="29.846289"
+       y="218.24075" />
+    <text
+       xml:space="preserve"
+       style="font-size:8.46667px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ffffff;stroke-width:0.264583"
+       x="42.421089"
+       y="254.25366"
+       id="text21769-92"><tspan
+         sodipodi:role="line"
+         id="tspan21767-2"
+         style="font-size:8.46667px;fill:#ffffff;stroke-width:0.264583"
+         x="42.421089"
+         y="254.25366">User 3</tspan></text>
+    <rect
+       style="fill:#ff8080;stroke:#ffffff;stroke-width:0.396896"
+       id="rect28713-8"
+       width="25.160734"
+       height="22.33091"
+       x="42.169518"
+       y="224.58636" />
+    <text
+       xml:space="preserve"
+       style="font-size:12.7px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ffffff;stroke-width:0.264583"
+       x="125.93966"
+       y="242.34724"
+       id="text34547-9"><tspan
+         sodipodi:role="line"
+         style="font-size:12.7px;fill:#ffffff;stroke-width:0.264583"
+         x="125.93966"
+         y="242.34724"
+         id="tspan36119-7">User</tspan><tspan
+         sodipodi:role="line"
+         style="font-size:12.7px;fill:#ffffff;stroke-width:0.264583"
+         x="125.93966"
+         y="258.22223"
+         id="tspan37766-3">Details</tspan></text>
+    <g
+       id="g8848-6"
+       transform="translate(0.35622361,123.57769)">
+      <rect
+         style="fill:#aaffaa;stroke:#aaffaa;stroke-width:0.264999"
+         id="rect3621-1"
+         width="26.66011"
+         height="8.8867044"
+         x="41.000374"
+         y="134.09666" />
+      <text
+         xml:space="preserve"
+         style="font-size:3.52778px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;stroke-width:0.264583"
+         x="42.631908"
+         y="139.83154"
+         id="text5891-2"><tspan
+           sodipodi:role="line"
+           id="tspan5889-93"
+           style="font-size:3.52778px;stroke-width:0.264583"
+           x="42.631908"
+           y="139.83154">Add to Friends</tspan></text>
+    </g>
+    <rect
+       style="fill:#ececec;stroke:#ffffff;stroke-width:0.499999"
+       id="rect18157-67"
+       width="150.69867"
+       height="54.718719"
+       x="29.58284"
+       y="155.75275" />
+    <text
+       xml:space="preserve"
+       style="font-size:8.46667px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ffffff;stroke-width:0.264583"
+       x="42.421089"
+       y="191.69466"
+       id="text21769-5"><tspan
+         sodipodi:role="line"
+         id="tspan21767-35"
+         style="font-size:8.46667px;fill:#ffffff;stroke-width:0.264583"
+         x="42.421089"
+         y="191.69466">User 2</tspan></text>
+    <rect
+       style="fill:#ff8080;stroke:#ffffff;stroke-width:0.396896"
+       id="rect28713-6"
+       width="25.160734"
+       height="22.33091"
+       x="42.169518"
+       y="162.02736" />
+    <text
+       xml:space="preserve"
+       style="font-size:12.7px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ffffff;stroke-width:0.264583"
+       x="125.93966"
+       y="181.91792"
+       id="text34547-2"><tspan
+         sodipodi:role="line"
+         style="font-size:12.7px;fill:#ffffff;stroke-width:0.264583"
+         x="125.93966"
+         y="181.91792"
+         id="tspan36119-9">User</tspan><tspan
+         sodipodi:role="line"
+         style="font-size:12.7px;fill:#ffffff;stroke-width:0.264583"
+         x="125.93966"
+         y="197.79292"
+         id="tspan37766-1">Details</tspan></text>
+    <g
+       id="g8848-2"
+       transform="translate(0.35622364,61.018683)">
+      <rect
+         style="fill:#aaffaa;stroke:#aaffaa;stroke-width:0.264999"
+         id="rect3621-7"
+         width="26.66011"
+         height="8.8867044"
+         x="41.000374"
+         y="134.09666" />
+      <text
+         xml:space="preserve"
+         style="font-size:3.52778px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;stroke-width:0.264583"
+         x="42.631908"
+         y="139.83154"
+         id="text5891-0"><tspan
+           sodipodi:role="line"
+           id="tspan5889-9"
+           style="font-size:3.52778px;stroke-width:0.264583"
+           x="42.631908"
+           y="139.83154">Add to Friends</tspan></text>
+    </g>
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer6"
+     inkscape:label="Geolocation Search"
+     style="display:none">
+    <text
+       xml:space="preserve"
+       style="font-size:16.9333px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#ffffff;stroke-width:0.264583"
+       x="37.627792"
+       y="71.60096"
+       id="text3231-3-3"><tspan
+         sodipodi:role="line"
+         id="tspan3229-5-6"
+         style="font-size:16.9333px;fill:#ffffff;stroke-width:0.264583"
+         x="37.627792"
+         y="71.60096">City</tspan></text>
+    <g
+       id="g54462">
+      <rect
+         style="fill:#ececec;stroke:#ffffff;stroke-width:0.499999"
+         id="rect18157-0"
+         width="150.69867"
+         height="54.718719"
+         x="29.582838"
+         y="93.471489" />
+      <text
+         xml:space="preserve"
+         style="font-size:11.2889px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ffffff;stroke-width:0.264583"
+         x="37.818481"
+         y="139.99863"
+         id="text21769-6"><tspan
+           sodipodi:role="line"
+           id="tspan21767-3"
+           style="font-size:11.2889px;fill:#ffffff;stroke-width:0.264583"
+           x="37.818481"
+           y="139.99863">QR 1</tspan></text>
+      <rect
+         style="fill:#ff9955;stroke:#ffffff;stroke-width:0.499999"
+         id="rect28713-20"
+         width="31.696842"
+         height="28.131903"
+         x="38.369823"
+         y="100.12135" />
+      <text
+         xml:space="preserve"
+         style="font-size:12.7px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ffffff;stroke-width:0.264583"
+         x="125.67621"
+         y="117.57797"
+         id="text34547-6"><tspan
+           sodipodi:role="line"
+           style="font-size:12.7px;fill:#ffffff;stroke-width:0.264583"
+           x="125.67621"
+           y="117.57797"
+           id="tspan36119-1">QR</tspan><tspan
+           sodipodi:role="line"
+           style="font-size:12.7px;fill:#ffffff;stroke-width:0.264583"
+           x="125.67621"
+           y="133.45297"
+           id="tspan37766-5">Details</tspan></text>
+    </g>
+    <rect
+       style="fill:#ececec;stroke:#ffffff;stroke-width:0.499999"
+       id="rect18157-2-4"
+       width="150.69867"
+       height="54.718719"
+       x="29.582836"
+       y="155.06955" />
+    <g
+       id="g54470">
+      <text
+         xml:space="preserve"
+         style="font-size:11.2889px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ffffff;stroke-width:0.264583"
+         x="37.818478"
+         y="201.59669"
+         id="text21769-9-7"><tspan
+           sodipodi:role="line"
+           id="tspan21767-1-6"
+           style="font-size:11.2889px;fill:#ffffff;stroke-width:0.264583"
+           x="37.818478"
+           y="201.59669">QR 2</tspan></text>
+      <rect
+         style="fill:#ff9955;stroke:#ffffff;stroke-width:0.499999"
+         id="rect28713-2-5"
+         width="31.696842"
+         height="28.131903"
+         x="38.36982"
+         y="161.71942" />
+      <text
+         xml:space="preserve"
+         style="font-size:12.7px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ffffff;stroke-width:0.264583"
+         x="125.67621"
+         y="179.17604"
+         id="text34547-7-6"><tspan
+           sodipodi:role="line"
+           style="font-size:12.7px;fill:#ffffff;stroke-width:0.264583"
+           x="125.67621"
+           y="179.17604"
+           id="tspan36119-0-9">QR</tspan><tspan
+           sodipodi:role="line"
+           style="font-size:12.7px;fill:#ffffff;stroke-width:0.264583"
+           x="125.67621"
+           y="195.05104"
+           id="tspan37766-9-3">Details</tspan></text>
+    </g>
+    <g
+       id="g54479">
+      <rect
+         style="fill:#ececec;stroke:#ffffff;stroke-width:0.499999"
+         id="rect18157-6-4"
+         width="150.69867"
+         height="54.718719"
+         x="29.582836"
+         y="217.2518" />
+      <text
+         xml:space="preserve"
+         style="font-size:11.2889px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ffffff;stroke-width:0.264583"
+         x="37.818478"
+         y="263.77893"
+         id="text21769-0-5"><tspan
+           sodipodi:role="line"
+           id="tspan21767-6-2"
+           style="font-size:11.2889px;fill:#ffffff;stroke-width:0.264583"
+           x="37.818478"
+           y="263.77893">QR 3</tspan></text>
+      <rect
+         style="fill:#ff9955;stroke:#ffffff;stroke-width:0.499999"
+         id="rect28713-26-5"
+         width="31.696842"
+         height="28.131903"
+         x="38.36982"
+         y="223.90166" />
+      <text
+         xml:space="preserve"
+         style="font-size:12.7px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ffffff;stroke-width:0.264583"
+         x="125.67621"
+         y="241.35828"
+         id="text34547-1-4"><tspan
+           sodipodi:role="line"
+           style="font-size:12.7px;fill:#ffffff;stroke-width:0.264583"
+           x="125.67621"
+           y="241.35828"
+           id="tspan36119-8-7">QR</tspan><tspan
+           sodipodi:role="line"
+           style="font-size:12.7px;fill:#ffffff;stroke-width:0.264583"
+           x="125.67621"
+           y="257.23328"
+           id="tspan37766-7-4">Details</tspan></text>
+    </g>
+  </g>
+</svg>
