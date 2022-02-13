@@ -11,7 +11,7 @@
    inkscape:export-xdpi="300"
    inkscape:export-ydpi="300"
    inkscape:version="1.1.2 (b8e25be8, 2022-02-05)"
-   sodipodi:docname="user_page.svg"
+   sodipodi:docname="user_interface.svg"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
@@ -34,7 +34,7 @@
      inkscape:window-width="1459"
      inkscape:window-height="837"
      inkscape:window-x="0"
-     inkscape:window-y="38"
+     inkscape:window-y="25"
      inkscape:window-maximized="0"
      inkscape:current-layer="layer4">
     <sodipodi:guide
@@ -165,7 +165,7 @@
          id="tspan6880"
          style="stroke-width:0.264583"
          x="76.305626"
-         y="101.45932">QR Invertary</tspan><tspan
+         y="101.45932">QR Inventory</tspan><tspan
          sodipodi:role="line"
          style="stroke-width:0.264583"
          x="76.305626"

@@ -11,7 +11,7 @@
    inkscape:export-xdpi="300"
    inkscape:export-ydpi="300"
    inkscape:version="1.1.2 (b8e25be8, 2022-02-05)"
-   sodipodi:docname="sign_in.svg"
+   sodipodi:docname="signin.svg"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
@@ -28,14 +28,14 @@
      showgrid="false"
      showguides="true"
      inkscape:guide-bbox="true"
-     inkscape:zoom="0.3827609"
-     inkscape:cx="535.5824"
-     inkscape:cy="539.50129"
-     inkscape:window-width="1293"
-     inkscape:window-height="837"
-     inkscape:window-x="219"
-     inkscape:window-y="38"
-     inkscape:window-maximized="0"
+     inkscape:zoom="1.0826113"
+     inkscape:cx="537.12722"
+     inkscape:cy="761.58451"
+     inkscape:window-width="1920"
+     inkscape:window-height="1027"
+     inkscape:window-x="0"
+     inkscape:window-y="25"
+     inkscape:window-maximized="1"
      inkscape:current-layer="layer4"
      inkscape:snap-text-baseline="false">
     <sodipodi:guide
@@ -56,7 +56,8 @@
      inkscape:label="Background"
      inkscape:groupmode="layer"
      id="layer1"
-     style="display:inline">
+     style="display:inline"
+     sodipodi:insensitive="true">
     <rect
        style="fill:#ffffff;stroke:#ffffff;stroke-width:0.499999"
        id="rect854"
@@ -74,7 +75,7 @@
          id="tspan3936"
          style="font-size:5.64444px;fill:#0078ff;fill-opacity:1;stroke-width:0.265;stroke-miterlimit:4;stroke-dasharray:none"
          x="26.340879"
-         y="226.83118"> Alread have an account</tspan></text>
+         y="226.83118"> Already have an account</tspan></text>
   </g>
   <g
      inkscape:groupmode="layer"
@@ -120,7 +121,7 @@
          id="tspan3025"
          style="fill:#b3b3b3;stroke-width:0.264583"
          x="28.471815"
-         y="67.546608">First name:</tspan></text>
+         y="67.546608">User Name:</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:8.46667px;line-height:1.25;font-family:sans-serif;fill:#b3b3b3;stroke-width:0.264583"
@@ -161,7 +162,7 @@
          style="fill:#ffffff;stroke-width:0.264583"
          x="86.16584"
          y="273.94797"
-         sodipodi:role="line">Confirme</tspan></text>
+         sodipodi:role="line">Confirm</tspan></text>
     <path
        style="fill:#cccccc;stroke:#808080;stroke-width:0.965;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        d="M 25.839921,93.006916 191.94185,92.398206"
@@ -213,7 +214,7 @@
          id="tspan12137-5-1"
          style="fill:#b3b3b3;stroke-width:0.264583"
          x="29.194141"
-         y="112.01715">Location:</tspan></text>
+         y="112.01715">Name:</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:8.46667px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
@@ -224,6 +225,6 @@
          id="tspan50442-1"
          style="stroke-width:0.264583"
          x="31.795063"
-         y="128.47502">AB</tspan></text>
+         y="128.47502">Xiaoming Li</tspan></text>
   </g>
 </svg>
