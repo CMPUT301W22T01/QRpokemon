@@ -1,0 +1,125 @@
+Class: Player
+Collaborator: Database, Database_Controller
+Responsibility: Store username
+Responsibility: Store QR_Inventory
+Responsibility: Store contact
+
+Class: Player_Controller
+Collaborator: Database_Controller, Player
+Responsibility: Get Player from Database_Controller
+Responsibility: Ask Player to update itself with data provided
+Responsibility: Ask Database_Controller to save player records
+Responsibility: Ask Database_Controller to update player records
+
+Class: QR_Code
+Collaborator: Database_Controller
+Responsibility: Store geolocation
+Responsibility: Store QR hash
+Responsibility: Store comments
+
+Class: Location
+Collaborator: Location_Controller
+Responsibility: Store a list of hashes for every location
+
+Class: Location_Controller
+Collaborator: Location, Map_Controller, QR_scanned_Controller
+
+Class: Signup_Activity
+Collaborator: FileSys_Controller
+Responsibility: Display signup page
+Responsibility: Send user input to Signup_Controller
+Responsibility: Notify user if username is invalid
+
+Class: Signup_Controller
+Collaborator: Signup_Activity, Player, Main_Menu_Activity, Player_Controller
+Responsibility: Create a Player class and ask Player_Controller to save
+Responsibility: Ask FileSys_Controller to find local session file 
+Responsibility: Ask FileSys_Controller to save local session file 
+Responsibility: Ask Database_Controller to save validated user data  
+Responsibility: Ask Database_Controller to find input username
+Responsibility: Send validation result to Signup_Activity
+Responsibility: Send user to Main_Menu_Activity
+
+Class: Main_Menu_Activity
+Collaborator: Main_Menu_Controller, QR_scanned_Controller
+Responsibility: Send button pressed to Main_Menu_Controller
+Responsibility: Display main menu
+
+Class: Main_Menu_Controller
+Collaborator: Main_Menu_Activity, Signup_Controller, Camera, QR_Inventory_Activity, Map_Activity
+Responsibility: Send user to QR_Inventory_Activity
+Responsibility: Send user to Map_Activity
+Responsibility: Send user to Profile_Activity
+Responsibility: Send user to Camera  
+Responsibility: Pipe image from Camera to QR_scanned_Activity
+Responsibility: Send user to QR_scanned_Activity
+
+Class: Map_Activity
+Collaborator: Main_Menu_Controller
+Responsibility: Display map
+Responsibility: Display gamewide user location
+Responsibility: Display QR codes' location
+Responsibility: Display QR codes' score
+
+Class: Map_Controller
+Collaborator: Map_Activity, Location_Controller
+Responsibility: Ask Location_Controller to read scanned QR code locations, QR code hash and player locations
+Responsibility: QR stuff to Map_Activity
+
+Class: QR_Inventory_Activity
+Collaborator: Main_Menu_Controller
+Responsibility: Display QR inventory menu
+Responsibility: Send button pressed to QR_Inventory_Controller
+Responsibility: Send comment QR_Inventory_Controller
+
+Class: QR_Inventory_Controller
+Collaborator: Player_Controller, QR_Inventory_Activity, Other_Player_Activity
+Responsibility: Ask player inventory data from Player_Controller
+Responsibility: Ask Player_Controller to update player inventory data
+Responsibility: Add/Update comment to player inventory 
+
+Class: QR_scanned_Activity
+Collaborator: Main_Menu_Controller, QR_Code
+Responsibility: Send button pressed to QR_scanned_Controller
+Responsibility: Display new QR scanned page
+Responsibility: Create a new QR_Code
+Responsibility: Prompt message when QRcode hash not found
+
+Class: QR_scanned_Controller
+Collaborator: QR_scanned_Activity, Main_Menu_Activity, QR_analyzer
+Responsibility: Send image to QR_analyzer
+Responsibility: Ask Database_Controller to save metadata specified by user
+Responsibility: Send user back to Main_Menu_Activity
+Responsibility: Prevent saving if QRcode hash is not found
+Responsibility: Notify QR_scanned_Activity if QRcode hash is not found
+
+Class: QR_analyzer
+Collaborator: QR_scanned_Controller
+Responsibility: Analyze QR code form image
+Responsibility: Send QRcode hash to QR_scanned_Controller
+Responsibility: Notify QR_scanned_Controller for QRcode hash not found from image
+
+Class: Camera
+Collaborator: Main_Menu_Controller
+Responsibility: Take picture
+Responsibility: Send picture
+
+Class: Database_Controller
+Collaborator: Database
+Responsibility: Write data to Database
+Responsibility: Read data from Database
+
+Class: Database
+Collaborator: Database_Controller, QR_Model, Player
+Responsibility: store QR_Model
+Responsibility: store Player
+
+
+Class: FileSys_Controller
+Collaborator: FileSys
+Responsibility: Write local files to FileSys
+Responsibility: Read files from FileSys
+
+Class: FileSys
+Collaborator: FileSys_Controller
+Responsibility: store local files
