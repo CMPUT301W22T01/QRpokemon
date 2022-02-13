@@ -3,6 +3,7 @@ Collaborator: Database, Database_Controller
 Responsibility: Store username
 Responsibility: Store QR_Inventory
 Responsibility: Store contact
+Responsibility: Store statistics
 
 Class: Player_Controller
 Collaborator: Database_Controller, Player
@@ -11,6 +12,13 @@ Responsibility: Ask Player to update itself with data provided
 Responsibility: Ask Database_Controller to save player records
 Responsibility: Ask Database_Controller to update player records
 
+Class: Score_Calculator
+Collaborator: Player_Controller, Map_Controller
+Responsibility: Calculate score from QR hash
+
+# QR Code will store all locations with usernames as keys.
+# If a user scanned a QR code but they're location is not stored, then it will
+# not appear in the database. Similar with comments.
 Class: QR_Code
 Collaborator: Database_Controller
 Responsibility: Store geolocation
@@ -50,9 +58,31 @@ Collaborator: Main_Menu_Activity, Signup_Controller, Camera, QR_Inventory_Activi
 Responsibility: Send user to QR_Inventory_Activity
 Responsibility: Send user to Map_Activity
 Responsibility: Send user to Profile_Activity
+Responsibility: Send user to Leaderboard_Activity
 Responsibility: Send user to Camera  
 Responsibility: Pipe image from Camera to QR_scanned_Activity
 Responsibility: Send user to QR_scanned_Activity
+
+Class: Profile_Activity
+Collaborator: Profile_Controller, Mean_Menu_Activity
+Responsibility: display the profile page
+
+Class: Profile_Controller
+Collaborator: Profile_Activity
+Responsibility: get username and contact information from inventory
+
+Class: Leaderboard_Activity
+Collaborator: Leaderboard_Controller, Mean_menu_Activity
+Responsibility: display the rank activity page (LeaderBoard)
+Responsibility: Send button pressed to Leaderboard_Controller (sort by button)
+Responsibility: display the rank of the user himself
+
+Class: Leaderboard_Controller
+Collaborator: Leaderboard_Activity, Database_Controller
+Responsibility: Get scores from the Database_Controller
+Responsibility: Sort the leaderboard
+Responsibility: Change the sort of the rank chosed by user
+Responsibility: Find the rank of the user himself
 
 Class: Map_Activity
 Collaborator: Main_Menu_Controller
