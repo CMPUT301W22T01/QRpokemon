@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 210 297"
+   version="1.1"
+   id="svg5"
+   inkscape:export-filename="/home/michael/bitmap.png"
+   inkscape:export-xdpi="300"
+   inkscape:export-ydpi="300"
+   inkscape:version="1.1.2 (b8e25be8, 2022-02-05)"
+   sodipodi:docname="user_page.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:pageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="mm"
+     showgrid="false"
+     showguides="false"
+     inkscape:guide-bbox="true"
+     inkscape:zoom="0.45166244"
+     inkscape:cx="356.4609"
+     inkscape:cy="519.19305"
+     inkscape:window-width="1459"
+     inkscape:window-height="837"
+     inkscape:window-x="0"
+     inkscape:window-y="38"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="layer4">
+    <sodipodi:guide
+       position="28.118343,143.60983"
+       orientation="1,0"
+       id="guide6606" />
+    <sodipodi:guide
+       position="179.84024,161.38757"
+       orientation="1,0"
+       id="guide6608" />
+    <inkscape:grid
+       type="xygrid"
+       id="grid8675" />
+  </sodipodi:namedview>
+  <defs
+     id="defs2">
+    <rect
+       x="661.99881"
+       y="318.82217"
+       width="105.1267"
+       height="146.12683"
+       id="rect16833" />
+    <rect
+       x="70.849371"
+       y="484.87538"
+       width="225.83237"
+       height="61.9932"
+       id="rect96673" />
+    <rect
+       x="556.87211"
+       y="223.61833"
+       width="4.5246346e-06"
+       height="46.4949"
+       id="rect85579" />
+  </defs>
+  <g
+     inkscape:label="Background"
+     inkscape:groupmode="layer"
+     id="layer1"
+     sodipodi:insensitive="true"
+     style="display:inline">
+    <rect
+       style="fill:#ffffff;stroke:#ffffff;stroke-width:0.499999"
+       id="rect854"
+       width="209.84608"
+       height="297.9021"
+       x="0.26311606"
+       y="-0.55316401" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer4"
+     inkscape:label="Header">
+    <text
+       xml:space="preserve"
+       style="font-size:19.05px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#ffffff;stroke-width:0.264583"
+       x="8.8610182"
+       y="20.190762"
+       id="text14901"><tspan
+         sodipodi:role="line"
+         id="tspan14899"
+         style="font-size:19.05px;fill:#ffffff;stroke-width:0.264583"
+         x="8.8610182"
+         y="20.190762">QRpokemon</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:16.9333px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;stroke-width:0.264583"
+       x="49.441547"
+       y="26.359991"
+       id="text22968"><tspan
+         sodipodi:role="line"
+         id="tspan22966"
+         style="font-size:16.9333px;fill:#000000;stroke-width:0.264583"
+         x="49.441547"
+         y="26.359991">QRpokemon</tspan></text>
+    <text
+       xml:space="preserve"
+       transform="scale(0.26458333)"
+       id="text85577"
+       style="line-height:1.25;font-family:sans-serif;font-size:13.33333333px;white-space:pre;shape-inside:url(#rect85579)" />
+    <text
+       xml:space="preserve"
+       transform="scale(0.26458333)"
+       id="text96671"
+       style="line-height:1.25;font-family:sans-serif;font-size:13.33333333px;white-space:pre;shape-inside:url(#rect96673)" />
+    <text
+       xml:space="preserve"
+       style="font-size:7.05556px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+       x="39.24852"
+       y="144.9852"
+       id="text104994"><tspan
+         sodipodi:role="line"
+         id="tspan104992"
+         style="font-size:7.05556px;stroke-width:0.264583"
+         x="39.24852"
+         y="144.9852" /></text>
+    <text
+       xml:space="preserve"
+       style="font-size:8.46667px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+       x="55.797337"
+       y="147.03551"
+       id="text113300"><tspan
+         sodipodi:role="line"
+         id="tspan113298"
+         style="stroke-width:0.264583"
+         x="55.797337"
+         y="147.03551" /></text>
+    <text
+       xml:space="preserve"
+       transform="scale(0.26458333)"
+       id="text16831"
+       style="line-height:1.25;font-family:sans-serif;font-size:32px;white-space:pre;shape-inside:url(#rect16833)" />
+    <rect
+       style="font-variation-settings:normal;vector-effect:none;fill:#e6e6e6;fill-opacity:1;fill-rule:evenodd;stroke-width:0.842031;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none;stop-color:#000000"
+       id="rect6195"
+       width="151.72189"
+       height="26.789452"
+       x="28.118355"
+       y="84.26738"
+       ry="8.4938078" />
+    <text
+       xml:space="preserve"
+       style="font-size:8.46667px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+       x="76.305626"
+       y="101.45932"
+       id="text6882"><tspan
+         sodipodi:role="line"
+         id="tspan6880"
+         style="stroke-width:0.264583"
+         x="76.305626"
+         y="101.45932">QR Invertary</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="76.305626"
+         y="112.04266"
+         id="tspan7016" /></text>
+    <rect
+       style="font-variation-settings:normal;vector-effect:none;fill:#e6e6e6;fill-opacity:1;fill-rule:evenodd;stroke-width:0.836811;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none;stop-color:#000000"
+       id="rect6195-1-9"
+       width="151.72189"
+       height="26.458324"
+       x="28.118343"
+       y="158.75"
+       ry="8.3888216" />
+    <text
+       xml:space="preserve"
+       style="font-size:8.46667px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+       x="94.681885"
+       y="142.39708"
+       id="text174893"><tspan
+         sodipodi:role="line"
+         id="tspan174891"
+         style="stroke-width:0.264583"
+         x="94.681885"
+         y="142.39708">Map</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:8.46667px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+       x="84.0728"
+       y="175.86549"
+       id="text25228"><tspan
+         sodipodi:role="line"
+         id="tspan25226"
+         style="stroke-width:0.264583"
+         x="84.0728"
+         y="175.86549">My Profile</tspan></text>
+    <rect
+       style="font-variation-settings:normal;vector-effect:none;fill:#e6e6e6;fill-opacity:1;fill-rule:evenodd;stroke-width:0.8366;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none;stop-color:#000000"
+       id="rect6195-1-0"
+       width="151.64548"
+       height="26.45833"
+       x="28.271194"
+       y="195.79167"
+       ry="8.3888235" />
+    <rect
+       style="font-variation-settings:normal;vector-effect:none;fill:#e6e6e6;fill-opacity:1;fill-rule:evenodd;stroke-width:0.836811;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none;stop-color:#000000"
+       id="rect6195-1"
+       width="151.72189"
+       height="26.45834"
+       x="28.118343"
+       y="232.83333"
+       ry="8.3888264" />
+    <text
+       xml:space="preserve"
+       style="font-size:8.46667px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+       x="89.562531"
+       y="211.47118"
+       id="text155447"><tspan
+         sodipodi:role="line"
+         id="tspan155445"
+         style="stroke-width:0.264583"
+         x="89.562531"
+         y="211.47118">Search</tspan></text>
+    <rect
+       style="font-variation-settings:normal;vector-effect:none;fill:#e6e6e6;fill-opacity:1;fill-rule:evenodd;stroke-width:0.830515;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none;stop-color:#000000"
+       id="rect8669"
+       width="151.79832"
+       height="26.048571"
+       x="28.041912"
+       y="121.70834"
+       ry="8.2589064" />
+    <text
+       xml:space="preserve"
+       style="font-size:8.46667px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+       x="94.681885"
+       y="138.88229"
+       id="text8673"><tspan
+         sodipodi:role="line"
+         id="tspan8671"
+         style="stroke-width:0.264583"
+         x="94.681885"
+         y="138.88229">Map</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:8.46667px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+       x="79.820427"
+       y="248.68889"
+       id="text165791"><tspan
+         sodipodi:role="line"
+         id="tspan165789"
+         style="stroke-width:0.264583"
+         x="79.820427"
+         y="248.68889">Check Rank</tspan></text>
+    <path
+       id="primary"
+       d="m 188.56966,278.24955 a 8.7294202,8.4365208 0 1 1 -8.72942,-8.43652 8.7294202,8.4365208 0 0 1 8.72942,8.43652 z m -4.84969,0 h -7.75948 M 179.84024,274.5 v 7.49912"
+       style="fill:none;stroke:#000000;stroke-width:1.90704px;stroke-linecap:round;stroke-linejoin:round" />
+  </g>
+</svg>
