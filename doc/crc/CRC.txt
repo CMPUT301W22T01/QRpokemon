@@ -33,13 +33,13 @@ Class: Location_Controller
 Collaborator: Location, Map_Controller, QR_scanned_Controller
 
 Class: Signup_Activity
-Collaborator: FileSys_Controller
+Collaborator: FileSys_Controller, Signup_Controller
 Responsibility: Display signup page
 Responsibility: Send user input to Signup_Controller
 Responsibility: Notify user if username is invalid
 
 Class: Signup_Controller
-Collaborator: Signup_Activity, Player, Main_Menu_Activity, Player_Controller
+Collaborator: Signup_Activity, Player, Main_Menu_Activity, Player_Controller, Restore_Session
 Responsibility: Create a Player class and ask Player_Controller to save
 Responsibility: Ask FileSys_Controller to find local session file 
 Responsibility: Ask FileSys_Controller to save local session file 
@@ -47,41 +47,61 @@ Responsibility: Ask Database_Controller to save validated user data
 Responsibility: Ask Database_Controller to find input username
 Responsibility: Send validation result to Signup_Activity
 Responsibility: Send user to Main_Menu_Activity
+Responsibility: Run Restore_Session when "Restore" text is pressed
 
 Class: Main_Menu_Activity
-Collaborator: Main_Menu_Controller, QR_scanned_Controller
+Collaborator: Main_Menu_Controller, QR_scanned_Controller, Restore_Session
 Responsibility: Send button pressed to Main_Menu_Controller
 Responsibility: Display main menu
 
 Class: Main_Menu_Controller
-Collaborator: Main_Menu_Activity, Signup_Controller, Camera, QR_Inventory_Activity, Map_Activity
+Collaborator: Main_Menu_Activity, Signup_Controller, Camera_Controller, QR_Inventory_Activity, Map_Activity, Other_Player_Activity, QR_scanned_Activity, Profile_Activity, Leaderboard_Activity
 Responsibility: Send user to QR_Inventory_Activity
 Responsibility: Send user to Map_Activity
 Responsibility: Send user to Profile_Activity
 Responsibility: Send user to Leaderboard_Activity
-Responsibility: Send user to Camera  
-Responsibility: Pipe image from Camera to QR_scanned_Activity
+Responsibility: Call Camera_Controller
+Responsibility: Check if QR hash is in database for players
+Responsibility: Send user to Other_Player_Activity
 Responsibility: Send user to QR_scanned_Activity
 
+Class: Other_Player_Activity
+Collaborator: Main_Menu_Controller, Player
+Responsibility: Display player information
+Responsibility: Display player inventory
+Responsibility: Send user input to Other_Player_Controller
+
+Class: Other_Player_Controller
+Collaborator: Other_Player_Activity, Player_Controller
+Responsibility: Get Player from Player_Controller
+Responsibility: Send Player to Other_Player_Activity
+Responsibility: Update comment from Other_Player_Activity to Player_Controller
+
+# The QR code for logging on other device is on top left as an "avatar"
+# The QR code for sharing to be scanned by other users needs to be pressed a button links to it
 Class: Profile_Activity
-Collaborator: Profile_Controller, Mean_Menu_Activity
-Responsibility: display the profile page
+Collaborator: Profile_Controller, Main_Menu_Activity
+Responsibility: Display the profile page
+Responsibility: Send button pressed to Profile_Controller
+Responsibility: Display a dialog with sharing QR code on it
+Responsibility: Display login QR code
 
 Class: Profile_Controller
-Collaborator: Profile_Activity
-Responsibility: get username and contact information from inventory
+Collaborator: Profile_Activity, Player_Controller
+Responsibility: Get username and contact information from inventory
+Responsibility: Open a dialog if dialog button pressed
 
 Class: Leaderboard_Activity
-Collaborator: Leaderboard_Controller, Mean_menu_Activity
+Collaborator: Leaderboard_Controller, Main_menu_Activity
 Responsibility: display the rank activity page (LeaderBoard)
 Responsibility: Send button pressed to Leaderboard_Controller (sort by button)
-Responsibility: display the rank of the user himself
+Responsibility: Display the rank of the user himself
 
 Class: Leaderboard_Controller
 Collaborator: Leaderboard_Activity, Database_Controller
 Responsibility: Get scores from the Database_Controller
 Responsibility: Sort the leaderboard
-Responsibility: Change the sort of the rank chosed by user
+Responsibility: Change the sort of the rank chosen by user
 Responsibility: Find the rank of the user himself
 
 Class: Map_Activity
@@ -116,8 +136,7 @@ Responsibility: Create a new QR_Code
 Responsibility: Prompt message when QRcode hash not found
 
 Class: QR_scanned_Controller
-Collaborator: QR_scanned_Activity, Main_Menu_Activity, QR_analyzer
-Responsibility: Send image to QR_analyzer
+Collaborator: QR_scanned_Activity, Main_Menu_Activity
 Responsibility: Ask Database_Controller to save metadata specified by user
 Responsibility: Send user back to Main_Menu_Activity
 Responsibility: Prevent saving if QRcode hash is not found
@@ -125,14 +144,27 @@ Responsibility: Notify QR_scanned_Activity if QRcode hash is not found
 
 Class: QR_analyzer
 Collaborator: QR_scanned_Controller
-Responsibility: Analyze QR code form image
-Responsibility: Send QRcode hash to QR_scanned_Controller
-Responsibility: Notify QR_scanned_Controller for QRcode hash not found from image
+Responsibility: Analyze QR code from image
+Responsibility: Raise error when QRcode hash not found from image
+Responsibility: Return QR hash
+
+Class: Restore_Session
+Collaborator: QR_analyzer, Main_Menu_Activity, Camera, Database_Controller, Signup_Controller
+Responsibility: Ask Database_Controller to check if user's hash exists
+Responsibility: Load Player from Database_Controller
+Responsibility: Send User to Main_Menu_Activity
+Responsibility: Raise error if user not found
+
+Class: Camera_Controller
+Collaborator: Restore_Session, Main_Menu_Controller, Camera
+Responsibility: Open Camera
+Responsibility: Pipe image from Camera to QR_analyzer
+Responsibility: Return QR hash from QR_analyzer
 
 Class: Camera
-Collaborator: Main_Menu_Controller
+Collaborator: Camera_Controller
 Responsibility: Take picture
-Responsibility: Send picture
+Responsibility: Return picture
 
 Class: Database_Controller
 Collaborator: Database
@@ -143,7 +175,6 @@ Class: Database
 Collaborator: Database_Controller, QR_Model, Player
 Responsibility: store QR_Model
 Responsibility: store Player
-
 
 Class: FileSys_Controller
 Collaborator: FileSys
