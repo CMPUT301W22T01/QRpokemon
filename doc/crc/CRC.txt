@@ -6,7 +6,7 @@ Responsibility: Store contact
 Responsibility: Store statistics
 
 Class: Player_Controller
-Collaborator: Database_Controller, Player
+Collaborator: Database_Controller, Player, Score_Calculator, 
 Responsibility: Get Player from Database_Controller
 Responsibility: Ask Player to update itself with data provided
 Responsibility: Ask Database_Controller to save player records
@@ -31,15 +31,19 @@ Responsibility: Store a list of hashes for every location
 
 Class: Location_Controller
 Collaborator: Location, Map_Controller, QR_scanned_Controller
+Responsibility: Read location related data from Location
+Responsibility: Return location and related data
+Responsibility: Update/Create a location with related data
 
 Class: Signup_Activity
-Collaborator: FileSys_Controller, Signup_Controller
+Collaborator: Signup_Controller
 Responsibility: Display signup page
 Responsibility: Send user input to Signup_Controller
+Responsibility: Send action when button pressed
 Responsibility: Notify user if username is invalid
 
 Class: Signup_Controller
-Collaborator: Signup_Activity, Player, Main_Menu_Activity, Player_Controller, Restore_Session
+Collaborator: Signup_Activity, Player, Main_Menu_Activity, Player_Controller, Restore_Session, FileSys_Controller
 Responsibility: Create a Player class and ask Player_Controller to save
 Responsibility: Ask FileSys_Controller to find local session file 
 Responsibility: Ask FileSys_Controller to save local session file 
@@ -53,6 +57,7 @@ Class: Main_Menu_Activity
 Collaborator: Main_Menu_Controller, QR_scanned_Controller, Restore_Session
 Responsibility: Send button pressed to Main_Menu_Controller
 Responsibility: Display main menu
+Responsibility: Prompt message when user is not found
 
 Class: Main_Menu_Controller
 Collaborator: Main_Menu_Activity, Signup_Controller, Camera_Controller, QR_Inventory_Activity, Map_Activity, Other_Player_Activity, QR_scanned_Activity, Profile_Activity, Leaderboard_Activity
@@ -62,8 +67,9 @@ Responsibility: Send user to Profile_Activity
 Responsibility: Send user to Leaderboard_Activity
 Responsibility: Call Camera_Controller
 Responsibility: Check if QR hash is in database for players
-Responsibility: Send user to Other_Player_Activity
-Responsibility: Send user to QR_scanned_Activity
+Responsibility: Send user to Other_Player_Activity # if user scanned other user's sharing QR code
+Responsibility: Send user to QR_scanned_Activity # if user scanned a new QR
+Responsibility: Notify Main_Menu_Activity if user not found
 
 Class: Other_Player_Activity
 Collaborator: Main_Menu_Controller, Player
@@ -90,10 +96,11 @@ Class: Profile_Controller
 Collaborator: Profile_Activity, Player_Controller
 Responsibility: Get username and contact information from inventory
 Responsibility: Open a dialog if dialog button pressed
+Responsibility: Get login and sharing QR code for this specific player from Player_Controller
 
 Class: Leaderboard_Activity
 Collaborator: Leaderboard_Controller, Main_menu_Activity
-Responsibility: display the rank activity page (LeaderBoard)
+Responsibility: display LeaderBoard page
 Responsibility: Send button pressed to Leaderboard_Controller (sort by button)
 Responsibility: Display the rank of the user himself
 
@@ -136,11 +143,14 @@ Responsibility: Create a new QR_Code
 Responsibility: Prompt message when QRcode hash not found
 
 Class: QR_scanned_Controller
-Collaborator: QR_scanned_Activity, Main_Menu_Activity
+Collaborator: QR_scanned_Activity, Main_Menu_Activity, Score_Calculator, Location_Controller, Database_Controller
 Responsibility: Ask Database_Controller to save metadata specified by user
 Responsibility: Send user back to Main_Menu_Activity
+Responsibility: Ask Score_Calculator to calculate score for QR code
 Responsibility: Prevent saving if QRcode hash is not found
+Responsibility: Ask score from SCorer_Controller for current QR code
 Responsibility: Notify QR_scanned_Activity if QRcode hash is not found
+Responsibility: Ask Location_Controller to save location with QR hash
 
 Class: QR_analyzer
 Collaborator: QR_scanned_Controller
@@ -149,7 +159,8 @@ Responsibility: Raise error when QRcode hash not found from image
 Responsibility: Return QR hash
 
 Class: Restore_Session
-Collaborator: QR_analyzer, Main_Menu_Activity, Camera, Database_Controller, Signup_Controller
+Collaborator: QR_analyzer, Main_Menu_Activity, Camera_Controller, Database_Controller, Signup_Controller
+Responsibility: Ask Camera_Controller to take picture
 Responsibility: Ask Database_Controller to check if user's hash exists
 Responsibility: Load Player from Database_Controller
 Responsibility: Send User to Main_Menu_Activity
@@ -159,6 +170,7 @@ Class: Camera_Controller
 Collaborator: Restore_Session, Main_Menu_Controller, Camera
 Responsibility: Open Camera
 Responsibility: Pipe image from Camera to QR_analyzer
+Responsibility: Raise error if QR hash not found
 Responsibility: Return QR hash from QR_analyzer
 
 Class: Camera
