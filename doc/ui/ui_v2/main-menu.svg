@@ -7,11 +7,11 @@
    viewBox="0 0 210 297"
    version="1.1"
    id="svg5"
-   inkscape:export-filename="/home/michael/bitmap.png"
-   inkscape:export-xdpi="300"
-   inkscape:export-ydpi="300"
+   inkscape:export-filename="/home/michael/dev/301/qr-pokemon/doc/storyboard/resources/main-ui.png"
+   inkscape:export-xdpi="48"
+   inkscape:export-ydpi="48"
    inkscape:version="1.1.2 (0a00cf5339, 2022-02-04)"
-   sodipodi:docname="user_interface.svg"
+   sodipodi:docname="main-menu.svg"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
@@ -29,8 +29,8 @@
      showguides="false"
      inkscape:guide-bbox="true"
      inkscape:zoom="1.4142136"
-     inkscape:cx="234.75945"
-     inkscape:cy="448.65925"
+     inkscape:cx="72.831997"
+     inkscape:cy="447.24503"
      inkscape:window-width="3840"
      inkscape:window-height="2098"
      inkscape:window-x="0"
@@ -252,7 +252,7 @@
        d="m 117.45752,271.22668 a 12.451825,12.034028 0 1 1 -12.45183,-12.03403 12.451825,12.034028 0 0 1 12.45183,12.03403 z m -6.9177,0 H 99.471536 m 5.534154,-5.34844 v 10.6969"
        style="fill:none;stroke:#000000;stroke-width:2.72024px;stroke-linecap:round;stroke-linejoin:round" />
     <g
-       id="g23615">
+       id="g57863">
       <g
          id="g2934"
          transform="translate(0.20276928,15.025358)">
@@ -276,14 +276,14 @@
       <text
          xml:space="preserve"
          style="font-size:8.46667px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
-         x="81.822495"
+         x="79.422195"
          y="232.58141"
          id="text165791"><tspan
            sodipodi:role="line"
            id="tspan165789"
            style="stroke-width:0.264583"
-           x="81.822495"
-           y="232.58141">Check Rank</tspan></text>
+           x="79.422195"
+           y="232.58141">Leaderboard</tspan></text>
     </g>
     <g
        id="g15377"
@@ -313,6 +313,6 @@
        id="text28325"><tspan
          sodipodi:role="line"
          id="tspan28323"
-         style="stroke-width:0.264583"></tspan></text>
+         style="stroke-width:0.264583" /></text>
   </g>
 </svg>
