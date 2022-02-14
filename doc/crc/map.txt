@@ -1,6 +1,0 @@
-Class: Map
-Collaborator: Account_activity
-Responsibility: Display map
-Responsibility: Dsiplay other users
-Responsibility: Add user on map as a friend
-Responsibility: show Other QR codes

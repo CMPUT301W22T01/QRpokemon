@@ -1,8 +1,0 @@
-Class Rank
-Collaborator: Start_activity
-Responsibility: Display gamewide user data (username and score)
-Responsibility: display rank with respect to hightest number of QR codes
-Responsibility: display rank with respect to hightest total score 
-Responsibility: display rank with respect to hightest score of a unique QR code scanned
-Responsibility: display current user's rank among users
-Responsibility: return back to Account_activity
