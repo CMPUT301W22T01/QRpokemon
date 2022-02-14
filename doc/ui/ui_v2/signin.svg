@@ -29,8 +29,8 @@
      showguides="true"
      inkscape:guide-bbox="true"
      inkscape:zoom="1.0826113"
-     inkscape:cx="291.88685"
-     inkscape:cy="404.11549"
+     inkscape:cx="283.57362"
+     inkscape:cy="602.70939"
      inkscape:window-width="3840"
      inkscape:window-height="2098"
      inkscape:window-x="0"
@@ -82,26 +82,26 @@
          x="25.464302"
          y="44.493851">Create your Profile</tspan></text>
     <g
-       id="g23661"
-       transform="translate(0,-11.87982)">
+       id="g54559"
+       transform="translate(1.6009903)">
       <rect
-         style="font-variation-settings:normal;opacity:1;vector-effect:none;fill:#0078ff;fill-opacity:1;fill-rule:evenodd;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none;stop-color:#000000;stop-opacity:1"
+         style="font-variation-settings:normal;vector-effect:none;fill:#0078ff;fill-opacity:1;fill-rule:evenodd;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none;stop-color:#000000"
          id="rect1257"
          width="92.70256"
          height="16.638922"
          x="57.047729"
-         y="262.06299"
+         y="241.06569"
          ry="6.707531" />
       <text
          xml:space="preserve"
          style="font-size:8.46667px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
          x="87.375839"
-         y="273.94797"
+         y="252.95067"
          id="text2935"><tspan
            id="tspan2933"
            style="fill:#ffffff;stroke-width:0.264583"
            x="87.375839"
-           y="273.94797"
+           y="252.95067"
            sodipodi:role="line">Confirm</tspan></text>
     </g>
     <g
@@ -222,7 +222,22 @@
            x="25.804283"
            y="131.19197">Xiaoming Li</tspan></text>
     </g>
+    <text
+       xml:space="preserve"
+       style="font-size:5.64444px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#005fcc;fill-opacity:1;stroke-width:0.264583"
+       x="71.099487"
+       y="266.89252"
+       id="text38657"><tspan
+         sodipodi:role="line"
+         id="tspan38655"
+         style="fill:#005fcc;fill-opacity:1;stroke-width:0.264583"
+         x="71.099487"
+         y="266.89252">I already have an account</tspan></text>
   </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer3"
+     inkscape:label="Restore Session" />
   <g
      inkscape:groupmode="layer"
      id="layer6"
