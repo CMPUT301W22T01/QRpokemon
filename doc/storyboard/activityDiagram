@@ -11,30 +11,33 @@ skinparam dpi 300
 ' Start Screen
 !$start = "start.png"
 
-' Login Screen
-!$login = "login.png"
-!$login_failed = "login-failed-zoomed.png"
+' Restore Screen
+!$restore = "restore.png"
+!$restore_fail = "restore-fail.png"
 
 ' Sign Up Screen
 !$sign_up = "sign-up.png"
+!$sign_up_failed = "sign-up-fail.png"
 
 ' Main Menu Screen
 !$main_ui = "main-ui.png"
 
 ' QR Inventory Screen
 !$qr_inventory = "qr-inventory.png"
-!$qr_inventory_after_delete = "qr-inventory-after-delete.png"
+!$qr_inventory_delete = "qr-inventory-delete.png"
 
 ' Search Screens
 !$search = "search.png"
 !$search_username = "search-username.png"
 !$search_geolocation = "search-geolocation.png"
 
+' My Profile
+!$my_profile = "my-profile.png"
+!$my_profile_qr = "my-profile-qr.png"
+
 ' Map
 !$map = "map.png"
-
-' Friend List
-!$friend_list = "friend-list.png"
+!$map_selection = "map-selection.png"
 
 ' Leaderboard
 !$leaderboard = "leaderboard.png"
@@ -44,8 +47,9 @@ skinparam dpi 300
 !$leaderboard_total_sum_of_scores = "leaderboard-total-sum-of-scores.png"
 
 ' Scan QR Codes
-!$switch_off = "switch-off.png"
-!$switch_on = "switch-on.png"
+!$scan = "scan.png"
+!$scan_fail = "scan-fail.png"
+!$scan_switch_on = "scan-switch-on.png"
 
 ' Viewing a Someone's
 !$view_profile = "view-profile.png"
@@ -54,21 +58,34 @@ skinparam dpi 300
 ' Begin Diagram '
 '''''''''''''''''
 start
-
-repeat :<img:$resource_dir/$start{scale=0.5}>;
-
-' Login & Sign Up
-switch ()
-case (Login)
-    :<img:$resource_dir/$login{scale=0.5}>;
-    repeat :Upload QR code;
-        backward:<img:$resource_dir/$login_failed{scale=0.5}>;
-    repeat while (Verification) is (invalid)
-    ->valid;
-case (Sign Up)
+switch()
+case (No Previous Session)
+    ' Sign Up
     :<img:$resource_dir/$sign_up{scale=0.5}>;
-case (Exit)
-    end
+    switch()
+    case (Restore Session?)
+        :Open Camera;
+        note left
+        User can go back to the
+        Create Profile screen if
+        they quit the camera
+        end note
+
+        repeat 
+            :<img:$resource_dir/$restore{scale=0.5}>;
+            backward:<img:$resource_dir/$restore_fail{scale=0.5}>;
+        repeat while (Scanned?) is (fail)
+        ->success;
+
+    case (Create a Profile)
+        repeat :Pick a username;
+            backward:<img:$resource_dir/$sign_up_failed{scale=0.15}>;
+        repeat while (Validation) is (invalid)
+        ->valid;
+    endswitch
+
+case (Session Found on Device)
+    :Continue to Main Menu;
 endswitch
 
 ' Main Menu
@@ -80,23 +97,27 @@ All following activites
 may return here
 end note
 
-backward:Return to start screen;
-repeat while (Logout?) is (yes)
-->no;
-
 ' Branch to Every Menu Option
 switch()
 
+case (Profile Icon)
+    while()
+        :<img:$resource_dir/$my_profile{scale=0.5}>;
+        :Generate QR Code;
+        :<img:$resource_dir/$my_profile_qr{scale=0.5}>;
+    endwhile
+    -[hidden]->
+    detach
 case (My QR Inventory)
     while ()
-    :<img:$resource_dir/$qr_inventory{scale=0.5}>;
-    switch(Delete QR Code from Inventory?)
-    case (yes)
-        :<img:$resource_dir/$qr_inventory_after_delete{scale=0.5}>;
-    case (no)
-        ' We need this node to link the entire switch back
-        :;
-    endswitch
+        :<img:$resource_dir/$qr_inventory{scale=0.5}>;
+        switch(Delete QR Code from Inventory?)
+        case (yes)
+            :<img:$resource_dir/$qr_inventory_delete{scale=0.5}>;
+        case (no)
+            ' We need this node to link the entire switch back
+            :;
+        endswitch
     endwhile
     -[hidden]->
     detach
@@ -127,36 +148,20 @@ case (Search)
 case (Map)
     :<img:$resource_dir/$map{scale=0.5}>;
     while()
-        switch()
-        case (Add as Friend)
-            switch()
-            case (Player Selected)
-                :Successfully added;
-            case (No Player Selected)
-                :A player needs to be selected;
-            endswitch
-
-        case (Select Player from Map)
-            :Highlight Selected Player;
-
-        endswitch
+        :Select QR Code from Map;
+        :<img:$resource_dir/$map_selection{scale=0.15}>;
     endwhile
     -[hidden]->
     detach
 
-case (Friends)
-    while ()
-        :<img:$resource_dir/$friend_list{scale=0.5}>;
-        :Open Friend Profile;
-        :<img:$resource_dir/$view_profile{scale=0.5}>;
-    endwhile
-    -[hidden]->
-    detach
-
-case (Check Rank)
+case (Leaderboard)
     :<img:$resource_dir/$leaderboard{scale=0.5}>;
     while ()
         :<img:$resource_dir/$leaderboard_sort_by{scale=0.5}>;
+        note left
+        The selected sort method
+        will be highlighted
+        end note
         switch()
         case (Sort by High Scores)
             :<img:$resource_dir/$leaderboard{scale=0.5}>;
@@ -176,15 +181,20 @@ case (Scan New QR)
 
     switch(User Scanned QR Code?)
     case (yes)
-        :<img:$resource_dir/$switch_off{scale=0.5}>;
-        note left
-        User can toggle saving
-        geolocation data and the
-        QR code
-        <img:$resource_dir/$switch_on{scale=0.15}>
-        end note
+        repeat
+            :<img:$resource_dir/$scan{scale=0.5}>;
+            note left
+            User can toggle saving
+            geolocation data and the
+            QR code
+            <img:$resource_dir/$scan_switch_on{scale=0.10}>
+            end note
+
+            backward:<img:$resource_dir/$scan_fail{scale=0.5}>;
+        repeat while (Scanned?) is (fail)
+        ->success;
         
-        switch(Save Image?)
+        switch(Save QR to Inventory?)
         case (Save)
             :<img:$resource_dir/$qr_inventory{scale=0.5}>;
             note right
@@ -193,7 +203,7 @@ case (Scan New QR)
             end note
             stop
 
-        case (Back)
+        case (Don't Save)
             :Activity Quits to Main Menu;
             stop
         endswitch
