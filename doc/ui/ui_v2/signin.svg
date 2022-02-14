@@ -10,7 +10,7 @@
    inkscape:export-filename="/home/michael/bitmap.png"
    inkscape:export-xdpi="300"
    inkscape:export-ydpi="300"
-   inkscape:version="1.1.2 (b8e25be8, 2022-02-05)"
+   inkscape:version="1.1.2 (0a00cf5339, 2022-02-04)"
    sodipodi:docname="signin.svg"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
@@ -29,12 +29,12 @@
      showguides="true"
      inkscape:guide-bbox="true"
      inkscape:zoom="1.0826113"
-     inkscape:cx="537.12722"
-     inkscape:cy="761.58451"
-     inkscape:window-width="1920"
-     inkscape:window-height="1027"
+     inkscape:cx="291.88685"
+     inkscape:cy="404.11549"
+     inkscape:window-width="3840"
+     inkscape:window-height="2098"
      inkscape:window-x="0"
-     inkscape:window-y="25"
+     inkscape:window-y="62"
      inkscape:window-maximized="1"
      inkscape:current-layer="layer4"
      inkscape:snap-text-baseline="false">
@@ -65,17 +65,6 @@
        height="297.9021"
        x="0.26311606"
        y="-0.55316401" />
-    <text
-       xml:space="preserve"
-       style="font-size:5.64444px;line-height:1.25;font-family:sans-serif;fill:#0078ff;fill-opacity:1;stroke-width:0.265;stroke-miterlimit:4;stroke-dasharray:none"
-       x="26.340879"
-       y="226.83118"
-       id="text3938"><tspan
-         sodipodi:role="line"
-         id="tspan3936"
-         style="font-size:5.64444px;fill:#0078ff;fill-opacity:1;stroke-width:0.265;stroke-miterlimit:4;stroke-dasharray:none"
-         x="26.340879"
-         y="226.83118"> Already have an account</tspan></text>
   </g>
   <g
      inkscape:groupmode="layer"
@@ -83,148 +72,172 @@
      inkscape:label="Header">
     <text
        xml:space="preserve"
-       style="font-size:19.05px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#ffffff;stroke-width:0.264583"
-       x="8.8610182"
-       y="20.190762"
-       id="text14901"><tspan
-         sodipodi:role="line"
-         id="tspan14899"
-         style="font-size:19.05px;fill:#ffffff;stroke-width:0.264583"
-         x="8.8610182"
-         y="20.190762">QRpokemon</tspan></text>
-    <text
-       xml:space="preserve"
        style="font-size:16.9333px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;stroke-width:0.264583"
-       x="18.238441"
-       y="21.06517"
+       x="25.464302"
+       y="44.493851"
        id="text22968"><tspan
          sodipodi:role="line"
          id="tspan22966"
-         style="font-size:16.9333px;fill:#000000;stroke-width:0.264583"
-         x="18.238441"
-         y="21.06517">User Profile</tspan></text>
-    <path
-       style="fill:#cccccc;stroke:#808080;stroke-width:0.965;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="M 24.958382,176.64843 191.06031,176.03972"
-       id="path16305-3" />
-    <path
-       style="fill:#cccccc;stroke:#808080;stroke-width:0.965;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="M 25.839922,218.86866 191.94185,218.25995"
-       id="path16305-8" />
-    <text
-       xml:space="preserve"
-       style="font-size:8.46667px;line-height:1.25;font-family:sans-serif;fill:#b3b3b3;stroke-width:0.264583"
-       x="28.471815"
-       y="67.546608"
-       id="text3027"><tspan
-         sodipodi:role="line"
-         id="tspan3025"
-         style="fill:#b3b3b3;stroke-width:0.264583"
-         x="28.471815"
-         y="67.546608">User Name:</tspan></text>
-    <text
-       xml:space="preserve"
-       style="font-size:8.46667px;line-height:1.25;font-family:sans-serif;fill:#b3b3b3;stroke-width:0.264583"
-       x="28.791447"
-       y="154.87306"
-       id="text12139"><tspan
-         sodipodi:role="line"
-         id="tspan12137"
-         style="fill:#b3b3b3;stroke-width:0.264583"
-         x="28.791447"
-         y="154.87306">Email:</tspan></text>
-    <text
-       xml:space="preserve"
-       style="font-size:8.46667px;line-height:1.25;font-family:sans-serif;fill:#b3b3b3;stroke-width:0.264583"
-       x="29.194138"
-       y="196.87683"
-       id="text12139-5"><tspan
-         sodipodi:role="line"
-         id="tspan12137-5"
-         style="fill:#b3b3b3;stroke-width:0.264583"
-         x="29.194138"
-         y="196.87683">Phone:</tspan></text>
-    <rect
-       style="font-variation-settings:normal;opacity:1;vector-effect:none;fill:#0078ff;fill-opacity:1;fill-rule:evenodd;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none;stop-color:#000000;stop-opacity:1"
-       id="rect1257"
-       width="92.70256"
-       height="16.638922"
-       x="57.047729"
-       y="262.06299"
-       ry="6.707531" />
-    <text
-       xml:space="preserve"
-       style="font-size:8.46667px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
-       x="86.16584"
-       y="273.94797"
-       id="text2935"><tspan
-         id="tspan2933"
-         style="fill:#ffffff;stroke-width:0.264583"
-         x="86.16584"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:16.9333px;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';fill:#000000;stroke-width:0.264583"
+         x="25.464302"
+         y="44.493851">Create your Profile</tspan></text>
+    <g
+       id="g23661"
+       transform="translate(0,-11.87982)">
+      <rect
+         style="font-variation-settings:normal;opacity:1;vector-effect:none;fill:#0078ff;fill-opacity:1;fill-rule:evenodd;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none;stop-color:#000000;stop-opacity:1"
+         id="rect1257"
+         width="92.70256"
+         height="16.638922"
+         x="57.047729"
+         y="262.06299"
+         ry="6.707531" />
+      <text
+         xml:space="preserve"
+         style="font-size:8.46667px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+         x="87.375839"
          y="273.94797"
-         sodipodi:role="line">Confirm</tspan></text>
-    <path
-       style="fill:#cccccc;stroke:#808080;stroke-width:0.965;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="M 25.839921,93.006916 191.94185,92.398206"
-       id="path16305-3-5" />
+         id="text2935"><tspan
+           id="tspan2933"
+           style="fill:#ffffff;stroke-width:0.264583"
+           x="87.375839"
+           y="273.94797"
+           sodipodi:role="line">Confirm</tspan></text>
+    </g>
+    <g
+       id="g46878">
+      <text
+         xml:space="preserve"
+         style="font-size:7.05556px;line-height:1.25;font-family:sans-serif;fill:#b3b3b3;stroke-width:0.264583"
+         x="25.076153"
+         y="77.390915"
+         id="text3027"><tspan
+           sodipodi:role="line"
+           id="tspan3025"
+           style="font-size:7.05556px;fill:#b3b3b3;stroke-width:0.264583"
+           x="25.076153"
+           y="77.390915">Username</tspan></text>
+      <path
+         style="fill:#cccccc;stroke:#808080;stroke-width:0.965;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         d="M 25.839921,93.006916 191.94185,92.398206"
+         id="path16305-3-5" />
+      <text
+         xml:space="preserve"
+         style="font-size:8.46667px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+         x="25.016886"
+         y="88.764435"
+         id="text33860"><tspan
+           sodipodi:role="line"
+           id="tspan33858"
+           style="stroke-width:0.264583"
+           x="25.016886"
+           y="88.764435">Name</tspan></text>
+    </g>
+    <g
+       id="g46854"
+       transform="translate(0,0.58607535)">
+      <path
+         style="fill:#cccccc;stroke:#808080;stroke-width:0.965;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         d="M 24.958382,176.64843 191.06031,176.03972"
+         id="path16305-3" />
+      <text
+         xml:space="preserve"
+         style="font-size:7.05556px;line-height:1.25;font-family:sans-serif;fill:#b3b3b3;stroke-width:0.264583"
+         x="24.135345"
+         y="160.97372"
+         id="text12139"><tspan
+           sodipodi:role="line"
+           id="tspan12137"
+           style="font-size:7.05556px;fill:#b3b3b3;stroke-width:0.264583"
+           x="24.135345"
+           y="160.97372">Email</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-size:8.46667px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+         x="24.567146"
+         y="172.24419"
+         id="text40838"><tspan
+           sodipodi:role="line"
+           id="tspan40836"
+           style="stroke-width:0.264583"
+           x="24.567146"
+           y="172.24419">abcd@xyz.com</tspan></text>
+    </g>
+    <g
+       id="g46861">
+      <path
+         style="fill:#cccccc;stroke:#808080;stroke-width:0.965;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         d="M 25.839922,218.86866 191.94185,218.25995"
+         id="path16305-8" />
+      <text
+         xml:space="preserve"
+         style="font-size:7.05556px;line-height:1.25;font-family:sans-serif;fill:#b3b3b3;stroke-width:0.264583"
+         x="25.016886"
+         y="203.96158"
+         id="text12139-5"><tspan
+           sodipodi:role="line"
+           id="tspan12137-5"
+           style="font-size:7.05556px;fill:#b3b3b3;stroke-width:0.264583"
+           x="25.016886"
+           y="203.96158">Phone</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-size:8.46667px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+         x="25.46562"
+         y="215.12796"
+         id="text50444"><tspan
+           sodipodi:role="line"
+           id="tspan50442"
+           style="stroke-width:0.264583"
+           x="25.46562"
+           y="215.12796">78070070000</tspan></text>
+    </g>
+    <g
+       id="g56071"
+       transform="translate(0,-0.63493379)">
+      <path
+         style="fill:#cccccc;stroke:#808080;stroke-width:0.965;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         d="M 25.839918,135.45604 191.94185,134.84733"
+         id="path16305-8-2" />
+      <text
+         xml:space="preserve"
+         style="font-size:7.05556px;line-height:1.25;font-family:sans-serif;fill:#b3b3b3;stroke-width:0.264583"
+         x="25.016882"
+         y="120.24761"
+         id="text12139-5-1"><tspan
+           sodipodi:role="line"
+           id="tspan12137-5-1"
+           style="font-size:7.05556px;fill:#b3b3b3;stroke-width:0.264583"
+           x="25.016882"
+           y="120.24761">Name</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-size:8.46667px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+         x="25.804283"
+         y="131.19197"
+         id="text50444-0"><tspan
+           sodipodi:role="line"
+           id="tspan50442-1"
+           style="stroke-width:0.264583"
+           x="25.804283"
+           y="131.19197">Xiaoming Li</tspan></text>
+    </g>
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer6"
+     inkscape:label="Username Taken"
+     style="display:none">
     <text
        xml:space="preserve"
-       style="font-size:8.46667px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
-       x="32.376644"
-       y="84.38311"
-       id="text33860"><tspan
+       style="font-size:5.64444px;line-height:1.25;font-family:sans-serif;display:inline;fill:#ff8080;fill-opacity:1;stroke-width:0.265;stroke-miterlimit:4;stroke-dasharray:none"
+       x="25.838152"
+       y="99.365211"
+       id="text3938"><tspan
          sodipodi:role="line"
-         id="tspan33858"
-         style="stroke-width:0.264583"
-         x="32.376644"
-         y="84.38311">Name</tspan></text>
-    <text
-       xml:space="preserve"
-       style="font-size:8.46667px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
-       x="30.913532"
-       y="171.14319"
-       id="text40838"><tspan
-         sodipodi:role="line"
-         id="tspan40836"
-         style="stroke-width:0.264583"
-         x="30.913532"
-         y="171.14319">abcd@xyz.com</tspan></text>
-    <text
-       xml:space="preserve"
-       style="font-size:8.46667px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
-       x="31.795069"
-       y="213.33473"
-       id="text50444"><tspan
-         sodipodi:role="line"
-         id="tspan50442"
-         style="stroke-width:0.264583"
-         x="31.795069"
-         y="213.33473">78070070000</tspan></text>
-    <path
-       style="fill:#cccccc;stroke:#808080;stroke-width:0.965;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="M 25.839918,134.00896 191.94185,133.40025"
-       id="path16305-8-2" />
-    <text
-       xml:space="preserve"
-       style="font-size:8.46667px;line-height:1.25;font-family:sans-serif;fill:#b3b3b3;stroke-width:0.264583"
-       x="29.194141"
-       y="112.01715"
-       id="text12139-5-1"><tspan
-         sodipodi:role="line"
-         id="tspan12137-5-1"
-         style="fill:#b3b3b3;stroke-width:0.264583"
-         x="29.194141"
-         y="112.01715">Name:</tspan></text>
-    <text
-       xml:space="preserve"
-       style="font-size:8.46667px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
-       x="31.795063"
-       y="128.47502"
-       id="text50444-0"><tspan
-         sodipodi:role="line"
-         id="tspan50442-1"
-         style="stroke-width:0.264583"
-         x="31.795063"
-         y="128.47502">Xiaoming Li</tspan></text>
+         id="tspan3936"
+         style="font-size:5.64444px;fill:#ff8080;fill-opacity:1;stroke-width:0.265;stroke-miterlimit:4;stroke-dasharray:none"
+         x="25.838152"
+         y="99.365211">Username already taken</tspan></text>
   </g>
 </svg>
