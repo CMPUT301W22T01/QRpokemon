@@ -11,7 +11,7 @@
    inkscape:export-xdpi="300"
    inkscape:export-ydpi="300"
    inkscape:version="1.1.2 (0a00cf5339, 2022-02-04)"
-   sodipodi:docname="myprofile-start.svg"
+   sodipodi:docname="myprofile.svg"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
@@ -29,14 +29,14 @@
      showguides="true"
      inkscape:guide-bbox="true"
      inkscape:zoom="1.1641198"
-     inkscape:cx="438.95827"
-     inkscape:cy="496.942"
+     inkscape:cx="163.21344"
+     inkscape:cy="573.39459"
      inkscape:window-width="3840"
      inkscape:window-height="2098"
      inkscape:window-x="0"
      inkscape:window-y="62"
      inkscape:window-maximized="1"
-     inkscape:current-layer="layer4">
+     inkscape:current-layer="layer2">
     <sodipodi:guide
        position="-14.091477,328.81946"
        orientation="1,0"
@@ -212,8 +212,15 @@
      inkscape:groupmode="layer"
      id="layer2"
      inkscape:label="QR Code"
-     sodipodi:insensitive="true"
      style="display:none">
+    <rect
+       style="fill:#000000;fill-opacity:0.5;stroke:#000000;stroke-width:0.499999;stroke-opacity:0.5"
+       id="rect22351"
+       width="209.84608"
+       height="297.9021"
+       x="0.26311606"
+       y="-0.55316401"
+       ry="0" />
     <g
        inkscape:label="QR Code: test1"
        transform="matrix(0.264583,0,0,0.264583,12.925116,56.425116)"
