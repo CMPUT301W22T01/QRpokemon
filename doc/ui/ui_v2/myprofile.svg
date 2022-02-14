@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 210 297"
+   version="1.1"
+   id="svg5"
+   inkscape:export-filename="/home/michael/bitmap.png"
+   inkscape:export-xdpi="300"
+   inkscape:export-ydpi="300"
+   inkscape:version="1.1.2 (0a00cf5339, 2022-02-04)"
+   sodipodi:docname="myprofile-start.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:pageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="mm"
+     showgrid="false"
+     showguides="true"
+     inkscape:guide-bbox="true"
+     inkscape:zoom="1.1641198"
+     inkscape:cx="438.95827"
+     inkscape:cy="496.942"
+     inkscape:window-width="3840"
+     inkscape:window-height="2098"
+     inkscape:window-x="0"
+     inkscape:window-y="62"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer4">
+    <sodipodi:guide
+       position="-14.091477,328.81946"
+       orientation="1,0"
+       id="guide6606" />
+    <sodipodi:guide
+       position="218.19061,302.90933"
+       orientation="1,0"
+       id="guide6608" />
+    <inkscape:grid
+       type="xygrid"
+       id="grid5170" />
+  </sodipodi:namedview>
+  <defs
+     id="defs2" />
+  <g
+     inkscape:label="Background"
+     inkscape:groupmode="layer"
+     id="layer1"
+     sodipodi:insensitive="true"
+     style="display:inline">
+    <rect
+       style="fill:#ffffff;stroke:#ffffff;stroke-width:0.499999"
+       id="rect854"
+       width="209.84608"
+       height="297.9021"
+       x="0.26311606"
+       y="-0.55316401" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer4"
+     inkscape:label="Header">
+    <text
+       xml:space="preserve"
+       style="font-size:19.05px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#ffffff;stroke-width:0.264583"
+       x="15.393459"
+       y="14.673798"
+       id="text14901"><tspan
+         sodipodi:role="line"
+         id="tspan14899"
+         style="font-size:19.05px;fill:#ffffff;stroke-width:0.264583"
+         x="15.393459"
+         y="14.673798">QRpokemon</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:27.9992px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;stroke-width:0.437488"
+       x="58.577335"
+       y="41.263027"
+       id="text22968"><tspan
+         sodipodi:role="line"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:27.9992px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#000000;stroke-width:0.437488"
+         x="58.577335"
+         y="41.263027"
+         id="tspan8399">Profile</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:8.46667px;line-height:1.25;font-family:sans-serif;stroke-width:0.348258"
+       x="23.703856"
+       y="134.93193"
+       id="text25394"
+       transform="scale(1.0050613,0.99496419)"><tspan
+         sodipodi:role="line"
+         id="tspan25392"
+         style="font-size:8.46667px;fill:#808080;fill-opacity:1;stroke-width:0.348258"
+         x="23.703856"
+         y="134.93193">&lt;username&gt;</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:9.87778px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+       x="106.35598"
+       y="70.985023"
+       id="text3963"><tspan
+         sodipodi:role="line"
+         id="tspan3961"
+         style="font-size:9.87778px;stroke-width:0.264583"
+         x="106.35598"
+         y="70.985023">Contact Information</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:6.35px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+       x="106.61703"
+       y="87.580208"
+       id="text8359"><tspan
+         sodipodi:role="line"
+         id="tspan8357"
+         style="font-size:6.35px;fill:#bfbfbf;fill-opacity:1;stroke-width:0.264583"
+         x="106.61703"
+         y="87.580208">Phone Number</tspan><tspan
+         sodipodi:role="line"
+         style="font-size:7.76111px;stroke-width:0.264583"
+         x="106.61703"
+         y="96.801643"
+         id="tspan59826">780-700-0000</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:6.35px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+       x="106.34258"
+       y="119.33134"
+       id="text18957"><tspan
+         sodipodi:role="line"
+         id="tspan18955"
+         style="font-size:6.35px;fill:#bfbfbf;fill-opacity:1;stroke-width:0.264583"
+         x="106.34258"
+         y="119.33134">Email</tspan><tspan
+         sodipodi:role="line"
+         style="font-size:7.76111px;stroke-width:0.264583"
+         x="106.34258"
+         y="128.55276"
+         id="tspan64174">player@qrcode.com</tspan></text>
+    <rect
+       style="font-variation-settings:normal;opacity:1;vector-effect:none;fill:#0078ff;fill-opacity:1;fill-rule:evenodd;stroke-width:1.25529;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none;stop-color:#000000;stop-opacity:1"
+       id="rect27517"
+       width="68.791672"
+       height="21.166656"
+       x="70.604164"
+       y="153.64563"
+       ry="7.055552" />
+    <text
+       xml:space="preserve"
+       style="font-size:7.05556px;line-height:1.25;font-family:sans-serif;fill:#ffffff;stroke-width:0.264583"
+       x="74.301262"
+       y="167.24782"
+       id="text6096"><tspan
+         sodipodi:role="line"
+         id="tspan6094"
+         style="fill:#ffffff;stroke-width:0.264583"
+         x="74.301262"
+         y="167.24782">Generate QR Code</tspan></text>
+    <g
+       id="g1668"
+       style="display:inline"
+       transform="translate(2.6002219,-26.624629)">
+      <circle
+         style="display:inline;opacity:1;fill:#e5e5e5;fill-opacity:1;stroke-width:0.499999"
+         id="circle35100"
+         cx="105.71735"
+         cy="274.26596"
+         r="15.861898" />
+      <circle
+         style="display:inline;opacity:1;fill:#fcfcfc;fill-opacity:1;stroke-width:0.499999"
+         id="path34792"
+         cx="105"
+         cy="273.54868"
+         r="15.861898" />
+      <path
+         id="primary-9"
+         d="m 104.61984,266.37215 -6.632603,6.16973 a 0.88050509,1.3203226 0 0 0 0,2.19642 l 6.632603,6.16973 a 0.82290193,1.2339464 0 0 0 1.20143,-1.55477 l -0.69123,-3.28229 h 6.45155 a 0.82290193,1.2339464 0 0 0 0.8229,-1.23395 v -2.46789 a 0.82290193,1.2339464 0 0 0 -0.8229,-1.23395 h -6.45155 l 0.69123,-3.2823 a 0.82290193,1.2339464 0 0 0 -1.20143,-1.48073 z"
+         style="display:inline;fill:none;stroke:#000000;stroke-width:2.01536px;stroke-linecap:round;stroke-linejoin:round" />
+    </g>
+    <g
+       id="g15377"
+       transform="matrix(1.1745638,0,0,1.1745638,-74.423556,20.046947)"
+       style="display:inline">
+      <circle
+         style="fill:#f0f1f2;fill-opacity:1;stroke:none;stroke-width:0.499999;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         id="path5120"
+         cx="105"
+         cy="62.645542"
+         r="25.711342" />
+      <circle
+         style="fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.54186;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         id="path5224"
+         cx="105"
+         cy="57.225338"
+         r="7.1362123" />
+      <path
+         id="rect8859"
+         style="fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.392181;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         d="m 97.692177,63.882923 c -2.830219,0 -5.108731,2.278512 -5.108731,5.108731 v 15.228527 c 0,0.333127 0.0327,0.658045 0.09302,0.973066 a 25.711341,25.711341 0 0 0 12.323274,3.163634 25.711341,25.711341 0 0 0 12.32328,-3.163115 c 0.0604,-0.31518 0.0935,-0.640284 0.0935,-0.973585 V 68.991654 c 0,-2.830219 -2.27851,-5.108731 -5.10873,-5.108731 z" />
+    </g>
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="QR Code"
+     sodipodi:insensitive="true"
+     style="display:none">
+    <g
+       inkscape:label="QR Code: test1"
+       transform="matrix(0.264583,0,0,0.264583,12.925116,56.425116)"
+       id="g66946"
+       style="stroke:#000000;stroke-width:1.88977">
+      <rect
+         x="0"
+         y="0"
+         width="696"
+         height="696"
+         style="fill:#ffffff;stroke:#000000;stroke-width:1.88977"
+         id="rect66940" />
+      <g
+         style="fill:#000000;stroke:#000000;stroke-width:1.88977"
+         id="g66944">
+        <path
+           d="m 573.6,600 h -19.2 c -1.32548,0 -2.4,-1.07452 -2.4,-2.4 V 576 h 21.6 c 1.32548,0 2.4,1.07452 2.4,2.4 v 19.2 c 0,1.32548 -1.07452,2.4 -2.4,2.4 z m -48,0 h -19.2 c -1.32548,0 -2.4,-1.07452 -2.4,-2.4 v -19.2 c 0,-1.32548 1.07452,-2.4 2.4,-2.4 H 528 v 21.6 c 0,1.32548 -1.07452,2.4 -2.4,2.4 z m -48,0 h -19.2 c -1.32548,0 -2.4,-1.07452 -2.4,-2.4 V 576 h 21.6 c 1.32548,0 2.4,1.07452 2.4,2.4 v 19.2 c 0,1.32548 -1.07452,2.4 -2.4,2.4 z m -72,0 h -19.2 c -1.32548,0 -2.4,-1.07452 -2.4,-2.4 v -19.2 c 0,-1.32548 -1.07452,-2.4 -2.4,-2.4 h -19.2 c -1.32548,0 -2.4,1.07452 -2.4,2.4 v 19.2 c 0,1.32548 -1.07452,2.4 -2.4,2.4 h -19.2 c -1.32548,0 -2.4,-1.07452 -2.4,-2.4 v -67.2 c 0,-1.32548 -1.07452,-2.4 -2.4,-2.4 h -19.2 c -1.32548,0 -2.4,1.07452 -2.4,2.4 v 67.2 c 0,1.32548 -1.07452,2.4 -2.4,2.4 h -19.2 c -1.32548,0 -2.4,-1.07452 -2.4,-2.4 V 482.4 c 0,-1.32548 1.07452,-2.4 2.4,-2.4 h 19.2 c 1.32548,0 2.4,-1.07452 2.4,-2.4 v -19.2 c 0,-1.32548 -1.07452,-2.4 -2.4,-2.4 h -19.2 c -1.32548,0 -2.4,-1.07452 -2.4,-2.4 v -43.2 c 0,-1.32548 -1.07452,-2.4 -2.4,-2.4 h -91.2 c -1.32548,0 -2.4,-1.07452 -2.4,-2.4 v -43.2 c 0,-1.32548 -1.07452,-2.4 -2.4,-2.4 h -19.2 c -1.32548,0 -2.4,1.07452 -2.4,2.4 v 19.2 c 0,1.32548 -1.07452,2.4 -2.4,2.4 h -19.2 c -1.32548,0 -2.4,-1.07452 -2.4,-2.4 v -19.2 c 0,-1.32548 -1.07452,-2.4 -2.4,-2.4 h -19.2 c -1.32548,0 -2.4,-1.07452 -2.4,-2.4 V 336 h 93.6 c 1.32548,0 2.4,1.07452 2.4,2.4 v 19.2 c 0,1.32548 1.07452,2.4 2.4,2.4 H 240 v 21.6 c 0,1.32548 1.07452,2.4 2.4,2.4 h 43.2 c 1.32548,0 2.4,-1.07452 2.4,-2.4 V 360 h 24 v 69.6 c 0,1.32548 1.07452,2.4 2.4,2.4 h 19.2 c 1.32548,0 2.4,-1.07452 2.4,-2.4 V 360 h 45.6 c 1.32548,0 2.4,-1.07452 2.4,-2.4 v -19.2 c 0,-1.32548 -1.07452,-2.4 -2.4,-2.4 h -19.2 c -1.32548,0 -2.4,-1.07452 -2.4,-2.4 v -43.2 c 0,-1.32548 1.07452,-2.4 2.4,-2.4 h 19.2 c 1.32548,0 2.4,1.07452 2.4,2.4 v 19.2 c 0,1.32548 1.07452,2.4 2.4,2.4 h 19.2 c 1.32548,0 2.4,-1.07452 2.4,-2.4 v -19.2 c 0,-1.32548 1.07452,-2.4 2.4,-2.4 h 19.2 c 1.32548,0 2.4,1.07452 2.4,2.4 v 19.2 c 0,1.32548 1.07452,2.4 2.4,2.4 H 456 v 21.6 c 0,1.32548 1.07452,2.4 2.4,2.4 h 19.2 c 1.32548,0 2.4,1.07452 2.4,2.4 v 19.2 c 0,1.32548 -1.07452,2.4 -2.4,2.4 h -19.2 c -1.32548,0 -2.4,1.07452 -2.4,2.4 V 384 h -45.6 c -1.32548,0 -2.4,1.07452 -2.4,2.4 V 432 h -24 v -45.6 c 0,-1.32548 -1.07452,-2.4 -2.4,-2.4 h -19.2 c -1.32548,0 -2.4,1.07452 -2.4,2.4 v 43.2 c 0,1.32548 1.07452,2.4 2.4,2.4 H 384 v 21.6 c 0,1.32548 -1.07452,2.4 -2.4,2.4 h -19.2 c -1.32548,0 -2.4,1.07452 -2.4,2.4 v 19.2 c 0,1.32548 1.07452,2.4 2.4,2.4 h 19.2 c 1.32548,0 2.4,1.07452 2.4,2.4 v 19.2 c 0,1.32548 1.07452,2.4 2.4,2.4 h 19.2 c 1.32548,0 2.4,-1.07452 2.4,-2.4 v -19.2 c 0,-1.32548 1.07452,-2.4 2.4,-2.4 h 19.2 c 1.32548,0 2.4,1.07452 2.4,2.4 v 19.2 c 0,1.32548 1.07452,2.4 2.4,2.4 H 480 v 45.6 c 0,1.32548 -1.07452,2.4 -2.4,2.4 h -19.2 c -1.32548,0 -2.4,1.07452 -2.4,2.4 V 576 h -45.6 c -1.32548,0 -2.4,1.07452 -2.4,2.4 v 19.2 c 0,1.32548 -1.07452,2.4 -2.4,2.4 z m -144,0 H 98.4 C 97.074517,600 96,598.92548 96,597.6 V 434.4 c 0,-1.32548 1.074517,-2.4 2.4,-2.4 h 163.2 c 1.32548,0 2.4,1.07452 2.4,2.4 v 163.2 c 0,1.32548 -1.07452,2.4 -2.4,2.4 z m 288,-24 H 528 v -45.6 c 0,-1.32548 -1.07452,-2.4 -2.4,-2.4 h -19.2 c -1.32548,0 -2.4,-1.07452 -2.4,-2.4 v -19.2 c 0,-1.32548 -1.07452,-2.4 -2.4,-2.4 H 480 v -21.6 c 0,-1.32548 -1.07452,-2.4 -2.4,-2.4 h -19.2 c -1.32548,0 -2.4,-1.07452 -2.4,-2.4 v -19.2 c 0,-1.32548 1.07452,-2.4 2.4,-2.4 h 19.2 c 1.32548,0 2.4,-1.07452 2.4,-2.4 V 432 h 48 v 21.6 c 0,1.32548 1.07452,2.4 2.4,2.4 h 19.2 c 1.32548,0 2.4,-1.07452 2.4,-2.4 v -19.2 c 0,-1.32548 -1.07452,-2.4 -2.4,-2.4 H 528 v -24 h 21.6 c 1.32548,0 2.4,-1.07452 2.4,-2.4 V 384 h 21.6 c 1.32548,0 2.4,1.07452 2.4,2.4 v 19.2 c 0,1.32548 1.07452,2.4 2.4,2.4 h 19.2 c 1.32548,0 2.4,1.07452 2.4,2.4 v 19.2 c 0,1.32548 -1.07452,2.4 -2.4,2.4 h -19.2 c -1.32548,0 -2.4,1.07452 -2.4,2.4 v 67.2 c 0,1.32548 -1.07452,2.4 -2.4,2.4 H 552 v -21.6 c 0,-1.32548 -1.07452,-2.4 -2.4,-2.4 h -19.2 c -1.32548,0 -2.4,1.07452 -2.4,2.4 v 19.2 c 0,1.32548 1.07452,2.4 2.4,2.4 H 552 v 72 z M 240,573.6 V 458.4 c 0,-1.32548 -1.07452,-2.4 -2.4,-2.4 H 122.4 c -1.32548,0 -2.4,1.07452 -2.4,2.4 v 115.2 c 0,1.32548 1.07452,2.4 2.4,2.4 h 115.2 c 1.32548,0 2.4,-1.07452 2.4,-2.4 z m 192,-24 v -19.2 c 0,-1.32548 -1.07452,-2.4 -2.4,-2.4 h -19.2 c -1.32548,0 -2.4,1.07452 -2.4,2.4 v 19.2 c 0,1.32548 1.07452,2.4 2.4,2.4 h 19.2 c 1.32548,0 2.4,-1.07452 2.4,-2.4 z m -48,0 v -19.2 c 0,-1.32548 -1.07452,-2.4 -2.4,-2.4 h -19.2 c -1.32548,0 -2.4,1.07452 -2.4,2.4 v 19.2 c 0,1.32548 1.07452,2.4 2.4,2.4 h 19.2 c 1.32548,0 2.4,-1.07452 2.4,-2.4 z M 213.6,552 h -67.2 c -1.32548,0 -2.4,-1.07452 -2.4,-2.4 v -67.2 c 0,-1.32548 1.07452,-2.4 2.4,-2.4 h 67.2 c 1.32548,0 2.4,1.07452 2.4,2.4 v 67.2 c 0,1.32548 -1.07452,2.4 -2.4,2.4 z m 216,-96 h -19.2 c -1.32548,0 -2.4,-1.07452 -2.4,-2.4 V 432 h 21.6 c 1.32548,0 2.4,1.07452 2.4,2.4 v 19.2 c 0,1.32548 -1.07452,2.4 -2.4,2.4 z m 48,-24 h -19.2 c -1.32548,0 -2.4,-1.07452 -2.4,-2.4 V 384 h 21.6 c 1.32548,0 2.4,1.07452 2.4,2.4 V 432 Z m 48,-24 h -19.2 c -1.32548,0 -2.4,-1.07452 -2.4,-2.4 V 290.4 c 0,-1.32548 1.07452,-2.4 2.4,-2.4 h 19.2 c 1.32548,0 2.4,1.07452 2.4,2.4 v 19.2 c 0,1.32548 1.07452,2.4 2.4,2.4 H 552 v 21.6 c 0,1.32548 1.07452,2.4 2.4,2.4 H 576 v 21.6 c 0,1.32548 -1.07452,2.4 -2.4,2.4 h -19.2 c -1.32548,0 -2.4,1.07452 -2.4,2.4 V 384 h -21.6 c -1.32548,0 -2.4,1.07452 -2.4,2.4 V 408 Z M 432,357.6 v -19.2 c 0,-1.32548 -1.07452,-2.4 -2.4,-2.4 h -19.2 c -1.32548,0 -2.4,1.07452 -2.4,2.4 v 19.2 c 0,1.32548 1.07452,2.4 2.4,2.4 h 19.2 c 1.32548,0 2.4,-1.07452 2.4,-2.4 z M 333.6,360 H 312 v -21.6 c 0,-1.32548 1.07452,-2.4 2.4,-2.4 h 19.2 c 1.32548,0 2.4,1.07452 2.4,2.4 V 360 Z m -48,0 H 240 v -21.6 c 0,-1.32548 1.07452,-2.4 2.4,-2.4 h 43.2 c 1.32548,0 2.4,1.07452 2.4,2.4 V 360 Z m 312,-24 H 576 v -24 h 21.6 c 1.32548,0 2.4,1.07452 2.4,2.4 v 19.2 c 0,1.32548 -1.07452,2.4 -2.4,2.4 z m -480,0 H 98.4 c -1.325483,0 -2.4,-1.07452 -2.4,-2.4 v -43.2 c 0,-1.32548 1.074517,-2.4 2.4,-2.4 h 115.2 c 1.32548,0 2.4,1.07452 2.4,2.4 v 19.2 c 0,1.32548 -1.07452,2.4 -2.4,2.4 h -91.2 c -1.32548,0 -2.4,1.07452 -2.4,2.4 V 336 Z m 456,-24 H 552 v -21.6 c 0,-1.32548 1.07452,-2.4 2.4,-2.4 h 19.2 c 1.32548,0 2.4,1.07452 2.4,2.4 V 312 Z m -96,0 H 456 v -21.6 c 0,-1.32548 1.07452,-2.4 2.4,-2.4 h 19.2 c 1.32548,0 2.4,1.07452 2.4,2.4 v 19.2 c 0,1.32548 -1.07452,2.4 -2.4,2.4 z m -168,0 h -67.2 c -1.32548,0 -2.4,-1.07452 -2.4,-2.4 v -19.2 c 0,-1.32548 1.07452,-2.4 2.4,-2.4 H 312 v 21.6 c 0,1.32548 -1.07452,2.4 -2.4,2.4 z m 24,-24 H 312 v -24 h 24 v 21.6 c 0,1.32548 -1.07452,2.4 -2.4,2.4 z m 264,-24 H 434.4 c -1.32548,0 -2.4,-1.07452 -2.4,-2.4 V 98.4 c 0,-1.325483 1.07452,-2.4 2.4,-2.4 h 163.2 c 1.32548,0 2.4,1.074517 2.4,2.4 v 163.2 c 0,1.32548 -1.07452,2.4 -2.4,2.4 z m -192,0 h -19.2 c -1.32548,0 -2.4,-1.07452 -2.4,-2.4 V 240 h 21.6 c 1.32548,0 2.4,1.07452 2.4,2.4 v 19.2 c 0,1.32548 -1.07452,2.4 -2.4,2.4 z m -48,0 H 336 v -21.6 c 0,-1.32548 1.07452,-2.4 2.4,-2.4 H 360 v 21.6 c 0,1.32548 -1.07452,2.4 -2.4,2.4 z m -48,0 h -19.2 c -1.32548,0 -2.4,-1.07452 -2.4,-2.4 v -43.2 c 0,-1.32548 1.07452,-2.4 2.4,-2.4 H 312 v 48 z m -48,0 H 98.4 C 97.074517,264 96,262.92548 96,261.6 V 98.4 C 96,97.074517 97.074517,96 98.4,96 h 163.2 c 1.32548,0 2.4,1.074517 2.4,2.4 v 163.2 c 0,1.32548 -1.07452,2.4 -2.4,2.4 z M 576,237.6 V 122.4 c 0,-1.32548 -1.07452,-2.4 -2.4,-2.4 H 458.4 c -1.32548,0 -2.4,1.07452 -2.4,2.4 v 115.2 c 0,1.32548 1.07452,2.4 2.4,2.4 h 115.2 c 1.32548,0 2.4,-1.07452 2.4,-2.4 z M 381.6,240 H 360 v -21.6 c 0,-1.32548 1.07452,-2.4 2.4,-2.4 H 384 v 24 z M 240,237.6 V 122.4 c 0,-1.32548 -1.07452,-2.4 -2.4,-2.4 H 122.4 c -1.32548,0 -2.4,1.07452 -2.4,2.4 v 115.2 c 0,1.32548 1.07452,2.4 2.4,2.4 h 115.2 c 1.32548,0 2.4,-1.07452 2.4,-2.4 z M 549.6,216 h -67.2 c -1.32548,0 -2.4,-1.07452 -2.4,-2.4 v -67.2 c 0,-1.32548 1.07452,-2.4 2.4,-2.4 h 67.2 c 1.32548,0 2.4,1.07452 2.4,2.4 v 67.2 c 0,1.32548 -1.07452,2.4 -2.4,2.4 z m -144,0 H 384 v -45.6 c 0,-1.32548 -1.07452,-2.4 -2.4,-2.4 H 336 v -21.6 c 0,-1.32548 -1.07452,-2.4 -2.4,-2.4 h -43.2 c -1.32548,0 -2.4,-1.07452 -2.4,-2.4 v -19.2 c 0,-1.32548 1.07452,-2.4 2.4,-2.4 h 43.2 c 1.32548,0 2.4,-1.07452 2.4,-2.4 V 98.4 c 0,-1.325483 1.07452,-2.4 2.4,-2.4 h 67.2 c 1.32548,0 2.4,1.074517 2.4,2.4 v 115.2 c 0,1.32548 -1.07452,2.4 -2.4,2.4 z m -72,0 H 312 v -21.6 c 0,-1.32548 -1.07452,-2.4 -2.4,-2.4 h -19.2 c -1.32548,0 -2.4,-1.07452 -2.4,-2.4 v -19.2 c 0,-1.32548 1.07452,-2.4 2.4,-2.4 H 336 v 45.6 c 0,1.32548 -1.07452,2.4 -2.4,2.4 z m -120,0 h -67.2 c -1.32548,0 -2.4,-1.07452 -2.4,-2.4 v -67.2 c 0,-1.32548 1.07452,-2.4 2.4,-2.4 h 67.2 c 1.32548,0 2.4,1.07452 2.4,2.4 v 67.2 c 0,1.32548 -1.07452,2.4 -2.4,2.4 z M 384,141.6 v -19.2 c 0,-1.32548 -1.07452,-2.4 -2.4,-2.4 h -19.2 c -1.32548,0 -2.4,1.07452 -2.4,2.4 v 19.2 c 0,1.32548 1.07452,2.4 2.4,2.4 h 19.2 c 1.32548,0 2.4,-1.07452 2.4,-2.4 z"
+           id="path66942"
+           style="stroke:#000000;stroke-width:1.88977" />
+      </g>
+    </g>
+  </g>
+</svg>
