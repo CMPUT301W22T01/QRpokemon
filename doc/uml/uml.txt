@@ -10,10 +10,19 @@ skinparam classattributeiconsize 0
 class Profile_Controller
 {    
      -Dialog: string
+     -BackButton: Button
+     -QRCodeButton: Button
 
     +GetUserName(): string
     +OpenDialog()
     +DisplayPlayerRank()
+}
+
+class PromptFragment
+{
+    -QRCodeTitle: TextView
+    -QRCode: ImageView
+    
 }
 
 class Profile_Activity
@@ -21,10 +30,11 @@ class Profile_Activity
     +OnCreate()
 }
 
-class main
+class Main_Menu_Activity
 
+Profile_Activity "1" *- "1" PromptFragment
 Profile_Activity "1" *- "1" Profile_Controller
-Profile_Activity "1" *- "1" main
+Profile_Activity "1" *- "1" Main_Menu_Activity
 
 @enduml
 ```
