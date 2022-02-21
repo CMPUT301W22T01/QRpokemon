@@ -6,5 +6,25 @@ skinparam dpi 300
 skinparam classattributeiconsize 0
 
 ' Begin UML Here
+
+class Profile_Controller
+{    
+     -Dialog: string
+
+    +GetUserName(): string
+    +OpenDialog()
+    +DisplayPlayerRank()
+}
+
+class Profile_Activity
+{
+    +OnCreate()
+}
+
+class main
+
+Profile_Activity "1" *- "1" Profile_Controller
+Profile_Activity "1" *- "1" main
+
 @enduml
 ```
