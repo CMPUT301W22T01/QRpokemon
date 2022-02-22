@@ -2,7 +2,7 @@
 @startuml
 
 ' Customization Settings
-skinparam dpi 300
+skinparam dpi 100
 skinparam classattributeiconsize 0
 
 ' Begin UML Here
@@ -30,11 +30,59 @@ class Profile_Activity
     +OnCreate()
 }
 
+class Leaderboard_Activity
+{
+    -sortButton: Button
+    -rankList: ListView
+    -sortButtonList: ListView
+    -rankAdapter: ArrayAdapter<RankData>
+    -rankDataList: ArrayList<RankData>
+
+    +OnCreate()
+    
+}
+
+class Leaderboard_Controller
+{
+    -score: ArrayList
+    -myScore: Integer
+    -sortBy: String
+
+    +getSortBy(): String
+    +sortDataBy(sortBy: String)
+    
+}
+
+class RankData
+{
+    -score: ArrayList
+
+    +getScore(): ArrayList
+    +setScore(s: ArrayList)
+}
+
+class CustomRankList
+{
+    -ranks: ArrayAdapter<RankData>
+    -context: Context 
+
+    +CustomRankList(context: Context, ranks: ArrayAdapter<RankData> )
+    +getView(position: Integer, convertView: View, parent: ViewGroup): View
+}
+
+class ArrayAdapter
+
 class Main_Menu_Activity
 
 Profile_Activity "1" *- "1" PromptFragment
 Profile_Activity "1" *- "1" Profile_Controller
 Profile_Activity "1" *- "1" Main_Menu_Activity
+
+Main_menu_Activity "1" *- "1" Leaderboard_Activity
+Leaderboard_Activity "1" *- "1" Leaderboard_Controller
+Leaderboard_Controller "1" *- "1" CustomRankList
+CustomRankList "1" *- "*" RankData
+ArrayAdapter <|-- CustomRankList
 
 @enduml
 ```
