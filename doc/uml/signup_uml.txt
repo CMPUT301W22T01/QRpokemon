@@ -1,0 +1,46 @@
+@startuml
+!theme plain
+skinparam dpi 100
+skinparam classattributeiconsize 0
+
+class Signup_Activity
+{
+    -confirm_Button: Button
+    -restore_Button: Button
+    -Username: EditText
+    -Email: EditText
+    -Phone: EditText
+    -signUpText: TextView
+
+    +OnCreate()
+    +UsernameInvalid()
+    
+}
+
+class Signup_Controller
+{
+    -newPlayer: Player
+
+    +AddNewPlayer(newPlayer: Player)
+    +CheckUserNameValid()
+    +SendUserToMain()
+    +SendToRestore()
+    
+}
+
+class Player
+
+class Player_Controller
+
+
+
+class Main_Menu_Activity
+
+
+Main_Menu_Activity "1" *- "1" Signup_Activity
+Signup_Activity "1" *- "1" Signup_Controller
+Signup_Controller "1" *- "1" Player
+Signup_Controller "1" *- "1" Player_Controller
+
+
+@enduml
