@@ -78,7 +78,7 @@ Profile_Activity "1" *- "1" PromptFragment
 Profile_Activity "1" *- "1" Profile_Controller
 Profile_Activity "1" *- "1" Main_Menu_Activity
 
-Main_menu_Activity "1" *- "1" Leaderboard_Activity
+Main_Menu_Activity "1" *- "1" Leaderboard_Activity
 Leaderboard_Activity "1" *- "1" Leaderboard_Controller
 Leaderboard_Controller "1" *- "1" CustomRankList
 CustomRankList "1" *- "*" RankData
