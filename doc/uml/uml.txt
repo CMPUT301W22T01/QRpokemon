@@ -70,9 +70,55 @@ class CustomRankList
     +getView(position: Integer, convertView: View, parent: ViewGroup): View
 }
 
+class Signup_Activity
+{
+    -confirm_Button: Button
+    -restore_Button: Button
+    -Username: EditText
+    -Email: EditText
+    -Phone: EditText
+    -signUpText: TextView
+
+    +OnCreate()
+    +UsernameInvalid()
+    
+}
+
+class Signup_Controller
+{
+    -newPlayer: Player
+
+    +AddNewPlayer(newPlayer: Player)
+    +CheckUserNameValid()
+    +FirstTimeCheck(): Boolean
+    +SendUserToMain()
+    +SendToRestore()
+    
+}
+
+class Restore_Session
+{
+    -UserQR: hash
+
+    +GetUserQR(): hash
+    +CheckIfUserExists(UserQR: hash): Boolean
+    +LoadPlayer()
+    +SendUserToMain()
+}
+
 class ArrayAdapter
 
 class Main_Menu_Activity
+
+class Player
+
+class Player_Controller
+
+class QR_analyzers
+
+class Camera_Controller
+
+class Database_controller
 
 Profile_Activity "1" *- "1" PromptFragment
 Profile_Activity "1" *- "1" Profile_Controller
@@ -83,6 +129,17 @@ Leaderboard_Activity "1" *- "1" Leaderboard_Controller
 Leaderboard_Controller "1" *- "1" CustomRankList
 CustomRankList "1" *- "*" RankData
 ArrayAdapter <|-- CustomRankList
+
+Main_Menu_Activity "1" *- "1" Signup_Activity
+Signup_Activity "1" *- "1" Signup_Controller
+Signup_Controller "1" *- "1" Player
+Signup_Controller "1" *- "1" Player_Controller
+
+Signup_Controller --> Restore_Session
+Restore_Session --> QR_analyzers
+Restore_Session --> Camera_Controller
+Restore_Session --> Database_controller
+Restore_Session --> Main_Menu_Activity
 
 @enduml
 ```
