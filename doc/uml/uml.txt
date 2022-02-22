@@ -106,13 +106,39 @@ class Restore_Session
     +SendUserToMain()
 }
 
+class Player
+{    
+     -username: String
+     -QR_Inventory: ArrayList<String>
+     -contact: String
+     -statistics: int
+
+    +SetUsername(name: String)
+    +GetUsername(): String
+    +SetContact(contact: String)
+    +GetContact(): String
+    +SetStatistics(statistics: int)
+    +GetStatistics(): int
+    +SetQR_Inventory(QR_Inventory: ArrayList<String>)
+    +GetQR_Inventory(): ArrayList<String>
+    +Player (Username: String, contact: String, stats: int, QR_Inventory: ArrayList<String>) 
+}
+
+class Player_Controller
+{
+     -Player: Player
+
+    +GetPlayer(Username: String)
+    +SavePlayerData()
+    +UpdateUsername()
+    +UpdateQR_Inventory()
+    +UpdateStatistics()
+    +Player_Controller(Username: String)  
+}
+
 class ArrayAdapter
 
 class Main_Menu_Activity
-
-class Player
-
-class Player_Controller
 
 class QR_analyzers
 
@@ -134,6 +160,7 @@ Main_Menu_Activity "1" *- "1" Signup_Activity
 Signup_Activity "1" *- "1" Signup_Controller
 Signup_Controller "1" *- "1" Player
 Signup_Controller "1" *- "1" Player_Controller
+Player_Controller "1" *- "1" Player
 
 Signup_Controller --> Restore_Session
 Restore_Session --> QR_analyzers
