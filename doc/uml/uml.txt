@@ -138,6 +138,41 @@ class PlayerController
     +playerController(Username: String)  
 }
 
+class Location
+{
+     -locationHash: ArrayList<String>
+
+    +getLocationHash()
+    +setLocationHash(locationHash: ArrayList<String>)
+}
+
+class QrCode
+{
+     -geoLocation: ArrayList<Location>
+     -qrCodeHash: String
+     -comment: String
+
+    +getGeoLocation()
+    +getQrCodeHash()
+    +getComment()
+    +setGeoLocation(geoLocation: ArrayList<Location>)
+    +setQrCodeHash(qrCodeHash: String)
+    +setComment(comment: String)
+}
+
+class QrInventoryActivity
+{
+     -myQrDataList: ArrayList<QrCode>
+}
+
+Class QrInventoryController
+{
+    +updateQrDataList(player: Player): ArrayList<String>
+    +addComment(comment: Stirng)
+    +deleteQr(qr: QrCode)
+    +onEvent()
+}
+
 class ArrayAdapter
 
 class MainMenuActivity
@@ -169,5 +204,10 @@ RestoreSession --> QrAnalyzer
 RestoreSession --> CameraController
 RestoreSession --> DatabaseController
 RestoreSession --> MainMenuActivity
+
+MainMenuActivity "1" *- "1" QrInventoryActivity
+QrInventoryActivity "1" *- "1" QrInventoryController
+QrCode "1" *- "*" Location
+QrInventoryController "1" *- "*" QrCode
 
 @enduml
