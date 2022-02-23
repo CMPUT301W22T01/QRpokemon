@@ -173,6 +173,46 @@ Class QrInventoryController
     +onEvent()
 }
 
+class SearchActivity
+{
+    -resultList: ListView
+    -resultDataAdapter: ArrayAdapter<ResultData>
+    -resultDataList: ArrayList<ResultData>
+
+    +onCreate()
+}
+
+class SearchController
+{
+    -serchText:String
+    -resultDataList: ArrayList<ResultData>
+
+    +vaildText(serchText):Boolean 
+    +searchResult():String
+}
+
+class ResultDataAdapter
+{
+    -resultData: ArrayAdapter<ResultData>
+    -context: Context
+
+    +ResultDataAdapter(context: Context, resultData: ArrayAdapter<ResultData> )
+    +getView(position: Integer, convertView: View, parent: ViewGroup): View
+}
+
+class ResultData
+{
+    -username: String
+    -geolation: String
+
+    +resultData(username: String, geolation: String)
+    +getUsername():String
+    +setUsername():String
+    +getGeolocation():String
+    +setGeolocation():String
+}
+
+
 class ArrayAdapter
 
 class MainMenuActivity
@@ -209,5 +249,11 @@ MainMenuActivity "1" *- "1" QrInventoryActivity
 QrInventoryActivity "1" *- "1" QrInventoryController
 QrCode "1" *- "*" Location
 QrInventoryController "1" *- "*" QrCode
+
+MainMenuActivity "1" *- "1" SearchActivity
+ResultDataAdapter "1" *- "*" ResultData
+ResultDataAdapter "1" *-"1" SearchController
+SearchActivity "1" *- "1" SearchController
+ArrayAdapter <|-- ResultDataAdapter
 
 @enduml
