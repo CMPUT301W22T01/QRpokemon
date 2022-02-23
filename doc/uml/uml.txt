@@ -131,11 +131,11 @@ class PlayerController
      -player: Player
 
     +getPlayer(Username: String)
-    +savePlayerData()
-    +updateUsername()
-    +updateQrInventory()
-    +updateStatistics()
-    +playerController(Username: String)  
+    +savePlayerData(databasecontroller: DataBaseController)
+    +updateUsername(username: String): Player
+    +updateQrInventory(QRcode: arraylist): Player
+    +updateStatistics(statistics: int): Player
+    +playerController(player: Player)  
 }
 
 class Location
