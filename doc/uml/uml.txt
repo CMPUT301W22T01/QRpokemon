@@ -12,19 +12,10 @@ skinparam classattributeiconsize 0
 class ProfileController
 {    
      -dialog: string
-     -backButton: Button
-     -qrCodeButton: Button
 
-    +getUsername(): string
+    +getUsername(player: Player, playercontroller: PlayerController): string
     +openDialog()
-    +displayPlayerRank()
-}
-
-class PromptFragment
-{
-    -qrCodeTitle: TextView
-    -qrCode: ImageView
-    
+    +displayPlayerRank(database: DataBase, databasecontroller: DataBaseController, currentplayer: Player)
 }
 
 class ProfileActivity
@@ -223,7 +214,6 @@ class CameraController
 
 class DatabaseController
 
-ProfileActivity "1" *- "1" PromptFragment
 ProfileActivity "1" *- "1" ProfileController
 ProfileActivity "1" *- "1" MainMenuActivity
 
