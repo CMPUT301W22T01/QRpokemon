@@ -1,4 +1,3 @@
-```
 @startuml
 
 ' Customization Settings
@@ -7,30 +6,33 @@ skinparam classattributeiconsize 0
 
 ' Begin UML Here
 
-class Profile_Controller
-{    
-     -Dialog: string
-     -BackButton: Button
-     -QRCodeButton: Button
+' NOTE: All activities should inherit from an Android Activity.
+' This includes onCreate() should inherit from an Android Activity
 
-    +GetUserName(): string
-    +OpenDialog()
-    +DisplayPlayerRank()
+class ProfileController
+{    
+     -dialog: string
+     -backButton: Button
+     -qrCodeButton: Button
+
+    +getUsername(): string
+    +openDialog()
+    +displayPlayerRank()
 }
 
 class PromptFragment
 {
-    -QRCodeTitle: TextView
-    -QRCode: ImageView
+    -qrCodeTitle: TextView
+    -qrCode: ImageView
     
 }
 
-class Profile_Activity
+class ProfileActivity
 {
-    +OnCreate()
+    +onCreate()
 }
 
-class Leaderboard_Activity
+class LeaderboardActivity
 {
     -sortButton: Button
     -rankList: ListView
@@ -38,11 +40,11 @@ class Leaderboard_Activity
     -rankAdapter: ArrayAdapter<RankData>
     -rankDataList: ArrayList<RankData>
 
-    +OnCreate()
+    +onCreate()
     
 }
 
-class Leaderboard_Controller
+class LeaderboardController
 {
     -score: ArrayList
     -myScore: Integer
@@ -66,107 +68,106 @@ class CustomRankList
     -ranks: ArrayAdapter<RankData>
     -context: Context 
 
-    +CustomRankList(context: Context, ranks: ArrayAdapter<RankData> )
+    +customRankList(context: Context, ranks: ArrayAdapter<RankData> )
     +getView(position: Integer, convertView: View, parent: ViewGroup): View
 }
 
-class Signup_Activity
+class SignupActivity
 {
-    -confirm_Button: Button
-    -restore_Button: Button
-    -Username: EditText
-    -Email: EditText
-    -Phone: EditText
-    -signUpText: TextView
+    -confirmButton: Button
+    -restoreButton: Button
+    -username: EditText
+    -email: EditText
+    -phone: EditText
+    -signupText: TextView
 
-    +OnCreate()
-    +UsernameInvalid()
+    +onCreate()
+    +usernameInvalid()
     
 }
 
-class Signup_Controller
+class SignupController
 {
     -newPlayer: Player
 
-    +AddNewPlayer(newPlayer: Player)
-    +CheckUserNameValid()
-    +FirstTimeCheck(): Boolean
-    +SendUserToMain()
-    +SendToRestore()
+    +addNewPlayer(newPlayer: Player)
+    +checkUserNameValid()
+    +firstTimeCheck(): Boolean
+    +sendUserToMain()
+    +sendToRestore()
     
 }
 
-class Restore_Session
+class RestoreSession
 {
-    -UserQR: hash
+    -userQr: hash
 
-    +GetUserQR(): hash
-    +CheckIfUserExists(UserQR: hash): Boolean
-    +LoadPlayer()
-    +SendUserToMain()
+    +getUserQr(): hash
+    +checkIfUserExists(UserQr: hash): Boolean
+    +loadPlayer()
+    +sendUserToMain()
 }
 
 class Player
 {    
      -username: String
-     -QR_Inventory: ArrayList<String>
+     -qrInventory: ArrayList<String>
      -contact: String
      -statistics: int
 
-    +SetUsername(name: String)
-    +GetUsername(): String
-    +SetContact(contact: String)
-    +GetContact(): String
-    +SetStatistics(statistics: int)
-    +GetStatistics(): int
-    +SetQR_Inventory(QR_Inventory: ArrayList<String>)
-    +GetQR_Inventory(): ArrayList<String>
-    +Player (Username: String, contact: String, stats: int, QR_Inventory: ArrayList<String>) 
+    +setUsername(name: String)
+    +getUsername(): String
+    +setContact(contact: String)
+    +getContact(): String
+    +setStatistics(statistics: int)
+    +getStatistics(): int
+    +setQrInventory(QrInventory: ArrayList<String>)
+    +getQrInventory(): ArrayList<String>
+    +player (username: String, contact: String, stats: int, QrInventory: ArrayList<String>) 
 }
 
-class Player_Controller
+class PlayerController
 {
-     -Player: Player
+     -player: Player
 
-    +GetPlayer(Username: String)
-    +SavePlayerData()
-    +UpdateUsername()
-    +UpdateQR_Inventory()
-    +UpdateStatistics()
-    +Player_Controller(Username: String)  
+    +getPlayer(Username: String)
+    +savePlayerData()
+    +updateUsername()
+    +updateQrInventory()
+    +updateStatistics()
+    +playerController(Username: String)  
 }
 
 class ArrayAdapter
 
-class Main_Menu_Activity
+class MainMenuActivity
 
-class QR_analyzers
+class QrAnalyzer
 
-class Camera_Controller
+class CameraController
 
-class Database_controller
+class DatabaseController
 
-Profile_Activity "1" *- "1" PromptFragment
-Profile_Activity "1" *- "1" Profile_Controller
-Profile_Activity "1" *- "1" Main_Menu_Activity
+ProfileActivity "1" *- "1" PromptFragment
+ProfileActivity "1" *- "1" ProfileController
+ProfileActivity "1" *- "1" MainMenuActivity
 
-Main_Menu_Activity "1" *- "1" Leaderboard_Activity
-Leaderboard_Activity "1" *- "1" Leaderboard_Controller
-Leaderboard_Controller "1" *- "1" CustomRankList
+MainMenuActivity "1" *- "1" LeaderboardActivity
+LeaderboardActivity "1" *- "1" LeaderboardController
+LeaderboardController "1" *- "1" CustomRankList
 CustomRankList "1" *- "*" RankData
 ArrayAdapter <|-- CustomRankList
 
-Main_Menu_Activity "1" *- "1" Signup_Activity
-Signup_Activity "1" *- "1" Signup_Controller
-Signup_Controller "1" *- "1" Player
-Signup_Controller "1" *- "1" Player_Controller
-Player_Controller "1" *- "1" Player
+MainMenuActivity "1" *- "1" SignupActivity
+SignupActivity "1" *- "1" SignupController
+SignupController "1" *- "1" Player
+SignupController "1" *- "1" PlayerController
+PlayerController "1" *- "1" Player
 
-Signup_Controller --> Restore_Session
-Restore_Session --> QR_analyzers
-Restore_Session --> Camera_Controller
-Restore_Session --> Database_controller
-Restore_Session --> Main_Menu_Activity
+SignupController --> RestoreSession
+RestoreSession --> QrAnalyzer
+RestoreSession --> CameraController
+RestoreSession --> DatabaseController
+RestoreSession --> MainMenuActivity
 
 @enduml
-```
