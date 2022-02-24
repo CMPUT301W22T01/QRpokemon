@@ -25,11 +25,6 @@ class ProfileActivity
 
 class LeaderboardActivity
 {
-    -sortButton: Button
-    -rankList: ListView
-    -sortButtonList: ListView
-    -rankAdapter: ArrayAdapter<RankData>
-    -rankDataList: ArrayList<RankData>
 
     +onCreate()
     
@@ -37,40 +32,22 @@ class LeaderboardActivity
 
 class LeaderboardController
 {
-    -score: ArrayList
+    
     -myScore: Integer
     -sortBy: String
+    -currentPlayer: Player
+    -currentRank: ArrayList<Player>
 
+    +LeaderboardController(currentPlayer: Player)
     +getSortBy(): String
-    +sortDataBy(sortBy: String)
+    +sortDataBy(sortBy: String, currentRank: ArrayList<Player>): ArrayList<Player>
     
 }
 
-class RankData
-{
-    -score: ArrayList
 
-    +getScore(): ArrayList
-    +setScore(s: ArrayList)
-}
-
-class CustomRankList
-{
-    -ranks: ArrayAdapter<RankData>
-    -context: Context 
-
-    +customRankList(context: Context, ranks: ArrayAdapter<RankData> )
-    +getView(position: Integer, convertView: View, parent: ViewGroup): View
-}
 
 class SignupActivity
 {
-    -confirmButton: Button
-    -restoreButton: Button
-    -username: EditText
-    -email: EditText
-    -phone: EditText
-    -signupText: TextView
 
     +onCreate()
     +usernameInvalid()
@@ -80,23 +57,26 @@ class SignupActivity
 class SignupController
 {
     -newPlayer: Player
+    -playerName: String
 
     +addNewPlayer(newPlayer: Player)
-    +checkUserNameValid()
-    +firstTimeCheck(): Boolean
-    +sendUserToMain()
+    +checkUserNameValid(playerName: String, databaseController: DatabaseController): Boolean
+    +getUsername(): String
+    +firstRunCheck(fileSystemController: FileSystemController): Boolean
+    +sendUserToMain(newPlayer: Player)
     +sendToRestore()
     
 }
 
 class RestoreSession
 {
-    -userQr: hash
-
-    +getUserQr(): hash
-    +checkIfUserExists(UserQr: hash): Boolean
-    +loadPlayer()
-    +sendUserToMain()
+    -oldUsername: String
+    -oldPlayer: Player
+    
+    +getUserQr(cameraController: CameraController): String
+    +checkIfUserExists(oldUsername: String): Boolean
+    +loadPlayer(oldUsername: String, databaseController: DatabaseController): Player
+    +sendUserToMain(oldPlayer: Player)
 }
 
 class Player
@@ -104,28 +84,32 @@ class Player
      -username: String
      -qrInventory: ArrayList<String>
      -contact: String
-     -statistics: int
+     -totalQR: Integer
+     -score: Integer
 
     +setUsername(name: String)
     +getUsername(): String
     +setContact(contact: String)
     +getContact(): String
-    +setStatistics(statistics: int)
-    +getStatistics(): int
+    +setTotalQR(totalQR: Integer)
+    +getTotalQR(): Integer
+    +setScore(score: Integer)
+    +getScore(): Integer
     +setQrInventory(QrInventory: ArrayList<String>)
     +getQrInventory(): ArrayList<String>
-    +player (username: String, contact: String, stats: int, QrInventory: ArrayList<String>) 
+    +player (username: String, contact: String, score: Integer, totalQR: Integer, QrInventory: ArrayList<String>) 
 }
 
 class PlayerController
 {
-     -player: Player
+    -player: Player
 
-    +getPlayer(Username: String)
+    +getPlayer(Username: String): Player
     +savePlayerData(databasecontroller: DataBaseController)
-    +updateUsername(username: String): Player
-    +updateQrInventory(QRcode: arraylist): Player
-    +updateStatistics(statistics: int): Player
+    +updateUsername(username: String)
+    +updateQrInventory(QRcode: arraylist)
+    +updateTotalQR(totalQR: Integer)
+    +updateScore(score: Integer)
     +playerController(player: Player)  
 }
 
