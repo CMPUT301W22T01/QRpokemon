@@ -113,6 +113,23 @@ class PlayerController
     +playerController(player: Player)  
 }
 
+Class OtherPlayerActivity
+{
+    +onCreate()
+}
+
+OtherPlayerController
+{
+  -player: Player
+  -score: Int
+  -phone: String
+  -scantotal: Int
+
+  +updateComment(playerController: PlayerController, comment: String, databaseController: DatabaseController, qrcodeController: QrcodeController, qrcode: QrCode)
+  +otherPlayerController(player: Player)
+
+}
+
 class Location
 {
      -locationHash: ArrayList<String>
@@ -192,6 +209,7 @@ SignupActivity "1" *- "1" SignupController
 SignupController "1" *- "1" Player
 SignupController "1" *- "1" PlayerController
 PlayerController "1" *- "1" Player
+OtherPlayerActivity "1" *- "1" OtherPlayerController
 
 SignupController --> RestoreSession
 RestoreSession --> QrAnalyzer
