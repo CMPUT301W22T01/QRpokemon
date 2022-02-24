@@ -134,7 +134,7 @@ class Location
 {
      -locationHash: ArrayList<String>
 
-    +getLocationHash()
+    +getLocationHash(): ArrayList<String>
     +setLocationHash(locationHash: ArrayList<String>)
 }
 
@@ -144,12 +144,22 @@ class QrCode
      -qrCodeHash: String
      -comment: String
 
-    +getGeoLocation()
-    +getQrCodeHash()
-    +getComment()
+    +getGeoLocation(): ArrayList<Location>
+    +getQrCodeHash(): String
+    +getComment(): String
     +setGeoLocation(geoLocation: ArrayList<Location>)
     +setQrCodeHash(qrCodeHash: String)
     +setComment(comment: String)
+}
+
+class QrCodeController
+{
+     -username: String
+     -qrCodeHash: String
+
+    +addComment(username: String, qrCodeHash: String, comment: Stirng)
+    +deleteQr(username: String, qrCodeHash: String)
+    +onEvent()
 }
 
 class QrInventoryActivity
@@ -157,12 +167,11 @@ class QrInventoryActivity
      -myQrDataList: ArrayList<QrCode>
 }
 
-Class QrInventoryController
+class QrInventoryController
 {
-    +updateQrDataList(player: Player): ArrayList<String>
-    +addComment(comment: Stirng)
-    +deleteQr(qr: QrCode)
-    +onEvent()
+     -username: String
+
+    +sendHash(qrCodeHash: String)
 }
 
 class SearchActivity
@@ -213,10 +222,12 @@ RestoreSession --> CameraController
 RestoreSession --> DatabaseController
 RestoreSession --> MainMenuActivity
 
-MainMenuActivity "1" *- "1" QrInventoryActivity
-QrInventoryActivity "1" *- "1" QrInventoryController
+MainMenuActivity "1" *- "1" QrInventoryController
+QrInventoryController "1" *- "1" QrInventoryActivity
 QrCode "1" *- "*" Location
-QrInventoryController "1" *- "*" QrCode
+QrInventoryController --> QrCodeController
+QrCodeController "1" *- "1" QrCode
+QrCodeController --> DatabaseController
 
 MainMenuActivity "1" o- "1" SearchActivity
 SearchActivity "1" *- "*" ResultData
