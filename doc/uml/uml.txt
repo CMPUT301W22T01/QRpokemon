@@ -203,9 +203,6 @@ ProfileActivity "1" *- "1" MainMenuActivity
 
 MainMenuActivity "1" *- "1" LeaderboardActivity
 LeaderboardActivity "1" *- "1" LeaderboardController
-LeaderboardController "1" *- "1" CustomRankList
-CustomRankList "1" *- "*" RankData
-ArrayAdapter <|-- CustomRankList
 
 MainMenuActivity "1" *- "1" SignupActivity
 SignupActivity "1" *- "1" SignupController
