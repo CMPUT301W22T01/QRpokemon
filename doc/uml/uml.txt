@@ -167,11 +167,8 @@ Class QrInventoryController
 
 class SearchActivity
 {
-    -resultList: ListView
-    -resultDataAdapter: ArrayAdapter<ResultData>
-    -resultDataList: ArrayList<ResultData>
-
     +onCreate()
+    +getPlayerInput():String
 }
 
 class SearchController
@@ -180,9 +177,8 @@ class SearchController
     -selectedUser:Player
 
     +getResultByUsername(databaseController: DatabaseController):ArrayList<String>
-    +sendUserToProfile(selectedUser)
+    +sendUserToProfile(selectedUser: Player)
     +getResultByLocation(locationController: LocationController):ArrayList<String>
-    
 
 }
 
@@ -224,8 +220,8 @@ QrInventoryController "1" *- "*" QrCode
 
 MainMenuActivity "1" o- "1" SearchActivity
 SearchActivity "1" *- "*" ResultData
-SearchController "1"->"1" DatabaseController
-SearchController "1" -> "1" PlayerController
+SearchController "1" -> "1" DatabaseController
+SearchController "1" -> "1" Player
 SearchController "1" -> "1" LocationController
 
 
