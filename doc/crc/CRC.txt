@@ -20,10 +20,17 @@ Responsibility: Calculate score from QR hash
 # If a user scanned a QR code but they're location is not stored, then it will
 # not appear in the database. Similar with comments.
 Class: QrCode
-Collaborator: DatabaseController
+Collaborator: DatabaseController, QrCodeController
 Responsibility: Store geolocation
 Responsibility: Store QR hash
 Responsibility: Store comments
+
+Class: QrCodeController
+Collaborator: DatabaseController, QrCode
+Responsibility: Ask QrCode to update itself
+Responsibility: Get QrCode from DatabaseController
+Responsibility: Ask DatabaseController to update QrCode
+Responsibility: Ask DatabaseController to save QrCode
 
 Class: Location
 Collaborator: LocationController
@@ -179,13 +186,13 @@ Responsibility: Take picture
 Responsibility: Return picture
 
 Class: DatabaseController
-Collaborator: Database
+Collaborator: Database, QrCodeController, PlayerContorller, Player, QrCode, RestoreSession, QrScannedController, LeaderboardController, SginupController
 Responsibility: Write data to Database
 Responsibility: Read data from Database
 
 Class: Database
-Collaborator: DatabaseController, QrModel, Player
-Responsibility: Store QrModel
+Collaborator: DatabaseController, QrCode, Player, QrCodeController
+Responsibility: Store QrCode
 Responsibility: Store Player
 
 Class: FileSystemController
