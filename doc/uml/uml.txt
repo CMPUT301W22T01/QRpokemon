@@ -162,9 +162,11 @@ class SearchController
     -serchText:String
     -selectedUser:Player
 
-    +getResultByLocation(locationController: LocationController):ArrayList<String>
-    +sendUserToProfile(selectedUser)
     +getResultByUsername(databaseController: DatabaseController):ArrayList<String>
+    +sendUserToProfile(selectedUser)
+    +getResultByLocation(locationController: LocationController):ArrayList<String>
+    
+
 }
 
 
