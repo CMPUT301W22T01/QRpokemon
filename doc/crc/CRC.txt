@@ -203,3 +203,15 @@ Responsibility: Read files from FileSys
 Class: FileSys
 Collaborator: FileSystemController
 Responsibility: Store local files
+
+Class: SearchActivity
+Collaborator: SearchController, MainMenuActivity
+Responsibility: Display Search page
+Responsibility: Send user input to SearchController
+
+Class: SearchController
+Collaborator: LocationController, DatabaseController, PlayerController, OtherPlayerController
+Responsibility: Get username and contact information form DatabaseController
+Responsibility: Get geolocation from LocationController
+Responsibility: Display the search result
+Responsibility: Send user to OtherPlayerActivity
