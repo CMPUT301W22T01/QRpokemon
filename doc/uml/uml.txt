@@ -136,10 +136,10 @@ class QrCode
      -qrCodeHash: String
      -comment: String
 
-    +getGeoLocation(): ArrayList<Location>
+    +getGeoLocation(): ArrayList<String>
     +getQrCodeHash(): String
     +getComment(): String
-    +setGeoLocation(geoLocation: ArrayList<Location>)
+    +setGeoLocation(geoLocation: ArrayList<String>)
     +setQrCodeHash(qrCodeHash: String)
     +setComment(comment: String)
 }
@@ -151,7 +151,6 @@ class QrCodeController
 
     +addComment(username: String, qrCodeHash: String, comment: Stirng)
     +deleteQr(username: String, qrCodeHash: String)
-    +onEvent()
 }
 
 class QrInventoryActivity
