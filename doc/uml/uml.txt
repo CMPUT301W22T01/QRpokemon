@@ -113,12 +113,12 @@ class PlayerController
     +playerController(player: Player)  
 }
 
-Class OtherPlayerActivity
+class OtherPlayerActivity
 {
     +onCreate()
 }
 
-OtherPlayerController
+class OtherPlayerController
 {
   -player: Player
   -score: Int
