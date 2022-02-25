@@ -32,15 +32,10 @@ Responsibility: Get QrCode from DatabaseController
 Responsibility: Ask DatabaseController to update QrCode
 Responsibility: Ask DatabaseController to save QrCode
 
-Class: Location
-Collaborator: LocationController
-Responsibility: Store a list of hashes for every location
-
 Class: LocationController
-Collaborator: Location, MapController, QrScannedController
-Responsibility: Read location related data from Location
-Responsibility: Return location and related data
-Responsibility: Update/Create a location with related data
+Collaborator: DatabaseController, MapController, QrScannedController
+Responsibility: Get location data from DatabaseController
+Responsibility: Return location to caller
 
 Class: SignupActivity
 Collaborator: SignupController
