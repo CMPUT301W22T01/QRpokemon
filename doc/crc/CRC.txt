@@ -177,7 +177,7 @@ Class: CameraController
 Collaborator: RestoreSession, MainMenuController, Camera
 Responsibility: Open Camera
 Responsibility: Pipe image from Camera to QrAnalyzer
-Responsibility: Raise error if QR hash not found
+Responsibility: Raise error from QrAnalyzer if QR hash not found
 Responsibility: Return QR hash from QrAnalyzer
 
 Class: Camera
