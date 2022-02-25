@@ -182,6 +182,19 @@ class SearchController
 
 }
 
+class MapActivity
+{
+    +onCreate()
+}
+
+class MapController
+{
+    - qrCodeHashList: ArrayList<String>
+    
+    +getQrCodeHash(locationController: LocationController): ArrayList<String>
+    +getQRcodeInfo(qrcodeController: QrCodeController, qrCodeHashList: ArrayList<String>): ArrayList<String>
+}
+
 
 
 class ArrayAdapter
@@ -220,12 +233,14 @@ QrInventoryController --> QrCodeController
 QrCodeController "1" *- "1" QrCode
 QrCodeController --> DatabaseController
 
-MainMenuActivity "1" o- "1" SearchActivity
+MainMenuActivity "1" *- "1" SearchActivity
 SearchActivity "1" *- "*" ResultData
 SearchController "1" -> "1" DatabaseController
 SearchController "1" -> "1" Player
 SearchController "1" -> "1" LocationController
 
+MainMenuActivity "1" *- "1" MapActivity
+MapController -> LocationController
 
 
 @enduml
