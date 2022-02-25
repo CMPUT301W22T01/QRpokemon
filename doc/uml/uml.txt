@@ -130,17 +130,9 @@ OtherPlayerController
 
 }
 
-class Location
-{
-     -locationHash: ArrayList<String>
-
-    +getLocationHash(): ArrayList<String>
-    +setLocationHash(locationHash: ArrayList<String>)
-}
-
 class QrCode
 {
-     -geoLocation: ArrayList<Location>
+     -geoLocation: ArrayList<String>
      -qrCodeHash: String
      -comment: String
 
