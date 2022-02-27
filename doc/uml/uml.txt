@@ -5,53 +5,34 @@ skinparam dpi 100
 skinparam classattributeiconsize 0
 
 ' Begin UML Here
-
-' NOTE: All activities should inherit from an Android Activity.
-' This includes onCreate() should inherit from an Android Activity
+' TODO: Rename method arguments to shorthand (fileSystemController -> fsController)?
 
 class ProfileController
 {    
-     -dialog: string
-
-    +getUsername(player: Player, playercontroller: PlayerController): string
-    +openDialog()
+    +getUsername(player: Player, playercontroller: PlayerController): String
+    +generatePlayerQr(): Image
     +displayPlayerRank(database: DataBase, databasecontroller: DataBaseController, currentplayer: Player)
 }
 
 class ProfileActivity
-{
-    +onCreate()
-}
 
 class LeaderboardActivity
-{
-
-    +onCreate()
-    
-}
 
 class LeaderboardController
 {
-    
     -myScore: Integer
     -sortBy: String
-    -currentPlayer: Player
     -currentRank: ArrayList<Player>
 
-    +LeaderboardController(currentPlayer: Player)
+    ' FIX: dbController needed
     +getSortBy(): String
-    +sortDataBy(sortBy: String, currentRank: ArrayList<Player>): ArrayList<Player>
-    
+    +sortData(sortBy: String, currentRank: ArrayList<Player>): ArrayList<Player>
 }
-
 
 
 class SignupActivity
 {
-
-    +onCreate()
     +usernameInvalid()
-    
 }
 
 class SignupController
@@ -60,144 +41,135 @@ class SignupController
     -playerName: String
 
     +addNewPlayer(newPlayer: Player)
-    +checkUserNameValid(playerName: String, databaseController: DatabaseController): Boolean
+    +validateUsername(playerName: String, databaseController: DatabaseController): Boolean
     +getUsername(): String
     +firstRunCheck(fileSystemController: FileSystemController): Boolean
     +sendUserToMain(newPlayer: Player)
     +sendToRestore()
-    
 }
 
 class RestoreSession
 {
-    -oldUsername: String
-    -oldPlayer: Player
+    -username: String
+    -player: Player
     
     +getUserQr(cameraController: CameraController): String
-    +checkIfUserExists(oldUsername: String): Boolean
-    +loadPlayer(oldUsername: String, databaseController: DatabaseController): Player
-    +sendUserToMain(oldPlayer: Player)
+    +validateUsername(username: String): Boolean  ' FIX: db required for validation
+    +loadPlayer(username: String, databaseController: DatabaseController): Player
+    +sendUserToMain(player: Player)
 }
 
 class Player
 {    
-     -username: String
-     -qrInventory: ArrayList<String>
-     -contact: String
-     -totalQR: Integer
-     -score: Integer
+    -username: String
+    -qrInventory: ArrayList<String>
+    -contact: String
+    -totalQr: Integer
+    -score: Integer
 
     +setUsername(name: String)
     +getUsername(): String
     +setContact(contact: String)
     +getContact(): String
-    +setTotalQR(totalQR: Integer)
-    +getTotalQR(): Integer
+    +setTotalQr(totalQr: Integer)
+    +getTotalQr(): Integer
     +setScore(score: Integer)
     +getScore(): Integer
-    +setQrInventory(QrInventory: ArrayList<String>)
+    +setQrInventory(qrInventory: ArrayList<String>)
     +getQrInventory(): ArrayList<String>
-    +player (username: String, contact: String, score: Integer, totalQR: Integer, QrInventory: ArrayList<String>) 
+    +player(username: String, contact: String, score: Integer, totalQr: Integer, qrInventory: ArrayList<String>) 
 }
 
 class PlayerController
 {
     -player: Player
 
-    +getPlayer(Username: String): Player
-    +savePlayerData(databasecontroller: DataBaseController)
+    +getPlayer(username: String): Player
+    +savePlayerData(databaseController: DatabaseController)
     +updateUsername(username: String)
-    +updateQrInventory(QRcode: arraylist)
-    +updateTotalQR(totalQR: Integer)
+    ' FIX: qrCode ArrayList needed? Maybe have (optional?) arguments for player data
+    +updateQrInventory(qrCode: ArrayList)
+    +updateTotalQr(totalQr: Integer)
     +updateScore(score: Integer)
     +playerController(player: Player)  
 }
 
 class OtherPlayerActivity
-{
-    +onCreate()
-}
 
 class OtherPlayerController
 {
-  -player: Player
-  -score: Int
-  -phone: String
-  -scantotal: Int
+    -player: Player
+    -score: Integer
+    -phone: String
+    -scanTotal: Integer
 
-  +updateComment(playerController: PlayerController, comment: String, databaseController: DatabaseController, qrcodeController: QrcodeController, qrcode: QrCode)
-  +otherPlayerController(player: Player)
+    +updateComment(playerController: PlayerController, comment: String, databaseController: DatabaseController, qrCodeController: qrCodeController, qrCode: QrCode)
+    +otherPlayerController(player: Player)
 
 }
 
 class QrCode
 {
-     -geoLocation: ArrayList<String>
-     -qrCodeHash: String
-     -comment: String
+    -geolocation: ArrayList<String>
+    -qrCodeHash: String
+    -comment: String
 
-    +getGeoLocation(): ArrayList<String>
+    +getGeolocation(): ArrayList<String>
     +getQrCodeHash(): String
     +getComment(): String
-    +setGeoLocation(geoLocation: ArrayList<String>)
+    +setGeolocation(geolocation: ArrayList<String>)  ' FIX: Make a single String?
     +setQrCodeHash(qrCodeHash: String)
     +setComment(comment: String)
 }
 
 class QrCodeController
 {
-     -username: String
-     -qrCodeHash: String
+    -username: String
+    -qrCodeHash: String
 
-    +addComment(username: String, qrCodeHash: String, comment: Stirng)
+    +addComment(username: String, qrCodeHash: String, comment: String)
     +deleteQr(username: String, qrCodeHash: String)
 }
 
 class QrInventoryActivity
 {
-     -myQrDataList: ArrayList<QrCode>
+    -qrDataList: ArrayList<QrCode>
 }
 
 class QrInventoryController
 {
-     -username: String
+    -username: String
 
     +sendHash(qrCodeHash: String)
 }
 
 class SearchActivity
 {
-    +onCreate()
-    +getPlayerInput():String
+    
+    +getPlayerInput(): String
 }
 
 class SearchController
 {
-    -serchText:String
-    -selectedUser:Player
+    -searchText: String
+    -selectedUser: Player
 
-    +getResultByUsername(databaseController: DatabaseController):ArrayList<String>
+    +getResultByUsername(databaseController: DatabaseController): ArrayList<String>
     +sendUserToProfile(selectedUser: Player)
-    +getResultByLocation(locationController: LocationController):ArrayList<String>
+    +getResultByLocation(locationController: LocationController): ArrayList<String>
 
 }
 
 class MapActivity
-{
-    +onCreate()
-}
 
 class MapController
 {
-    - qrCodeHashList: ArrayList<String>
+    -qrCodeHashList: ArrayList<String>
     
     +getQrCodeHash(locationController: LocationController): ArrayList<String>
-    +getQRcodeInfo(qrcodeController: QrCodeController, qrCodeHashList: ArrayList<String>): ArrayList<String>
+    +getQrCodeInfo(qrCodeController: QrCodeController, qrCodeHashList: ArrayList<String>): ArrayList<String>
 }
 
-
-
-class ArrayAdapter
 
 class MainMenuActivity
 
@@ -208,12 +180,9 @@ class CameraController
 class DatabaseController
 
 ProfileActivity "1" *- "1" ProfileController
-ProfileActivity "1" *- "1" MainMenuActivity
 
-MainMenuActivity "1" *- "1" LeaderboardActivity
 LeaderboardActivity "1" *- "1" LeaderboardController
 
-MainMenuActivity "1" *- "1" SignupActivity
 SignupActivity "1" *- "1" SignupController
 SignupController "1" *- "1" Player
 SignupController "1" *- "1" PlayerController
@@ -233,14 +202,11 @@ QrInventoryController --> QrCodeController
 QrCodeController "1" *- "1" QrCode
 QrCodeController --> DatabaseController
 
-MainMenuActivity "1" *- "1" SearchActivity
 SearchActivity "1" *- "*" ResultData
 SearchController "1" -> "1" DatabaseController
 SearchController "1" -> "1" Player
 SearchController "1" -> "1" LocationController
 
-MainMenuActivity "1" *- "1" MapActivity
 MapController -> LocationController
-
 
 @enduml
