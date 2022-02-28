@@ -161,10 +161,9 @@ Responsibility: Raise error when QRcode hash not found from image
 Responsibility: Return QR hash
 
 Class: RestoreSession
-Collaborator: QrAnalyzer, MainMenuActivity, CameraController, DatabaseController, SignupController
+Collaborator: QrAnalyzer, MainMenuActivity, CameraController, PlayerController, SignupController
 Responsibility: Ask CameraController to take picture
-Responsibility: Ask DatabaseController to check if user's hash exists
-Responsibility: Load Player from DatabaseController
+Responsibility: Load Player from PlayerController  # PlayerController should handle errors
 Responsibility: Send User to MainMenuActivity
 Responsibility: Raise error if user not found
 
@@ -181,7 +180,7 @@ Responsibility: Take picture
 Responsibility: Return picture
 
 Class: DatabaseController
-Collaborator: Database, QrCodeController, PlayerContorller, Player, QrCode, RestoreSession, QrScannedController, LeaderboardController, SginupController
+Collaborator: Database, QrCodeController, PlayerController, Player, QrCode, RestoreSession, QrScannedController, LeaderboardController, SignupController
 Responsibility: Write data to Database
 Responsibility: Read data from Database
 

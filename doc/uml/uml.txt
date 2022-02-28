@@ -49,13 +49,12 @@ class SignupController
 
 class RestoreSession
 {
-    -username: String
+    -userHash: String
     -player: Player
     
-    +getUserQr(cameraController: CameraController): String
-    +validateUsername(username: String, databaseController: DatabaseController): Boolean
-    +loadPlayer(username: String, databaseController: DatabaseController): Player
-    +sendUserToMain(player: Player)
+    +getUserQr(qrAnalyzer: QrAnalyzer): String
+    +loadPlayer(hash: String, playerController: PlayerController)
+    +sendUserToMain()
 }
 
 class Player
@@ -183,13 +182,14 @@ SignupController "1" *- "1" PlayerController
 PlayerController "1" *- "1" Player
 OtherPlayerActivity "1" *- "1" OtherPlayerController
 
-SignupController --> RestoreSession
-RestoreSession --> QrAnalyzer
-RestoreSession --> CameraController
-RestoreSession --> DatabaseController
-RestoreSession --> MainMenuActivity
+SignupController "Send user to" --> RestoreSession
+RestoreSession <-- "Get QR hash" QrAnalyzer
+RestoreSession <-- "Get player" PlayerController
+RestoreSession "Ask to open camera" -->  CameraController
+RestoreSession "Send user to" --> MainMenuActivity
 
-MainMenuActivity "1" *- "1" QrInventoryController
+' FIX: MainMenu is not part of Inventory
+MainMenuActivity "1" *- "1" QrInventoryController  
 QrInventoryController "1" *- "1" QrInventoryActivity
 QrCode "1" *- "*" Location
 QrInventoryController --> QrCodeController
