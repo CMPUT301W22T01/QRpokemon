@@ -1,7 +1,7 @@
 Class: Player
 Collaborator: Database, DatabaseController
 Responsibility: Store username
-Responsibility: Store QrInventory
+Responsibility: Store qrInventory
 Responsibility: Store contact
 Responsibility: Store statistics
 
@@ -123,7 +123,7 @@ Responsibility: Display QR codes' score
 Class: MapController
 Collaborator: MapActivity, LocationController
 Responsibility: Ask LocationController to read scanned QR code locations, QR code hash and player locations
-Responsibility: QR stuff to MapActivity
+Responsibility: Send QR locations, QR hashes and player locations to MapActivity
 
 Class: QrInventoryActivity
 Collaborator: MainMenuController

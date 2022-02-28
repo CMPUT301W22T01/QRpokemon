@@ -9,9 +9,9 @@ skinparam classattributeiconsize 0
 
 class ProfileController
 {    
-    +getUsername(player: Player, playercontroller: PlayerController): String
+    +getUsername(player: Player, playerController: PlayerController): String
     +generatePlayerQr(): Image
-    +displayPlayerRank(database: DataBase, databasecontroller: DataBaseController, currentplayer: Player)
+    +displayPlayerRank(currentPlayer: Player, databaseController: DatabaseController)
 }
 
 class ProfileActivity
@@ -24,9 +24,8 @@ class LeaderboardController
     -sortBy: String
     -currentRank: ArrayList<Player>
 
-    ' FIX: dbController needed
     +getSortBy(): String
-    +sortData(sortBy: String, currentRank: ArrayList<Player>): ArrayList<Player>
+    +sortData(sortBy: String, currentRank: ArrayList<Player>, databaseController: DatabaseController): ArrayList<Player>
 }
 
 
@@ -54,7 +53,7 @@ class RestoreSession
     -player: Player
     
     +getUserQr(cameraController: CameraController): String
-    +validateUsername(username: String): Boolean  ' FIX: db required for validation
+    +validateUsername(username: String, databaseController: DatabaseController): Boolean
     +loadPlayer(username: String, databaseController: DatabaseController): Player
     +sendUserToMain(player: Player)
 }
@@ -63,49 +62,43 @@ class Player
 {    
     -username: String
     -qrInventory: ArrayList<String>
-    -contact: String
-    -totalQr: Integer
-    -score: Integer
+    -contactInfo: HashMap
+    -qrCount: Integer
+    -totalScore: Integer
 
     +setUsername(name: String)
     +getUsername(): String
-    +setContact(contact: String)
-    +getContact(): String
-    +setTotalQr(totalQr: Integer)
-    +getTotalQr(): Integer
-    +setScore(score: Integer)
-    +getScore(): Integer
+    +setContactInfo(field: String, info: String)
+    +getContactInfo(field: String): String
+    +setQrCount(count: Integer)
+    +getQrCount(): Integer
+    +setTotalScore(score: Integer)
+    +getTotalScore(): Integer
     +setQrInventory(qrInventory: ArrayList<String>)
     +getQrInventory(): ArrayList<String>
-    +player(username: String, contact: String, score: Integer, totalQr: Integer, qrInventory: ArrayList<String>) 
 }
 
 class PlayerController
 {
     -player: Player
 
-    +getPlayer(username: String): Player
-    +savePlayerData(databaseController: DatabaseController)
-    +updateUsername(username: String)
-    ' FIX: qrCode ArrayList needed? Maybe have (optional?) arguments for player data
-    +updateQrInventory(qrCode: ArrayList)
-    +updateTotalQr(totalQr: Integer)
-    +updateScore(score: Integer)
-    +playerController(player: Player)  
+    +getPlayer(username: String, databaseController: DatabaseController): Player
+    ' We will use a HashMap to send all the player's data as there would be
+    ' too many parameters otherwise.
+    ' Additionally, it would allow us to send NULL to specify unchanged parameters.
+    +savePlayerData(playerData: HashMap, databaseController: DatabaseController)
 }
 
 class OtherPlayerActivity
 
 class OtherPlayerController
 {
-    -player: Player
     -score: Integer
-    -phone: String
-    -scanTotal: Integer
+    -contactInfo: HashMap
+    -qrCount: Integer
 
-    +updateComment(playerController: PlayerController, comment: String, databaseController: DatabaseController, qrCodeController: qrCodeController, qrCode: QrCode)
-    +otherPlayerController(player: Player)
-
+    +getPlayerStats(playerController: PlayerController)
+    +updateComment(comment: String, playerController: PlayerController)
 }
 
 class QrCode
@@ -127,6 +120,8 @@ class QrCodeController
     -username: String
     -qrCodeHash: String
 
+    ' FIX: Functionality not in CRC (missing feature or uml wrong?)
+    ' FIX: No contact to database
     +addComment(username: String, qrCodeHash: String, comment: String)
     +deleteQr(username: String, qrCodeHash: String)
 }
@@ -140,12 +135,12 @@ class QrInventoryController
 {
     -username: String
 
+    ' FIX: Functionality not in CRC (who are we sending a hash to?)
     +sendHash(qrCodeHash: String)
 }
 
 class SearchActivity
 {
-    
     +getPlayerInput(): String
 }
 
@@ -164,12 +159,11 @@ class MapActivity
 
 class MapController
 {
-    -qrCodeHashList: ArrayList<String>
+    -mapData: HashMap
     
-    +getQrCodeHash(locationController: LocationController): ArrayList<String>
-    +getQrCodeInfo(qrCodeController: QrCodeController, qrCodeHashList: ArrayList<String>): ArrayList<String>
+    +getQrCodeInfo(locationController: LocationController)
+    +sendDataToMap()
 }
-
 
 class MainMenuActivity
 
