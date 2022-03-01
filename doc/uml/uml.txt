@@ -8,7 +8,7 @@ skinparam classattributeiconsize 0
 ' TODO: Rename method arguments to shorthand (fileSystemController -> fsController)?
 
 class ProfileController
-{    
+{
     +getUsername(player: Player, playerController: PlayerController): String
     +generatePlayerQr(): Image
     +displayPlayerRank(currentPlayer: Player, databaseController: DatabaseController)
@@ -51,14 +51,14 @@ class RestoreSession
 {
     -userHash: String
     -player: Player
-    
-    +getUserQr(qrAnalyzer: QrAnalyzer): String
+
+    +getUserQr(cameraController: CameraController): String
     +loadPlayer(hash: String, playerController: PlayerController)
     +sendUserToMain()
 }
 
 class Player
-{    
+{
     -username: String
     -qrInventory: ArrayList<String>
     -contactInfo: HashMap
@@ -159,7 +159,7 @@ class MapActivity
 class MapController
 {
     -mapData: HashMap
-    
+
     +getQrCodeInfo(locationController: LocationController)
     +sendDataToMap()
 }
@@ -169,6 +169,14 @@ class MainMenuActivity
 class QrAnalyzer
 
 class CameraController
+{
+    ' TODO: Add image class?
+    -image: Image
+    -qrHash: String
+
+    +openCamera(): Image
+    +analyzeImage(): String
+}
 
 class DatabaseController
 
@@ -183,13 +191,15 @@ PlayerController "1" *- "1" Player
 OtherPlayerActivity "1" *- "1" OtherPlayerController
 
 SignupController "Send user to" --> RestoreSession
-RestoreSession <-- "Get QR hash" QrAnalyzer
-RestoreSession <-- "Get player" PlayerController
-RestoreSession "Ask to open camera" -->  CameraController
-RestoreSession "Send user to" --> MainMenuActivity
+RestoreSession <-right- CameraController: "Return QR hash"
+RestoreSession <-- PlayerController: "Get player"
+RestoreSession -right-> CameraController: "Ask to\n open camera"
+RestoreSession --> MainMenuActivity: "Send user to"
+CameraController -right-> QrAnalyzer: "Send image to analyze"
+CameraController <-- QrAnalyzer: "Get hash"
 
 ' FIX: MainMenu is not part of Inventory
-MainMenuActivity "1" *- "1" QrInventoryController  
+MainMenuActivity "1" *- "1" QrInventoryController
 QrInventoryController "1" *- "1" QrInventoryActivity
 QrCode "1" *- "*" Location
 QrInventoryController --> QrCodeController
