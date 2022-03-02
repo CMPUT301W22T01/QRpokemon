@@ -195,10 +195,10 @@ RestoreSession --> MainMenuActivity: "Send user to"
 CameraController -right-> QrAnalyzer: "Send image to analyze"
 CameraController <-- QrAnalyzer: "Get hash"
 
-QrInventoryController *- "1" QrInventoryActivity
-QrCode *- "1" Location
+QrInventoryController "1" *- "1" QrInventoryActivity
+QrCode "1" *- "1" Location
 QrInventoryController --> QrCodeController
-QrCodeController *- "*" QrCode
+QrCodeController "1" *- "*" QrCode
 QrCodeController --> DatabaseController
 
 SearchController "1" -> "1" DatabaseController
