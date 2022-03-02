@@ -139,9 +139,6 @@ class QrInventoryController
 }
 
 class SearchActivity
-{
-    +getPlayerInput(): String
-}
 
 class SearchController
 {
@@ -187,7 +184,7 @@ LeaderboardActivity "1" *- "1" LeaderboardController
 SignupActivity "1" *- "1" SignupController
 SignupController "1" *- "1" Player
 SignupController "1" *- "1" PlayerController
-PlayerController "1" *- "1" Player
+PlayerController "1" -down-* "*" Player
 OtherPlayerActivity "1" *- "1" OtherPlayerController
 
 SignupController "Send user to" --> RestoreSession
@@ -198,16 +195,14 @@ RestoreSession --> MainMenuActivity: "Send user to"
 CameraController -right-> QrAnalyzer: "Send image to analyze"
 CameraController <-- QrAnalyzer: "Get hash"
 
-' FIX: MainMenu is not part of Inventory
-MainMenuActivity "1" *- "1" QrInventoryController
-QrInventoryController "1" *- "1" QrInventoryActivity
-QrCode "1" *- "*" Location
+QrInventoryController -* "1" QrInventoryActivity
+QrCode -* "1" Location
 QrInventoryController --> QrCodeController
-QrCodeController "1" *- "1" QrCode
+QrCodeController -* "*" QrCode
 QrCodeController --> DatabaseController
 
-SearchActivity "1" *- "*" ResultData
 SearchController "1" -> "1" DatabaseController
+' FIX: We shouldn't need an entire player object. Just a db call for usernames
 SearchController "1" -> "1" Player
 SearchController "1" -> "1" LocationController
 
