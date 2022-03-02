@@ -177,15 +177,15 @@ class CameraController
 
 class DatabaseController
 
-ProfileActivity "1" *- "1" ProfileController
+ProfileActivity "1" -* "1" ProfileController
 
-LeaderboardActivity "1" *- "1" LeaderboardController
+LeaderboardActivity "1" -* "1" LeaderboardController
 
-SignupActivity "1" *- "1" SignupController
+SignupActivity "1" -* "1" SignupController
 SignupController "1" *- "1" Player
-SignupController "1" *- "1" PlayerController
-PlayerController "1" -down-* "*" Player
-OtherPlayerActivity "1" *- "1" OtherPlayerController
+SignupController "1" -* "1" PlayerController
+PlayerController "1" *-down- "*" Player
+OtherPlayerActivity "1" -* "1" OtherPlayerController
 
 SignupController "Send user to" --> RestoreSession
 RestoreSession <-right- CameraController: "Return QR hash"
@@ -195,10 +195,10 @@ RestoreSession --> MainMenuActivity: "Send user to"
 CameraController -right-> QrAnalyzer: "Send image to analyze"
 CameraController <-- QrAnalyzer: "Get hash"
 
-QrInventoryController -* "1" QrInventoryActivity
-QrCode -* "1" Location
+QrInventoryController *- "1" QrInventoryActivity
+QrCode *- "1" Location
 QrInventoryController --> QrCodeController
-QrCodeController -* "*" QrCode
+QrCodeController *- "*" QrCode
 QrCodeController --> DatabaseController
 
 SearchController "1" -> "1" DatabaseController
