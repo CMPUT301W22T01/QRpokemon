@@ -2,210 +2,224 @@
 
 ' Customization Settings
 skinparam dpi 100
+skinparam pagemargin 4
 skinparam classattributeiconsize 0
 
 ' Begin UML Here
 ' TODO: Rename method arguments to shorthand (fileSystemController -> fsController)?
 
-class ProfileController
-{
-    +getUsername(player: Player, playerController: PlayerController): String
-    +generatePlayerQr(): Image
-    +displayPlayerRank(currentPlayer: Player, databaseController: DatabaseController)
+package "Activities" {
+
+    class ProfileActivity
+
+    class LeaderboardActivity
+
+    class OtherPlayerActivity
+
+    class SignupActivity
+    {
+        +usernameInvalid()
+    }
+
+    class QrInventoryActivity
+    {
+        -qrDataList: ArrayList<QrCode>
+    }
+
+    class SearchActivity
+
+    class MapActivity
+
+    class MainMenuActivity
 }
 
-class ProfileActivity
+package "Controllers" {
 
-class LeaderboardActivity
+    class ProfileController
+    {
+        +getUsername(player: Player, playerController: PlayerController): String
+        +generatePlayerQr(): Image
+        +displayPlayerRank(currentPlayer: Player, databaseController: DatabaseController)
+    }
 
-class LeaderboardController
-{
-    -myScore: Integer
-    -sortBy: String
-    -currentRank: ArrayList<Player>
+    class LeaderboardController
+    {
+        -myScore: Integer
+        -sortBy: String
+        -currentRank: ArrayList<Player>
 
-    +getSortBy(): String
-    +sortData(sortBy: String, currentRank: ArrayList<Player>, databaseController: DatabaseController): ArrayList<Player>
+        +getSortBy(): String
+        +sortData(sortBy: String, currentRank: ArrayList<Player>, databaseController: DatabaseController): ArrayList<Player>
+    }
+
+    class SignupController
+    {
+        -newPlayer: Player
+        -playerName: String
+
+        +addNewPlayer(newPlayer: Player)
+        +validateUsername(playerName: String, databaseController: DatabaseController): Boolean
+        +getUsername(): String
+        +firstRunCheck(fileSystemController: FileSystemController): Boolean
+        +sendUserToMain(newPlayer: Player)
+        +sendToRestore()
+    }
+
+    class PlayerController
+    {
+        -player: Player
+
+        +getPlayer(username: String, databaseController: DatabaseController): Player
+        ' We will use a HashMap to send all the player's data as there would be
+        ' too many parameters otherwise.
+        ' Additionally, it would allow us to send NULL to specify unchanged parameters.
+        +savePlayerData(playerData: HashMap, databaseController: DatabaseController)
+    }
+
+    class OtherPlayerController
+    {
+        -score: Integer
+        -contactInfo: HashMap
+        -qrCount: Integer
+
+        +getPlayerStats(playerController: PlayerController)
+        +updateComment(comment: String, playerController: PlayerController)
+    }
+
+    class QrCodeController
+    {
+        -username: String
+        -qrCodeHash: String
+
+        ' FIX: Functionality not in CRC (missing feature or uml wrong?)
+        ' FIX: No contact to database
+        +addComment(username: String, qrCodeHash: String, comment: String)
+        +deleteQr(username: String, qrCodeHash: String)
+    }
+
+    class QrInventoryController
+    {
+        -username: String
+
+        ' FIX: Functionality not in CRC (who are we sending a hash to?)
+        +sendHash(qrCodeHash: String)
+    }
+
+    class SearchController
+    {
+        -searchText: String
+        -selectedUser: Player
+
+        +getResultByUsername(databaseController: DatabaseController): ArrayList<String>
+        +sendUserToProfile(selectedUser: Player)
+        +getResultByLocation(locationController: LocationController): ArrayList<String>
+
+    }
+
+    class LocationController
+
+    class MapController
+    {
+        -mapData: HashMap
+
+        +getQrCodeInfo(locationController: LocationController)
+        +sendDataToMap()
+    }
+
+    class CameraController
+    {
+        ' TODO: Add image class?
+        -image: Image
+        -qrHash: String
+
+        +openCamera(): Image
+        +analyzeImage(): String
+    }
+
+    class DatabaseController
+
+    class RestoreSession
+    {
+        -userHash: String
+        -player: Player
+
+        +getUserQr(cameraController: CameraController): String
+        +loadPlayer(hash: String, playerController: PlayerController)
+        +sendUserToMain()
+    }
 }
 
+package "Models" {
 
-class SignupActivity
-{
-    +usernameInvalid()
+    class Player
+    {
+        -username: String
+        -qrInventory: ArrayList<String>
+        -contactInfo: HashMap
+        -qrCount: Integer
+        -totalScore: Integer
+
+        +setUsername(name: String)
+        +getUsername(): String
+        +setContactInfo(field: String, info: String)
+        +getContactInfo(field: String): String
+        +setQrCount(count: Integer)
+        +getQrCount(): Integer
+        +setTotalScore(score: Integer)
+        +getTotalScore(): Integer
+        +setQrInventory(qrInventory: ArrayList<String>)
+        +getQrInventory(): ArrayList<String>
+    }
+
+
+    class QrCode
+    {
+        -geolocation: ArrayList<String>
+        -qrCodeHash: String
+        -comment: String
+
+        +getGeolocation(): ArrayList<String>
+        +getQrCodeHash(): String
+        +getComment(): String
+        ' FIX: Make geolocation single String?
+        +setGeolocation(geolocation: ArrayList<String>)
+        +setQrCodeHash(qrCodeHash: String)
+        +setComment(comment: String)
+    }
+
+    class QrAnalyzer
+    class Location
 }
 
-class SignupController
-{
-    -newPlayer: Player
-    -playerName: String
+ProfileActivity "1" --* "1" ProfileController
 
-    +addNewPlayer(newPlayer: Player)
-    +validateUsername(playerName: String, databaseController: DatabaseController): Boolean
-    +getUsername(): String
-    +firstRunCheck(fileSystemController: FileSystemController): Boolean
-    +sendUserToMain(newPlayer: Player)
-    +sendToRestore()
-}
+LeaderboardActivity "1" --* "1" LeaderboardController
 
-class RestoreSession
-{
-    -userHash: String
-    -player: Player
-
-    +getUserQr(cameraController: CameraController): String
-    +loadPlayer(hash: String, playerController: PlayerController)
-    +sendUserToMain()
-}
-
-class Player
-{
-    -username: String
-    -qrInventory: ArrayList<String>
-    -contactInfo: HashMap
-    -qrCount: Integer
-    -totalScore: Integer
-
-    +setUsername(name: String)
-    +getUsername(): String
-    +setContactInfo(field: String, info: String)
-    +getContactInfo(field: String): String
-    +setQrCount(count: Integer)
-    +getQrCount(): Integer
-    +setTotalScore(score: Integer)
-    +getTotalScore(): Integer
-    +setQrInventory(qrInventory: ArrayList<String>)
-    +getQrInventory(): ArrayList<String>
-}
-
-class PlayerController
-{
-    -player: Player
-
-    +getPlayer(username: String, databaseController: DatabaseController): Player
-    ' We will use a HashMap to send all the player's data as there would be
-    ' too many parameters otherwise.
-    ' Additionally, it would allow us to send NULL to specify unchanged parameters.
-    +savePlayerData(playerData: HashMap, databaseController: DatabaseController)
-}
-
-class OtherPlayerActivity
-
-class OtherPlayerController
-{
-    -score: Integer
-    -contactInfo: HashMap
-    -qrCount: Integer
-
-    +getPlayerStats(playerController: PlayerController)
-    +updateComment(comment: String, playerController: PlayerController)
-}
-
-class QrCode
-{
-    -geolocation: ArrayList<String>
-    -qrCodeHash: String
-    -comment: String
-
-    +getGeolocation(): ArrayList<String>
-    +getQrCodeHash(): String
-    +getComment(): String
-    +setGeolocation(geolocation: ArrayList<String>)  ' FIX: Make a single String?
-    +setQrCodeHash(qrCodeHash: String)
-    +setComment(comment: String)
-}
-
-class QrCodeController
-{
-    -username: String
-    -qrCodeHash: String
-
-    ' FIX: Functionality not in CRC (missing feature or uml wrong?)
-    ' FIX: No contact to database
-    +addComment(username: String, qrCodeHash: String, comment: String)
-    +deleteQr(username: String, qrCodeHash: String)
-}
-
-class QrInventoryActivity
-{
-    -qrDataList: ArrayList<QrCode>
-}
-
-class QrInventoryController
-{
-    -username: String
-
-    ' FIX: Functionality not in CRC (who are we sending a hash to?)
-    +sendHash(qrCodeHash: String)
-}
-
-class SearchActivity
-
-class SearchController
-{
-    -searchText: String
-    -selectedUser: Player
-
-    +getResultByUsername(databaseController: DatabaseController): ArrayList<String>
-    +sendUserToProfile(selectedUser: Player)
-    +getResultByLocation(locationController: LocationController): ArrayList<String>
-
-}
-
-class MapActivity
-
-class MapController
-{
-    -mapData: HashMap
-
-    +getQrCodeInfo(locationController: LocationController)
-    +sendDataToMap()
-}
-
-class MainMenuActivity
-
-class QrAnalyzer
-
-class CameraController
-{
-    ' TODO: Add image class?
-    -image: Image
-    -qrHash: String
-
-    +openCamera(): Image
-    +analyzeImage(): String
-}
-
-class DatabaseController
-
-ProfileActivity "1" -* "1" ProfileController
-
-LeaderboardActivity "1" -* "1" LeaderboardController
-
-SignupActivity "1" -* "1" SignupController
-SignupController "1" *- "1" Player
-SignupController "1" -* "1" PlayerController
-PlayerController "1" *-down- "*" Player
-OtherPlayerActivity "1" -* "1" OtherPlayerController
+SignupActivity "1" --* "1" SignupController
+SignupController "1" *-- "1" Player
+SignupController "1" --* "1" PlayerController
+PlayerController "1" *-- "*" Player
+OtherPlayerActivity "1" --* "1" OtherPlayerController
 
 SignupController "Send user to" --> RestoreSession
-RestoreSession <-right- CameraController: "Return QR hash"
+RestoreSession <-- CameraController: "Return QR hash"
 RestoreSession <-- PlayerController: "Get player"
-RestoreSession -right-> CameraController: "Ask to\n open camera"
+RestoreSession --> CameraController: "Ask to\n open camera"
 RestoreSession --> MainMenuActivity: "Send user to"
-CameraController -right-> QrAnalyzer: "Send image to analyze"
+CameraController --> QrAnalyzer: "Send image to analyze"
 CameraController <-- QrAnalyzer: "Get hash"
 
-QrInventoryController "1" *- "1" QrInventoryActivity
-QrCode "1" *- "1" Location
+QrInventoryController "1" *-- "1" QrInventoryActivity
+QrCode "1" *-- "1" Location
 QrInventoryController --> QrCodeController
-QrCodeController "1" *- "*" QrCode
+QrCodeController "1" *-- "*" QrCode
 QrCodeController --> DatabaseController
 
-SearchController "1" -> "1" DatabaseController
+SearchController "1" --> "1" DatabaseController
 ' FIX: We shouldn't need an entire player object. Just a db call for usernames
-SearchController "1" -> "1" Player
-SearchController "1" -> "1" LocationController
+SearchController "1" --> "1" Player
+SearchController "1" --> "1" LocationController
 
-MapController -> LocationController
+MapController --> LocationController
 
 @enduml
