@@ -6,7 +6,6 @@ skinparam pagemargin 4
 skinparam classattributeiconsize 0
 
 ' Begin UML Here
-' TODO: Rename method arguments to shorthand (fileSystemController -> fsController)?
 
 package "Activities" {
 
@@ -37,9 +36,9 @@ package "Controllers" {
 
     class ProfileController
     {
-        +getUsername(player: Player, playerController: PlayerController): String
+        +getUsername(player: Player): String
         +generatePlayerQr(): Image
-        +displayPlayerRank(currentPlayer: Player, databaseController: DatabaseController)
+        +displayPlayerRank(currentPlayer: Player)
     }
 
     class LeaderboardController
@@ -49,7 +48,7 @@ package "Controllers" {
         -currentRank: ArrayList<Player>
 
         +getSortBy(): String
-        +sortData(sortBy: String, currentRank: ArrayList<Player>, databaseController: DatabaseController): ArrayList<Player>
+        +sortData(sortBy: String, currentRank: ArrayList<Player>): ArrayList<Player>
     }
 
     class SignupController
@@ -58,9 +57,9 @@ package "Controllers" {
         -playerName: String
 
         +addNewPlayer(newPlayer: Player)
-        +validateUsername(playerName: String, databaseController: DatabaseController): Boolean
+        +validateUsername(playerName: String): Boolean
         +getUsername(): String
-        +firstRunCheck(fileSystemController: FileSystemController): Boolean
+        +firstRunCheck(): Boolean
         +sendUserToMain(newPlayer: Player)
         +sendToRestore()
     }
@@ -69,11 +68,11 @@ package "Controllers" {
     {
         -player: Player
 
-        +getPlayer(username: String, databaseController: DatabaseController): Player
+        +getPlayer(username: String): Player
         ' We will use a HashMap to send all the player's data as there would be
         ' too many parameters otherwise.
         ' Additionally, it would allow us to send NULL to specify unchanged parameters.
-        +savePlayerData(playerData: HashMap, databaseController: DatabaseController)
+        +savePlayerData(playerData: HashMap)
     }
 
     class OtherPlayerController
@@ -82,8 +81,8 @@ package "Controllers" {
         -contactInfo: HashMap
         -qrCount: Integer
 
-        +getPlayerStats(playerController: PlayerController)
-        +updateComment(comment: String, playerController: PlayerController)
+        +getPlayerStats()
+        +updateComment(comment: String)
     }
 
     class QrCodeController
@@ -110,9 +109,9 @@ package "Controllers" {
         -searchText: String
         -selectedUser: Player
 
-        +getResultByUsername(databaseController: DatabaseController): ArrayList<String>
+        +getResultByUsername(): ArrayList<String>
         +sendUserToProfile(selectedUser: Player)
-        +getResultByLocation(locationController: LocationController): ArrayList<String>
+        +getResultByLocation(): ArrayList<String>
 
     }
 
@@ -122,7 +121,7 @@ package "Controllers" {
     {
         -mapData: HashMap
 
-        +getQrCodeInfo(locationController: LocationController)
+        +getQrCodeInfo()
         +sendDataToMap()
     }
 
@@ -143,8 +142,8 @@ package "Controllers" {
         -userHash: String
         -player: Player
 
-        +getUserQr(cameraController: CameraController): String
-        +loadPlayer(hash: String, playerController: PlayerController)
+        +getUserQr(): String
+        +loadPlayer(hash: String)
         +sendUserToMain()
     }
 }
