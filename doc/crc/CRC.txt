@@ -80,9 +80,8 @@ Responsibility: Display player inventory
 Responsibility: Send user input to OtherPlayerController
 
 Class: OtherPlayerController
-Collaborator: OtherPlayerActivity, PlayerController
+Collaborator: Player, OtherPlayerActivity, PlayerController
 Responsibility: Get Player from PlayerController
-Responsibility: Send Player to OtherPlayerActivity
 Responsibility: Update comment from OtherPlayerActivity to PlayerController
 
 # The QR code for logging on other device is on top left as an "avatar"
@@ -97,12 +96,11 @@ Responsibility: Display login QR code
 Class: ProfileController
 Collaborator: ProfileActivity, PlayerController
 Responsibility: Get username and contact information from inventory
-Responsibility: Open a dialog if dialog button pressed
 Responsibility: Get login and sharing QR code for this specific player from PlayerController
 
 Class: LeaderboardActivity
 Collaborator: LeaderboardController, MainMenuActivity
-Responsibility: display LeaderBoard page
+Responsibility: Display Leaderboard page
 Responsibility: Send button pressed to LeaderboardController (sort by button)
 Responsibility: Display the rank of the user himself
 
