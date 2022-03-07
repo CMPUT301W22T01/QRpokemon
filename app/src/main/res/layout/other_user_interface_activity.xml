@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/img_otherUser"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="50dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:srcCompat="@tools:sample/avatars" />
+
+        <TextView
+            android:id="@+id/text_other_user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="<User name>"
+            app:layout_constraintEnd_toStartOf="@+id/text_email"
+            app:layout_constraintHorizontal_bias="0.611"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/img_otherUser" />
+
+        <TextView
+            android:id="@+id/tvx_contactInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="70dp"
+            android:text="@string/contact_information"
+            android:textSize="15dp"
+            app:layout_constraintStart_toEndOf="@+id/img_otherUser"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/txv_phone_number"
+            style="@style/txv_hint"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/phone_number"
+            android:textSize="13sp"
+            app:layout_constraintStart_toEndOf="@+id/img_otherUser"
+            app:layout_constraintTop_toBottomOf="@+id/tvx_contactInfo" />
+
+        <TextView
+            android:id="@+id/text_phone"
+            style="@style/txv_hint"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="8dp"
+            android:text="780-780-0000"
+            app:layout_constraintStart_toEndOf="@+id/img_otherUser"
+            app:layout_constraintTop_toBottomOf="@+id/txv_phone_number" />
+
+        <TextView
+            android:id="@+id/txv_email"
+            style="@style/txv_hint"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/email"
+            android:textSize="13sp"
+            app:layout_constraintStart_toEndOf="@+id/img_otherUser"
+            app:layout_constraintTop_toBottomOf="@+id/text_phone" />
+
+        <TextView
+            android:id="@+id/text_email"
+            style="@style/txv_hint"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="8dp"
+            android:text="abcd@gmail.com"
+            app:layout_constraintStart_toEndOf="@+id/img_otherUser"
+            app:layout_constraintTop_toBottomOf="@+id/txv_email" />
+
+        <TextView
+            android:id="@+id/text_total_score"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="total score: 9999"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_other_user_name" />
+
+        <ScrollView
+            android:layout_width="409dp"
+            android:layout_height="484dp"
+            tools:layout_editor_absoluteX="1dp"
+            tools:layout_editor_absoluteY="246dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" />
+        </ScrollView>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
