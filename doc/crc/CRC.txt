@@ -38,39 +38,34 @@ Responsibility: Get location data from DatabaseController
 Responsibility: Return location to caller
 
 Class: SignupActivity
-Collaborator: SignupController
+Collaborator: SignupController, MainMenuActivity
 Responsibility: Display signup page
 Responsibility: Send user input to SignupController
 Responsibility: Send action when button pressed
 Responsibility: Notify user if username is invalid
+Responsibility: Send user to MainMenuActivity
 
 Class: SignupController
-Collaborator: SignupActivity, Player, MainMenuActivity, PlayerController, RestoreSession, FileSystemController
+Collaborator: SignupActivity, Player, PlayerController, RestoreSession, FileSystemController
 Responsibility: Create a Player class and ask PlayerController to save
 Responsibility: Ask FileSystemController to find local session file 
 Responsibility: Ask FileSystemController to save local session file 
 Responsibility: Ask DatabaseController to save validated user data  
 Responsibility: Ask DatabaseController to find input username
 Responsibility: Send validation result to SignupActivity
-Responsibility: Send user to MainMenuActivity
 Responsibility: Run RestoreSession when "Restore" text is pressed
 
 Class: MainMenuActivity
-Collaborator: MainMenuController, QrScannedController, RestoreSession
+Collaborator: MainMenuController, QrScannedController, RestoreSession, QrInventoryActivity, MapActivity, OtherPlayerActivity, QrScannedActivity, ProfileActivity, LeaderboardActivity
 Responsibility: Send button pressed to MainMenuController
 Responsibility: Display main menu
 Responsibility: Prompt message when user is not found
+Responsibility: Send user to other Activities
 
 Class: MainMenuController
-Collaborator: MainMenuActivity, SignupController, CameraController, QrInventoryActivity, MapActivity, OtherPlayerActivity, QrScannedActivity, ProfileActivity, LeaderboardActivity
-Responsibility: Send user to QrInventoryActivity
-Responsibility: Send user to MapActivity
-Responsibility: Send user to ProfileActivity
-Responsibility: Send user to LeaderboardActivity
+Collaborator: MainMenuActivity, SignupController, CameraController
 Responsibility: Call CameraController
 Responsibility: Check if QR hash is in database for players
-Responsibility: Send user to OtherPlayerActivity # if user scanned other user's sharing QR code
-Responsibility: Send user to QrScannedActivity # if user scanned a new QR
 Responsibility: Notify MainMenuActivity if user not found
 
 Class: OtherPlayerActivity
@@ -197,13 +192,13 @@ Collaborator: FileSystemController
 Responsibility: Store local files
 
 Class: SearchActivity
-Collaborator: SearchController, MainMenuActivity
+Collaborator: SearchController, MainMenuActivity, OtherPlayerActivity
 Responsibility: Display Search page
 Responsibility: Send user input to SearchController
+Responsibility: Send user to OtherPlayerActivity
 
 Class: SearchController
-Collaborator: LocationController, DatabaseController, PlayerController, OtherPlayerController
+Collaborator: LocationController, DatabaseController, PlayerController
 Responsibility: Get username and contact information form DatabaseController
 Responsibility: Get geolocation from LocationController
 Responsibility: Display the search result
-Responsibility: Send user to OtherPlayerActivity
