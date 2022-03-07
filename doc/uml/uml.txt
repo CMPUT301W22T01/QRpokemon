@@ -3,7 +3,7 @@
 ' Customization Settings
 skinparam dpi 300
 skinparam classattributeiconsize 0
-
+skinparam linetype ortho
 ' Begin UML Here
 
 ' Most activity functions are shown in storyboard so we will update this later
@@ -50,28 +50,25 @@ package "Controllers" {
         -sortBy: String
         -currentRanking: Player[]
 
-        +getSortBy(): String
-        ' FIX: sortData() weird :/
-        +sortData(): Player[]
+        ' PlayerController doesn't return all players at once, one player at a time.
+        +sortData()
+        +setSortBy(method:String)
     }
 
     class SignupController
     {
-        -newPlayer: Player
-        -playerName: String
-
-        +addNewPlayer(newPlayer: Player)
         +validateUsername(playerName: String): Boolean
+        +addNewPlayer(newusername: String, contact: String, password: String)
         +getUsername(): String
-        +firstRunCheck(): Boolean
-        +sendUserToMain(newPlayer: Player)
-        +sendToRestore()
+        ' checks the app is the first time run or load in current player in playerController
+        +checkExisitingSession(): Boolean
     }
 
     class PlayerController
     {
         -player: Player
 
+        ' Constructor of PlayerController takes a username and pull Player from database
         +getPlayer(username: String): Player
         ' We will use a HashMap to send all the player's data as there would be
         ' too many parameters otherwise.
@@ -82,19 +79,20 @@ package "Controllers" {
     class OtherPlayerController
     {
         -player: Player
+        -inventoryArray: String[]
 
         +setPlayer(username: String)
         +getPlayerInfo(infoName: String): String
-        +updateComment(comment: String)
+        +updateComment(comment: String, qrCodeHash: String)
     }
 
     class QrCodeController
     {
         -username: String
-        -qrCodeHash: String
 
-        +addComment(username: String, qrCodeHash: String, comment: String)
-        +deleteQr(username: String, qrCodeHash: String)
+        +addQrCode(qrCodeHash: String, geolocation: String)
+        +updateComment(qrCodeHash: String, comment: String)
+        +deleteQrCode(qrCodeHash: String)
     }
 
     class QrInventoryController
@@ -107,18 +105,15 @@ package "Controllers" {
 
     class SearchController
     {
-        -searchText: String
-        -selectedUser: Player
-
-        +getResultByUsername(): String[]
-        +sendUserToProfile(selectedUser: Player)
-        +getResultByLocation(): String[]
-
+        +getResultByUsername(search: String): String[]
+        +sendUserToProfile(selectedUser: String)
+        +getResultByLocation(search: String): String[]
     }
 
     class LocationController
     {
-        +getLocation(): Location
+        +addLocation(location: String, QrCodeHash: String)
+        +getQrCode(location: String): QrCode[]
     }
 
     class MapController
@@ -184,15 +179,15 @@ package "Models" {
 
     class QrCode
     {
-        -geolocation: String[]
+        -geolocation: String
         -qrCodeHash: String
         -comment: String
 
-        +getGeolocation(): String[]
+        +getGeolocation(): String
         +getQrCodeHash(): String
         +getComment(): String
-        ' FIX: Make geolocation single String?
-'       +setGeolocation(geolocation: String[])
+
+        +setGeolocation(geolocation: String)
         +setQrCodeHash(qrCodeHash: String)
         +setComment(comment: String)
     }
@@ -207,16 +202,6 @@ package "Models" {
         +analyzeImage(): String
     }
 
-    class Location
-    {
-        ' NOTE: Use location city name + place or hash it somehow?
-        -qrCodes: String[]
-
-        '' Store QR codes at this location
-        ' +addQrCode(qrHash: String)
-        ' +delQrCode(qrHash: String)
-    }
-
     ' NOTE: May want to remove since Firebase implements
     class Database
     {
@@ -229,26 +214,29 @@ package "Models" {
     note bottom: This is our\nFirebase instance.
 }
 
-ProfileController "1" *-up- "1" ProfileActivity
+' ProfileController "1" *-up- "1" ProfileActivity
 ProfileController "1" *-- "1" Player
 
 ProfileController --> Player: Get player username\nand contact
 ProfileController -up-> ProfileActivity: Send username and contact
 ProfileController -up-> ProfileActivity: Send user's QR image
 
-LeaderboardActivity "1" --* "1" LeaderboardController
+' LeaderboardActivity "1" --* "1" LeaderboardController
+LeaderboardController "1" --> "1" OtherPlayerController: Get players
 
-SignupActivity "1" --* "1" SignupController
+' SignupActivity "1" --* "1" SignupController
 SignupController "1" *-- "1" Player
-SignupController "1" --* "1" PlayerController
+SignupController "1" --> "1" PlayerController: \n\n\n\nCreates new player\nLoad current player
 PlayerController "1" *-- "*" Player
 
-OtherPlayerActivity "1" --* "1" OtherPlayerController
+' OtherPlayerController "1" *-- "1" OtherPlayerActivity
 Player "1" --* "1" OtherPlayerController
 OtherPlayerController --> PlayerController: Gets player
-OtherPlayerController --> OtherPlayerActivity: Updates comment
+OtherPlayerController <-- OtherPlayerActivity: Updates\n comment
+OtherPlayerController -> QrCodeController: Adds comment
 
 SignupController --> RestoreSession: "Ask to handle\nreturning player"
+SignupController -> DatabaseController: "\nCheck username \nuniquness"
 RestoreSession <-- CameraController: "Return QR hash"
 RestoreSession --> PlayerController: "Get player"
 RestoreSession --> CameraController: "Ask to\n open camera"
@@ -256,16 +244,15 @@ RestoreSession -up-> MainMenuActivity: "Send user to"
 CameraController -down-> QrAnalyzer: "Send image to analyze"
 CameraController <-up- QrAnalyzer: "Return hash"
 
-QrInventoryController "1" *-- "1" QrInventoryActivity
-QrCode "1" *-- "1" Location
+' QrInventoryController "1" *-- "1" QrInventoryActivity
 QrInventoryController --> QrCodeController
-QrCodeController "1" *-down- "*" QrCode
-QrCodeController --> DatabaseController
+QrCodeController "1" *-down- "1" QrCode: Update\ncomment
+QrCodeController "1" --> "1" DatabaseController
+QrCodeController "1" --> "1" QrCode: Creates 
 
-SearchController --> DatabaseController
+SearchController "1" --> "1" PlayerController: Get usernames
 ' FIX: We shouldn't need an entire player object. Just a db call for usernames
-SearchController --> Player
-SearchController --> LocationController
+SearchController "1" --> "1" LocationController: Get QR\nlocations 
 
 LocationController --> DatabaseController: Get location data
 MapController --> LocationController: Asks for location data
