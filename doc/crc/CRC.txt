@@ -6,14 +6,14 @@ Responsibility: Store contact
 Responsibility: Store statistics
 
 Class: PlayerController
-Collaborator: DatabaseController, Player, ScoreCalculator, 
+Collaborator: DatabaseController, Player
 Responsibility: Get Player from DatabaseController
 Responsibility: Ask Player to update itself with data provided
 Responsibility: Ask DatabaseController to save player records
 Responsibility: Ask DatabaseController to update player records
 
 Class: ScoreCalculator
-Collaborator: PlayerController, MapController
+Collaborator: QrScannedController
 Responsibility: Calculate score from QR hash
 
 # QR Code will store all locations with usernames as keys.
@@ -34,8 +34,8 @@ Responsibility: Ask DatabaseController to save QrCode
 
 Class: LocationController
 Collaborator: DatabaseController, MapController, QrScannedController
-Responsibility: Get location data from DatabaseController
-Responsibility: Return location to caller
+Responsibility: Get location data 
+Responsibility: Get Qr hashes at location
 
 Class: SignupActivity
 Collaborator: SignupController, MainMenuActivity
@@ -63,9 +63,9 @@ Responsibility: Prompt message when user is not found
 Responsibility: Send user to other Activities
 
 Class: MainMenuController
-Collaborator: MainMenuActivity, SignupController, CameraController
+Collaborator: MainMenuActivity, SignupController, CameraController, QrCodeController
 Responsibility: Call CameraController
-Responsibility: Check if QR hash is in database for players
+Responsibility: Ask QrCodeController to check if QR hash is in database for players
 Responsibility: Notify MainMenuActivity if user not found
 
 Class: OtherPlayerActivity
@@ -114,7 +114,7 @@ Responsibility: Display QR codes' location
 Responsibility: Display QR codes' score
 
 Class: MapController
-Collaborator: MapActivity, LocationController
+Collaborator: MapActivity, LoscationController
 Responsibility: Ask LocationController to read scanned QR code locations, QR code hash and player locations
 Responsibility: Send QR locations, QR hashes and player locations to MapActivity
 
@@ -143,7 +143,6 @@ Responsibility: Ask DatabaseController to save metadata specified by user
 Responsibility: Send user back to MainMenuActivity
 Responsibility: Ask ScoreCalculator to calculate score for QR code
 Responsibility: Prevent saving if QRcode hash is not found
-Responsibility: Ask score from ScoreController for current QR code
 Responsibility: Notify QrScannedActivity if QRcode hash is not found
 Responsibility: Ask LocationController to save location with QR hash
 
