@@ -14,20 +14,20 @@
             android:id="@+id/img_otherUser"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="50dp"
-            android:layout_marginTop="50dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="60dp"
+            android:src="@drawable/ic_launcher_background"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:srcCompat="@tools:sample/avatars" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/text_other_user_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-            android:text="<User name>"
+            android:text="User name"
             app:layout_constraintEnd_toStartOf="@+id/text_email"
-            app:layout_constraintHorizontal_bias="0.611"
+            app:layout_constraintHorizontal_bias="0.632"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/img_otherUser" />
 
@@ -91,16 +91,32 @@
             app:layout_constraintTop_toBottomOf="@+id/text_other_user_name" />
 
         <ScrollView
-            android:layout_width="409dp"
-            android:layout_height="484dp"
-            tools:layout_editor_absoluteX="1dp"
-            tools:layout_editor_absoluteY="246dp">
+            android:id="@+id/scrollView2"
+            android:layout_width="402dp"
+            android:layout_height="397dp"
+            android:layout_marginTop="24dp"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.444"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_total_score">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical" />
         </ScrollView>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/floatingActionButton3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/scrollView2"
+            app:srcCompat="?attr/actionModeCloseDrawable" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
