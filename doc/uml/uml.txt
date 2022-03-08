@@ -4,7 +4,8 @@
 skinparam dpi 300
 !pragma ratio 1.0
 skinparam classattributeiconsize 0
-skinparam linetype ortho
+' skinparam linetype ortho
+
 ' Begin UML Here
 
 ' Most activity functions are shown in storyboard so we will update this later
@@ -283,24 +284,29 @@ package "Models" {
     note bottom: This is system camera
 }
 
+
+'''''''''''''''''''''''''''''''''
+' Relationships Between Classes '
+'''''''''''''''''''''''''''''''''
+
 ' ProfileController "1" *-up- "1" ProfileActivity
-ProfileController "1" *- "1" Player
+ProfileController "1" *-- "1" Player
 
 ProfileController --> Player: Get player username\nand contact
-ProfileController -> ProfileActivity: Send player info
+ProfileController --> ProfileActivity: Send player info
 
 LeaderboardActivity "1" --o "1" LeaderboardController
-LeaderboardController "1" -> "1" OtherPlayerController: Get players
+LeaderboardController "1" --> "1" OtherPlayerController: Get players
 
 SignupController"1" o-- "1" SignupActivity 
 SignupController "1" o-- "1" Player
 SignupController "1" --> "1" PlayerController: Creates new player\nLoad current player
-PlayerController "1" *- "1" Player
+PlayerController "1" *-- "1" Player
 
 OtherPlayerController "1" o-- "1" OtherPlayerActivity
-Player "*" -* "1" OtherPlayerController
+Player "*" --* "1" OtherPlayerController
 OtherPlayerController --> PlayerController: Gets player
-OtherPlayerController <- OtherPlayerActivity: Updates\n comment
+OtherPlayerController <-- OtherPlayerActivity: Updates\n comment
 OtherPlayerController --> QrCodeController: Adds comment
 
 SignupController --> RestoreSession: "Ask to handle\nreturning player"
@@ -350,6 +356,7 @@ MainMenuActivity "1" --> "1" MapActivity
 MainMenuActivity "1" --> "1" ProfileActivity
 MainMenuActivity "1" --> "1" OtherPlayerActivity
 MainMenuActivity "1" --> "1" LeaderboardActivity
+MainMenuActivity "1" --> "1" SearchActivity
 
 CameraController "1" --> "1" Camera: opens
 
@@ -357,4 +364,7 @@ MapActivity "1" --> "1" MapController
 
 SearchActivity "1" --> "1" SearchController
 SearchActivity "1" --> "1" OtherPlayerActivity: Opens profile
+
+' Layout Connections
+' ScoreCalculator -[hidden]-> QrScannedController
 @enduml
