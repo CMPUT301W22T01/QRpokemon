@@ -24,7 +24,7 @@ package "Activities" {
 
     class SignupActivity
     {
-        -signupControlller: SignupController
+        -signupController: SignupController
     }
 
     class QrInventoryActivity
@@ -42,6 +42,10 @@ package "Activities" {
 
     class MainMenuActivity{
         -mainMenuController: MainMenuController
+    }
+
+    class QrScannedActivity{
+        -QrScannedActivity: QrScannedController
     }
 }
 
@@ -274,27 +278,29 @@ package "Models" {
     }
 
     note bottom: This is our\nFirebase instance.
+
+    class Camera
+    note bottom: This is system camera
 }
 
 ' ProfileController "1" *-up- "1" ProfileActivity
-ProfileController "1" *-- "1" Player
+ProfileController "1" *- "1" Player
 
 ProfileController --> Player: Get player username\nand contact
-ProfileController -up-> ProfileActivity: Send username and contact
-ProfileController -up-> ProfileActivity: Send user's QR image
+ProfileController -> ProfileActivity: Send player info
 
-' LeaderboardActivity "1" --* "1" LeaderboardController
-LeaderboardController "1" --> "1" OtherPlayerController: Get players
+LeaderboardActivity "1" --o "1" LeaderboardController
+LeaderboardController "1" -> "1" OtherPlayerController: Get players
 
-' SignupActivity "1" --* "1" SignupController
+SignupController"1" o-- "1" SignupActivity 
 SignupController "1" o-- "1" Player
 SignupController "1" --> "1" PlayerController: Creates new player\nLoad current player
-PlayerController "1" *-- "1" Player
+PlayerController "1" *- "1" Player
 
-' OtherPlayerController "1" *-- "1" OtherPlayerActivity
+OtherPlayerController "1" o-- "1" OtherPlayerActivity
 Player "*" -* "1" OtherPlayerController
 OtherPlayerController --> PlayerController: Gets player
-OtherPlayerController <-- OtherPlayerActivity: Updates\n comment
+OtherPlayerController <- OtherPlayerActivity: Updates\n comment
 OtherPlayerController --> QrCodeController: Adds comment
 
 SignupController --> RestoreSession: "Ask to handle\nreturning player"
@@ -302,13 +308,13 @@ SignupController --> DatabaseController: "\nCheck username\nuniquness"
 RestoreSession <-- CameraController: "Return QR hash"
 RestoreSession --> PlayerController: "Get player"
 RestoreSession --> CameraController: "Ask to\n open camera"
-RestoreSession -up-> MainMenuActivity: "Send user to"
-CameraController -down-> QrAnalyzer: "Send image\n to analyze"
-CameraController <-up- QrAnalyzer: "Return hash"
+MainMenuActivity <-- RestoreSession: "Send user to"
+CameraController --> QrAnalyzer: "Send image\n to analyze"
+CameraController <-- QrAnalyzer: "Return hash"
 
-' QrInventoryController "1" *-- "1" QrInventoryActivity
+QrInventoryController "1" o-- "1" QrInventoryActivity
 QrInventoryController --> QrCodeController
-QrCodeController "1" o-down- "1" QrCode: Update\ncomment
+QrCodeController "1" o-- "1" QrCode: Update\ncomment
 QrCodeController "1" --> "1" DatabaseController: Save QrCode
 QrCodeController "1" --> "1" QrCode: Creates 
 QrCodeController "1" o-- "1" LocationController: Get Location
@@ -320,11 +326,11 @@ SearchController "1" --> "1" LocationController: Get QR\nlocations
 LocationController "1" --> "1" DatabaseController: Get location data
 MapController "1" --> "1" LocationController: Asks for location data
 
-DatabaseController "1" o-- "1" Database
-
+Database "1" --o "1" DatabaseController
 MainMenuController "1" o-- "1" CameraController: Get QR Hash
 MainMenuController "1" o-- "1" PlayerController: Get current player
 MainMenuController "1" o-- "1" QrCodeController: Verify & identify\n QR Hash
+MainMenuController "1" --o "1" MainMenuActivity
 
 FileSystemController "1" --> "1" FileSystem: "Read/Write data"
 SignupController "1" --> "1" FileSystemController: "Read or save\n session data"
@@ -335,6 +341,20 @@ QrInventoryController "1" o-- "1" QrCodeController
 QrScannedController "1" o-- "1" ScoreCalculator: Get Score
 QrScannedController "1" --> "1" PlayerController: Get Player
 QrScannedController "1" --> "1" QrCodeController: Save new QR Code
+QrScannedActivity "1" o-- "1" QrScannedController
 
-ProfileController "1" *-- "1" ProfileActivity
+MainMenuActivity "1" <-- "1" SignupActivity
+MainMenuActivity "1" --> "1" QrScannedActivity
+MainMenuActivity "1" --> "1" QrInventoryActivity
+MainMenuActivity "1" --> "1" MapActivity
+MainMenuActivity "1" --> "1" ProfileActivity
+MainMenuActivity "1" --> "1" OtherPlayerActivity
+MainMenuActivity "1" --> "1" LeaderboardActivity
+
+CameraController "1" --> "1" Camera: opens
+
+MapActivity "1" --> "1" MapController
+
+SearchActivity "1" --> "1" SearchController
+SearchActivity "1" --> "1" OtherPlayerActivity: Opens profile
 @enduml
