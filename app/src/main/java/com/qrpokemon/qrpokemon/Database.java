@@ -3,7 +3,6 @@ package com.qrpokemon.qrpokemon;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.util.Collection;
 import java.util.HashMap;
 
 public class Database {
@@ -17,9 +16,8 @@ public class Database {
         locationIndex = db.collection("LocationIndex");
     }
 
-    public HashMap getData() {
-
-
+    public HashMap getData(String collection) {
+        players.document(collection).get();
         return null;
     }
 
@@ -27,5 +25,11 @@ public class Database {
         players
             .document(collection)  // Player username
             .set(data);  // User attributes
+    }
+
+    public void deleteData(String collection){
+        players
+            .document(collection)
+            .delete();
     }
 }
