@@ -85,15 +85,27 @@ package "Controllers" {
         +setSortBy(method:String)
     }
 
-    class SignupController
-    {
-        -playerController: PlayerController
+    together {
+        class RestoreSession
+        {
+            -userHash: String
+            -playerController: PlayerController
 
-        +validateUsername(playerName: String): Boolean
-        +addNewPlayer(newusername: String, contact: String, password: String)
-        +getUsername(): String
-        ' checks the app is the first time run or load in current player in playerController
-        +checkExisitingSession(): Boolean
+            +getUserQr(): String
+            +loadPlayer(userHash: String)
+            +sendUserToMain()
+        }
+
+        class SignupController
+        {
+            -playerController: PlayerController
+
+            +validateUsername(playerName: String): Boolean
+            +addNewPlayer(newusername: String, contact: String, password: String)
+            +getUsername(): String
+            ' checks the app is the first time run or load in current player in playerController
+            +checkExisitingSession(): Boolean
+        }
     }
 
     class PlayerController
@@ -178,16 +190,6 @@ package "Controllers" {
 
         readFromDatabase(collection: String): HashMap
         writeToDatabase(collection: String, data: HashMap)
-    }
-
-    class RestoreSession
-    {
-        -userHash: String
-        -playerController: PlayerController
-
-        +getUserQr(): String
-        +loadPlayer(userHash: String)
-        +sendUserToMain()
     }
 
     class FileSystemController
@@ -290,35 +292,30 @@ package "Models" {
 '''''''''''''''''''''''''''''''''
 
 ' ProfileController "1" *-up- "1" ProfileActivity
-ProfileController "1" *-- "1" Player
+ProfileActivity --> ProfileController: Send player info
 
-ProfileController --> Player: Get player username\nand contact
-ProfileController --> ProfileActivity: Send player info
+LeaderboardActivity "1" o-- "1" LeaderboardController
+LeaderboardController "1" -> "1" OtherPlayerController: Get players
 
-LeaderboardActivity "1" --o "1" LeaderboardController
-LeaderboardController "1" --> "1" OtherPlayerController: Get players
-
-SignupController"1" o-- "1" SignupActivity 
-SignupController "1" o-- "1" Player
+SignupActivity "1" o-- "1" SignupController
 SignupController "1" --> "1" PlayerController: Creates new player\nLoad current player
 PlayerController "1" *-- "1" Player
 
-OtherPlayerController "1" o-- "1" OtherPlayerActivity
-Player "*" --* "1" OtherPlayerController
+OtherPlayerActivity "1" o-- "1" OtherPlayerController
 OtherPlayerController --> PlayerController: Gets player
-OtherPlayerController <-- OtherPlayerActivity: Updates\n comment
+OtherPlayerActivity --> OtherPlayerController: Updates\n comment
 OtherPlayerController --> QrCodeController: Adds comment
 
-SignupController --> RestoreSession: "Ask to handle\nreturning player"
+SignupController -> RestoreSession: "Ask to handle\nreturning player"
 SignupController --> DatabaseController: "\nCheck username\nuniquness"
-RestoreSession <-- CameraController: "Return QR hash"
+RestoreSession <-- CameraController  : "Return QR hash"
 RestoreSession --> PlayerController: "Get player"
 RestoreSession --> CameraController: "Ask to\n open camera"
 MainMenuActivity <-- RestoreSession: "Send user to"
-CameraController --> QrAnalyzer: "Send image\n to analyze"
-CameraController <-- QrAnalyzer: "Return hash"
+CameraController -> QrAnalyzer: "Send image\n to analyze"
+CameraController <- QrAnalyzer: "Return hash"
 
-QrInventoryController "1" o-- "1" QrInventoryActivity
+QrInventoryActivity "1" o-- "1" QrInventoryController
 QrInventoryController --> QrCodeController
 QrCodeController "1" o-- "1" QrCode: Update\ncomment
 QrCodeController "1" --> "1" DatabaseController: Save QrCode
@@ -329,14 +326,14 @@ SearchController "1" --> "1" PlayerController: Get usernames
 ' FIX: We shouldn't need an entire player object. Just a db call for usernames
 SearchController "1" --> "1" LocationController: Get QR\nlocations 
 
-LocationController "1" --> "1" DatabaseController: Get location data
+LocationController "1" -> "1" DatabaseController: Get location data
 MapController "1" --> "1" LocationController: Asks for location data
 
-Database "1" --o "1" DatabaseController
+DatabaseController "1" o-- "1" Database
 MainMenuController "1" o-- "1" CameraController: Get QR Hash
 MainMenuController "1" o-- "1" PlayerController: Get current player
 MainMenuController "1" o-- "1" QrCodeController: Verify & identify\n QR Hash
-MainMenuController "1" --o "1" MainMenuActivity
+MainMenuActivity "1" o-- "1" MainMenuController
 
 FileSystemController "1" --> "1" FileSystem: "Read/Write data"
 SignupController "1" --> "1" FileSystemController: "Read or save\n session data"
@@ -344,7 +341,7 @@ SignupController "1" --> "1" FileSystemController: "Read or save\n session data"
 QrInventoryController "1" o-- "1" PlayerController
 QrInventoryController "1" o-- "1" QrCodeController 
 
-QrScannedController "1" o-- "1" ScoreCalculator: Get Score
+QrScannedController "1" o- "1" ScoreCalculator: Get Score
 QrScannedController "1" --> "1" PlayerController: Get Player
 QrScannedController "1" --> "1" QrCodeController: Save new QR Code
 QrScannedActivity "1" o-- "1" QrScannedController
@@ -363,8 +360,9 @@ CameraController "1" --> "1" Camera: opens
 MapActivity "1" --> "1" MapController
 
 SearchActivity "1" --> "1" SearchController
-SearchActivity "1" --> "1" OtherPlayerActivity: Opens profile
+SearchActivity "1" -> "1" OtherPlayerActivity: Opens profile
 
 ' Layout Connections
-' ScoreCalculator -[hidden]-> QrScannedController
+CameraController -[hidden]l- LocationController
+FileSystemController -[hidden]r- DatabaseController
 @enduml
