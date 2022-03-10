@@ -1,5 +1,4 @@
 <resources>
-    <string name="app_name">NameIntentApp</string>
     <string name="app_name">QRpokemon</string>
     <string name="contact_information">Contact Information :</string>
     <string name="phone_number">Phone Number:</string>
