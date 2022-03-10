@@ -1,32 +1,24 @@
 package com.qrpokemon.qrpokemon;
 
+import static android.content.Context.MODE_PRIVATE;
+
+import android.app.Activity;
+import android.content.Context;
 import android.content.SharedPreferences;
 
-import androidx.appcompat.app.AppCompatActivity;
+public class FileSystemController {
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
-import java.lang.reflect.Type;
-
-public class FileSystemController extends AppCompatActivity {
-
-    public String readToFile(String filename ) {
-        SharedPreferences sharedPreferences = getSharedPreferences("shared preference", MODE_PRIVATE);
-        Gson gson = new Gson();
-        String json = sharedPreferences.getString(filename,null);
-        Type type = new TypeToken<String>() {}.getType();
-        String data = gson.fromJson(json, type);
-
+    public String readToFile(Context context, String filename ) {
+        SharedPreferences preferences = context.getSharedPreferences("First run", Activity.MODE_PRIVATE);
+        String data = preferences.getString(filename,null);
         return data; //could be null due to first run
     }
 
-    public void writeToFile(String filename, String data) {
-        SharedPreferences sharedPreferences = getSharedPreferences("shared preference", MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        Gson gson = new Gson();
-        String json = gson.toJson(data);
-        editor.putString(filename, json);
-        editor.apply();
+    public void writeToFile(Context context, String filename, String data) {
+        SharedPreferences preferences = context.getSharedPreferences("First run", Activity.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString(filename, data);
+        editor.commit();
     }
+
 }
