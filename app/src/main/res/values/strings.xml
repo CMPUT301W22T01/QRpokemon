@@ -1,5 +1,9 @@
 <resources>
     <string name="app_name">QRpokemon</string>
+    <string name="contact_information">Contact Information :</string>
+    <string name="phone_number">Phone Number:</string>
+    <string name="email">Email :</string>
+    <string name="score">Score:</string>
     <string name="leaderboard">Leaderboard</string>
     <string name="rank_order">Rank order</string>
     <string name="user_name">User name</string>
@@ -10,8 +14,6 @@
     <string name="score">Score :</string>
     <string name="location">Location</string>
     <string name="time">Time :</string>
-
-
     <string-array name="sort">
         <item>single QR code score</item>
         <item>overall score</item>
