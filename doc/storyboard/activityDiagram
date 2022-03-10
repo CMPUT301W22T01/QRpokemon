@@ -1,0 +1,214 @@
+@startuml
+skinparam dpi 300
+
+'''''''''''''''''''''''''''
+' Preprocessor Statements '
+'''''''''''''''''''''''''''
+
+' Resource Directory
+!$resource_dir = "resources"
+
+' Restore Screen
+!$restore = "restore.png"
+!$restore_fail = "restore-fail.png"
+
+' Sign Up Screen
+!$sign_up = "sign-up.png"
+!$sign_up_failed = "sign-up-fail.png"
+
+' Main Menu Screen
+!$main_ui = "main-ui.png"
+
+' QR Inventory Screen
+!$qr_inventory = "qr-inventory.png"
+!$qr_inventory_delete = "qr-inventory-delete.png"
+
+' Search Screens
+!$search = "search.png"
+!$search_username = "search-username.png"
+!$search_geolocation = "search-geolocation.png"
+
+' My Profile
+!$my_profile = "my-profile.png"
+!$my_profile_qr = "my-profile-qr.png"
+
+' Map
+!$map = "map.png"
+!$map_selection = "map-selection.png"
+
+' Leaderboard
+!$leaderboard = "leaderboard.png"
+!$leaderboard_sort_by = "leaderboard-sort-by.png"
+!$leaderboard_highest_unique = "leaderboard-highest-unique.png"
+!$leaderboard_total_scanned = "leaderboard-total-scanned.png"
+!$leaderboard_total_sum_of_scores = "leaderboard-total-sum-of-scores.png"
+
+' Scan QR Codes
+!$scan = "scan.png"
+!$scan_fail = "scan-fail.png"
+!$scan_switch_on = "scan-switch-on.png"
+
+' Viewing a Someone's
+!$view_profile = "view-profile.png"
+
+'''''''''''''''''
+' Begin Diagram '
+'''''''''''''''''
+start
+switch()
+case (No Previous Session)
+    ' Sign Up
+    :<img:$resource_dir/$sign_up{scale=0.5}>;
+    switch()
+    case (Restore Session?)
+        :Open Camera;
+        note left
+        User can go back to the
+        Create Profile screen if
+        they quit the camera
+        end note
+
+        repeat 
+            :<img:$resource_dir/$restore{scale=0.5}>;
+            backward:<img:$resource_dir/$restore_fail{scale=0.5}>;
+        repeat while (Scanned?) is (fail)
+        ->success;
+
+    case (Create a Profile)
+        repeat :Pick a username;
+            backward:<img:$resource_dir/$sign_up_failed{scale=0.15}>;
+        repeat while (Validation) is (invalid)
+        ->valid;
+    endswitch
+
+case (Session Found on Device)
+    :Continue to Main Menu;
+endswitch
+
+' Main Menu
+:<img:$resource_dir/$main_ui{scale=0.5}>;
+
+' Leave note because we cannot loop back here
+note right
+All following activites
+may return here
+end note
+
+' Branch to Every Menu Option
+switch()
+
+case (Profile Icon)
+    while()
+        :<img:$resource_dir/$my_profile{scale=0.5}>;
+        :Generate QR Code;
+        :<img:$resource_dir/$my_profile_qr{scale=0.5}>;
+    endwhile
+    -[hidden]->
+    detach
+case (My QR Inventory)
+    while ()
+        :<img:$resource_dir/$qr_inventory{scale=0.5}>;
+        switch(Delete QR Code from Inventory?)
+        case (yes)
+            :<img:$resource_dir/$qr_inventory_delete{scale=0.5}>;
+        case (no)
+            ' We need this node to link the entire switch back
+            :;
+        endswitch
+    endwhile
+    -[hidden]->
+    detach
+
+case (Search)
+    :<img:$resource_dir/$search{scale=0.5}>;
+
+    while ()
+    switch()
+    case (Search by username)
+        repeat
+        :<img:$resource_dir/$search_username{scale=0.5}>;
+        note left
+        App will search as
+        user enters characters
+        end note
+        backward:<img:$resource_dir/$view_profile{scale=0.4}>;
+        repeat while (View User Profile?) is (yes)
+
+    case (Search by geolocation)
+        :<img:$resource_dir/$search_geolocation{scale=0.5}>;
+
+    endswitch
+    endwhile
+    -[hidden]->
+    detach
+
+case (Map)
+    :<img:$resource_dir/$map{scale=0.5}>;
+    while()
+        :Select QR Code from Map;
+        :<img:$resource_dir/$map_selection{scale=0.15}>;
+    endwhile
+    -[hidden]->
+    detach
+
+case (Leaderboard)
+    :<img:$resource_dir/$leaderboard{scale=0.5}>;
+    while ()
+        :<img:$resource_dir/$leaderboard_sort_by{scale=0.5}>;
+        note left
+        The selected sort method
+        will be highlighted
+        end note
+        switch()
+        case (Sort by High Scores)
+            :<img:$resource_dir/$leaderboard{scale=0.5}>;
+        case (Sort by Highest Unique)
+            :<img:$resource_dir/$leaderboard_highest_unique{scale=0.5}>;
+        case (Sort by Total Scanned)
+            :<img:$resource_dir/$leaderboard_total_scanned{scale=0.5}>;
+        case (Sort by Total Sum of Scores)
+            :<img:$resource_dir/$leaderboard_total_sum_of_scores{scale=0.5}>;
+        endswitch
+    endwhile
+    -[hidden]->
+    detach
+
+case (Scan New QR)
+    :Open Camera;
+
+    switch(User Scanned QR Code?)
+    case (yes)
+        repeat
+            :<img:$resource_dir/$scan{scale=0.5}>;
+            note left
+            User can toggle saving
+            geolocation data and the
+            QR code
+            <img:$resource_dir/$scan_switch_on{scale=0.10}>
+            end note
+
+            backward:<img:$resource_dir/$scan_fail{scale=0.5}>;
+        repeat while (Scanned?) is (fail)
+        ->success;
+        
+        switch(Save QR to Inventory?)
+        case (Save)
+            :<img:$resource_dir/$qr_inventory{scale=0.5}>;
+            note right
+            See QR Inventory Diagram
+            for more detail
+            end note
+            stop
+
+        case (Don't Save)
+            :Activity Quits to Main Menu;
+            stop
+        endswitch
+
+    case (no)
+        :Activity Quits to Main Menu;
+        stop
+    endswitch
+endswitch
+
+@enduml
