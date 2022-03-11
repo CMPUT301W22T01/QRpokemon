@@ -111,6 +111,7 @@ package "Controllers" {
     class PlayerController
     {
         -player: Player
+        -databaseController: DatabaseController
 
         ' Constructor of PlayerController takes a username and pull Player from database
         +getPlayer(username: String): HashMap
@@ -300,6 +301,7 @@ LeaderboardController "1" -> "1" OtherPlayerController: Get players
 SignupActivity "1" o-- "1" SignupController
 SignupController "1" --> "1" PlayerController: Creates new player\nLoad current player
 PlayerController "1" *-- "1" Player
+PlayerController "1" --> "1" DatabaseController: Get Player by username
 
 OtherPlayerActivity "1" o-- "1" OtherPlayerController
 OtherPlayerController --> PlayerController: Gets player
