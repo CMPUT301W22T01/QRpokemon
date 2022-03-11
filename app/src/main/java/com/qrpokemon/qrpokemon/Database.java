@@ -86,9 +86,9 @@ public class Database {
 
         CollectionReference collectionReference = db.collection(collection);
         if (overwrite)
-            collectionReference.document(objectName).update(data);
-        else
             collectionReference.document(objectName).set(data);
+        else
+            collectionReference.document(objectName).update(data);
     }
 
     public void writeData(String collection, String objectName,
