@@ -1,21 +1,31 @@
 package com.qrpokemon.qrpokemon;
 
+import android.util.Log;
+
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Database {
     final private FirebaseFirestore db;
     final private String[] collections = {"Player", "QrCode", "LocationIndex"};
     private List <DocumentSnapshot> list;
 
-    Database() {
+    Database() throws Exception {
         db = FirebaseFirestore.getInstance();
+
+        if (db == null) {
+            Log.e("Database", "Database failed to initialize");
+            throw new Exception("Database failed to initialize");
+
+        }
     }
 
     public void checkValidCollection(String collection) throws Exception {
@@ -32,10 +42,10 @@ public class Database {
      * Get an array of documents from the database
      * @param collection
      * @param objectName
-     * @return List
+     * @return List<Map>
      * @throws Exception
      */
-    public List getData(String collection, String objectName) throws Exception {
+    public List<Map> getData(String collection, String objectName) throws Exception {
 
         // Check for valid collection reference
         checkValidCollection(collection);
@@ -63,7 +73,14 @@ public class Database {
                 );
         }
 
-        return list;
+        ArrayList<Map> returnList = new ArrayList<>();
+        if (!list.isEmpty()) {
+            for (int i = 0; i < list.size(); i++) {
+                returnList.set(i, list.get(i).getData());
+            }
+        }
+
+        return returnList;
     }
 
     /**
