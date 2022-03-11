@@ -1,7 +1,5 @@
 package com.qrpokemon.qrpokemon;
 
-import android.util.Log;
-
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -18,19 +16,13 @@ public class Database {
     final private String[] collections = {"Player", "QrCode", "LocationIndex"};
     private List <DocumentSnapshot> list;
 
-    Database() throws Exception {
+    Database() {
         db = FirebaseFirestore.getInstance();
-
-        if (db == null) {
-            Log.e("Database", "Database failed to initialize");
-            throw new Exception("Database failed to initialize");
-
-        }
     }
 
     public void checkValidCollection(String collection) throws Exception {
-        for (int i = 0; i < collections.length; i++) {
-            if (collection == collections[i]) {
+        for (String s : collections) {
+            if (collection.equals(s)) {
                 return;
             }
         }
@@ -40,10 +32,12 @@ public class Database {
 
     /**
      * Get an array of documents from the database
-     * @param collection
-     * @param objectName
+     * @param collection The collection to search in.
+     *                   May be one of [Player, QrCode, Location].
+     * @param objectName An object within the collection.
+     *                   May be null to return the collection.
      * @return List<Map>
-     * @throws Exception
+     * @throws Exception Throws an exception if collection is invalid.
      */
     public List<Map> getData(String collection, String objectName) throws Exception {
 
@@ -53,24 +47,17 @@ public class Database {
         CollectionReference collectionReference = db.collection(collection);
 
         if (objectName == null) {
-            collectionReference.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                @Override
-                public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                    // No specific object needed so return all objects
-                        list = queryDocumentSnapshots.getDocuments();
-                }
-            });
+            // No specific object needed so return all objects
+            collectionReference.get().addOnSuccessListener(queryDocumentSnapshots ->
+                list = queryDocumentSnapshots.getDocuments()
+            );
         }
         else {
             // Get object with Identifier objectName
             collectionReference.whereEqualTo("Identifier", objectName).get()
-                    .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                        @Override
-                        public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                            list = queryDocumentSnapshots.getDocuments();
-                        }
-                    }
-                );
+                    .addOnSuccessListener(queryDocumentSnapshots ->
+                            list = queryDocumentSnapshots.getDocuments()
+                    );
         }
 
         ArrayList<Map> returnList = new ArrayList<>();
@@ -85,33 +72,38 @@ public class Database {
 
     /**
      * Write data to an object in a collection
-     * @param collection
-     * @param objectName
-     * @param data
-     * @param overwrite
-     * @throws Exception
+     * @param collection The collection to search in.
+     *                   May be one of [Player, QrCode, Location].
+     * @param objectName An object within the collection.
+     *                   May be null to return the collection.
+     * @param data A map containing the attributes of an object.
+     * @param overwrite A boolean flag if the provided data should truncate and overwrite all
+     *                  attributes.
+     * @throws Exception Throws an exception if collection is invalid.
      */
-    public void writeData(String collection, String objectName, HashMap data, Boolean overwrite) throws Exception {
+    public void writeData(String collection, String objectName, HashMap data,
+                          Boolean overwrite) throws Exception {
         // Check for valid collection reference
         checkValidCollection(collection);
 
         CollectionReference collectionReference = db.collection(collection);
-
         if (overwrite)
-            collectionReference.document(objectName).update(data);  //  Player username & User attributes
+            collectionReference.document(objectName).update(data);
         else
-            collectionReference.document(objectName).set(data);  //  Player username & User attributes
+            collectionReference.document(objectName).set(data);
     }
 
-    public void writeData(String collection, String objectName, HashMap data) throws Exception {
+    public void writeData(String collection, String objectName,
+                          HashMap data) throws Exception {
         writeData(collection, objectName, data, false);
     }
 
     /**
      * Delete a document from a collection
-     * @param collection
-     * @param objectName
-     * @throws Exception
+     * @param collection The collection to search in.
+     *                   May be one of [Player, QrCode, Location].
+     * @param objectName An object within the collection. Must be specified.
+     * @throws Exception Throws an exception if collection is invalid or objectName is null.
      */
     public void deleteData(String collection, String objectName) throws Exception {
         // Check for valid collection reference
