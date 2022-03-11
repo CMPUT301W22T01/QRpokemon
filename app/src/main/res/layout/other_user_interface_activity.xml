@@ -90,8 +90,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/text_other_user_name" />
 
-        <ScrollView
-            android:id="@+id/scrollView2"
+        <LinearLayout
+            android:id="@+id/linearlayout2"
             android:layout_width="402dp"
             android:layout_height="397dp"
             android:layout_marginTop="24dp"
@@ -101,11 +101,12 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/text_total_score">
 
-            <LinearLayout
+            <ListView
+                android:id="@+id/other_user_listview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical" />
-        </ScrollView>
+        </LinearLayout>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/floatingActionButton3"
@@ -115,7 +116,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/scrollView2"
+            app:layout_constraintTop_toBottomOf="@+id/linearlayout2"
             app:srcCompat="?attr/actionModeCloseDrawable" />
 
 
