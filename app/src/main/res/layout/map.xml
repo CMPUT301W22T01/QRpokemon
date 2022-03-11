@@ -6,19 +6,19 @@
     android:layout_height="match_parent">
 
 
-    <fragment
+    <ImageView
         android:id="@+id/fakemap"
-        android:layout_width="380dp"
+        android:layout_width="371dp"
         android:layout_height="429dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="124dp"
+        android:layout_marginTop="125dp"
         android:layout_marginEnd="8dp"
-        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:src="@drawable/fakemap"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.533"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-    </fragment>
+        app:layout_constraintTop_toTopOf="parent"/>
+
 
     <ImageView
         android:id="@+id/mark"
