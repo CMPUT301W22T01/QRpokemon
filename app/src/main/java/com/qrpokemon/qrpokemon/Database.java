@@ -59,7 +59,7 @@ public class Database {
         }
 
         ArrayList<Map> returnList = new ArrayList<>();
-        if (!list.isEmpty()) {
+        if (list != null) {
             for (int i = 0; i < list.size(); i++) {
                 returnList.set(i, list.get(i).getData());
             }
