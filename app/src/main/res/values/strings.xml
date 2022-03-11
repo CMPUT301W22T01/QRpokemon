@@ -11,7 +11,6 @@
     <string name="qr_quantity">QR quantity</string>
     <string name="total_score">Total score</string>
     <string name="hash">Hash :</string>
-    <string name="score">Score :</string>
     <string name="location">Location</string>
     <string name="time">Time :</string>
     <string-array name="sort">

@@ -16,14 +16,16 @@ public class SignupActivity extends AppCompatActivity  implements View.OnClickLi
     private String name,phone,email;
     private Button bt_submit;
     private TextView tv_have;
+    private FileSystemController fileSystemController;
     private SharedPreferences sp;
     private SharedPreferences.Editor editor;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.signup_activity);
-        sp = getSharedPreferences("user",MODE_PRIVATE);
-        editor = sp.edit();
+        fileSystemController.writeToFile(this,"first run", "true");
+
+
         et_email = findViewById(R.id.et_email);
         et_name = findViewById(R.id.et_name);
         et_phone = findViewById(R.id.et_phone);
@@ -57,9 +59,7 @@ public class SignupActivity extends AppCompatActivity  implements View.OnClickLi
                     Toast.makeText(this, "Phone is empty!", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                editor.putString("name",name);
-                editor.putString("email",email);
-                editor.putString("phone",phone);
+                fileSystemController.writeToFile(this, "name", name);
                 editor.commit();
                 Intent intent1 = new Intent(SignupActivity.this, MyprofileActivity.class);
                 startActivity(intent1);
