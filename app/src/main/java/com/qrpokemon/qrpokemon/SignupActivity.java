@@ -17,14 +17,26 @@ public class SignupActivity extends AppCompatActivity  implements View.OnClickLi
     private Button bt_submit;
     private TextView tv_have;
     private FileSystemController fileSystemController;
-    private SharedPreferences sp;
-    private SharedPreferences.Editor editor;
+
+    /**
+     * Init Textview and button objects and check if the app is in the first run
+     * If user is registered successfully, then the app won't display this Activity ever
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.signup_activity);
-        fileSystemController.writeToFile(this,"first run", "true");
-
+        if(load("firstRun") == null) { // program is in first run:
+            fileSystemController.writeToFile(this,"firstRun", "firstRun");
+        }
+        else { //app has run before
+            if (load("name") != null){ //if a user has been successfully created
+                Intent intent = new Intent(SignupActivity.this, MyprofileActivity.class);
+                startActivity(intent);
+                finish(); // we won't be back once user has correctly registered the app
+            }
+        }
 
         et_email = findViewById(R.id.et_email);
         et_name = findViewById(R.id.et_name);
@@ -36,13 +48,21 @@ public class SignupActivity extends AppCompatActivity  implements View.OnClickLi
         tv_have.setOnClickListener(this);
     }
 
+    /**
+     * Check on which button user have entered,
+     * From here, user can either login from new device
+     * or register with filled in message, username cannot be null or identical to others in database
+     * User can go to MainMenuActivity once registration is done.
+     * @param view
+     */
     @Override
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.tv_have:
-                Intent intent = new Intent(SignupActivity.this, SignupActivity.class);
-                startActivity(intent);
+                Intent signup_intent = new Intent(SignupActivity.this, SignupActivity.class);
+                startActivity(signup_intent);
                 break;
+
             case R.id.bt_submit:
                 name = et_name.getText().toString().trim();
                 email = et_email.getText().toString().trim();
@@ -60,10 +80,16 @@ public class SignupActivity extends AppCompatActivity  implements View.OnClickLi
                     return;
                 }
                 fileSystemController.writeToFile(this, "name", name);
-                editor.commit();
-                Intent intent1 = new Intent(SignupActivity.this, MyprofileActivity.class);
-                startActivity(intent1);
+
+                //TODO: Change the Activity to MainMenuActivity once it is ready.
+                Intent intent = new Intent(SignupActivity.this, MyprofileActivity.class);
+                startActivity(intent);
                 break;
         }
+    }
+
+    public String load(String filename){
+        String data = fileSystemController.readToFile(this,filename);
+        return data;
     }
 }
