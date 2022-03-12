@@ -1,10 +1,14 @@
 package com.qrpokemon.qrpokemon;
 
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
+import android.util.Log;
 
-import java.util.ArrayList;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,7 +16,6 @@ import java.util.Map;
 public class Database {
     final private FirebaseFirestore db;
     final private String[] collections = {"Player", "QrCode", "LocationIndex"};
-    private List <DocumentSnapshot> list;
 
     Database() {
         db = FirebaseFirestore.getInstance();
@@ -30,42 +33,37 @@ public class Database {
 
     /**
      * Get an array of documents from the database
+     * @param callback   A DatabaseCallback used to run code after data has been fetched
+     * @param list       A list which will have fetched data appended to it
      * @param collection The collection to search in.
      *                   May be one of [Player, QrCode, Location].
      * @param objectName An object within the collection.
      *                   May be null to return the collection.
-     * @return List<Map>
      * @throws Exception Throws an exception if collection is invalid.
      */
-    public List<Map> getData(String collection, String objectName) throws Exception {
+    public void getData(DatabaseCallback callback, List<Map> list, String collection,
+                        String objectName) throws Exception {
 
         // Check for valid collection reference
         checkValidCollection(collection);
 
         CollectionReference collectionReference = db.collection(collection);
+        Task task = objectName == null ? collectionReference.get()
+                : collectionReference.whereEqualTo("Identifier", objectName).get();
 
-        if (objectName == null) {
-            // No specific object needed so return all objects
-            collectionReference.get().addOnSuccessListener(queryDocumentSnapshots ->
-                list = queryDocumentSnapshots.getDocuments()
-            );
-        }
-        else {
-            // Get object with Identifier objectName
-            collectionReference.whereEqualTo("Identifier", objectName).get()
-                    .addOnSuccessListener(queryDocumentSnapshots ->
-                            list = queryDocumentSnapshots.getDocuments()
-                    );
-        }
+        task.addOnCompleteListener((OnCompleteListener<QuerySnapshot>) runningTask -> {
+            if (runningTask.isSuccessful()) {
+                // TODO: Use documentSnapshot.toObject() with HashMap to reconstruct objects?
+                for (QueryDocumentSnapshot document : runningTask.getResult())
+                    list.add(document.getData());
 
-        ArrayList<Map> returnList = new ArrayList<>();
-        if (!list.isEmpty()) {
-            for (int i = 0; i < list.size(); i++) {
-                returnList.set(i, list.get(i).getData());
+                if (callback != null)
+                    callback.run(list);
+
+            } else {
+                Log.e("Database: ", "Failed to add document");
             }
-        }
-
-        return returnList;
+        });
     }
 
     /**
@@ -79,16 +77,17 @@ public class Database {
      *                  attributes.
      * @throws Exception Throws an exception if collection is invalid.
      */
-    public void writeData(String collection, String objectName, HashMap data,
-                          Boolean overwrite) throws Exception {
+    public void writeData(String collection, String objectName, HashMap data, Boolean overwrite)
+            throws Exception {
         // Check for valid collection reference
         checkValidCollection(collection);
 
         CollectionReference collectionReference = db.collection(collection);
+
         if (overwrite)
-            collectionReference.document(objectName).update(data);
-        else
             collectionReference.document(objectName).set(data);
+        else
+            collectionReference.document(objectName).update(data);
     }
 
     public void writeData(String collection, String objectName,
