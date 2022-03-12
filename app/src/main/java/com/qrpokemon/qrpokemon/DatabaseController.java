@@ -10,7 +10,7 @@ public class DatabaseController {
     private Database database;
     
     DatabaseController(){
-        database = new Database();
+        database = Database.getInstance();
     }
 
     public List<Map> readFromDatabase(String collection, String objectName) throws Exception{

@@ -11,10 +11,19 @@ import java.util.List;
 import java.util.Map;
 
 public class SignupController {
+    private static SignupController currentInstance;
     private PlayerController playerController;
     private FileSystemController fileSystemController = new FileSystemController();
-    private Database database = new Database();
+    private Database database = Database.getInstance();
 
+    private SignupController(){}
+
+    public static SignupController getInstance() {
+        if (currentInstance == null)
+            currentInstance = new SignupController();
+
+        return currentInstance;
+    }
 
     public Boolean validateUsername(String userName){ //check username from database
         List<Map> result = new ArrayList<Map>();
@@ -41,8 +50,8 @@ public class SignupController {
             HashMap<String, String> contact = new HashMap<>();
             contact.put("email", email);
             contact.put("phone", phone);
-            Player newPlayer = new Player(newUsername, null, contact, 0,0);
-            PlayerController playerController = new PlayerController(newPlayer); //gives current player to PlayerController
+            PlayerController playerController = PlayerController.getInstance(); //gives current player to PlayerController
+            playerController.setupPlayer(newUsername, new ArrayList<String>(), contact, 0,0);
             Log.e("Database: ", "addNewPlayer") ;
             //update local fileSystem
 //            fileSystemController.writeToFile(context, "name", newUsername);

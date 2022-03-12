@@ -10,13 +10,16 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class PlayerController {
-    private Player currentPlayer;
+    private static PlayerController currentInstance;
+    private Player currentPlayer = null;
 
-    PlayerController(Player currentPlayer) throws Exception {
-        this.currentPlayer = currentPlayer;
-        savePlayerData(0,
-                0,
-                new ArrayList<String>());
+    private PlayerController() {}
+
+    public static PlayerController getInstance() {
+        if (currentInstance == null)
+            currentInstance = new PlayerController();
+
+        return currentInstance;
     }
 
     /**
@@ -43,6 +46,16 @@ public class PlayerController {
         return info;
     }
 
+    public void setupPlayer(String username,
+                            @Nullable ArrayList<String> qrInventory,
+                            @Nullable HashMap contact,
+                            @Nullable Integer qrCount,
+                            @Nullable Integer totalScore) {
+        if (this.currentPlayer == null){
+            this.currentPlayer = new Player(username, qrInventory, contact, qrCount, totalScore);
+        }
+    }
+
     /**
      * update count, totalScore and qrInventory of current user.
      * @param count
@@ -50,9 +63,9 @@ public class PlayerController {
      * @param qrInventory
      */
     public void savePlayerData(@Nullable Integer count,
-                               @Nullable  Integer totalScore,
-                               @Nullable  ArrayList<String> qrInventory) throws Exception {
-        Database database = new Database();
+                               @Nullable Integer totalScore,
+                               @Nullable ArrayList<String> qrInventory) throws Exception {
+        Database database = Database.getInstance();
         HashMap<String, Object> info = new HashMap<>();
 
         //update player's data

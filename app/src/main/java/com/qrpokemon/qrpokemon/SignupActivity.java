@@ -19,7 +19,7 @@ public class SignupActivity extends AppCompatActivity  implements View.OnClickLi
     private String name,phone,email;
     private Button bt_submit;
     private TextView tv_have;
-    private SignupController signupController = new SignupController();
+    private SignupController signupController = SignupController.getInstance();
 
     /**
      * Init Textview and button objects and check if the app is in the first run
@@ -91,7 +91,6 @@ public class SignupActivity extends AppCompatActivity  implements View.OnClickLi
 
                     //TODO: Change the Activity to MainMenuActivity once it is ready.
 //                    Intent intent = new Intent(SignupActivity.this, MyprofileActivity.class);
-//                    intent.putExtra(playerController);
 //                    startActivity(intent);
                 } catch (Exception e) {
                     Log.e("TrackRecordActivity" , String.valueOf(e));
