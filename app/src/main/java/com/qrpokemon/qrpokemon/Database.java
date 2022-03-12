@@ -14,11 +14,23 @@ import java.util.List;
 import java.util.Map;
 
 public class Database {
+    private static Database dbInstance;
     final private FirebaseFirestore db;
     final private String[] collections = {"Player", "QrCode", "LocationIndex"};
 
-    Database() {
+    private Database() {
         db = FirebaseFirestore.getInstance();
+    }
+
+    /**
+     * Implements Database as a Singleton
+     * @return Database
+     */
+    public static Database getInstance() {
+        if (dbInstance == null)
+            dbInstance = new Database();
+
+        return dbInstance;
     }
 
     public void checkValidCollection(String collection) throws Exception {
