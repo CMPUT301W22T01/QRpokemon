@@ -52,7 +52,7 @@ public class PlayerController {
     public void savePlayerData(@Nullable Integer count,
                                @Nullable  Integer totalScore,
                                @Nullable  ArrayList<String> qrInventory) throws Exception {
-        DatabaseController databaseController = new DatabaseController();
+        Database database = new Database();
         HashMap<String, Object> info = new HashMap<>();
 
         //update player's data
@@ -71,6 +71,6 @@ public class PlayerController {
         info.put("qrCount",this.currentPlayer.getQrCount());
         info.put("totalScore", this.currentPlayer.getTotalScore());
         info.put("contact", this.currentPlayer.getContactInfo());
-        databaseController.writeToDatabase("Player", this.currentPlayer.getUsername() ,info ,true);
+        database.writeData("Player", this.currentPlayer.getUsername() ,info ,true);
     }
 }

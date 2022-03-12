@@ -14,10 +14,10 @@ public class DatabaseController {
     }
 
     public List<Map> readFromDatabase(String collection, String objectName) throws Exception{
-        List<Map> temp = database.getData(collection, objectName);
-        Log.e("DatabaseController: ", temp.toString());
-        return temp;
-
+//        List<Map> temp = database.getData(collection, objectName);
+//        Log.e("DatabaseController: ", temp.toString());
+//        return temp;
+        return null;
     }
 
     public void writeToDatabase(String collection, String objectName, HashMap data, Boolean overwrite) throws Exception{

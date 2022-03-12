@@ -5,6 +5,7 @@ import android.util.Log;
 
 import androidx.annotation.Nullable;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,19 +13,25 @@ import java.util.Map;
 public class SignupController {
     private PlayerController playerController;
     private FileSystemController fileSystemController = new FileSystemController();
-    private DatabaseController databaseController = new DatabaseController();
+    private Database database = new Database();
+
 
     public Boolean validateUsername(String userName){ //check username from database
-        List<Map> result = null;
+        List<Map> result = new ArrayList<Map>();
         try{
+            DatabaseCallback databaseCallback = new DatabaseCallback(null) {
+                @Override
+                public void run(List<Map> dataList) {
+                    Log.e("DatabaseCallBack: ", dataList.toString());
+                }
+            };
             // read data from player
-            result = databaseController.readFromDatabase("Player", userName);
-            Log.e("SignupController: ", result.toString() + "result");
+            database.getData(databaseCallback, result, "Player", userName);
         } catch (Exception e) { //collection is invalid
             e.printStackTrace();
             Log.e("SignupController: ", e.toString());
         }
-        return result.isEmpty();
+        return true;
     }
 
     public PlayerController addNewPlayer(Context context, String newUsername, @Nullable String email, @Nullable String phone) throws Exception {
@@ -36,7 +43,7 @@ public class SignupController {
             contact.put("phone", phone);
             Player newPlayer = new Player(newUsername, null, contact, 0,0);
             PlayerController playerController = new PlayerController(newPlayer); //gives current player to PlayerController
-
+            Log.e("Database: ", "addNewPlayer") ;
             //update local fileSystem
 //            fileSystemController.writeToFile(context, "name", newUsername);
             return playerController;
