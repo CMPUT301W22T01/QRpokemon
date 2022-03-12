@@ -5,18 +5,21 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.File;
+
 public class SignupActivity extends AppCompatActivity  implements View.OnClickListener {
     private EditText et_name,et_phone,et_email;
     private String name,phone,email;
     private Button bt_submit;
     private TextView tv_have;
-    private FileSystemController fileSystemController;
+    private SignupController signupController = new SignupController();
 
     /**
      * Init Textview and button objects and check if the app is in the first run
@@ -27,11 +30,12 @@ public class SignupActivity extends AppCompatActivity  implements View.OnClickLi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.signup_activity);
-        if(load("firstRun") == null) { // program is in first run:
-            fileSystemController.writeToFile(this,"firstRun", "firstRun");
+        if(signupController.load(this, "firstRun") == null) { // program is in first run:
+            signupController.write(this, "firstRun");
         }
         else { //app has run before
-            if (load("name") != null){ //if a user has been successfully created
+            if (signupController.load(this, "name") != null){ //if a user has been successfully created
+                Log.e("TrackRecordActivity" , "User create successfully");
                 Intent intent = new Intent(SignupActivity.this, MyprofileActivity.class);
                 startActivity(intent);
                 finish(); // we won't be back once user has correctly registered the app
@@ -49,10 +53,12 @@ public class SignupActivity extends AppCompatActivity  implements View.OnClickLi
     }
 
     /**
-     * Check on which button user have entered,
-     * From here, user can either login from new device
-     * or register with filled in message, username cannot be null or identical to others in database
-     * User can go to MainMenuActivity once registration is done.
+     * Check on which button user have entered
+     * User can either choose to:
+     *      login from new device
+     *      register with filled in message: username cannot be null or identical to others in database
+     * User can leave null to contact info
+     * User goes to MainMenuActivity once registration is done.
      * @param view
      */
     @Override
@@ -72,24 +78,27 @@ public class SignupActivity extends AppCompatActivity  implements View.OnClickLi
                     return;
                 }
                 if(email.equals("")){
-                    Toast.makeText(this, "Email is empty!", Toast.LENGTH_SHORT).show();
-                    return;
+//                    Toast.makeText(this, "Email is empty!", Toast.LENGTH_SHORT).show();
+                    email = null;
                 }
                 if(phone.equals("")){
-                    Toast.makeText(this, "Phone is empty!", Toast.LENGTH_SHORT).show();
-                    return;
+//                    Toast.makeText(this, "Phone number is empty!", Toast.LENGTH_SHORT).show();
+                    phone = null;
                 }
-                fileSystemController.writeToFile(this, "name", name);
 
-                //TODO: Change the Activity to MainMenuActivity once it is ready.
-                Intent intent = new Intent(SignupActivity.this, MyprofileActivity.class);
-                startActivity(intent);
+                try{
+                    PlayerController playerController = signupController.addNewPlayer(this, name, email, phone);
+
+                    //TODO: Change the Activity to MainMenuActivity once it is ready.
+//                    Intent intent = new Intent(SignupActivity.this, MyprofileActivity.class);
+//                    intent.putExtra(playerController);
+//                    startActivity(intent);
+                } catch (Exception e) {
+                    Log.e("TrackRecordActivity" , String.valueOf(e));
+                    e.printStackTrace();
+                }
+
                 break;
         }
-    }
-
-    public String load(String filename){
-        String data = fileSystemController.readToFile(this,filename);
-        return data;
     }
 }

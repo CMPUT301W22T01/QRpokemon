@@ -1,13 +1,23 @@
 package com.qrpokemon.qrpokemon;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Player {
     private String username;
-    private String[] qrInventory;
+    private ArrayList<String> qrInventory;
     private HashMap contactInfo;
     private Integer qrCount;
     private Integer totalScore;
+
+    public Player(String username, ArrayList<String> qrInventory, HashMap contactInfo, Integer qrCount, Integer totalScore) {
+        this.username = username;
+        this.qrInventory = qrInventory;
+        this.contactInfo = contactInfo;
+        this.qrCount = qrCount;
+        this.totalScore = totalScore;
+    }
 
     public String getUsername() {
         return username;
@@ -17,11 +27,11 @@ public class Player {
         this.username = username;
     }
 
-    public String[] getQrInventory() {
+    public ArrayList<String> getQrInventory() {
         return qrInventory;
     }
 
-    public void setQrInventory(String[] qrInventory) {
+    public void setQrInventory(ArrayList<String> qrInventory) {
         this.qrInventory = qrInventory;
     }
 
