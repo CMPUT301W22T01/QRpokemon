@@ -1,5 +1,4 @@
 <resources>
-    <string name="app_name">NameIntentApp</string>
     <string name="app_name">QRpokemon</string>
     <string name="contact_information">Contact Information :</string>
     <string name="phone_number">Phone Number:</string>
@@ -12,7 +11,6 @@
     <string name="qr_quantity">QR quantity</string>
     <string name="total_score">Total score</string>
     <string name="hash">Hash :</string>
-    <string name="score">Score :</string>
     <string name="location">Location</string>
     <string name="time">Time :</string>
     <string-array name="sort">
