@@ -13,8 +13,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.File;
+import java.util.Observable;
+import java.util.Observer;
 
-public class SignupActivity extends AppCompatActivity  implements View.OnClickListener {
+public class SignupActivity extends AppCompatActivity  implements View.OnClickListener, Observer {
     private EditText et_name,et_phone,et_email;
     private String name,phone,email;
     private Button bt_submit;
@@ -87,17 +89,22 @@ public class SignupActivity extends AppCompatActivity  implements View.OnClickLi
                 }
 
                 try{
-                    PlayerController playerController = signupController.addNewPlayer(this, name, email, phone);
-
-                    //TODO: Change the Activity to MainMenuActivity once it is ready.
-//                    Intent intent = new Intent(SignupActivity.this, MyprofileActivity.class);
-//                    startActivity(intent);
+                    PlayerController playerController = PlayerController.getInstance();
+                    playerController.addObserver(this);
+                    signupController.addNewPlayer(this, name, email, phone);
                 } catch (Exception e) {
                     Log.e("TrackRecordActivity" , String.valueOf(e));
-                    e.printStackTrace();
                 }
 
                 break;
         }
+    }
+
+    @Override
+    public void update(Observable observable, Object o) {
+        // Run after playerController have updated the player
+        //TODO: Change the Activity to MainMenuActivity once it is ready.
+        Intent intent = new Intent(SignupActivity.this, MyprofileActivity.class);
+        startActivity(intent);
     }
 }

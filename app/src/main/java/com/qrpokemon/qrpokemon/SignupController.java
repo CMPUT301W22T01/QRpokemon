@@ -2,6 +2,7 @@ package com.qrpokemon.qrpokemon;
 
 import android.content.Context;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
@@ -9,10 +10,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Observable;
+import java.util.Observer;
 
 public class SignupController {
     private static SignupController currentInstance;
-    private PlayerController playerController;
     private FileSystemController fileSystemController = new FileSystemController();
     private Database database = Database.getInstance();
 
@@ -25,41 +27,35 @@ public class SignupController {
         return currentInstance;
     }
 
-    public Boolean validateUsername(String userName){ //check username from database
+
+    public void addNewPlayer(Context context, String newUsername, @Nullable String email, @Nullable String phone) throws Exception {
         List<Map> result = new ArrayList<Map>();
         try{
-            DatabaseCallback databaseCallback = new DatabaseCallback(null) {
+            DatabaseCallback databaseCallback = new DatabaseCallback(context) {
                 @Override
                 public void run(List<Map> dataList) {
-                    Log.e("DatabaseCallBack: ", dataList.toString());
+                    if (dataList.isEmpty()){
+                        HashMap<String, String> contact = new HashMap<>();
+                        contact.put("email", email);
+                        contact.put("phone", phone);
+
+                        PlayerController playerController = PlayerController.getInstance(); //gives current player to PlayerController
+
+                        try {
+                            playerController.setupPlayer(newUsername, new ArrayList<String>(), contact, 0,0);
+                            playerController.savePlayerData(0,0, new ArrayList<String>(), contact, true);
+                        } catch (Exception e) {
+                            Log.e("SignupController: ", e.toString());
+                        }
+//                        Log.e("Database: ", "addNewPlayer") ;
+                    } else{
+                        Toast.makeText(context, "Username is not unique!", Toast.LENGTH_SHORT).show();
+                    }
                 }
             };
-            // read data from player
-            database.getData(databaseCallback, result, "Player", userName);
-        } catch (Exception e) { //collection is invalid
+            database.getData(databaseCallback, result, "Player", newUsername);
+        } catch (Exception e) {
             e.printStackTrace();
-            Log.e("SignupController: ", e.toString());
-        }
-        return true;
-    }
-
-    public PlayerController addNewPlayer(Context context, String newUsername, @Nullable String email, @Nullable String phone) throws Exception {
-        Boolean result = validateUsername(newUsername);
-        if (result){ // if user name is valid, create a new Player
-
-            HashMap<String, String> contact = new HashMap<>();
-            contact.put("email", email);
-            contact.put("phone", phone);
-            PlayerController playerController = PlayerController.getInstance(); //gives current player to PlayerController
-            playerController.setupPlayer(newUsername, new ArrayList<String>(), contact, 0,0);
-            Log.e("Database: ", "addNewPlayer") ;
-            //update local fileSystem
-//            fileSystemController.writeToFile(context, "name", newUsername);
-            return playerController;
-        }
-
-        else{
-            throw new Exception("Username is not unique!");
         }
     }
 

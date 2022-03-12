@@ -4,12 +4,11 @@ import android.util.Log;
 
 import androidx.annotation.Nullable;
 
-import com.google.android.gms.common.data.DataBufferObserverSet;
-
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Observable;
 
-public class PlayerController {
+public class PlayerController extends Observable {
     private static PlayerController currentInstance;
     private Player currentPlayer = null;
 
@@ -53,37 +52,55 @@ public class PlayerController {
                             @Nullable Integer totalScore) {
         if (this.currentPlayer == null){
             this.currentPlayer = new Player(username, qrInventory, contact, qrCount, totalScore);
+            setChanged();
+            notifyObservers(null);
         }
     }
 
     /**
      * update count, totalScore and qrInventory of current user.
-     * @param count
+     * @param qrCount
      * @param totalScore
      * @param qrInventory
      */
-    public void savePlayerData(@Nullable Integer count,
+    public void savePlayerData(@Nullable Integer qrCount,
                                @Nullable Integer totalScore,
-                               @Nullable ArrayList<String> qrInventory) throws Exception {
+                               @Nullable ArrayList<String> qrInventory,
+                               @Nullable HashMap contact,
+                               Boolean addIdentifier) throws Exception {
         Database database = Database.getInstance();
         HashMap<String, Object> info = new HashMap<>();
 
-        //update player's data
-        if (count != null){
-            this.currentPlayer.setQrCount(count);
+        //update player's data.
+        // Don't update parameter if null
+        if (qrCount != null){
+            this.currentPlayer.setQrCount(qrCount);
+            info.put("qrCount",this.currentPlayer.getQrCount());
         }
         if (totalScore != null){
             this.currentPlayer.setTotalScore(totalScore);
+            info.put("totalScore", this.currentPlayer.getTotalScore());
         }
         if (qrInventory != null){
             this.currentPlayer.setQrInventory(qrInventory);
+            info.put("qrInventory", this.currentPlayer.getQrInventory());
         }
 
-        info.put("Identifier", this.currentPlayer.getUsername());
-        info.put("qrInventory", this.currentPlayer.getQrInventory());
-        info.put("qrCount",this.currentPlayer.getQrCount());
-        info.put("totalScore", this.currentPlayer.getTotalScore());
-        info.put("contact", this.currentPlayer.getContactInfo());
+        if (contact != null){
+            this.currentPlayer.setContactInfo(contact);
+            info.put("contact", this.currentPlayer.getContactInfo());
+        }
+
+        if (addIdentifier)
+            info.put("Identifier", this.currentPlayer.getUsername());
+
         database.writeData("Player", this.currentPlayer.getUsername() ,info ,true);
+    }
+
+    public void savePlayerData(@Nullable Integer qrCount,
+                               @Nullable Integer totalScore,
+                               @Nullable ArrayList<String> qrInventory,
+                               @Nullable HashMap contact) throws Exception {
+        savePlayerData(qrCount, totalScore, qrInventory, contact, false);
     }
 }
