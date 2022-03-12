@@ -1,9 +1,6 @@
 package com.qrpokemon.qrpokemon;
 
-import android.content.Context;
 import android.util.Log;
-
-import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -12,16 +9,13 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Consumer;
 
 public class Database {
     final private FirebaseFirestore db;
     final private String[] collections = {"Player", "QrCode", "LocationIndex"};
-    private List<Map> list;
 
     Database() {
         db = FirebaseFirestore.getInstance();
@@ -39,11 +33,12 @@ public class Database {
 
     /**
      * Get an array of documents from the database
+     * @param callback   A DatabaseCallback used to run code after data has been fetched
+     * @param list       A list which will have fetched data appended to it
      * @param collection The collection to search in.
      *                   May be one of [Player, QrCode, Location].
      * @param objectName An object within the collection.
      *                   May be null to return the collection.
-     * @return List<Map>
      * @throws Exception Throws an exception if collection is invalid.
      */
     public void getData(DatabaseCallback callback, List<Map> list, String collection,
@@ -56,20 +51,17 @@ public class Database {
         Task task = objectName == null ? collectionReference.get()
                 : collectionReference.whereEqualTo("Identifier", objectName).get();
 
-        task.addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()) {
-                    // TODO: Use documentSnapshot.toObject() with HashMap to reconstruct objects?
-                    for (QueryDocumentSnapshot document : task.getResult())
-                        list.add(document.getData());
+        task.addOnCompleteListener((OnCompleteListener<QuerySnapshot>) runningTask -> {
+            if (runningTask.isSuccessful()) {
+                // TODO: Use documentSnapshot.toObject() with HashMap to reconstruct objects?
+                for (QueryDocumentSnapshot document : runningTask.getResult())
+                    list.add(document.getData());
 
-                    if (callback != null)
-                        callback.run(list);
+                if (callback != null)
+                    callback.run(list);
 
-                } else {
-                    Log.e("Database: ", "Failed to add document");
-                }
+            } else {
+                Log.e("Database: ", "Failed to add document");
             }
         });
     }
