@@ -1,18 +1,27 @@
 package com.qrpokemon.qrpokemon;
 
+import android.content.Context;
+import android.util.Log;
+
+import androidx.annotation.NonNull;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Consumer;
 
 public class Database {
     final private FirebaseFirestore db;
     final private String[] collections = {"Player", "QrCode", "LocationIndex"};
-    private List <DocumentSnapshot> list;
+    private List<Map> list;
 
     Database() {
         db = FirebaseFirestore.getInstance();
@@ -37,35 +46,32 @@ public class Database {
      * @return List<Map>
      * @throws Exception Throws an exception if collection is invalid.
      */
-    public List<Map> getData(String collection, String objectName) throws Exception {
+    public void getData(DatabaseCallback callback, List<Map> list, String collection,
+                        String objectName) throws Exception {
 
         // Check for valid collection reference
         checkValidCollection(collection);
 
         CollectionReference collectionReference = db.collection(collection);
+        Task task = objectName == null ? collectionReference.get()
+                : collectionReference.whereEqualTo("Identifier", objectName).get();
 
-        if (objectName == null) {
-            // No specific object needed so return all objects
-            collectionReference.get().addOnSuccessListener(queryDocumentSnapshots ->
-                list = queryDocumentSnapshots.getDocuments()
-            );
-        }
-        else {
-            // Get object with Identifier objectName
-            collectionReference.whereEqualTo("Identifier", objectName).get()
-                    .addOnSuccessListener(queryDocumentSnapshots ->
-                            list = queryDocumentSnapshots.getDocuments()
-                    );
-        }
+        task.addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    // TODO: Use documentSnapshot.toObject() with HashMap to reconstruct objects?
+                    for (QueryDocumentSnapshot document : task.getResult())
+                        list.add(document.getData());
 
-        ArrayList<Map> returnList = new ArrayList<>();
-        if (list != null) {
-            for (int i = 0; i < list.size(); i++) {
-                returnList.set(i, list.get(i).getData());
+                    if (callback != null)
+                        callback.run(list);
+
+                } else {
+                    Log.e("Database: ", "Failed to add document");
+                }
             }
-        }
-
-        return returnList;
+        });
     }
 
     /**
@@ -79,12 +85,13 @@ public class Database {
      *                  attributes.
      * @throws Exception Throws an exception if collection is invalid.
      */
-    public void writeData(String collection, String objectName, HashMap data,
-                          Boolean overwrite) throws Exception {
+    public void writeData(String collection, String objectName, HashMap data, Boolean overwrite)
+            throws Exception {
         // Check for valid collection reference
         checkValidCollection(collection);
 
         CollectionReference collectionReference = db.collection(collection);
+
         if (overwrite)
             collectionReference.document(objectName).set(data);
         else
