@@ -45,6 +45,14 @@ public class PlayerController extends Observable {
         return info;
     }
 
+    /**
+     * create a new player
+     * @param username is guaranteed to be unique, it notifies Observer once player is created
+     * @param qrInventory
+     * @param contact
+     * @param qrCount
+     * @param totalScore
+     */
     public void setupPlayer(String username,
                             @Nullable ArrayList<String> qrInventory,
                             @Nullable HashMap contact,
@@ -58,10 +66,13 @@ public class PlayerController extends Observable {
     }
 
     /**
-     * update count, totalScore and qrInventory of current user.
+     * Update/Create a player's data based on the addIdentifier boolean flag
      * @param qrCount
      * @param totalScore
-     * @param qrInventory
+     * @param qrInventory an Arraylist of qrHashes
+     * @param contact contact info for player
+     * @param addIdentifier if true create a new player in database, update a user otherwise
+     * @throws Exception if collection is invalid
      */
     public void savePlayerData(@Nullable Integer qrCount,
                                @Nullable Integer totalScore,
@@ -96,7 +107,7 @@ public class PlayerController extends Observable {
 
         database.writeData("Player", this.currentPlayer.getUsername() ,info ,true);
     }
-
+    // boolean flag is false in default, updating user only.
     public void savePlayerData(@Nullable Integer qrCount,
                                @Nullable Integer totalScore,
                                @Nullable ArrayList<String> qrInventory,

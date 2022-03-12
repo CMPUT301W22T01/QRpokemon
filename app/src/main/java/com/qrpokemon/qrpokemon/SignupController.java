@@ -27,11 +27,21 @@ public class SignupController {
         return currentInstance;
     }
 
-
+    /**
+     * The username will be checked first
+     * It asks PlayerController to create a current Player class
+     * It asks PlayerController to add new player to database
+     * @param context
+     * @param newUsername
+     * @param email
+     * @param phone
+     * @throws Exception if collection not in correct range
+     */
     public void addNewPlayer(Context context, String newUsername, @Nullable String email, @Nullable String phone) throws Exception {
         List<Map> result = new ArrayList<Map>();
         try{
             DatabaseCallback databaseCallback = new DatabaseCallback(context) {
+                //this runs after datalist is collected from Database class
                 @Override
                 public void run(List<Map> dataList) {
                     if (dataList.isEmpty()){
@@ -39,11 +49,15 @@ public class SignupController {
                         contact.put("email", email);
                         contact.put("phone", phone);
 
-                        PlayerController playerController = PlayerController.getInstance(); //gives current player to PlayerController
+                        //Get playerController class there is only one PlayerController class
+                        PlayerController playerController = PlayerController.getInstance();
 
                         try {
-                            playerController.setupPlayer(newUsername, new ArrayList<String>(), contact, 0,0);
+                            // add player on firestore
                             playerController.savePlayerData(0,0, new ArrayList<String>(), contact, true);
+
+                            //Create current Player class in PlayerController class
+                            playerController.setupPlayer(newUsername, new ArrayList<String>(), contact, 0,0);
                         } catch (Exception e) {
                             Log.e("SignupController: ", e.toString());
                         }
@@ -53,6 +67,7 @@ public class SignupController {
                     }
                 }
             };
+            // this will run first
             database.getData(databaseCallback, result, "Player", newUsername);
         } catch (Exception e) {
             e.printStackTrace();
@@ -69,6 +84,11 @@ public class SignupController {
         return data;
     }
 
+    /**
+     * write data to local FileSystem based on the filename
+     * @param context
+     * @param filename
+     */
     public void write(Context context, String filename){
 //        fileSystemController.writeToFile(context, filename, "firstRun");
     }

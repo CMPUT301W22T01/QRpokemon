@@ -100,6 +100,11 @@ public class SignupActivity extends AppCompatActivity  implements View.OnClickLi
         }
     }
 
+    /**
+     * update will be called once a player has been successfully added
+     * @param observable
+     * @param o
+     */
     @Override
     public void update(Observable observable, Object o) {
         // Run after playerController have updated the player
