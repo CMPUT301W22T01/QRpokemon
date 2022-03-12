@@ -53,11 +53,11 @@ public class SignupController {
                         PlayerController playerController = PlayerController.getInstance();
 
                         try {
-                            // add player on firestore
-                            playerController.savePlayerData(0,0, new ArrayList<String>(), contact, true);
-
                             //Create current Player class in PlayerController class
                             playerController.setupPlayer(newUsername, new ArrayList<String>(), contact, 0,0);
+                            
+                            // add player on firestore
+                            playerController.savePlayerData(0,0, new ArrayList<String>(), contact, true);
                         } catch (Exception e) {
                             Log.e("SignupController: ", e.toString());
                         }
