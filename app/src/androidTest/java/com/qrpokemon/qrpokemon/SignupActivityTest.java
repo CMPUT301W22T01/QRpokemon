@@ -24,26 +24,34 @@ import com.robotium.solo.Solo;
  */
 public class SignupActivityTest {
     private Solo solo;
-
+    private Database database = Database.getInstance();
     @Rule
-    public ActivityTestRule<SignupActivity> rule = new ActivityTestRule<>(SignupActivity.class, true, true);
+    public ActivityTestRule<MainActivity> rule = new ActivityTestRule<>(MainActivity.class, true, true);
 
     @Before
     public void setUp() throws Exception{
         solo = new Solo(InstrumentationRegistry.getInstrumentation(), rule.getActivity());
+    }
+
+    @Test
+    public void start() throws Exception{
+        Activity activity = rule.getActivity();
 
         // Asserts that the current activity is the SignupActivity
-        solo.assertCurrentActivity("Wrong Activity", SignupActivity.class);
+        solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
+        database.deleteData("Player", "ABCD");
     }
 
     @Test
     public void enterInputs() throws Exception{
+
         solo.enterText((EditText) solo.getView(R.id.et_name), "ABCD");
         solo.enterText((EditText) solo.getView(R.id.et_email), "123@321.com");
         solo.enterText((EditText) solo.getView(R.id.et_phone), "123456");
-
-        solo.clickOnView(solo.getView(R.id.bt_submit));
         solo.waitForActivity(MyprofileActivity.class, 2000);
-        solo.assertCurrentActivity("Not in MyprofileActivity", MyprofileActivity.class);
+        solo.clickOnView(solo.getView(R.id.bt_submit));
+        solo.assertCurrentActivity("Not in MyprofileActivity", MainActivity.class);
+
+
     }
 }
