@@ -2,6 +2,7 @@ package com.qrpokemon.qrpokemon;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ScrollView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,6 +17,7 @@ import java.util.Observer;
 public class QrInventoryActivity extends AppCompatActivity {
 
     HashMap listOfPlayerData;
+    ScrollView qrInventoryList;
     QrInventoryController qrInventoryController = QrInventoryController.getInstance();
     private String currentPlayer = null;
     final private String TAG = "QrInventoryActivity";
