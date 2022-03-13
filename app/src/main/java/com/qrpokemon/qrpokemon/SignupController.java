@@ -54,10 +54,10 @@ public class SignupController {
 
                         try {
                             //Create current Player class in PlayerController class
-                            playerController.setupPlayer(newUsername, new ArrayList<String>(), context, 0,0);
+                            playerController.setupPlayer(newUsername, new ArrayList<String>(), contact, 0,0);
                             
                             // add player on firestore
-                            playerController.savePlayerData(0,0, new ArrayList<String>(), context, true);
+                            playerController.savePlayerData(0,0, new ArrayList<String>(), contact, true);
                             write(context, "name", newUsername);
                             fileSystemController.deleteFile(context);
                         } catch (Exception e) {
