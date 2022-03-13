@@ -33,13 +33,11 @@ public class SignupActivity extends AppCompatActivity  implements View.OnClickLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.signup_activity);
         if(signupController.load(this, "firstRun") == null) { // program is in first run:
-            signupController.write(this, "firstRun");
+            signupController.write(this, "firstRun", null);
         }
         else { //app has run before
             if (signupController.load(this, "name") != null){ //if a user has been successfully created
                 Log.e("TrackRecordActivity" , "User create successfully");
-                Intent intent = new Intent(SignupActivity.this, MyprofileActivity.class);
-                startActivity(intent);
                 finish(); // we won't be back once user has correctly registered the app
             }
         }
@@ -95,7 +93,6 @@ public class SignupActivity extends AppCompatActivity  implements View.OnClickLi
                 } catch (Exception e) {
                     Log.e("TrackRecordActivity" , String.valueOf(e));
                 }
-
                 break;
         }
     }
@@ -107,9 +104,6 @@ public class SignupActivity extends AppCompatActivity  implements View.OnClickLi
      */
     @Override
     public void update(Observable observable, Object o) {
-        // Run after playerController have updated the player
-        Intent intent = new Intent(SignupActivity.this, MainActivity.class);
-        startActivity(intent);
         finish();
     }
 }

@@ -55,9 +55,12 @@ public class SignupController {
                         try {
                             //Create current Player class in PlayerController class
                             playerController.setupPlayer(newUsername, new ArrayList<String>(), contact, 0,0);
-                            
+
                             // add player on firestore
                             playerController.savePlayerData(0,0, new ArrayList<String>(), contact, true);
+                            write(context, "name", newUsername);
+                            //TODO: delete/comment out this line at due date
+                            fileSystemController.deleteFile(context);
                         } catch (Exception e) {
                             Log.e("SignupController: ", e.toString());
                         }
@@ -89,7 +92,10 @@ public class SignupController {
      * @param context
      * @param filename
      */
-    public void write(Context context, String filename){
-//        fileSystemController.writeToFile(context, filename, "firstRun");
+    public void write(Context context, String filename, @Nullable String username){
+        if (filename.equals("name"))
+            fileSystemController.writeToFile(context, filename, username);
+        else
+            fileSystemController.writeToFile(context, filename, "firstRun");
     }
 }

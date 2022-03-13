@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import java.io.File;
+
 public class FileSystemController {
     /**
      * reading off from local filesystem
@@ -28,6 +30,18 @@ public class FileSystemController {
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString(filename, data);
         editor.commit();
+    }
+
+
+    public void deleteFile(Context context){
+        File file = new File(context.getFilesDir().getParent() + "/shared_prefs/");
+        String[] children = file.list();
+        for (int i = 0; i < children.length; i++) {
+            // clear each preference file
+            context.getSharedPreferences(children[i].replace(".xml", ""), Context.MODE_PRIVATE).edit().clear().commit();
+            //delete the file
+            new File(file, children[i]).delete();
+        }
     }
 
 }
