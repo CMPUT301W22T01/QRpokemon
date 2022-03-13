@@ -53,12 +53,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.QR_Inventory_Button:  // open QR Inventory Activity
-//                Intent intent = new Intent(MainActivity.this,QRInventoryActivity.class);
-//                startActivity(intent);
+                Intent intent = new Intent(MainActivity.this,QRActivity.class);
+                startActivity(intent);
                 break;
             case R.id.Map_Button:           // open Map Activity
-//                Intent intent = new Intent(MainActivity.this,MapActivity.class);
-//                startActivity(intent);
+                // test scan button
+                Intent intent1 = new Intent(MainActivity.this,ScanActivity.class);
+                startActivity(intent1);
                 break;
             case R.id.Search_Button:        // open Search Activity
 //                Intent intent = new Intent(MainActivity.this,SearchActivity.class);
