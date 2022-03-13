@@ -21,6 +21,7 @@
         </activity>
         <activity android:name=".SignupActivity"></activity>
         <activity android:name=".MyprofileActivity"></activity>
+        <activity android:name=".QrInventoryActivity"></activity>
     </application>
 
 </manifest>

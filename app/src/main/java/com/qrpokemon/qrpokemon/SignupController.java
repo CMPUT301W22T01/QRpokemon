@@ -60,7 +60,7 @@ public class SignupController {
                             playerController.savePlayerData(0,0, new ArrayList<String>(), contact, true);
                             write(context, "name", newUsername);
                             //TODO: delete/comment out this line at due date
-                            fileSystemController.deleteFile(context);
+//                            fileSystemController.deleteFile(context);
                         } catch (Exception e) {
                             Log.e("SignupController: ", e.toString());
                         }
