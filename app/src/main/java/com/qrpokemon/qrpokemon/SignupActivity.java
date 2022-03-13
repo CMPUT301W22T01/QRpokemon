@@ -108,8 +108,8 @@ public class SignupActivity extends AppCompatActivity  implements View.OnClickLi
     @Override
     public void update(Observable observable, Object o) {
         // Run after playerController have updated the player
-        //TODO: Change the Activity to MainMenuActivity once it is ready.
-        Intent intent = new Intent(SignupActivity.this, MyprofileActivity.class);
+        Intent intent = new Intent(SignupActivity.this, MainActivity.class);
         startActivity(intent);
+        finish();
     }
 }

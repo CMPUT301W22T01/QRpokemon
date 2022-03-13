@@ -27,6 +27,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_menu);
+        Intent intent = new Intent(this, SignupActivity.class);
+        startActivity(intent);
+
         qrInventoryMainBt = findViewById(R.id.QR_Inventory_Button);
         mapMainBt = findViewById(R.id.Map_Button);
         searchMainBt = findViewById(R.id.Search_Button);
