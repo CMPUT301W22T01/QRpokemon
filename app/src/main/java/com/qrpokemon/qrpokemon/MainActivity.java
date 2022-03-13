@@ -3,7 +3,9 @@ package com.qrpokemon.qrpokemon;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -69,6 +71,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //                startActivity(intent);
                 break;
             case R.id.Camera_Button:        // open Camera Activity
+                Intent camera_intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivityForResult(camera_intent, 101);
+
 //                Intent intent = new Intent(MainActivity.this,CameraActivity.class);
 //                startActivity(intent);
                 break;
@@ -76,6 +81,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //                Intent intent = new Intent(MainActivity.this,ProfileActivity.class);
 //                startActivity(intent);
                 break;
+
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+// get information from https://www.geeksforgeeks.org/android-how-to-open-camera-through-intent-and-display-captured-image/#:~:text=When%20the%20app%20is%20opened%2C%20it%20displays%20the,is%20captured%2C%20it%20is%20displayed%20in%20the%20imageview.
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 101) {
+
+            Bitmap photo = (Bitmap) data.getExtras().get("data");
+
+//            Intent intent = new Intent(MainActivity.this,QrScannedActivity.class);
+//            intent.putExtra("data", photo);
+//            startActivity(intent);
 
         }
     }
