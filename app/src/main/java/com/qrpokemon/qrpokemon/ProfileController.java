@@ -27,8 +27,10 @@ public class ProfileController {
     private PlayerController currentPlayerController;
     static HashMap currentPlayer;
     static HashMap playerContact;
+    Context mContext;
 
-    public ProfileController() {
+    public ProfileController(Context mContext) {
+        this.mContext = mContext;
         this.currentPlayerController = PlayerController.getInstance();
 
         try {
@@ -43,23 +45,59 @@ public class ProfileController {
 
 
 
+    /**
+     * get the name of the current user
+     * @return a String of the user name
+     */
     public static String getPlayerName(){
         String playerName = currentPlayer.get("Identifier").toString();
         return playerName;
     }
 
+    /**
+     * get the email of the current user
+     * @return a String of the user email
+     */
     public static String getPlayerEmail(){
         String playerEmail = playerContact.get("email").toString();
         return playerEmail;
     }
 
+    /**
+     * get the phone number of the current user
+     * @return a String of the user phone number
+     */
     public static String getPlayerPhone(){
         String playerPhone = playerContact.get("phone").toString();
         return playerPhone;
     }
 
-//    public Bitmap generatePlayerQr(){
-//
-//    }
+    /**
+     * generate a QR code of the player
+     * scanning the code will get the player's username
+     * @return a Bitmap as the QR code
+     */
+    public Bitmap generatePlayerQr(){
+        MultiFormatWriter writer=new MultiFormatWriter();
+        Bitmap bitmap = null;
+        try {
+            BitMatrix matrix = writer.encode(currentPlayer.get("Identifier").toString(), BarcodeFormat.QR_CODE,
+                    350, 350);
+            //Initialize the barcode encoder
+            BarcodeEncoder encoder=new BarcodeEncoder();
+
+            //Initialize the Bitmap
+            bitmap = encoder.createBitmap(matrix);
+
+            //Initialize input manager
+            InputMethodManager manager=(InputMethodManager) mContext.getSystemService(
+                    Context.INPUT_METHOD_SERVICE
+            );
+
+        }catch (WriterException e){
+            e.printStackTrace();
+        }
+        return bitmap;
+    }
 
 }
