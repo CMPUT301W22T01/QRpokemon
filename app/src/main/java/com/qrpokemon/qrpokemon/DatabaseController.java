@@ -23,8 +23,8 @@ public class DatabaseController {
     }
 
     /**
-     * Implements Database as a Singleton
-     * @return Database
+     * Get the Singleton instance of the DatabaseController
+     * @return DatabaseController
      */
     public static DatabaseController getInstance() {
         if (dbInstance == null)
@@ -33,6 +33,12 @@ public class DatabaseController {
         return dbInstance;
     }
 
+    /**
+     * Checks if a collection is valid in our database.
+     * Note that valid collections are hardcoded constants of this class.
+     * @param collection The collection string to be verified
+     * @throws Exception Collection is invalid
+     */
     public void checkValidCollection(String collection) throws Exception {
         for (String s : collections) {
             if (collection.equals(s)) {
