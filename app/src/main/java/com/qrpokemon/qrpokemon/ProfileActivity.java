@@ -9,13 +9,15 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class MyprofileActivity extends AppCompatActivity implements View.OnClickListener {
+public class ProfileActivity extends AppCompatActivity implements View.OnClickListener {
     private SharedPreferences sp;
     private SharedPreferences.Editor editor;
     private String name,phone,email;
     private TextView tv_name,tv_phone,tv_email;
-    private Button bt_back;
     private ImageView iv_back;
+    private ProfileController profileController;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,9 +29,16 @@ public class MyprofileActivity extends AppCompatActivity implements View.OnClick
         tv_phone = findViewById(R.id.tv_phone);
         iv_back = findViewById(R.id.iv_back);
 
-        name = sp.getString("name","");
-        phone = sp.getString("phone","");
-        email = sp.getString("email","");
+//        name = sp.getString("name","");
+//        phone = sp.getString("phone","");
+//        email = sp.getString("email","");
+
+        profileController = new ProfileController();
+
+        name = profileController.getPlayerName();
+        phone = profileController.getPlayerPhone();
+        email = profileController.getPlayerEmail();
+
         tv_email.setText(email);
         tv_name.setText(name);
         tv_phone.setText(phone);

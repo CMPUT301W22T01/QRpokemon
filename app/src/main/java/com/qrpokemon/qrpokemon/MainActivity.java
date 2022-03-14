@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         usernameMainTv = findViewById(R.id.user_textView);
         profileMainIv = findViewById(R.id.avatar_imageView);
+        profileMainIv.setImageResource(R.drawable.profile_avadar);
 
         startCamera = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
@@ -105,8 +106,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //                startActivity(intent);
                 break;
             case R.id.avatar_imageView:     // open Profile Activity
-//                Intent intent = new Intent(MainActivity.this,ProfileActivity.class);
-//                startActivity(intent);
+                Intent intent = new Intent(MainActivity.this,ProfileActivity.class);
+                startActivity(intent);
                 break;
 
         }
