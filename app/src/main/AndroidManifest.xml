@@ -27,5 +27,6 @@
         <activity android:name=".SignupActivity"
             tools:ignore="DuplicateActivity"></activity>
         <activity android:name=".QrScannedActivity"></activity>
+        <activity android:name=".QrInventoryActivity"></activity>
     </application>
 </manifest>

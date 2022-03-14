@@ -109,6 +109,11 @@ public class PlayerController extends Observable {
             info.put("contact", currentPlayer.getContactInfo());
         }
 
+        info.put("qrCount",this.currentPlayer.getQrCount());
+        info.put("totalScore", this.currentPlayer.getTotalScore());
+        info.put("qrInventory", this.currentPlayer.getQrInventory());
+        info.put("contact", this.currentPlayer.getContactInfo());
+
         if (addIdentifier)
             info.put("Identifier", currentPlayer.getUsername());
 
@@ -120,6 +125,6 @@ public class PlayerController extends Observable {
                                @Nullable Integer totalScore,
                                @Nullable ArrayList<String> qrInventory,
                                @Nullable HashMap contact) throws Exception {
-        savePlayerData(qrCount, totalScore, qrInventory, contact, false);
+        savePlayerData(qrCount, totalScore, qrInventory, contact, true);
     }
 }
