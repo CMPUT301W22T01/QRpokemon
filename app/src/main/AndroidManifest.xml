@@ -23,10 +23,10 @@
         </activity>
         <activity android:name=".LeaderboardActivity"> </activity>
         <activity android:name=".SignupActivity"> </activity>
-        <activity android:name=".MyprofileActivity"> </activity>
         <activity android:name=".SignupActivity"
             tools:ignore="DuplicateActivity"></activity>
         <activity android:name=".QrScannedActivity"></activity>
         <activity android:name=".QrInventoryActivity"></activity>
+        <activity android:name=".ProfileActivity"></activity>
     </application>
 </manifest>

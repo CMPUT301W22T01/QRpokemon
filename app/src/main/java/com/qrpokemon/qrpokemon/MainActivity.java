@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Log.e("MainActivity: ", "No current player");
         }
         profileMainIv = findViewById(R.id.avatar_imageView);
+        profileMainIv.setImageResource(R.drawable.profile_avadar);
 
         // setting Listeners for buttons and imageView
         qrInventoryMainBt.setOnClickListener(this);
@@ -58,7 +59,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.QR_Inventory_Button:  // open QR Inventory Activity
-                Intent intent = new Intent(MainActivity.this,QrInventoryActivity.class);
+                intent = new Intent(MainActivity.this,QrInventoryActivity.class);
                 startActivity(intent);
                 break;
             case R.id.Map_Button:           // open Map Activity
@@ -79,8 +80,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(intent);
                 break;
             case R.id.avatar_imageView:     // open Profile Activity
-//                Intent intent = new Intent(MainActivity.this,ProfileActivity.class);
-//                startActivity(intent);
+                intent = new Intent(MainActivity.this,ProfileActivity.class);
+                startActivity(intent);
                 break;
 
         }
