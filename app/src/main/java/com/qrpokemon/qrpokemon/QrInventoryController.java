@@ -14,9 +14,9 @@ import java.util.Observable;
 
 public class QrInventoryController extends Observable {
 
-//    private Database database = Database.getInstance();
     private PlayerController player = PlayerController.getInstance();
     private PlayerController playerController = PlayerController.getInstance();
+
     private static QrInventoryController currentInstance;
     final private String TAG = "QrInventoryController";
 
@@ -29,22 +29,20 @@ public class QrInventoryController extends Observable {
         return currentInstance;
     }
 
-    // player todo
 
+    /**
+     *
+     * @param currentPlayer The identifier of the current player
+     * @return all the information of the current player's document, which is a hashMap
+     * @throws Exception
+     */
     public HashMap<String, Object> getPlayerInfo (String currentPlayer) throws Exception {
 
-        HashMap<String, Object> temp = new HashMap<>();
+        HashMap<String, Object> temp;
         temp = playerController.getPlayer(currentPlayer);
         return temp;
     }
 
-    // comment todo
-
-    public void setComment (String currentPlayer, String comment) {
-
-
-
-    }
 
     public void getQrCode(Context context, @Nullable String currentQrCode) throws Exception {
 

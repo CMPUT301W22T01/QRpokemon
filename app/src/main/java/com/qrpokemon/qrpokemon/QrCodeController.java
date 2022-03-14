@@ -23,19 +23,5 @@ public class QrCodeController {
         return currentInstance;
     }
 
-//public void getQrCode(Context context, @Nullable String currentQrCode) throws Exception {
-//
-//        Database database = Database.getInstance();
-//        List<Map> result = new ArrayList<Map>();
-//        DatabaseCallback databaseCallback = new DatabaseCallback(context) {
-//
-//            @Override
-//            public void run(List<Map> dataList) {
-//                if (dataList != null) {
-//                    EditText email = (EditText) ((Activity) context).findViewById(R.id.et_email);
-//                }
-//            }
-//        };
-//        database.getData(databaseCallback, result, "QrCode", "hash111");
-//    }
+    // Todo: Waiting for more implementation, currently not used
 }
