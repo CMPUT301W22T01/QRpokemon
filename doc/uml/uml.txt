@@ -135,6 +135,8 @@ package "Controllers" {
     {
         -username: String
         -locationController: LocationController
+        -databaseController: DatabaseController
+
         ' addQrCode add a newly scanned QR code to Database and it update the geolocation index in Location Database if saved.
         +addQrCode(qrCodeHash: String, score: Integer, addLocation: Boolean)
         +updateComment(qrCodeHash: String, comment: String)
@@ -159,12 +161,6 @@ package "Controllers" {
         +getResultByLocation(search: String): String[]
     }
 
-    class LocationController
-    {
-        +getQrCode(location: String): QrCode[]
-        +getLocation()
-    }
-
     class MapController
     {
         -mapData: HashMap
@@ -182,6 +178,12 @@ package "Controllers" {
 
         +openCamera(): Image
         +analyzeImage(): String
+    }
+
+    class LocationController
+    {
+        +getQrCode(location: String): QrCode[]
+        +getLocation()
     }
 
     class DatabaseController
@@ -299,26 +301,26 @@ LeaderboardActivity "1" o-- "1" LeaderboardController
 LeaderboardController "1" -> "1" OtherPlayerController: Get players
 
 SignupActivity "1" o-- "1" SignupController
-SignupController "1" --> "1" PlayerController: Creates new player\nLoad current player
+SignupController "1" o-> "1" PlayerController: Creates new player\nLoad current player
 PlayerController "1" *-- "1" Player
 PlayerController "1" --> "1" DatabaseController: Get Player by username
 
-OtherPlayerActivity "1" o-- "1" OtherPlayerController
+' OtherPlayerActivity "1" o-> "1" OtherPlayerController
 OtherPlayerController --> PlayerController: Gets player
-OtherPlayerActivity --> OtherPlayerController: Updates\n comment
+OtherPlayerActivity "1" o-> "1" OtherPlayerController: Updates\n comment
 OtherPlayerController --> QrCodeController: Adds comment
 
 SignupController -> RestoreSession: "Ask to handle\nreturning player"
-SignupController --> DatabaseController: "\nCheck username\nuniquness"
+SignupController --> DatabaseController: "\nCheck username\nuniqueness"
 RestoreSession <-- CameraController  : "Return QR hash"
 RestoreSession --> PlayerController: "Get player"
 RestoreSession --> CameraController: "Ask to\n open camera"
 MainMenuActivity <-- RestoreSession: "Send user to"
-CameraController -> QrAnalyzer: "Send image\n to analyze"
-CameraController <- QrAnalyzer: "Return hash"
+CameraController <- QrAnalyzer: "Return\nhash"
+CameraController -> QrAnalyzer: "Send image\nto analyze"
 
 QrInventoryActivity "1" o-- "1" QrInventoryController
-QrInventoryController --> QrCodeController
+QrInventoryController "1" o-> "1" QrCodeController
 QrCodeController "1" o-- "1" QrCode: Update\ncomment
 QrCodeController "1" --> "1" DatabaseController: Save QrCode
 QrCodeController "1" --> "1" QrCode: Creates 
@@ -334,14 +336,14 @@ MapController "1" --> "1" LocationController: Asks for location data
 DatabaseController "1" o-- "1" Database
 MainMenuController "1" o-- "1" CameraController: Get QR Hash
 MainMenuController "1" o-- "1" PlayerController: Get current player
-MainMenuController "1" o-- "1" QrCodeController: Verify & identify\n QR Hash
+MainMenuController "1" o-l- "1" QrCodeController: Verify & identify\n QR Hash
 MainMenuActivity "1" o-- "1" MainMenuController
 
 FileSystemController "1" --> "1" FileSystem: "Read/Write data"
 SignupController "1" --> "1" FileSystemController: "Read or save\n session data"
 
 QrInventoryController "1" o-- "1" PlayerController
-QrInventoryController "1" o-- "1" QrCodeController 
+' QrInventoryController "1" o-- "1" QrCodeController 
 
 QrScannedController "1" o- "1" ScoreCalculator: Get Score
 QrScannedController "1" --> "1" PlayerController: Get Player
@@ -367,4 +369,7 @@ SearchActivity "1" -> "1" OtherPlayerActivity: Opens profile
 ' Layout Connections
 CameraController -[hidden]l- LocationController
 FileSystemController -[hidden]r- DatabaseController
+' LocationController -[hidden]l- DatabaseController
+QrCodeController -[hidden]- PlayerController
+' QrCode -[hidden]- Database
 @enduml
