@@ -12,9 +12,11 @@ import android.widget.TextView;
 import androidx.test.core.app.ActivityScenario;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.platform.app.InstrumentationRegistry;
+import androidx.test.rule.ActivityTestRule;
 
 import com.robotium.solo.Solo;
 
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -23,12 +25,17 @@ public class MainActivityTest {
 
 
     @Rule
-    public ActivityScenarioRule rule = new ActivityScenarioRule<>(MainActivity.class);
+    public ActivityTestRule<MainActivity> rule =
+            new ActivityTestRule<>(MainActivity.class, true, true);
 
+    @Before
+    public void setUp() throws Exception{
+        solo = new Solo(InstrumentationRegistry.getInstrumentation(), rule.getActivity());
+    }
 
     @Test
     public void start() throws Exception{
-        ActivityScenario scenario = rule.getScenario();
+        Activity activity = rule.getActivity();
     }
 
 //    @Test
