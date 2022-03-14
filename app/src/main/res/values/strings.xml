@@ -1,3 +1,28 @@
 <resources>
     <string name="app_name">QRpokemon</string>
+    <string name="contact_information">Contact Information :</string>
+    <string name="phone_number">Phone Number:</string>
+    <string name="email">Email :</string>
+    <string name="score">Score:</string>
+    <string name="leaderboard">Leaderboard</string>
+    <string name="rank_order">Rank order</string>
+    <string name="user_name">User name</string>
+    <string name="highest_score">Highest score</string>
+    <string name="qr_quantity">QR quantity</string>
+    <string name="total_score">Total score</string>
+    <string name="hash">Hash :</string>
+    <string name="location">Location</string>
+    <string name="time">Time :</string>
+    <string-array name="sort">
+        <item>High Scores</item>
+        <item>Highest Unique</item>
+        <item>Total Scanned</item>
+        <item>Total Sum of Scores</item>
+    </string-array>
+    <string name="edmonton">Edmonton</string>
+    <string name="region">Region</string>
+    <string name="qr_code">QR code</string>
+    <string name="arrow">⇦</string>
+    <string name="details">Details</string>
+
 </resources>
