@@ -113,10 +113,10 @@ public class QrScannedActivity extends AppCompatActivity {
             }
         });
 
-        photoSave.setOnClickListener(new View.OnClickListener(){
+        locationSave.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                if (photoSave.isChecked()){
+                if (locationSave.isChecked()){
                     Toast.makeText(QrScannedActivity.this, "Location will be saved", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(QrScannedActivity.this, "Location won't be saved", Toast.LENGTH_SHORT).show();

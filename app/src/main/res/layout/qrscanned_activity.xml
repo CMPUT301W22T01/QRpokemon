@@ -118,7 +118,7 @@
         android:id="@+id/qr_result"
         android:layout_width="333dp"
         android:layout_height="36dp"
-        android:text="TextView"
+        android:text="Score: "
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
