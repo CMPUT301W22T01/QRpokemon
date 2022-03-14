@@ -7,12 +7,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
+
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -24,27 +26,21 @@ import java.util.List;
 public class Leaderboard extends AppCompatActivity {
     private static final String TAG = "MainActivity";
 
+    // init variables
     private ListView leaderboardListView;
     private Spinner sortBy;
     private ImageButton backButton;
-
     private List<LeaderboardItem> leaderboardList = new ArrayList<>();
     private LeaderboardAdapter leaderboardAdapter;
+    private int sortType = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.leaderboard_activity);
 
-        // set leaderboard value
+        // data binding
         leaderboardListView = findViewById(R.id.leaderboard_listview);
-
-        // get data to the list
-//        LeaderboardItem item1 = new LeaderboardItem(2,"xml", 7,8,9);
-//        LeaderboardItem item2 = new LeaderboardItem(3,"xml", 5,8,9);
-//        leaderboardList.add(item1);
-//        leaderboardList.add(item2);
-
         sortBy = findViewById(R.id.sp_sort_selection);
         backButton = findViewById(R.id.leaderboard_back);
 
@@ -52,7 +48,37 @@ public class Leaderboard extends AppCompatActivity {
         leaderboardAdapter = new LeaderboardAdapter(Leaderboard.this, leaderboardList);
         leaderboardListView.setAdapter(leaderboardAdapter);
 
-        //set back button
+        // set spinner for select different sort type
+        sortBy.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                // 0 = i = sortType( one Qrcode score)
+                // 1 = i = sortType( total Qrcode score)
+                // 2 = i = sortType( numbers of  Qrcode score)
+                sortType = i;
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
+        });
+
+        // get data to the list
+
+
+
+
+
+        
+//        LeaderboardItem item1 = new LeaderboardItem(2,"xml", 7,8,9);
+//        LeaderboardItem item2 = new LeaderboardItem(3,"xml", 5,8,9);
+//        leaderboardList.add(item1);
+//        leaderboardList.add(item2);
+
+
+
+
+
+        // set click event for back button
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -65,7 +91,7 @@ public class Leaderboard extends AppCompatActivity {
     }
 }
 
-
+// create object for each item in leaderboard
 class LeaderboardItem{
     private int rank;
     private String userName;
@@ -122,6 +148,7 @@ class LeaderboardItem{
     }
 }
 
+// set adapter for leaderboard listview
 class LeaderboardAdapter extends BaseAdapter{
     private Context context;
     private List<LeaderboardItem> leaderboardItems;
