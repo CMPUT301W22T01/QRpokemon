@@ -75,14 +75,14 @@ package "Controllers" {
 
     class LeaderboardController
     {
+        -controllerInstance: LeaderboardController
         -myScore: Integer
-        -sortBy: String
-        -currentRanking: Player[]
+        -sortMethod: String
         -playerController: PlayerController
 
         ' PlayerController doesn't return all players at once, one player at a time.
-        +sortData()
-        +setSortBy(method:String)
+        +getLeaderboard(list: HashMap[])
+        +sortLeaderboard(list: HashMap[], sortMethod: Integer)
     }
 
     together {
@@ -188,10 +188,12 @@ package "Controllers" {
 
     class DatabaseController
     {
-        ' Database instance
+        -controllerInstance: DatabaseController
         -database: Database
 
-        readFromDatabase(collection: String): HashMap
+        getInstance()
+        checkValidCollection(collection: String)
+        getData(callback: Function, list: HashMap[], collection: String, objectName: String )
         writeToDatabase(collection: String, data: HashMap)
     }
 
@@ -259,31 +261,25 @@ package "Models" {
     class FileSystem{}
     note bottom: This is local filesystem
 
-    class QrCode
-    {
-        -geolocation: String
-        -qrCodeHash: String
-        -comment: String
+    together {
+        class QrCode
+        {
+            -geolocation: String
+            -qrCodeHash: String
+            -comment: String
 
-        +getGeolocation(): String
-        +getQrCodeHash(): String
-        +getComment(): String
+            +getGeolocation(): String
+            +getQrCodeHash(): String
+            +getComment(): String
 
-        +setGeolocation(geolocation: String)
-        +setQrCodeHash(qrCodeHash: String)
-        +setComment(comment: String)
+            +setGeolocation(geolocation: String)
+            +setQrCodeHash(qrCodeHash: String)
+            +setComment(comment: String)
+        }
+
+        class Database
+        note bottom: This is our\nFirebase instance.
     }
-
-    ' NOTE: May want to remove since Firebase implements
-    class Database
-    {
-        -data: HashMap
-
-        +getData(collection: String): HashMap
-        +writeData(collection: String, data: HashMap)
-    }
-
-    note bottom: This is our\nFirebase instance.
 
     class Camera
     note bottom: This is system camera
@@ -298,6 +294,7 @@ package "Models" {
 ProfileActivity --> ProfileController: Send player info
 
 LeaderboardActivity "1" o-- "1" LeaderboardController
+LeaderboardController "1" o-- "1" PlayerController
 LeaderboardController "1" -> "1" OtherPlayerController: Get players
 
 SignupActivity "1" o-- "1" SignupController
@@ -316,14 +313,13 @@ RestoreSession <-- CameraController  : "Return QR hash"
 RestoreSession --> PlayerController: "Get player"
 RestoreSession --> CameraController: "Ask to\n open camera"
 MainMenuActivity <-- RestoreSession: "Send user to"
-CameraController <- QrAnalyzer: "Return\nhash"
+CameraController <- QrAnalyzer: "Return hash"
 CameraController -> QrAnalyzer: "Send image\nto analyze"
 
 QrInventoryActivity "1" o-- "1" QrInventoryController
 QrInventoryController "1" o-> "1" QrCodeController
-QrCodeController "1" o-- "1" QrCode: Update\ncomment
+QrCodeController "1" o-> "1" QrCode #green: Create &\nUpdate comment
 QrCodeController "1" --> "1" DatabaseController: Save QrCode
-QrCodeController "1" --> "1" QrCode: Creates 
 QrCodeController "1" o-- "1" LocationController: Get Location
 
 SearchController "1" --> "1" PlayerController: Get usernames
@@ -331,11 +327,11 @@ SearchController "1" --> "1" PlayerController: Get usernames
 SearchController "1" --> "1" LocationController: Get QR\nlocations 
 
 LocationController "1" -> "1" DatabaseController: Get location data
-MapController "1" --> "1" LocationController: Asks for location data
+MapController "1" --> "1" LocationController #red: Asks for location data
 
 DatabaseController "1" o-- "1" Database
 MainMenuController "1" o-- "1" CameraController: Get QR Hash
-MainMenuController "1" o-- "1" PlayerController: Get current player
+MainMenuController "1" o-- "1" PlayerController #blue: Get current player
 MainMenuController "1" o-l- "1" QrCodeController: Verify & identify\n QR Hash
 MainMenuActivity "1" o-- "1" MainMenuController
 
@@ -371,5 +367,8 @@ CameraController -[hidden]l- LocationController
 FileSystemController -[hidden]r- DatabaseController
 ' LocationController -[hidden]l- DatabaseController
 QrCodeController -[hidden]- PlayerController
-' QrCode -[hidden]- Database
+QrCode -[hidden]left- Database
+QrCode -[hidden]left- Player
+QrCode -[hidden]left- FileSystem
+QrCode -[hidden]left- Camera
 @enduml
