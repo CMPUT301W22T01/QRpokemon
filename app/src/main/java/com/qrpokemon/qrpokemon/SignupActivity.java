@@ -37,7 +37,7 @@ public class SignupActivity extends AppCompatActivity  implements View.OnClickLi
         }
         else { //app has run before
             if (signupController.load(this, "name") != null){ //if a user has been successfully created
-                Log.e("TrackRecordActivity" , "User create successfully");
+                signupController.load(this, "name", false);
                 finish(); // we won't be back once user has correctly registered the app
             }
         }

@@ -12,6 +12,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -57,7 +58,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     public void onActivityResult(ActivityResult result) {
                         if (result.getResultCode() == RESULT_OK) {
                             // There are no request codes
-
+                            Log.e("MainMenuActivity: ", "Waiting for result");
                             profileMainIv.setImageURI(cam_uri);
 
                         }
@@ -97,7 +98,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Intent camera_intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 if (camera_intent.resolveActivity(getPackageManager()) != null){
                     startCamera.launch(camera_intent);
-            }else{
+                } else {
                     Toast.makeText(MainActivity.this, "There is no app that support open camera", Toast.LENGTH_SHORT).show();
                 }
 

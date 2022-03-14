@@ -63,6 +63,7 @@ public class PlayerController extends Observable {
             setChanged();
             notifyObservers(null);
         }
+        Log.e("PlayerController: A player is created with : ", username + contact.toString());
     }
 
     /**
