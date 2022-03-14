@@ -1,5 +1,4 @@
 package com.qrpokemon.qrpokemon;
-
 import android.util.Log;
 
 import com.google.android.gms.tasks.OnCompleteListener;

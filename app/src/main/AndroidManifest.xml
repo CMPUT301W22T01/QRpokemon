@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.qrpokemon.qrpokemon">
+
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-feature android:name="android.hardware.camera"/>
 
     <application
         android:allowBackup="true"
@@ -20,5 +24,8 @@
         <activity android:name=".LeaderboardActivity"> </activity>
         <activity android:name=".SignupActivity"> </activity>
         <activity android:name=".MyprofileActivity"> </activity>
+        <activity android:name=".SignupActivity"
+            tools:ignore="DuplicateActivity"></activity>
+        <activity android:name=".QrScannedActivity"></activity>
     </application>
 </manifest>

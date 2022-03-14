@@ -1,9 +1,5 @@
 package com.qrpokemon.qrpokemon;
-
-import android.util.Log;
-
 import androidx.annotation.Nullable;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -53,9 +49,10 @@ public class PlayerController extends Observable {
     }
 
     /**
-     * create a new player
+     * Create a new player if app is in first run
+     * Load current player otherwise
      * @param username is guaranteed to be unique, it notifies Observer once player is created
-     * @param qrInventory
+     * @param qrInventory a ArrayList<String> object
      * @param contact
      * @param qrCount
      * @param totalScore
@@ -70,6 +67,7 @@ public class PlayerController extends Observable {
             setChanged();
             notifyObservers(null);
         }
+//        Log.e("PlayerController: A player is created with : ", username + contact.toString());
     }
 
     /**

@@ -3,7 +3,6 @@ package com.qrpokemon.qrpokemon;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -11,8 +10,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import java.io.File;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -37,7 +34,7 @@ public class SignupActivity extends AppCompatActivity  implements View.OnClickLi
         }
         else { //app has run before
             if (signupController.load(this, "name") != null){ //if a user has been successfully created
-                Log.e("TrackRecordActivity" , "User create successfully");
+                signupController.load(this, "name", false);
                 finish(); // we won't be back once user has correctly registered the app
             }
         }

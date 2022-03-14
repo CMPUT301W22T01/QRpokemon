@@ -20,7 +20,7 @@
         android:clickable="true"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="?attr/actionModeCloseDrawable" />
+        app:srcCompat="?attr/actionModeCloseDrawable"/>
 
     <TextView
         android:id="@+id/no_code_found_textView"
@@ -48,16 +48,17 @@
         app:layout_constraintRight_toRightOf="parent" />
 
 
-    <ImageView
+    <com.budiyev.android.codescanner.CodeScannerView
         android:id="@+id/code_not_found_imageView"
-        android:layout_width="190dp"
-        android:layout_height="210dp"
+        android:layout_width="408dp"
+        android:layout_height="337dp"
         android:layout_marginTop="32dp"
         app:layout_constraintBottom_toTopOf="@+id/constraint_layout_inside_o_code_found"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/no_code_found_textView"
-        tools:srcCompat="@tools:sample/avatars" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/no_code_found_textView"/>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraint_layout_inside_o_code_found"
@@ -67,23 +68,23 @@
         app:layout_constraintTop_toBottomOf="@+id/code_not_found_imageView">
 
         <Switch
-            android:id="@+id/photo_switch_code_not_found"
+            android:id="@+id/qr_switch"
             android:layout_width="64dp"
             android:layout_height="53dp"
             android:scaleX="2.5"
             android:scaleY="2.5"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toLeftOf="@+id/location_switch_code_not_found"
+            app:layout_constraintRight_toLeftOf="@+id/location_switch"
             app:layout_constraintTop_toTopOf="parent"
              />
 
         <Switch
-            android:id="@+id/location_switch_code_not_found"
+            android:id="@+id/location_switch"
             android:layout_width="64dp"
             android:layout_height="53dp"
             android:scaleX="2.5"
             android:scaleY="2.5"
-            app:layout_constraintLeft_toRightOf="@+id/photo_switch_code_not_found"
+            app:layout_constraintLeft_toRightOf="@+id/qr_switch"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -92,26 +93,36 @@
             android:layout_width="wrap_content"
             android:layout_height="30dp"
             android:layout_marginLeft="32dp"
-            android:text=" photo"
+            android:text="Save QR"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toLeftOf="@+id/location_textView_code_not_found"
-            app:layout_constraintTop_toBottomOf="@+id/photo_switch_code_not_found" />
+            app:layout_constraintTop_toBottomOf="@+id/qr_switch" />
 
         <TextView
             android:id="@+id/location_textView_code_not_found"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
             android:layout_marginLeft="16dp"
-            android:text="location"
+            android:text="Save location"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toRightOf="@+id/photo_textView_code_not_found"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/location_switch_code_not_found" />
+            app:layout_constraintTop_toBottomOf="@+id/location_switch" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/qr_result"
+        android:layout_width="333dp"
+        android:layout_height="36dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scan_Button_no_code_found" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
