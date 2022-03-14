@@ -37,27 +37,15 @@
         <TextView
             android:id="@+id/qr_inventory_list_content_hash"
             android:layout_width="260dp"
-            android:layout_height="46dp"
+            android:layout_height="80dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="6dp"
             android:text="TextView"
-            android:textSize="15dp"
+            android:textSize="30dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/imageView"
             app:layout_constraintTop_toBottomOf="@+id/jb" />
 
-        <Button
-            android:id="@+id/add_comment_button"
-            android:layout_width="128dp"
-            android:layout_height="37dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginBottom="8dp"
-            android:layout_weight="1"
-            android:background="@drawable/custom_button_qr_inventory"
-            android:text="Add comment"
-            android:textSize="10sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintRight_toRightOf="parent" />
     </LinearLayout>
 </LinearLayout>
