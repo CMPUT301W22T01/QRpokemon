@@ -32,7 +32,7 @@ public class QrInventoryActivity extends AppCompatActivity implements View.OnCli
     private FloatingActionButton backButton, deleteButton;
     private ListView qrInventoryList;
     private HashMap hashMapOfPlayerData;
-    private HashMap<String, Object> m;
+    private HashMap<String, Object> m = new HashMap<>();
     private ArrayList<Integer> scoresOfPlayer;
     private ArrayList<String> qrHashCodes;
     private ArrayAdapter<String> qrInventoryDataAdapter;
@@ -137,12 +137,13 @@ public class QrInventoryActivity extends AppCompatActivity implements View.OnCli
     public void update(Observable observable, Object o) {
 
         try {
-            while (m.size() != qrHashCodes.size()) {
-                m = qrInventoryController.getQrCodeDocument(this, qrHashCodes);
-                Log.e(TAG, "Got: " + m.toString());
-            }
+
+            m = qrInventoryController.returnList();
+            Log.e(TAG, "MMMMMMMMMM: " + m.toString());
+
         } catch (Exception e) {
             e.printStackTrace();
+            Log.e(TAG, "Got: " + e);
         }
     }
 }

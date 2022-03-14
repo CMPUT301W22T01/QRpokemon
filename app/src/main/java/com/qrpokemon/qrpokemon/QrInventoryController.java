@@ -15,7 +15,7 @@ import java.util.Observable;
 
 public class QrInventoryController extends Observable {
 
-    private HashMap<String, Object> data;
+    private HashMap<String, Object> data = new HashMap<>();
     private Database database = Database.getInstance();
     private PlayerController player = PlayerController.getInstance();
     private PlayerController playerController = PlayerController.getInstance();
@@ -46,7 +46,6 @@ public class QrInventoryController extends Observable {
         return temp;
     }
 
-
     public HashMap<String, Object> getQrCodeDocument(Context context, ArrayList<String> qrHashCodes) throws Exception {
 
         List<Map> result = new ArrayList<Map>();
@@ -57,16 +56,22 @@ public class QrInventoryController extends Observable {
                 if (!dataList.isEmpty()) {
                     if (dataList != null && data.get((String) dataList.get(0).get("Identifier")) == null) {
                         data.put((String) dataList.get(0).get("Identifier"), dataList);
+                        Log.e(TAG, "UUUUUUUUUUUUUUUUU" + data.toString());
+                        setChanged();
+                        notifyObservers(null);
                     }
-                    setChanged();
-                    notifyObservers(null);
                 }
             }
         };
         for (int i = 0; i < qrHashCodes.size(); i++) {
             database.getData(databaseCallback, result, "QrCode", qrHashCodes.get(i));
+            Log.e(TAG, "1212" + qrHashCodes.get(i));
         }
-//        database.getData(databaseCallback, result, "QrCode", qrHash);
+
+        return data;
+    }
+
+    public HashMap<String, Object> returnList () {
         return data;
     }
 }
