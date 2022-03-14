@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">QRpokemon</string>
+    <string name="edmonton">Edmonton</string>
+    <string name="region">Region</string>
+    <string name="qr_code">QR code</string>
+    <string name="arrow">⇦</string>
+    <string name="details">Details</string>
+
 </resources>

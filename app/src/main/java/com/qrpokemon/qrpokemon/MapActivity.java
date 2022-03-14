@@ -47,6 +47,8 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
     }
 
+     * ask permission for device, get current location of the device, return nothing
+     */
 
     private void getCurrentLocation(){
         // get permission from devices
@@ -75,6 +77,11 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         });
     }
 
+
+    /**
+     * manipulate map positioning and zoom to current location, nothing return
+     * @param googleMap
+     */
     @Override
     public void onMapReady(GoogleMap googleMap) {
         LatLng current_latLng = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
@@ -84,6 +91,12 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
     }
 
+    /**
+     * Callback for the result from requesting permissions, nothing return
+     * @param requestCode request code passed in requestPermissions
+     * @param permissions  requested permissions
+     * @param grantResults result of the permission request
+     */
     @SuppressLint("MissingSuperCall")
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
