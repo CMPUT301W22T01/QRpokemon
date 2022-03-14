@@ -24,7 +24,7 @@ import com.robotium.solo.Solo;
  */
 public class SignupActivityTest {
     private Solo solo;
-    private Database database = Database.getInstance();
+    private DatabaseController databaseController = DatabaseController.getInstance();
     @Rule
     public ActivityTestRule<MainActivity> rule = new ActivityTestRule<>(MainActivity.class, true, true);
 
@@ -39,7 +39,7 @@ public class SignupActivityTest {
 
         // Asserts that the current activity is the SignupActivity
         solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
-        database.deleteData("Player", "ABCD");
+        databaseController.deleteData("Player", "ABCD");
     }
 
     @Test

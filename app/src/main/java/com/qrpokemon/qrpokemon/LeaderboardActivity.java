@@ -1,36 +1,29 @@
 package com.qrpokemon.qrpokemon;
 import android.content.Context;
-import android.content.Intent;
-import android.content.res.Resources;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 
 public class LeaderboardActivity extends AppCompatActivity {
-    private static final String TAG = "MainActivity";
-
-    // init variables
+    // Init variables
+    LeaderboardController leaderboardController;
     private ListView leaderboardListView;
     private Spinner sortBy;
     private ImageButton backButton;
-    private List<LeaderboardItem> leaderboardList = new ArrayList<>();
+    private LeaderboardList leaderboardList;
     private LeaderboardAdapter leaderboardAdapter;
     private int sortType = 0;
 
@@ -45,11 +38,17 @@ public class LeaderboardActivity extends AppCompatActivity {
         sortBy = findViewById(R.id.sp_sort_selection);
         backButton = findViewById(R.id.leaderboard_back);
 
+        // Create and fill our list with player data
+        leaderboardList = new LeaderboardList();
+        leaderboardController = LeaderboardController.getInstance();
+        leaderboardController.getLeaderboard(this, leaderboardList);
+
         // set adapter
         // TODO: Implement observer for list
         // TODO: Get database to sort for us?
-        leaderboardAdapter = new LeaderboardAdapter(this, leaderboardList);
+        leaderboardAdapter = new LeaderboardAdapter(this, leaderboardList.getList());
         leaderboardListView.setAdapter(leaderboardAdapter);
+        leaderboardList.addObserver(leaderboardAdapter);
 
         // set spinner for select different sort type
         sortBy.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -84,19 +83,19 @@ public class LeaderboardActivity extends AppCompatActivity {
     }
 }
 
+// TODO: Delete if unused (or use like a struct)
 // create object for each item in leaderboard
 class LeaderboardItem {
     private int rank;
-    private String userName;
+    private String username;
     private int highestScore;
-    private int qrQuantity;
-    private int totalScore;
+    private long qrCount;
+    private long totalScore;
 
-    public LeaderboardItem(int rank, String userName, int highestScore, int qrQuantity, int totalScore) {
-        this.rank = rank;
-        this.userName = userName;
+    public LeaderboardItem(String username, long qrCount, long totalScore) {
+        this.username = username;
         this.highestScore = highestScore;
-        this.qrQuantity = qrQuantity;
+        this.qrCount = qrCount;
         this.totalScore = totalScore;
     }
 
@@ -110,11 +109,11 @@ class LeaderboardItem {
     }
 
     public String getUserName() {
-        return userName;
+        return username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUserName(String username) {
+        this.username = username;
     }
 
     public int getHighestScore() {
@@ -125,15 +124,16 @@ class LeaderboardItem {
         this.highestScore = highestScore;
     }
 
-    public int getQrQuantity() {
-        return qrQuantity;
+    // TODO: Remove since we should just do another database fetch in this case
+    public long getQrQuantity() {
+        return qrCount;
     }
 
     public void setQrQuantity(int qrQuantity) {
-        this.qrQuantity = qrQuantity;
+        this.qrCount = qrQuantity;
     }
 
-    public int getTotalScore() {
+    public long getTotalScore() {
         return totalScore;
     }
 
@@ -142,20 +142,40 @@ class LeaderboardItem {
     }
 }
 
-// set adapter for leaderboard listview
-class LeaderboardAdapter extends BaseAdapter {
-    private Context context;
-    private List<LeaderboardItem> leaderboardItems;
+class LeaderboardList extends Observable {
+    private ArrayList<LeaderboardItem> list;
 
-    public LeaderboardAdapter(Context context, List<LeaderboardItem> leaderboardItem) {
-        this.context = context;
-        this.leaderboardItems = leaderboardItem;
+    LeaderboardList() {
+        list = new ArrayList<>();
     }
 
+    public void add(LeaderboardItem leaderboardItem) {
+        list.add(leaderboardItem);
+    }
+
+    public void notifyListUpdate() {
+        setChanged();
+        notifyObservers();
+    }
+
+    public List<LeaderboardItem> getList() {
+        return list;
+    }
+}
+
+// set adapter for leaderboard listview
+class LeaderboardAdapter extends BaseAdapter implements Observer {
+    private Context context;
+    private List<LeaderboardItem> leaderboardList;
+
+    public LeaderboardAdapter(Context context, List<LeaderboardItem> leaderboardList) {
+        this.context = context;
+        this.leaderboardList = leaderboardList;
+    }
 
     @Override
     public int getCount() {
-        return leaderboardItems.size();
+        return leaderboardList.size();
     }
 
     @Override
@@ -180,13 +200,22 @@ class LeaderboardAdapter extends BaseAdapter {
 
         String a = String.valueOf(22);
 
-        rankOrderList.setText(String.valueOf(leaderboardItems.get(i).getRank()));
-        userNameList.setText(String.valueOf(leaderboardItems.get(i).getUserName()));
-        highestScoreList.setText(String.valueOf(leaderboardItems.get(i).getHighestScore()));
-        qrNumList.setText(String.valueOf(leaderboardItems.get(i).getQrQuantity()));
-        totalScoreList.setText(String.valueOf(leaderboardItems.get(i).getTotalScore()));
+        rankOrderList.setText(String.valueOf(leaderboardList.get(i).getRank()));
+        userNameList.setText(String.valueOf(leaderboardList.get(i).getUserName()));
+        highestScoreList.setText(String.valueOf(leaderboardList.get(i).getHighestScore()));
+        qrNumList.setText(String.valueOf(leaderboardList.get(i).getQrQuantity()));
+        totalScoreList.setText(String.valueOf(leaderboardList.get(i).getTotalScore()));
 
         return view1;
+    }
+
+    @Override
+    public void update(Observable observable, Object o) {
+        if (observable instanceof LeaderboardList)
+            // Update the list
+            leaderboardList = ((LeaderboardList) observable).getList();
+
+        this.notifyDataSetChanged();
     }
 }
 
