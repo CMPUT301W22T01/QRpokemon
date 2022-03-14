@@ -53,14 +53,27 @@
         app:layout_constraintTop_toBottomOf="@+id/QR_inventory_total_score" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/backButton_qr_inventory"
+        android:id="@+id/bt_back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="32dp"
         android:clickable="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/QR_inventory_list"
         app:srcCompat="?attr/actionModeCloseDrawable" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/bt_delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:clickable="true"
+        android:visibility="visible"
+        app:backgroundTint="@color/red"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/QR_inventory_list"
+        app:srcCompat="?attr/actionModeCutDrawable" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

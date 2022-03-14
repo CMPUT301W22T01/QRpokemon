@@ -87,32 +87,33 @@ public class PlayerController extends Observable {
         // Don't update parameter if null
         if (qrCount != null){
             this.currentPlayer.setQrCount(qrCount);
-            info.put("qrCount",this.currentPlayer.getQrCount());
         }
         if (totalScore != null){
             this.currentPlayer.setTotalScore(totalScore);
-            info.put("totalScore", this.currentPlayer.getTotalScore());
         }
         if (qrInventory != null){
             this.currentPlayer.setQrInventory(qrInventory);
-            info.put("qrInventory", this.currentPlayer.getQrInventory());
         }
-
         if (contact != null){
             this.currentPlayer.setContactInfo(contact);
-            info.put("contact", this.currentPlayer.getContactInfo());
         }
+
+        info.put("qrCount",this.currentPlayer.getQrCount());
+        info.put("totalScore", this.currentPlayer.getTotalScore());
+        info.put("qrInventory", this.currentPlayer.getQrInventory());
+        info.put("contact", this.currentPlayer.getContactInfo());
 
         if (addIdentifier)
             info.put("Identifier", this.currentPlayer.getUsername());
 
         database.writeData("Player", this.currentPlayer.getUsername() ,info ,true);
+        Log.e("After saving, info changed to: ", info.toString());
     }
     // boolean flag is false in default, updating user only.
     public void savePlayerData(@Nullable Integer qrCount,
                                @Nullable Integer totalScore,
                                @Nullable ArrayList<String> qrInventory,
                                @Nullable HashMap contact) throws Exception {
-        savePlayerData(qrCount, totalScore, qrInventory, contact, false);
+        savePlayerData(qrCount, totalScore, qrInventory, contact, true);
     }
 }
