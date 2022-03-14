@@ -40,7 +40,6 @@ public class MainActivityTest {
 
 //    @Test
 //    public void checkQrInventoryButton(){
-//        ActivityScenario scenario = rule.getScenario();
 //        solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
 //        solo.clickOnButton("QR INVENTORY"); //Click on QR INVENTORY Button
 //        solo.assertCurrentActivity("Wrong Activity", QrInventoryActivity.class);
@@ -49,7 +48,6 @@ public class MainActivityTest {
 //
 //    @Test
 //    public void checkClickingProfile() {
-//        ActivityScenario scenario = rule.getScenario();
 //        solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
 //        solo.clickOnImage(1);
 //        solo.assertCurrentActivity("Wrong Activity", ProfileActivity.class);
@@ -58,7 +56,6 @@ public class MainActivityTest {
 //
 //    @Test
 //    public void checkMapButton() {
-//        ActivityScenario scenario = rule.getScenario();
 //        solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
 //        solo.clickOnButton("MAP"); //Click on MAP Button
 //        solo.assertCurrentActivity("Wrong Activity", MapActivity.class);
@@ -66,7 +63,6 @@ public class MainActivityTest {
 //
 //    @Test
 //    public void checkSearchButton() {
-//        ActivityScenario scenario = rule.getScenario();
 //        solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
 //        solo.clickOnButton("SEARCH"); //Click on SEARCH Button
 //        solo.assertCurrentActivity("Wrong Activity", SearchActivity.class);
@@ -74,7 +70,6 @@ public class MainActivityTest {
 //
 //    @Test
 //    public void checkLeaderboardButton() {
-//        ActivityScenario scenario = rule.getScenario();
 //        solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
 //        solo.clickOnButton("LEADERBOARD"); //Click on LEADERBOARD Button
 //        solo.assertCurrentActivity("Wrong Activity", LeaderboardActivity.class);
