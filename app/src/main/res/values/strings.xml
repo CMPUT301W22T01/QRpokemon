@@ -14,8 +14,9 @@
     <string name="location">Location</string>
     <string name="time">Time :</string>
     <string-array name="sort">
-        <item>single QR code score</item>
-        <item>overall score</item>
-        <item>quantity of Qrcode</item>
+        <item>High Scores</item>
+        <item>Highest Unique</item>
+        <item>Total Scanned</item>
+        <item>Total Sum of Scores</item>
     </string-array>
 </resources>
