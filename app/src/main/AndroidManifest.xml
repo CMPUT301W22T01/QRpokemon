@@ -5,6 +5,9 @@
 
     <uses-permission android:name="android.permission.CAMERA"/>
     <uses-feature android:name="android.hardware.camera"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"></uses-permission>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"></uses-permission>
+    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
 
     <application
         android:allowBackup="true"
@@ -13,6 +16,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.QRpokemon">
+
+        <meta-data android:name="com.google.android.geo.API_KEY"
+            android:value="@string/map_key"></meta-data>
         <activity
             android:name=".MainActivity"
             android:exported="true">
@@ -28,5 +34,6 @@
         <activity android:name=".QrScannedActivity"></activity>
         <activity android:name=".QrInventoryActivity"></activity>
         <activity android:name=".ProfileActivity"></activity>
+        <activity android:name=".MapActivity"></activity>
     </application>
 </manifest>

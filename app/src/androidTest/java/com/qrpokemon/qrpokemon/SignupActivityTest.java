@@ -41,7 +41,7 @@ public class SignupActivityTest {
         solo.enterText((EditText) solo.getView(R.id.et_email), "123@321.com");
         solo.enterText((EditText) solo.getView(R.id.et_phone), "123456");
         solo.clickOnView(solo.getView(R.id.bt_submit));
-        solo.waitForActivity(MyprofileActivity.class, 2000);
+        solo.waitForActivity(ProfileActivity.class, 2000);
         solo.assertCurrentActivity("Not in MyprofileActivity", MainActivity.class);
     }
     /**

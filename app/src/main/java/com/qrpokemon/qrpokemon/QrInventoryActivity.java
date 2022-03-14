@@ -123,8 +123,7 @@ public class QrInventoryActivity extends AppCompatActivity implements View.OnCli
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.bt_back:
-                Intent main_menu_intent = new Intent(this, MainActivity.class);
-                startActivity(main_menu_intent);
+                finish();
                 break;
 
             case R.id.bt_delete:
@@ -134,7 +133,7 @@ public class QrInventoryActivity extends AppCompatActivity implements View.OnCli
                 // delete from local and firebase
                 PlayerController playerController = PlayerController.getInstance();
                 try {
-                    playerController.savePlayerData(null, null, qrHashCodes, null);
+                    playerController.savePlayerData(qrHashCodes.size(), null, qrHashCodes, null);
 
                     qrInventoryList.setAdapter(qrInventoryDataAdapter);
                     totalCount.setText("Total Number: " + qrHashCodes.size());

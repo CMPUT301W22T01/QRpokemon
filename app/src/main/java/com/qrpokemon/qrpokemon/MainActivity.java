@@ -63,8 +63,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(intent);
                 break;
             case R.id.Map_Button:           // open Map Activity
-//                Intent intent = new Intent(MainActivity.this,MapActivity.class);
-//                startActivity(intent);
+                intent = new Intent(MainActivity.this,MapActivity.class);
+                startActivity(intent);
                 break;
             case R.id.Search_Button:        // open Search Activity
 //                Intent intent = new Intent(MainActivity.this,SearchActivity.class);
