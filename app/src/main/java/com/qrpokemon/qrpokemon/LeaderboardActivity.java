@@ -48,7 +48,7 @@ public class LeaderboardActivity extends AppCompatActivity {
                 // 0 = i = sortMethod( one Qrcode score)
                 // 1 = i = sortMethod( total Qrcode score)
                 // 2 = i = sortMethod( numbers of  Qrcode score)
-                sortMethod = i;  // FIXME: This assignment is local scoped
+                sortMethod = i;
             }
 
             @Override
