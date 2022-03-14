@@ -40,11 +40,14 @@ public class ProfileActivityTest {
 
 
     // Currently the test will fail because it was empty in signup page
+    /**
+     * Check the back button of the profile page
+     */
     @Test
     public void checkBackButton(){
 
-        solo.assertCurrentActivity("Wrong Activity", SignupActivity.class);
-        solo.clickOnImage (1);
+        solo.assertCurrentActivity("Wrong Activity", ProfileActivity.class);
+        solo.clickOnView(solo.getView(R.id.iv_back));
         solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
     }
 
