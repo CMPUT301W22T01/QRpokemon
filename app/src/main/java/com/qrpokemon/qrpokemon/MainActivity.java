@@ -1,20 +1,11 @@
 package com.qrpokemon.qrpokemon;
-
-import androidx.activity.result.ActivityResult;
-import androidx.activity.result.ActivityResultCallback;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -25,10 +16,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button searchMainBt;
     private Button leaderboardMainBt;
     private FloatingActionButton cameraMainBt;
-
-    private TextView usernameMainTv;
     private ImageView profileMainIv;
+    private MainMenuController mainMenuController = MainMenuController.getInstance();
 
+    /**
+     * MainMenu is created here, it sends user to different activities by pressing buttons
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,7 +36,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         leaderboardMainBt = findViewById(R.id.Leaderboard_Button);
         cameraMainBt = findViewById(R.id.Camera_Button);
 
-        usernameMainTv = findViewById(R.id.user_textView);
+        try {
+            mainMenuController.load(this); //load & display current player's username
+        } catch (Exception e) {
+            e.printStackTrace();
+            Log.e("MainActivity: ", "No current player");
+        }
         profileMainIv = findViewById(R.id.avatar_imageView);
 
         // setting Listeners for buttons and imageView

@@ -18,8 +18,7 @@ import java.util.Observer;
 public class SignupController {
     private static SignupController currentInstance;
     private FileSystemController fileSystemController = new FileSystemController();
-    private Database database = Database.getInstance();
-
+    private DatabaseController database = DatabaseController.getInstance();
     private SignupController(){}
 
     public static SignupController getInstance() {
@@ -113,11 +112,11 @@ public class SignupController {
                 };
                 // this will run first
                 database.getData(databaseCallback, result, "Player", fileSystemController.readToFile(context, filename));
+                Log.e("SignupController: ", "Current player is : " );
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
-
         return data;
     }
     public String load(Context context, String filename){

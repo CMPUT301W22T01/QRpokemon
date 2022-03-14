@@ -1,9 +1,5 @@
 package com.qrpokemon.qrpokemon;
-
-import android.util.Log;
-
 import androidx.annotation.Nullable;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Observable;
@@ -37,16 +33,18 @@ public class PlayerController extends Observable {
             info.put("contact", this.currentPlayer.getContactInfo());
         }
         else{
-            DatabaseController databaseController = new DatabaseController();
-            info = (HashMap<String, Object>) databaseController.readFromDatabase("Player", username).get(0);
+            DatabaseController databaseController = DatabaseController.getInstance();
+            //TODO implement method to get all players
+//            databaseController.getData("Player", new List<Map>, username).get(0);
         }
         return info;
     }
 
     /**
-     * create a new player
+     * Create a new player if app is in first run
+     * Load current player otherwise
      * @param username is guaranteed to be unique, it notifies Observer once player is created
-     * @param qrInventory
+     * @param qrInventory a ArrayList<String> object
      * @param contact
      * @param qrCount
      * @param totalScore
@@ -61,7 +59,7 @@ public class PlayerController extends Observable {
             setChanged();
             notifyObservers(null);
         }
-        Log.e("PlayerController: A player is created with : ", username + contact.toString());
+//        Log.e("PlayerController: A player is created with : ", username + contact.toString());
     }
 
     /**
@@ -78,7 +76,7 @@ public class PlayerController extends Observable {
                                @Nullable ArrayList<String> qrInventory,
                                @Nullable HashMap contact,
                                Boolean addIdentifier) throws Exception {
-        Database database = Database.getInstance();
+        DatabaseController databaseController = DatabaseController.getInstance();
         HashMap<String, Object> info = new HashMap<>();
 
         //update player's data.
@@ -104,7 +102,7 @@ public class PlayerController extends Observable {
         if (addIdentifier)
             info.put("Identifier", this.currentPlayer.getUsername());
 
-        database.writeData("Player", this.currentPlayer.getUsername() ,info ,true);
+        databaseController.writeData("Player", this.currentPlayer.getUsername() ,info ,true);
     }
     // boolean flag is false in default, updating user only.
     public void savePlayerData(@Nullable Integer qrCount,
