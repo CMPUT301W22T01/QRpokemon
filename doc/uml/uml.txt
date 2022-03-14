@@ -44,6 +44,7 @@ package "Activities" {
     class MainMenuActivity{
         -mainMenuController: MainMenuController
     }
+    note top: All Activities extend Android's Activity class (not shown for readability)
 
     class QrScannedActivity{
         -QrScannedActivity: QrScannedController
@@ -259,30 +260,28 @@ package "Models" {
     }
 
     class FileSystem{}
-    note bottom: This is local filesystem
+    note bottom: This is our local filesystem
 
-    together {
-        class QrCode
-        {
-            -geolocation: String
-            -qrCodeHash: String
-            -comment: String
+    class QrCode
+    {
+        -geolocation: String
+        -qrCodeHash: String
+        -comment: String
 
-            +getGeolocation(): String
-            +getQrCodeHash(): String
-            +getComment(): String
+        +getGeolocation(): String
+        +getQrCodeHash(): String
+        +getComment(): String
 
-            +setGeolocation(geolocation: String)
-            +setQrCodeHash(qrCodeHash: String)
-            +setComment(comment: String)
-        }
-
-        class Database
-        note bottom: This is our\nFirebase instance.
+        +setGeolocation(geolocation: String)
+        +setQrCodeHash(qrCodeHash: String)
+        +setComment(comment: String)
     }
 
+    class Database
+    note bottom: This is our\nFirebase instance.
+
     class Camera
-    note bottom: This is system camera
+    note bottom: This is the system camera
 }
 
 
@@ -367,8 +366,8 @@ CameraController -[hidden]l- LocationController
 FileSystemController -[hidden]r- DatabaseController
 ' LocationController -[hidden]l- DatabaseController
 QrCodeController -[hidden]- PlayerController
-QrCode -[hidden]left- Database
-QrCode -[hidden]left- Player
-QrCode -[hidden]left- FileSystem
-QrCode -[hidden]left- Camera
+' QrCode -[hidden]left- Database
+' QrCode -[hidden]left- Player
+' QrCode -[hidden]left- FileSystem
+' QrCode -[hidden]left- Camera
 @enduml
