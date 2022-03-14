@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.qrpokemon.qrpokemon">
 
-<!--    <uses-permission android:name="android.permission.CAMERA"/>-->
+    <uses-permission android:name="android.permission.CAMERA"/>
     <uses-feature android:name="android.hardware.camera"/>
 
     <application
@@ -21,7 +21,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".SignupActivity"></activity>
+        <activity android:name=".QrScannedActivity"></activity>
         <activity android:name=".MyprofileActivity"></activity>
+
     </application>
 
 </manifest>

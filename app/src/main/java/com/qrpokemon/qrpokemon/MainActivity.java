@@ -6,18 +6,15 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.ContentValues;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -31,9 +28,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private TextView usernameMainTv;
     private ImageView profileMainIv;
-    private Uri cam_uri;
-
-    private ActivityResultLauncher<Intent> startCamera;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,19 +45,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         usernameMainTv = findViewById(R.id.user_textView);
         profileMainIv = findViewById(R.id.avatar_imageView);
 
-        startCamera = registerForActivityResult(
-                new ActivityResultContracts.StartActivityForResult(),
-                new ActivityResultCallback<ActivityResult>() {
-                    @Override
-                    public void onActivityResult(ActivityResult result) {
-                        if (result.getResultCode() == RESULT_OK) {
-                            // There are no request codes
-                            Log.e("MainMenuActivity: ", "Waiting for result");
-                            profileMainIv.setImageURI(cam_uri);
-
-                        }
-                    }
-                });
         // setting Listeners for buttons and imageView
         qrInventoryMainBt.setOnClickListener(this);
         mapMainBt.setOnClickListener(this);
@@ -76,7 +57,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.QR_Inventory_Button:  // open QR Inventory Activity
 //                Intent intent = new Intent(MainActivity.this,QRInventoryActivity.class);
 //                startActivity(intent);
@@ -95,15 +76,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.Camera_Button:        // open Camera Activity
 
-                Intent camera_intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                if (camera_intent.resolveActivity(getPackageManager()) != null){
-                    startCamera.launch(camera_intent);
-                } else {
-                    Toast.makeText(MainActivity.this, "There is no app that support open camera", Toast.LENGTH_SHORT).show();
-                }
-
-//                Intent intent = new Intent(MainActivity.this,CameraActivity.class);
-//                startActivity(intent);
+                Intent intent = new Intent(this, QrScannedActivity.class);
+                startActivity(intent);
                 break;
             case R.id.avatar_imageView:     // open Profile Activity
 //                Intent intent = new Intent(MainActivity.this,ProfileActivity.class);
@@ -112,21 +86,4 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         }
     }
-
-
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-//
-//// get information from https://www.geeksforgeeks.org/android-how-to-open-camera-through-intent-and-display-captured-image/#:~:text=When%20the%20app%20is%20opened%2C%20it%20displays%20the,is%20captured%2C%20it%20is%20displayed%20in%20the%20imageview.
-//        super.onActivityResult(requestCode, resultCode, data);
-//        if (requestCode == 101) {
-//
-//            Bitmap photo = (Bitmap) data.getExtras().get("data");
-//
-////            Intent intent = new Intent(MainActivity.this,QrScannedActivity.class);
-////            intent.putExtra("data", photo);
-////            startActivity(intent);
-//
-//        }
-//    }
 }

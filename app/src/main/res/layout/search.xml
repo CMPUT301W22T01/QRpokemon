@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <SearchView
+    <EditText
         android:id="@+id/sv"
         android:queryHint="Username / Geolocation"
         android:layout_width="374dp"

@@ -29,8 +29,6 @@ public class PlayerController extends Observable {
     public HashMap getPlayer(@Nullable String username) throws Exception {
         HashMap<String, Object> info = new HashMap<>();
         if (username == null){
-            //a temporary object to convert other data type into ArrayList
-            ArrayList<String> temp = new ArrayList<>();
 
             info.put("Identifier", this.currentPlayer.getUsername());
             info.put("qrInventory", this.currentPlayer.getQrInventory());
