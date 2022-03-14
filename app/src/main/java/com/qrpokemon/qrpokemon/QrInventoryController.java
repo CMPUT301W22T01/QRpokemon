@@ -46,6 +46,13 @@ public class QrInventoryController extends Observable {
         return temp;
     }
 
+    /**
+     *
+     * @param context       current activity
+     * @param qrHashCodes   an ArrayList which has all the qrCodes owned by the current player
+     * @return              the document of a qrHash
+     * @throws Exception
+     */
     public HashMap<String, Object> getQrCodeDocument(Context context, ArrayList<String> qrHashCodes) throws Exception {
 
         List<Map> result = new ArrayList<Map>();
@@ -71,6 +78,10 @@ public class QrInventoryController extends Observable {
         return data;
     }
 
+    /**
+     * serve for getQrCodeDocument, used to return value
+     * @return
+     */
     public HashMap<String, Object> returnList () {
         return data;
     }
