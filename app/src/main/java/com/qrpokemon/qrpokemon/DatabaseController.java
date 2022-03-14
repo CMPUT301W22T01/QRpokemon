@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
 public class DatabaseController {
     private static DatabaseController dbInstance;
     final private FirebaseFirestore db;
