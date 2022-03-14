@@ -23,7 +23,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Leaderboard extends AppCompatActivity {
+public class LeaderboardActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
 
     // init variables
@@ -39,22 +39,27 @@ public class Leaderboard extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.leaderboard_activity);
 
+        // TODO: Move controller functions into controller class
         // data binding
         leaderboardListView = findViewById(R.id.leaderboard_listview);
         sortBy = findViewById(R.id.sp_sort_selection);
         backButton = findViewById(R.id.leaderboard_back);
 
         // set adapter
-        leaderboardAdapter = new LeaderboardAdapter(Leaderboard.this, leaderboardList);
+        // TODO: Implement observer for list
+        // TODO: Get database to sort for us?
+        leaderboardAdapter = new LeaderboardAdapter(this, leaderboardList);
         leaderboardListView.setAdapter(leaderboardAdapter);
 
         // set spinner for select different sort type
         sortBy.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                // TODO: Use dropdown text in switch statement?
                 // 0 = i = sortType( one Qrcode score)
                 // 1 = i = sortType( total Qrcode score)
                 // 2 = i = sortType( numbers of  Qrcode score)
+
                 sortType = i;
             }
             @Override
@@ -64,35 +69,23 @@ public class Leaderboard extends AppCompatActivity {
 
         // get data to the list
 
-
-
-
-
-        
 //        LeaderboardItem item1 = new LeaderboardItem(2,"xml", 7,8,9);
 //        LeaderboardItem item2 = new LeaderboardItem(3,"xml", 5,8,9);
 //        leaderboardList.add(item1);
 //        leaderboardList.add(item2);
 
-
-
-
-
         // set click event for back button
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Leaderboard.this, MainActivity.class);
-                startActivity(intent);
+                finish();
             }
         });
-
-
     }
 }
 
 // create object for each item in leaderboard
-class LeaderboardItem{
+class LeaderboardItem {
     private int rank;
     private String userName;
     private int highestScore;
@@ -107,6 +100,7 @@ class LeaderboardItem{
         this.totalScore = totalScore;
     }
 
+    // TODO: Remove unused getters and setters
     public int getRank() {
         return rank;
     }
@@ -149,7 +143,7 @@ class LeaderboardItem{
 }
 
 // set adapter for leaderboard listview
-class LeaderboardAdapter extends BaseAdapter{
+class LeaderboardAdapter extends BaseAdapter {
     private Context context;
     private List<LeaderboardItem> leaderboardItems;
 
