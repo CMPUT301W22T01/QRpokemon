@@ -137,6 +137,7 @@ public class QrInventoryActivity extends AppCompatActivity implements View.OnCli
                     playerController.savePlayerData(null, null, qrHashCodes, null);
 
                     qrInventoryList.setAdapter(qrInventoryDataAdapter);
+                    totalCount.setText("Total Number: " + qrHashCodes.size());
 
                 } catch (Exception e) {
                     e.printStackTrace();
