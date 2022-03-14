@@ -195,7 +195,8 @@ package "Controllers" {
         getInstance()
         checkValidCollection(collection: String)
         getData(callback: Function, list: HashMap[], collection: String, objectName: String )
-        writeToDatabase(collection: String, data: HashMap)
+        writeData(collection String , objectName String, data: HashMap)
+        deleteData(String collection, String objectName)
     }
 
     class FileSystemController
@@ -299,7 +300,7 @@ LeaderboardController "1" -> "1" OtherPlayerController: Get players
 SignupActivity "1" o-- "1" SignupController
 SignupController "1" o-> "1" PlayerController: Creates new player\nLoad current player
 PlayerController "1" *-- "1" Player
-PlayerController "1" --> "1" DatabaseController: Get Player by username
+PlayerController "1" --> "*" DatabaseController: Get Players
 
 ' OtherPlayerActivity "1" o-> "1" OtherPlayerController
 OtherPlayerController --> PlayerController: Gets player
@@ -318,7 +319,8 @@ CameraController -> QrAnalyzer: "Send image\nto analyze"
 QrInventoryActivity "1" o-- "1" QrInventoryController
 QrInventoryController "1" o-> "1" QrCodeController
 QrCodeController "1" o-> "1" QrCode #green: Create &\nUpdate comment
-QrCodeController "1" --> "1" DatabaseController: Save QrCode
+note right on link: We create/update\none at a time
+QrCodeController "1" --> "1" DatabaseController: Get & Save\nQrCode(s)
 QrCodeController "1" o-- "1" LocationController: Get Location
 
 SearchController "1" --> "1" PlayerController: Get usernames
