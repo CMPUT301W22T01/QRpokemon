@@ -11,7 +11,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.ScrollView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,17 +24,21 @@ import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
 
-public class QrInventoryActivity extends AppCompatActivity implements View.OnClickListener {
+public class QrInventoryActivity extends AppCompatActivity implements View.OnClickListener, Observer {
 
     private String seletedHash;
-    private HashMap listOfPlayerData;
+    private String currentPlayer;
+    private Button ascendingButton, descendingButton;
     private FloatingActionButton backButton, deleteButton;
     private ListView qrInventoryList;
-    private ArrayList<String> qrInventoryData;
+    private HashMap hashMapOfPlayerData;
+    private HashMap<String, Object> m;
+    private ArrayList<Integer> scoresOfPlayer;
+    private ArrayList<String> qrHashCodes;
     private ArrayAdapter<String> qrInventoryDataAdapter;
     private QrInventoryController qrInventoryController = QrInventoryController.getInstance();
 
-    private String currentPlayer = null;
+
     final private String TAG = "QrInventoryActivity";
 
     /**
@@ -52,35 +55,51 @@ public class QrInventoryActivity extends AppCompatActivity implements View.OnCli
         qrInventoryList = findViewById(R.id.QR_inventory_list);
         backButton = findViewById(R.id.bt_back);
         deleteButton = findViewById(R.id.bt_delete);
+        descendingButton = findViewById(R.id.bt_descending);
+        ascendingButton = findViewById(R.id.bt_ascending);
 
         backButton.setOnClickListener(this);
         deleteButton.setOnClickListener(this);
+        qrInventoryController.addObserver(this);
 
         // Get all the data of the current player's document
         try {
             // So far, 'listOfPlayData' should have contained all the information of the current player's
             // document, which is a hashMap.
-            listOfPlayerData = qrInventoryController.getPlayerInfo(currentPlayer);
-            Log.e(TAG, "All info of the current player: " + listOfPlayerData.toString());
+            hashMapOfPlayerData = qrInventoryController.getPlayerInfo(null);
+            Log.e(TAG, "All info of the current player: " + hashMapOfPlayerData.toString());
         } catch (Exception e) {
             e.printStackTrace();
             Log.e(TAG, e.toString());
         }
 
-        // Get all hashcode of the qrcode that owned by the player
-        qrInventoryData = (ArrayList<String>) listOfPlayerData.get("qrInventory");
-        Log.e(TAG, "Current player has the following qrCodes: " + qrInventoryData.toString());
+        // Get the identifier of the current player
+        currentPlayer = hashMapOfPlayerData.get("Identifier").toString();
+        Log.e(TAG, "Current player is: " + currentPlayer);
 
-        qrInventoryDataAdapter = new QrInventoryCustomList(this, qrInventoryData);
+        // Get all hashcode of the qrcode that owned by the player
+        qrHashCodes = (ArrayList<String>) hashMapOfPlayerData.get("qrInventory");
+        Log.e(TAG, "Current player has the following qrCodes: " + qrHashCodes.toString());
+
+        // Get all the scores of the qrcode that owned by the player
+        try {
+            qrInventoryController.getQrCodeDocument(this, qrHashCodes);
+//            update(qrInventoryController, this);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        //update(qrInventoryController, null);
+
+        qrInventoryDataAdapter = new QrInventoryCustomList(this, qrHashCodes);
         qrInventoryList.setAdapter(qrInventoryDataAdapter);
 
-        // Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete Delete
+        // Set a click listener for the listview
         qrInventoryList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 seletedHash = adapterView.getItemAtPosition(i).toString();
-                Log.e(TAG, "POP" + seletedHash.toString());
-//                deleteButton.setVisibility(VISIBLE);
+                Log.e(TAG, "Current hash: " + seletedHash);
+                deleteButton.setVisibility(VISIBLE);
             }
         });
     }
@@ -101,7 +120,7 @@ public class QrInventoryActivity extends AppCompatActivity implements View.OnCli
                 // delete from local and firebase
                 PlayerController playerController = PlayerController.getInstance();
                 try {
-                    playerController.savePlayerData(null, null, qrInventoryData, null);
+                    playerController.savePlayerData(null, null, qrHashCodes, null);
 
                     qrInventoryList.setAdapter(qrInventoryDataAdapter);
 
@@ -109,9 +128,21 @@ public class QrInventoryActivity extends AppCompatActivity implements View.OnCli
                     e.printStackTrace();
                 }
 
-//                deleteButton.setVisibility(INVISIBLE);
+                deleteButton.setVisibility(INVISIBLE);
 
         }
     }
 
+    @Override
+    public void update(Observable observable, Object o) {
+
+        try {
+            while (m.size() != qrHashCodes.size()) {
+                m = qrInventoryController.getQrCodeDocument(this, qrHashCodes);
+                Log.e(TAG, "Got: " + m.toString());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
