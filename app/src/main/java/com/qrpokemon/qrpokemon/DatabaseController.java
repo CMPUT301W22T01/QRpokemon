@@ -13,12 +13,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Database {
-    private static Database dbInstance;
+public class DatabaseController {
+    private static DatabaseController dbInstance;
     final private FirebaseFirestore db;
     final private String[] collections = {"Player", "QrCode", "LocationIndex"};
 
-    private Database() {
+    private DatabaseController() {
         db = FirebaseFirestore.getInstance();
     }
 
@@ -26,9 +26,9 @@ public class Database {
      * Implements Database as a Singleton
      * @return Database
      */
-    public static Database getInstance() {
+    public static DatabaseController getInstance() {
         if (dbInstance == null)
-            dbInstance = new Database();
+            dbInstance = new DatabaseController();
 
         return dbInstance;
     }
