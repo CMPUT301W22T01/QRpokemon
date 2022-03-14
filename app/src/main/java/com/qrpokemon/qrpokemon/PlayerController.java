@@ -23,6 +23,7 @@ public class PlayerController extends Observable {
      * takes currentPlayer's data and put them into one HashMap
      * @param username unique user's name. Can be null if read off from current player
      * @return a HashMap consists of username, qrInventory, contactInfo, qrCount, totalScore
+     * @throws Exception if collection is incorrect
      */
     public HashMap getPlayer(@Nullable String username) throws Exception {
         HashMap<String, Object> info = new HashMap<>();
@@ -52,10 +53,10 @@ public class PlayerController extends Observable {
      * Create a new player if app is in first run
      * Load current player otherwise
      * @param username is guaranteed to be unique, it notifies Observer once player is created
-     * @param qrInventory a ArrayList<String> object
-     * @param contact
-     * @param qrCount
-     * @param totalScore
+     * @param qrInventory a ArrayList object store player's qr code(s)
+     * @param contact player's contact info
+     * @param qrCount player's qrcount number
+     * @param totalScore player's Score so far
      */
     public void setupPlayer(String username,
                             @Nullable ArrayList<String> qrInventory,
@@ -72,8 +73,8 @@ public class PlayerController extends Observable {
 
     /**
      * Update/Create a player's data based on the addIdentifier boolean flag
-     * @param qrCount
-     * @param totalScore
+     * @param qrCount player's qrCount
+     * @param totalScore player's total Score
      * @param qrInventory an Arraylist of qrHashes
      * @param contact contact info for player
      * @param addIdentifier if true create a new player in database, update a user otherwise

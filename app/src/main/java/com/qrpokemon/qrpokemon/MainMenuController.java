@@ -20,7 +20,7 @@ public class MainMenuController {
 
     /**
      * load current player from local
-     * @param context
+     * @param context context of current activity
      */
     public void load(Context context){
         String data = null;

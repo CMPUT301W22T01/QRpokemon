@@ -45,7 +45,7 @@ public class QrInventoryActivity extends AppCompatActivity implements View.OnCli
      *
      * Displays all QrInventory related information, including a title, a total score board,
      * a list of all qrcodes currently owned by the player, and a back button
-     * @param savedInstanceState
+     * @param savedInstanceState saved Instances so far
      */
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -117,7 +117,7 @@ public class QrInventoryActivity extends AppCompatActivity implements View.OnCli
      * User can either choose to:
      *      delete a selected qrCodes from his inventory
      *      go back to main menu
-     * @param view
+     * @param view QrInventory's view
      */
     @Override
     public void onClick(View view) {
@@ -150,8 +150,8 @@ public class QrInventoryActivity extends AppCompatActivity implements View.OnCli
     /**
      *
      * Used for getting data from the database and save values into local vars
-     * @param observable
-     * @param o
+     * @param observable observable object will notify update
+     * @param o observer object
      */
     @Override
     public void update(Observable observable, Object o) {

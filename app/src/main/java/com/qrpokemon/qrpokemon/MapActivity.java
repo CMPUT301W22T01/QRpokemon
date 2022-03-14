@@ -91,7 +91,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
     /**
      * manipulate map positioning and zoom to current location, nothing return
-     * @param googleMap
+     * @param googleMap google map service
      */
     @Override
     public void onMapReady(GoogleMap googleMap) {

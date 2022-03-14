@@ -37,7 +37,7 @@ public class QrInventoryController extends Observable {
      *
      * @param currentPlayer The identifier of the current player
      * @return all the information of the current player's document, which is a hashMap
-     * @throws Exception
+     * @throws Exception if collection is incorrect or player doesn't found
      */
     public HashMap<String, Object> getPlayerInfo (String currentPlayer) throws Exception {
 
@@ -51,7 +51,7 @@ public class QrInventoryController extends Observable {
      * @param context       current activity
      * @param qrHashCodes   an ArrayList which has all the qrCodes owned by the current player
      * @return              the document of a qrHash
-     * @throws Exception
+     * @throws Exception if collection name is incorrect
      */
     public HashMap<String, Object> getQrCodeDocument(Context context, ArrayList<String> qrHashCodes) throws Exception {
 
@@ -80,7 +80,7 @@ public class QrInventoryController extends Observable {
 
     /**
      * serve for getQrCodeDocument, used to return value
-     * @return
+     * @return Hashmap of qr codes
      */
     public HashMap<String, Object> returnList () {
         return data;

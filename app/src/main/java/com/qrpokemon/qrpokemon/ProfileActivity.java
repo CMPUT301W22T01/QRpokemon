@@ -19,7 +19,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
     /**
      * Init Textview and button objects for the profile
-     * @param savedInstanceState
+     * @param savedInstanceState current instances
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +58,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
      * User can either choose to:
      *      go back to main menu
      *      generate a unique qr code for himself
-     * @param view
+     * @param view ProfileActivity's view
      */
     @Override
     public void onClick(View view) {

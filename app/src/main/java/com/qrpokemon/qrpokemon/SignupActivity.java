@@ -23,7 +23,7 @@ public class SignupActivity extends AppCompatActivity  implements View.OnClickLi
     /**
      * Init Textview and button objects and check if the app is in the first run
      * If user is registered successfully, then the app won't display this Activity ever
-     * @param savedInstanceState
+     * @param savedInstanceState saved instances
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +56,7 @@ public class SignupActivity extends AppCompatActivity  implements View.OnClickLi
      *      register with filled in message: username cannot be null or identical to others in database
      * User can leave null to contact info
      * User goes to MainMenuActivity once registration is done.
-     * @param view
+     * @param view SignupActivity's view
      */
     @Override
     public void onClick(View view) {
@@ -96,8 +96,8 @@ public class SignupActivity extends AppCompatActivity  implements View.OnClickLi
 
     /**
      * update will be called once a player has been successfully added
-     * @param observable
-     * @param o
+     * @param observable observable object
+     * @param o object being observed
      */
     @Override
     public void update(Observable observable, Object o) {

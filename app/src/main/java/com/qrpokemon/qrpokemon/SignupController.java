@@ -32,10 +32,10 @@ public class SignupController {
      * The username will be checked first
      * It asks PlayerController to create a current Player class
      * It asks PlayerController to add new player to database
-     * @param context
-     * @param newUsername
-     * @param email
-     * @param phone
+     * @param context from Activity passed in
+     * @param newUsername New player's name
+     * @param email player entered email
+     * @param phone player entered phone
      * @throws Exception if collection not in correct range
      */
     public void addNewPlayer(Context context, String newUsername, @Nullable String email, @Nullable String phone) throws Exception {
@@ -81,9 +81,11 @@ public class SignupController {
     }
 
     /**
-     * load data from local based on the pass in filename, file "firstRun" and file "name" indicates current user name
-     * @param filename indicates which file is reading of from local
-     * @return
+     *
+     * @param context Activity be passed in
+     * @param filename ndicates which file is reading of from local
+     * @param flag read from local or firestore database
+     * @return String of player name
      */
     public String load(Context context, String filename, Boolean flag){
         String data = null;
@@ -125,8 +127,9 @@ public class SignupController {
 
     /**
      * write data to local FileSystem based on the filename
-     * @param context
-     * @param filename
+     * @param context Activity be passed in
+     * @param filename Filename to be written in
+     * @param username player's username
      */
     public void write(Context context, String filename, @Nullable String username){
         if (filename.equals("name"))

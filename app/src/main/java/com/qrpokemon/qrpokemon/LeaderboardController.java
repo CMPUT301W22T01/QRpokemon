@@ -63,6 +63,7 @@ public class LeaderboardController {
      * Sorts data based on what is selected in Leaderboard Activity
      * @param context The LeaderboardActivity context
      * @param list The list to be sorted
+     * @param sortMethod method to be sorted with
      */
     public void sortLeaderboard(Context context, LeaderboardList list, int sortMethod) {
         list.sort(sortMethod);
