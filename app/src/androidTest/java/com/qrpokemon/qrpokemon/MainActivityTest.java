@@ -12,9 +12,11 @@ import android.widget.TextView;
 import androidx.test.core.app.ActivityScenario;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.platform.app.InstrumentationRegistry;
+import androidx.test.rule.ActivityTestRule;
 
 import com.robotium.solo.Solo;
 
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -23,17 +25,21 @@ public class MainActivityTest {
 
 
     @Rule
-    public ActivityScenarioRule rule = new ActivityScenarioRule<>(MainActivity.class);
+    public ActivityTestRule<MainActivity> rule =
+            new ActivityTestRule<>(MainActivity.class, true, true);
 
+    @Before
+    public void setUp() throws Exception{
+        solo = new Solo(InstrumentationRegistry.getInstrumentation(), rule.getActivity());
+    }
 
     @Test
     public void start() throws Exception{
-        ActivityScenario scenario = rule.getScenario();
+        Activity activity = rule.getActivity();
     }
 
 //    @Test
 //    public void checkQrInventoryButton(){
-//        ActivityScenario scenario = rule.getScenario();
 //        solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
 //        solo.clickOnButton("QR INVENTORY"); //Click on QR INVENTORY Button
 //        solo.assertCurrentActivity("Wrong Activity", QrInventoryActivity.class);
@@ -42,7 +48,6 @@ public class MainActivityTest {
 //
 //    @Test
 //    public void checkClickingProfile() {
-//        ActivityScenario scenario = rule.getScenario();
 //        solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
 //        solo.clickOnImage(1);
 //        solo.assertCurrentActivity("Wrong Activity", ProfileActivity.class);
@@ -51,7 +56,6 @@ public class MainActivityTest {
 //
 //    @Test
 //    public void checkMapButton() {
-//        ActivityScenario scenario = rule.getScenario();
 //        solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
 //        solo.clickOnButton("MAP"); //Click on MAP Button
 //        solo.assertCurrentActivity("Wrong Activity", MapActivity.class);
@@ -59,7 +63,6 @@ public class MainActivityTest {
 //
 //    @Test
 //    public void checkSearchButton() {
-//        ActivityScenario scenario = rule.getScenario();
 //        solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
 //        solo.clickOnButton("SEARCH"); //Click on SEARCH Button
 //        solo.assertCurrentActivity("Wrong Activity", SearchActivity.class);
@@ -67,7 +70,6 @@ public class MainActivityTest {
 //
 //    @Test
 //    public void checkLeaderboardButton() {
-//        ActivityScenario scenario = rule.getScenario();
 //        solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
 //        solo.clickOnButton("LEADERBOARD"); //Click on LEADERBOARD Button
 //        solo.assertCurrentActivity("Wrong Activity", LeaderboardActivity.class);
