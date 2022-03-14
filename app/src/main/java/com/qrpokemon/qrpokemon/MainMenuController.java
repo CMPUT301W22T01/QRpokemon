@@ -40,7 +40,7 @@ public class MainMenuController {
             };
             // read player's data from firestore
             database.getData(databaseCallback, result, "Player", fileSystemController.readToFile(context, "name"));
-            Log.e("SignupController: ", "Current player is : " );
+            Log.e("Main menuController: ", "Current player is : " +fileSystemController.readToFile(context, "name"));
             } catch (Exception e) {
                 e.printStackTrace();
             }

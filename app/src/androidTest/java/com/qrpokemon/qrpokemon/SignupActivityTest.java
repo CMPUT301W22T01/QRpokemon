@@ -1,6 +1,10 @@
 package com.qrpokemon.qrpokemon;
+import static org.junit.Assert.assertEquals;
+
 import android.app.Activity;
 import android.widget.EditText;
+import android.widget.TextView;
+
 import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.rule.ActivityTestRule;
 import com.robotium.solo.Solo;
@@ -43,6 +47,8 @@ public class SignupActivityTest {
         solo.clickOnView(solo.getView(R.id.bt_submit));
         solo.waitForActivity(ProfileActivity.class, 2000);
         solo.assertCurrentActivity("Not in MyprofileActivity", MainActivity.class);
+        FileSystemController fileSystemController = new FileSystemController();
+        fileSystemController.deleteFile(solo.getCurrentActivity());
     }
     /**
      * Check if the user story US 03.01.01 is working properly
@@ -59,27 +65,29 @@ public class SignupActivityTest {
         solo.waitForActivity(MainActivity.class, 2000);
         solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
 
-//        // go to profile activity
-//        solo.clickOnView(solo.getView(R.id.avatar_imageView));
-//        solo.waitForActivity(ProfileActivity.class, 2000);
-//        solo.assertCurrentActivity("Wrong Activity", ProfileActivity.class);
-//        // check the profile name
-//        TextView textViewName = (TextView)solo.getView(R.id.tv_name);
-//        String displayName = textViewName.getText().toString();
-//        assertEquals("Heather", displayName);
-//        // check the profile email
-//        TextView textViewEmail = (TextView)solo.getView(R.id.tv_email);
-//        String displayEmail = textViewEmail.getText().toString();
-//        assertEquals("123@gmail.com", displayEmail);
-//        // check the profile phone number
-//        TextView textViewPhone = (TextView)solo.getView(R.id.tv_phone);
-//        String displayPhone = textViewPhone.getText().toString();
-//        assertEquals("7777777", displayPhone);
-//        // generate qr code for the current player
-//        solo.clickOnButton("Create QRcode");
-//        // press back button to go back to main menu
-//        solo.clickOnView(solo.getView(R.id.iv_back));
-//        solo.waitForActivity(MainActivity.class, 2000);
-//        solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
+        // go to profile activity
+        solo.clickOnView(solo.getView(R.id.avatar_imageView));
+        solo.waitForActivity(ProfileActivity.class, 2000);
+        solo.assertCurrentActivity("Wrong Activity", ProfileActivity.class);
+        // check the profile name
+        TextView textViewName = (TextView)solo.getView(R.id.tv_name);
+        String displayName = textViewName.getText().toString();
+        assertEquals("Heather", displayName);
+        // check the profile email
+        TextView textViewEmail = (TextView)solo.getView(R.id.tv_email);
+        String displayEmail = textViewEmail.getText().toString();
+        assertEquals("123@gmail.com", displayEmail);
+        // check the profile phone number
+        TextView textViewPhone = (TextView)solo.getView(R.id.tv_phone);
+        String displayPhone = textViewPhone.getText().toString();
+        assertEquals("7777777", displayPhone);
+        // generate qr code for the current player
+        solo.clickOnButton("Create QRcode");
+        // press back button to go back to main menu
+        solo.clickOnView(solo.getView(R.id.iv_back));
+        solo.waitForActivity(MainActivity.class, 2000);
+        solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
+        FileSystemController fileSystemController = new FileSystemController();
+        fileSystemController.deleteFile(solo.getCurrentActivity());
     }
 }
