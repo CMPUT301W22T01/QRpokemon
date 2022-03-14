@@ -42,6 +42,9 @@ public class SignupActivityTest {
         database.deleteData("Player", "ABCD");
     }
 
+    /**
+     * Check entering inputs through the EditTexts
+     */
     @Test
     public void enterInputs() throws Exception{
 
@@ -54,6 +57,9 @@ public class SignupActivityTest {
 
     }
 
+    /**
+     * Check if the user story US 03.01.01 is working properly
+     */
     @Test
     public void testUS_03_01_01() throws Exception{
 
