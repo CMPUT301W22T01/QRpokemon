@@ -45,6 +45,7 @@ public class LeaderboardController {
                     ));
                 }
 
+                list.sort(0);  // Use default sort method
                 list.notifyListUpdate();  // Tell subscribers the list is updated
             }
         };
@@ -63,7 +64,7 @@ public class LeaderboardController {
      * @param context The LeaderboardActivity context
      * @param list The list to be sorted
      */
-    public void sortLeaderboard(Context context, List<LeaderboardItem> list) {
-        //list.sort();
+    public void sortLeaderboard(Context context, LeaderboardList list, int sortMethod) {
+        list.sort(sortMethod);
     }
 }

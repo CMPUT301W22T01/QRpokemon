@@ -1,6 +1,7 @@
 package com.qrpokemon.qrpokemon;
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
@@ -25,7 +27,7 @@ public class LeaderboardActivity extends AppCompatActivity {
     private ImageButton backButton;
     private LeaderboardList leaderboardList;
     private LeaderboardAdapter leaderboardAdapter;
-    private int sortType = 0;
+    private int sortMethod = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,10 +44,9 @@ public class LeaderboardActivity extends AppCompatActivity {
         leaderboardList = new LeaderboardList();
         leaderboardController = LeaderboardController.getInstance();
         leaderboardController.getLeaderboard(this, leaderboardList);
+        Log.d("Leaderboard: ", leaderboardList.getList().toString());
 
         // set adapter
-        // TODO: Implement observer for list
-        // TODO: Get database to sort for us?
         leaderboardAdapter = new LeaderboardAdapter(this, leaderboardList.getList());
         leaderboardListView.setAdapter(leaderboardAdapter);
         leaderboardList.addObserver(leaderboardAdapter);
@@ -54,24 +55,17 @@ public class LeaderboardActivity extends AppCompatActivity {
         sortBy.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                // TODO: Use dropdown text in switch statement?
-                // 0 = i = sortType( one Qrcode score)
-                // 1 = i = sortType( total Qrcode score)
-                // 2 = i = sortType( numbers of  Qrcode score)
+                // TODO: Use dropdown text String in switch statement?
+                // 0 = i = sortMethod( one Qrcode score)
+                // 1 = i = sortMethod( total Qrcode score)
+                // 2 = i = sortMethod( numbers of  Qrcode score)
 
-                sortType = i;
+                sortMethod = i;
             }
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
             }
         });
-
-        // get data to the list
-
-//        LeaderboardItem item1 = new LeaderboardItem(2,"xml", 7,8,9);
-//        LeaderboardItem item2 = new LeaderboardItem(3,"xml", 5,8,9);
-//        leaderboardList.add(item1);
-//        leaderboardList.add(item2);
 
         // set click event for back button
         backButton.setOnClickListener(new View.OnClickListener() {
@@ -83,8 +77,9 @@ public class LeaderboardActivity extends AppCompatActivity {
     }
 }
 
-// TODO: Delete if unused (or use like a struct)
-// create object for each item in leaderboard
+/**
+ * Create an object for each item in leaderboard
+ */
 class LeaderboardItem {
     private int rank;
     private String username;
@@ -161,6 +156,15 @@ class LeaderboardList extends Observable {
     public List<LeaderboardItem> getList() {
         return list;
     }
+
+    public void sort(int sortMethod) {
+        switch (sortMethod) {
+            case 0:
+                list.sort(new LeaderboardCompareTotalScore());
+        }
+
+        notifyListUpdate();
+    }
 }
 
 // set adapter for leaderboard listview
@@ -219,4 +223,9 @@ class LeaderboardAdapter extends BaseAdapter implements Observer {
     }
 }
 
-
+// NOTE: Replace if Database can do the sorting
+class LeaderboardCompareTotalScore implements Comparator<LeaderboardItem> {
+        public int compare(LeaderboardItem first, LeaderboardItem second) {
+            return (int) (second.getTotalScore() - first.getTotalScore());
+        }
+}
