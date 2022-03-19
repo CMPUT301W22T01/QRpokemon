@@ -1,27 +1,14 @@
 package com.qrpokemon.qrpokemon;
-
-import static android.content.ContentValues.TAG;
-
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.util.Log;
 import android.view.inputmethod.InputMethodManager;
-
-
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import com.journeyapps.barcodescanner.BarcodeEncoder;
-
 import java.util.HashMap;
-
-
-
 public class ProfileController {
-
-
-
 
     //Get playerController class there is only one PlayerController class
     private PlayerController currentPlayerController;
@@ -59,16 +46,28 @@ public class ProfileController {
      * @return a String of the user email
      */
     public static String getPlayerEmail(){
-        String playerEmail = playerContact.get("email").toString();
+        String playerEmail;
+        try {
+            playerEmail = playerContact.get("email").toString();
+        } catch (Exception e) {
+            playerEmail = "";
+        }
         return playerEmail;
     }
 
     /**
      * get the phone number of the current user
      * @return a String of the user phone number
+     * @throws Exception if player doens't have a phone number
      */
     public static String getPlayerPhone(){
-        String playerPhone = playerContact.get("phone").toString();
+        String playerPhone;
+        try{
+            playerPhone = playerContact.get("phone").toString();
+        } catch (Exception e) {
+            playerPhone = "";
+        }
+
         return playerPhone;
     }
 
