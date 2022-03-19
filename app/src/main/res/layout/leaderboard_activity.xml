@@ -20,26 +20,27 @@
             android:textAlignment="center"
             android:textSize="48sp"
             app:layout_constraintEnd_toEndOf="parent"
-
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <!--TODO: Unselected scores should be dimmed (lower intensity)-->
+
         <Spinner
             android:id="@+id/sp_sort_selection"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="12dp"
             android:entries="@array/sort"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.87"
+            app:layout_constraintHorizontal_bias="0.881"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txv_leaderboard"
             tools:ignore="TouchTargetSizeCheck" />
 
         <LinearLayout
+            android:id="@+id/linearLayout"
             android:layout_width="match_parent"
             android:layout_height="450dp"
             android:layout_marginTop="8dp"
@@ -67,6 +68,62 @@
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:srcCompat="@drawable/car_ui_icon_arrow_back" />
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="7dp"
+            android:text="Rank"
+            android:textSize="11sp"
+            app:layout_constraintTop_toBottomOf="@+id/sp_sort_selection"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:gravity="center"
+            android:padding="7dp"
+            android:text="User Name"
+            android:textSize="11sp"
+            app:layout_constraintTop_toBottomOf="@+id/sp_sort_selection"
+            app:layout_constraintStart_toEndOf="@+id/textView1" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="44dp"
+            android:padding="7dp"
+            android:text="Highest score"
+            android:textSize="11sp"
+            app:layout_constraintStart_toEndOf="@+id/textView2"
+            app:layout_constraintTop_toBottomOf="@+id/sp_sort_selection" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="7dp"
+            android:text="Total number"
+            android:layout_marginStart="8dp"
+            android:textSize="11sp"
+            app:layout_constraintEnd_toStartOf="@+id/textView5"
+            app:layout_constraintStart_toEndOf="@+id/textView3"
+            app:layout_constraintTop_toBottomOf="@+id/sp_sort_selection" />
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="7dp"
+            android:text="Total score"
+            android:textSize="11sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/textView4"
+            app:layout_constraintTop_toBottomOf="@+id/sp_sort_selection"/>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
