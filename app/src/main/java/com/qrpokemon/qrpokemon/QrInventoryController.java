@@ -3,18 +3,18 @@ package com.qrpokemon.qrpokemon;
 import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
-
-import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Observable;
 
-public class QrInventoryController extends Observable {
+public class QrInventoryController {
 
+    private Integer totalScore = 0;
     private HashMap<String, Object> data = new HashMap<>();
     private DatabaseController databaseController = DatabaseController.getInstance();
     private PlayerController player = PlayerController.getInstance();
@@ -53,37 +53,45 @@ public class QrInventoryController extends Observable {
      * @return              the document of a qrHash
      * @throws Exception if collection name is incorrect
      */
-    public HashMap<String, Object> getQrCodeDocument(Context context, ArrayList<String> qrHashCodes) throws Exception {
+    public HashMap<String, Object> getAndSetQrCodeData(Context context, ArrayList<String> qrHashCodes, ArrayAdapter<String> qrInventory) throws Exception {
 
         List<Map> result = new ArrayList<Map>();
         DatabaseCallback databaseCallback = new DatabaseCallback(context) {
 
             @Override
             public void run(List<Map> dataList) {
+
                 if (!dataList.isEmpty()) {
-                    if (dataList != null && data.get((String) dataList.get(0).get("Identifier")) == null) {
-                        data.put((String) dataList.get(0).get("Identifier"), dataList);
-                        Log.e(TAG, "UUUUUUUUUUUUUUUUU" + data.toString());
-                        setChanged();
-                        notifyObservers(null);
+                    Log.e(TAG, "Found:" + dataList.toString());
+                    if (dataList != null ) {
+                        data.put((String) dataList.get(dataList.size()-1).get("Identifier"), dataList);
+                        ListView temp = ((Activity) context).findViewById(R.id.QR_inventory_list);
+                        qrInventory.add((String) (dataList.get(dataList.size()-1).get("Identifier"))
+                                + " "
+                                + (String.valueOf(dataList.get(dataList.size()-1).get("score"))));
+                        Log.e(TAG, "Hash '" + (String) dataList.get(dataList.size()-1).get("Identifier")
+                                + " "
+                                + (String.valueOf(dataList.get(dataList.size()-1).get("score"))) + "' has added to datalist");
+                        totalScore += Integer.valueOf(String.valueOf( dataList.get(dataList.size()-1).get("score")));
+                        Log.e(TAG, "Current score: " + totalScore.toString());
+
+                        // set the value of total score
+                        TextView tvScore = ((Activity) context).findViewById(R.id.tv_total_score);
+                        tvScore.setText(totalScore.toString());
+
+                        temp.setAdapter(qrInventory);
+
                     }
                 }
             }
         };
         for (int i = 0; i < qrHashCodes.size(); i++) {
             databaseController.getData(databaseCallback, result, "QrCode", qrHashCodes.get(i));
-            Log.e(TAG, "1212" + qrHashCodes.get(i));
+            Log.e(TAG, "Loop now get hash: " + qrHashCodes.get(i));
         }
 
         return data;
     }
 
-    /**
-     * serve for getQrCodeDocument, used to return value
-     * @return Hashmap of qr codes
-     */
-    public HashMap<String, Object> returnList () {
-        return data;
-    }
 }
 

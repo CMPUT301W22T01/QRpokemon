@@ -3,7 +3,6 @@ package com.qrpokemon.qrpokemon;
 import static android.view.View.VISIBLE;
 import static android.view.View.INVISIBLE;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -20,20 +19,17 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Observable;
-import java.util.Observer;
 
-public class QrInventoryActivity extends AppCompatActivity implements View.OnClickListener, Observer {
+public class QrInventoryActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private String selectedHash;
-    private String currentPlayer;
+    private String selectedHash, currentPlayer;
+    private Integer selectedPosition;
     private TextView totalScore, totalCount;
     private Button ascendingButton, descendingButton;
     private FloatingActionButton backButton, deleteButton;
     private ListView qrInventoryList;
     private HashMap hashMapOfPlayerData;
     private HashMap<String, Object> m = new HashMap<>();
-    private ArrayList<Integer> scoresOfPlayer;
     private ArrayList<String> qrHashCodes;
     private ArrayAdapter<String> qrInventoryDataAdapter;
     private QrInventoryController qrInventoryController = QrInventoryController.getInstance();
@@ -42,9 +38,9 @@ public class QrInventoryActivity extends AppCompatActivity implements View.OnCli
     final private String TAG = "QrInventoryActivity";
 
     /**
-     *
      * Displays all QrInventory related information, including a title, a total score board,
      * a list of all qrcodes currently owned by the player, and a back button
+     *
      * @param savedInstanceState saved Instances so far
      */
     @Override
@@ -62,7 +58,6 @@ public class QrInventoryActivity extends AppCompatActivity implements View.OnCli
 
         backButton.setOnClickListener(this);
         deleteButton.setOnClickListener(this);
-        qrInventoryController.addObserver(this);
 
         // Get all the data of the current player's document
         try {
@@ -87,25 +82,28 @@ public class QrInventoryActivity extends AppCompatActivity implements View.OnCli
         totalCount.setText("Total Number: " + qrHashCodes.size());
 
         // todo Set the total score of the current player
-        totalScore.setText("Total Score: " + "763");
+        totalScore.setText("Total Score: ");
+
+        qrInventoryDataAdapter = new QrInventoryCustomList(this, new ArrayList<String>());
+        qrInventoryList.setAdapter(qrInventoryDataAdapter);
 
         // todo Get all the scores of the qrcode that owned by the player
-//        try {
-//            qrInventoryController.getQrCodeDocument(this, qrHashCodes);
-////            update(qrInventoryController, this);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-        //update(qrInventoryController, null);
+        try {
+            qrInventoryController.getAndSetQrCodeData(this, qrHashCodes, qrInventoryDataAdapter);
+            Log.e(TAG, "QrCode documents of the current player has the following: " + qrInventoryDataAdapter.getItem(0).toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+            Log.e(TAG, "error: " + e);
+        }
 
-        qrInventoryDataAdapter = new QrInventoryCustomList(this, qrHashCodes);
-        qrInventoryList.setAdapter(qrInventoryDataAdapter);
 
         // Set a click listener for the listview
         qrInventoryList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                selectedPosition = i;
                 selectedHash = adapterView.getItemAtPosition(i).toString();
+
                 Log.e(TAG, "Current hash: " + selectedHash);
                 deleteButton.setVisibility(VISIBLE);
             }
@@ -115,55 +113,52 @@ public class QrInventoryActivity extends AppCompatActivity implements View.OnCli
     /**
      * Check on which button user have entered
      * User can either choose to:
-     *      delete a selected qrCodes from his inventory
-     *      go back to main menu
+     * delete a selected qrCodes from his inventory
+     * go back to main menu
+     *
      * @param view QrInventory's view
      */
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.bt_back:
                 finish();
                 break;
 
             case R.id.bt_delete:
+                // deducted the current score from the total score
+                Integer curTotalScore;
+                String cut = " ";
+
+                String[] tStr = qrInventoryDataAdapter.getItem(selectedPosition).split(cut);
+                curTotalScore = Integer.valueOf((String) totalScore.getText());
+
+                curTotalScore -= Integer.valueOf(tStr[1]);
+                totalScore.setText(curTotalScore.toString());
+
                 // delete from arraylist
+                qrHashCodes.remove(selectedHash);
                 qrInventoryDataAdapter.remove(selectedHash);
 
                 // delete from local and firebase
                 PlayerController playerController = PlayerController.getInstance();
                 try {
-                    playerController.savePlayerData(qrHashCodes.size(), null, qrHashCodes, null);
+                    playerController.savePlayerData(qrHashCodes.size(), curTotalScore, qrHashCodes, null);
 
                     qrInventoryList.setAdapter(qrInventoryDataAdapter);
                     totalCount.setText("Total Number: " + qrHashCodes.size());
 
                 } catch (Exception e) {
                     e.printStackTrace();
+                    Log.e(TAG, "error from Onclick (delete from local and firebase): " + e);
                 }
 
                 deleteButton.setVisibility(INVISIBLE);
 
-        }
-    }
+            case R.id.bt_descending:
 
-    /**
-     *
-     * Used for getting data from the database and save values into local vars
-     * @param observable observable object will notify update
-     * @param o observer object
-     */
-    @Override
-    public void update(Observable observable, Object o) {
-
-        try {
-
-            m = qrInventoryController.returnList();
-//            Log.e(TAG, "MMMMMMMMMM: " + m.toString());
-
-        } catch (Exception e) {
-            e.printStackTrace();
-//            Log.e(TAG, "Got: " + e);
+            case R.id.bt_ascending:
         }
     }
 }
+
