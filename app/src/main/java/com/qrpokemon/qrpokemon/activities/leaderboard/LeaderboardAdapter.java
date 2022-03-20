@@ -3,7 +3,6 @@ package com.qrpokemon.qrpokemon.activities.leaderboard;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -55,30 +54,30 @@ public class LeaderboardAdapter extends RecyclerView.Adapter implements Observer
         this.notifyDataSetChanged();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder {
-        TextView rankOrderList;
-        TextView userNameList;
-        TextView highestScoreList;
-        TextView qrNumList;
-        TextView totalScoreList;
+    static class ViewHolder extends RecyclerView.ViewHolder {
+        TextView ranking;
+        TextView username;
+        TextView highestScore;
+        TextView qrQuantity;
+        TextView totalScore;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             // Link views to their variables
-            rankOrderList = itemView.findViewById(R.id.rand_order_list);
-            userNameList = itemView.findViewById(R.id.username_list);
-            highestScoreList = itemView.findViewById(R.id.highestscore_list);
-            qrNumList = itemView.findViewById(R.id.qr_quantity_list);
-            totalScoreList = itemView.findViewById(R.id.total_score_list);
+            ranking = itemView.findViewById(R.id.rand_order_list);
+            username = itemView.findViewById(R.id.username_list);
+            highestScore = itemView.findViewById(R.id.highestscore_list);
+            qrQuantity = itemView.findViewById(R.id.qr_quantity_list);
+            totalScore = itemView.findViewById(R.id.total_score_list);
         }
 
         public void bind(LeaderboardItem leaderboardItem) {
-            rankOrderList.setText(String.valueOf(leaderboardItem.getRank()));
-            userNameList.setText(leaderboardItem.getUsername());
-            highestScoreList.setText(String.valueOf(leaderboardItem.getHighestScore()));
-            qrNumList.setText(String.valueOf(leaderboardItem.getQrQuantity()));
-            totalScoreList.setText(String.valueOf(leaderboardItem.getTotalScore()));
+            ranking.setText(String.valueOf(leaderboardItem.getRank()));
+            username.setText(leaderboardItem.getUsername());
+            highestScore.setText(String.valueOf(leaderboardItem.getHighestScore()));
+            qrQuantity.setText(String.valueOf(leaderboardItem.getQrQuantity()));
+            totalScore.setText(String.valueOf(leaderboardItem.getTotalScore()));
         }
     }
 }

@@ -14,9 +14,6 @@ import java.util.Map;
 
 public class LeaderboardController {
     static private LeaderboardController controllerInstance;
-    private int myScore;
-    private String sortMethod;
-    private PlayerController playerController;
 
     private LeaderboardController() {}
 
@@ -29,10 +26,12 @@ public class LeaderboardController {
 
     /**
      * Gets and fills a list of Leaderboard rankings (unsorted)
+     * (Preferred over continuously repopulating list with SnapshotListener)
      * @param context The LeaderboardActivity context
      * @param list A list of leaderboard items (will be cleared)
      */
     public void getLeaderboard(Context context, LeaderboardList list) {
+        // TODO: Replace db call with sortLeaderboard() (which should call db for us)
         List<Map> temp = new ArrayList<>();  // Store our db results temporarily
         DatabaseController databaseController = DatabaseController.getInstance();
 
@@ -64,12 +63,13 @@ public class LeaderboardController {
     }
 
     /**
-     * Sorts data based on what is selected in Leaderboard Activity
+     * Calls the database to return player data sorted by sortMethod
      * @param context The LeaderboardActivity context
      * @param list The list to be sorted
      * @param sortMethod method to be sorted with
      */
     public void sortLeaderboard(Context context, LeaderboardList list, int sortMethod) {
+        // TODO: Use binary search to get estimated ranking
         list.sort(sortMethod);
     }
 }

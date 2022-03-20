@@ -3,10 +3,10 @@ package com.qrpokemon.qrpokemon.activities.leaderboard;
 /**
 * An item in leaderboard
 */
-class LeaderboardItem {
-    private int rank = 0;  // TODO: Get from database or calculate
+public class LeaderboardItem {
+    private int rank = 0;
     private String username;
-    private int highestScore = 0;  // TODO: Get from database or calculate
+    private int highestScore = 0;
     private long qrCount;
     private long totalScore;
 
@@ -16,7 +16,6 @@ class LeaderboardItem {
         this.totalScore = totalScore;
     }
 
-    // TODO: Remove unused getters
     public int getRank() {
         return rank;
     }

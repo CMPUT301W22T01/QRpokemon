@@ -25,28 +25,40 @@ public class LeaderboardList extends Observable {
         return list;
     }
 
+    // TODO: Move sorting to LeaderboardController which will call Firestore
     public void sort(int sortMethod) {
-        // TODO: Add other sorting methods
-        // TODO: Use String dropdown text?
+        // TODO: Use String dropdown text instead of int?
         switch (sortMethod) {
             case 0:
                 list.sort(new LeaderboardCompareTotalScore());
                 break;
-            //case 1:
-            //    break;
-            //case 2:
-            //    break;
-            //case 3:
-            //    break;
+            case 1:
+                list.sort(new LeaderboardCompareHighestUnique());
+                break;
+            case 2:
+                list.sort(new LeaderboardCompareMostScanned());
+                break;
         }
 
         notifyListUpdate();
     }
-}
 
-// NOTE: Replace if Database can do the sorting
-class LeaderboardCompareTotalScore implements Comparator<LeaderboardItem> {
-    public int compare(LeaderboardItem first, LeaderboardItem second) {
-        return (int) (second.getTotalScore() - first.getTotalScore());
+    // TODO: Replace with Firestore sorting query in Controller
+    static class LeaderboardCompareTotalScore implements Comparator<LeaderboardItem> {
+        public int compare(LeaderboardItem first, LeaderboardItem second) {
+            return (int) (second.getTotalScore() - first.getTotalScore());
+        }
+    }
+
+    static class LeaderboardCompareHighestUnique implements Comparator<LeaderboardItem> {
+        public int compare(LeaderboardItem first, LeaderboardItem second) {
+            return (int) (second.getTotalScore() - first.getTotalScore());
+        }
+    }
+
+    static class LeaderboardCompareMostScanned implements Comparator<LeaderboardItem> {
+        public int compare(LeaderboardItem first, LeaderboardItem second) {
+            return (int) (second.getTotalScore() - first.getTotalScore());
+        }
     }
 }

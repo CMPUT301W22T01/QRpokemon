@@ -49,9 +49,9 @@ public class LeaderboardActivity extends AppCompatActivity {
         sortBy.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                // 0 = i = sortMethod( one Qrcode score)
-                // 1 = i = sortMethod( total Qrcode score)
-                // 2 = i = sortMethod( numbers of  Qrcode score)
+                // i=0 | High Scores (aggregate total score)
+                // i=1 | Highest Unique
+                // i=2 | Most QR Codes Scanned
                 sortMethod = i;
             }
 
