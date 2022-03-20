@@ -6,6 +6,9 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
@@ -13,7 +16,7 @@ import java.util.Observer;
 /**
  * Adapter for leaderboard listview
   */
-public class LeaderboardAdapter extends BaseAdapter implements Observer {
+public class LeaderboardAdapter extends RecyclerView.Adapter implements Observer {
     private Context context;
     private List<LeaderboardItem> leaderboardList;
 
@@ -22,40 +25,23 @@ public class LeaderboardAdapter extends BaseAdapter implements Observer {
         this.leaderboardList = leaderboardList;
     }
 
+    @NonNull
     @Override
-    public int getCount() {
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = View.inflate(context, R.layout.leaderboard_list,null);
+        return new ViewHolder(view);
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+        // Bind data to ViewHolder
+        LeaderboardItem leaderboardItem = leaderboardList.get(position);
+        ((ViewHolder) holder).bind(leaderboardItem);
+    }
+
+    @Override
+    public int getItemCount() {
         return leaderboardList.size();
-    }
-
-    @Override
-    public Object getItem(int i) {
-        return null;
-    }
-
-    @Override
-    public long getItemId(int i) {
-        return 0;
-    }
-
-    @Override
-    public View getView(int i, View view, ViewGroup viewGroup) {
-        View view1 = View.inflate(context, R.layout.leaderboard_list,null);
-
-        TextView rankOrderList = view1.findViewById(R.id.rand_order_list);
-        TextView userNameList = view1.findViewById(R.id.username_list);
-        TextView highestScoreList = view1.findViewById(R.id.highestscore_list);
-        TextView qrNumList = view1.findViewById(R.id.qr_quantity_list);
-        TextView totalScoreList = view1.findViewById(R.id.total_score_list);
-
-        String a = String.valueOf(22);
-
-        rankOrderList.setText(String.valueOf(leaderboardList.get(i).getRank()));
-        userNameList.setText(String.valueOf(leaderboardList.get(i).getUsername()));
-        highestScoreList.setText(String.valueOf(leaderboardList.get(i).getHighestScore()));
-        qrNumList.setText(String.valueOf(leaderboardList.get(i).getQrQuantity()));
-        totalScoreList.setText(String.valueOf(leaderboardList.get(i).getTotalScore()));
-
-        return view1;
     }
 
     @Override
@@ -65,5 +51,32 @@ public class LeaderboardAdapter extends BaseAdapter implements Observer {
             leaderboardList = ((LeaderboardList) observable).getList();
 
         this.notifyDataSetChanged();
+    }
+
+    class ViewHolder extends RecyclerView.ViewHolder {
+        TextView rankOrderList;
+        TextView userNameList;
+        TextView highestScoreList;
+        TextView qrNumList;
+        TextView totalScoreList;
+
+        public ViewHolder(@NonNull View itemView) {
+            super(itemView);
+
+            // Link views to their variables
+            rankOrderList = itemView.findViewById(R.id.rand_order_list);
+            userNameList = itemView.findViewById(R.id.username_list);
+            highestScoreList = itemView.findViewById(R.id.highestscore_list);
+            qrNumList = itemView.findViewById(R.id.qr_quantity_list);
+            totalScoreList = itemView.findViewById(R.id.total_score_list);
+        }
+
+        public void bind(LeaderboardItem leaderboardItem) {
+            rankOrderList.setText(String.valueOf(leaderboardItem.getRank()));
+            userNameList.setText(leaderboardItem.getUsername());
+            highestScoreList.setText(String.valueOf(leaderboardItem.getHighestScore()));
+            qrNumList.setText(String.valueOf(leaderboardItem.getQrQuantity()));
+            totalScoreList.setText(String.valueOf(leaderboardItem.getTotalScore()));
+        }
     }
 }

@@ -1,17 +1,17 @@
 package com.qrpokemon.qrpokemon;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageButton;
-import android.widget.ListView;
 import android.widget.Spinner;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class LeaderboardActivity extends AppCompatActivity {
     // Init variables
-    private ListView leaderboardListView;
+    private RecyclerView leaderboardRecyclerView;
     private Spinner sortBy;
     private ImageButton backButton;
     private int sortMethod = 0;
@@ -27,7 +27,7 @@ public class LeaderboardActivity extends AppCompatActivity {
         setContentView(R.layout.leaderboard_activity);
 
         // data binding
-        leaderboardListView = findViewById(R.id.leaderboard_listview);
+        leaderboardRecyclerView = findViewById(R.id.rv_leaderboard);
         sortBy = findViewById(R.id.sp_sort_selection);
         backButton = findViewById(R.id.leaderboard_back);
 
@@ -38,7 +38,8 @@ public class LeaderboardActivity extends AppCompatActivity {
 
         // set adapter
         leaderboardAdapter = new LeaderboardAdapter(this, leaderboardList.getList());
-        leaderboardListView.setAdapter(leaderboardAdapter);
+        leaderboardRecyclerView.setAdapter(leaderboardAdapter);
+        leaderboardRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         leaderboardList.addObserver(leaderboardAdapter);
 
         // set spinner for select different sort type

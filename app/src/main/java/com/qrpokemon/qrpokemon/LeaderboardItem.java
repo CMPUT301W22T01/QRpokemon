@@ -4,9 +4,9 @@ package com.qrpokemon.qrpokemon;
 * An item in leaderboard
 */
 class LeaderboardItem {
-    private int rank;
+    private int rank = 0;  // TODO: Get from database or calculate
     private String username;
-    private int highestScore;
+    private int highestScore = 0;  // TODO: Get from database or calculate
     private long qrCount;
     private long totalScore;
 
