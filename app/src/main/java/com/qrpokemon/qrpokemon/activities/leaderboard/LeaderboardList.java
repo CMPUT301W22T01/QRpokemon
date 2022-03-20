@@ -1,4 +1,4 @@
-package com.qrpokemon.qrpokemon;
+package com.qrpokemon.qrpokemon.activities.leaderboard;
 
 import java.util.ArrayList;
 import java.util.Comparator;

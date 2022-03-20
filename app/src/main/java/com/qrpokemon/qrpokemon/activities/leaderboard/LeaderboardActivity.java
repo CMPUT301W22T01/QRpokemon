@@ -1,4 +1,5 @@
-package com.qrpokemon.qrpokemon;
+package com.qrpokemon.qrpokemon.activities.leaderboard;
+
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -8,6 +9,8 @@ import android.widget.Spinner;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.qrpokemon.qrpokemon.R;
 
 public class LeaderboardActivity extends AppCompatActivity {
     // Init variables

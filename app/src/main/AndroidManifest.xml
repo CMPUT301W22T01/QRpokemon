@@ -27,7 +27,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LeaderboardActivity"> </activity>
+        <activity android:name=".activities.leaderboard.LeaderboardActivity"> </activity>
         <activity android:name=".SignupActivity"> </activity>
         <activity android:name=".SignupActivity"
             tools:ignore="DuplicateActivity"></activity>

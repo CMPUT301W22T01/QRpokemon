@@ -8,7 +8,7 @@ import java.util.Map;
 public abstract class DatabaseCallback {
     private Context context;
 
-    DatabaseCallback(Context context) {
+    public DatabaseCallback(Context context) {
         context = context;
     }
 

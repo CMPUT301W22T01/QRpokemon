@@ -1,4 +1,5 @@
 package com.qrpokemon.qrpokemon;
+
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.qrpokemon.qrpokemon.activities.leaderboard.LeaderboardActivity;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private Intent intent;
@@ -59,11 +61,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.QR_Inventory_Button:  // open QR Inventory Activity
-                intent = new Intent(MainActivity.this,QrInventoryActivity.class);
+                intent = new Intent(MainActivity.this, QrInventoryActivity.class);
                 startActivity(intent);
                 break;
             case R.id.Map_Button:           // open Map Activity
-                intent = new Intent(MainActivity.this,MapActivity.class);
+                intent = new Intent(MainActivity.this, MapActivity.class);
                 startActivity(intent);
                 break;
             case R.id.Search_Button:        // open Search Activity
@@ -71,7 +73,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //                startActivity(intent);
                 break;
             case R.id.Leaderboard_Button:   // open Leaderboard Activity
-                intent = new Intent(MainActivity.this,LeaderboardActivity.class);
+                intent = new Intent(MainActivity.this, LeaderboardActivity.class);
                 startActivity(intent);
                 break;
             case R.id.Camera_Button:        // open Camera Activity
@@ -80,7 +82,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(intent);
                 break;
             case R.id.avatar_imageView:     // open Profile Activity
-                intent = new Intent(MainActivity.this,ProfileActivity.class);
+                intent = new Intent(MainActivity.this, ProfileActivity.class);
                 startActivity(intent);
                 break;
 
