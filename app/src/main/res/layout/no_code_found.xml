@@ -34,13 +34,14 @@
         app:layout_constraintStart_toEndOf="@+id/backButton_no_code_found"
         app:layout_constraintTop_toTopOf="parent" />
 
+
     <Button
         android:id="@+id/scan_Button_no_code_found"
         android:layout_width="173dp"
         android:layout_height="61dp"
         android:layout_marginBottom="50dp"
         android:background="@drawable/scan_button_background"
-        android:text="Scan"
+        android:text="Confirm"
         android:textColor="#000000"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -113,5 +114,16 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+
+
+    <TextView
+        android:id="@+id/qr_result"
+        android:layout_width="333dp"
+        android:layout_height="36dp"
+        android:text="Score :"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scan_Button_no_code_found" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
