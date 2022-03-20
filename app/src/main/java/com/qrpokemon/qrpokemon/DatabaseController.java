@@ -5,6 +5,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
@@ -55,21 +56,28 @@ public class DatabaseController {
      * @param list       A list which will have fetched data appended to it
      * @param collection The collection to search in.
      *                   May be one of [Player, QrCode, Location].
-     * @param objectName An object within the collection.
-     *                   May be null to return the collection.
+     * @param objectName (Optional) An object within the collection.
+     *                   May be null to return the entire collection.
+     * @param sortField (Optional) A field within a Document that should be used for sorting.
+     *                  May be null to specify no sort order.
      * @throws Exception Throws an exception if collection is invalid.
      */
     public void getData(DatabaseCallback callback, List<Map> list, String collection,
-                        String objectName) throws Exception {
+                        String objectName, String sortField) throws Exception {
 
-        // Check for valid collection reference
+        // Validate and get collection reference
         checkValidCollection(collection);
-
         CollectionReference collectionReference = db.collection(collection);
-        Task task = objectName == null ? collectionReference.get()
-                : collectionReference.whereEqualTo("Identifier", objectName).get();
 
-        task.addOnCompleteListener((OnCompleteListener<QuerySnapshot>) runningTask -> {
+        // Setup query
+        Query task = objectName == null ? collectionReference
+                : collectionReference.whereEqualTo("Identifier", objectName);
+
+        if (sortField != null)
+            task = task.orderBy(sortField, Query.Direction.DESCENDING);
+
+        // Run query
+        task.get().addOnCompleteListener((OnCompleteListener<QuerySnapshot>) runningTask -> {
             if (runningTask.isSuccessful()) {
                 // TODO: Use documentSnapshot.toObject() with HashMap to reconstruct objects?
                 for (QueryDocumentSnapshot document : runningTask.getResult())
@@ -82,6 +90,17 @@ public class DatabaseController {
                 Log.e("Database: ", "Failed to add document");
             }
         });
+    }
+
+    public void getData(DatabaseCallback callback, List<Map> list, String collection,
+                        String objectName) throws Exception {
+        // Return the specified document/object
+        getData(callback, list, collection, objectName, null);
+    }
+
+    public void getData(DatabaseCallback callback, List<Map> list, String collection) throws Exception {
+        // Return the entire collection
+        getData(callback, list, collection, null, null);
     }
 
     /**
