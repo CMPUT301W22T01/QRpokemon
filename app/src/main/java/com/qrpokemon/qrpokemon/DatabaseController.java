@@ -74,7 +74,7 @@ public class DatabaseController {
                 : collectionReference.whereEqualTo("Identifier", objectName);
 
         if (sortField != null)
-            task = task.orderBy(sortField);
+            task = task.orderBy(sortField, Query.Direction.DESCENDING);
 
         // Run query
         task.get().addOnCompleteListener((OnCompleteListener<QuerySnapshot>) runningTask -> {
