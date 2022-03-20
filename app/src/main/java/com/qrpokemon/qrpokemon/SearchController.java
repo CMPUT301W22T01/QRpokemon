@@ -1,0 +1,61 @@
+package com.qrpokemon.qrpokemon;
+
+import android.app.Activity;
+import android.content.Context;
+import android.util.Log;
+
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+public class SearchController {
+    static private com.qrpokemon.qrpokemon.SearchController controllerInstance;
+
+
+    private SearchController() {}
+
+    public static com.qrpokemon.qrpokemon.SearchController getInstance() {
+        if (controllerInstance == null)
+            controllerInstance = new com.qrpokemon.qrpokemon.SearchController();
+
+        return controllerInstance;
+    }
+
+    /**
+     * Gets and fills a list of Leaderboard rankings (unsorted)
+     * @param context The LeaderboardActivity context
+     * @param list A list of leaderboard items (will be cleared)
+     */
+    public void getSearch(Context context, ArrayList<SearchItem> list, String userName) {
+        List<Map> temp = new ArrayList<>();  // Store our db results temporarily
+        DatabaseController databaseController = DatabaseController.getInstance();
+
+        DatabaseCallback callback = new DatabaseCallback(context) {
+            @Override
+            public void run(List<Map> playerList) {
+                // Add each player to our Search list
+                for (Map<String, Object> player : playerList) {
+                    if (userName == player.get("Identifier").toString()){
+                        list.add(new SearchItem(
+
+                                (String) player.get("Identifier"),
+                                (String) player.get("email"),
+                                (String) player.get("phone")
+                        ));
+                    }
+                }
+            }
+        };
+
+        try {
+            databaseController.getData(callback, temp, "Player", null);
+        } catch (Exception exception) {
+            Log.e("Search Controller: ", "Database call failed");
+            Log.e("Search Controller: ", exception.toString());
+            ((Activity) context).finish();  // Quit the activity on error
+        }
+    }
+
+
+}
