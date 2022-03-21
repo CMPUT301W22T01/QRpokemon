@@ -1,6 +1,7 @@
 package com.qrpokemon.qrpokemon;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,11 +33,19 @@ public class QrInventoryCustomList extends ArrayAdapter<String> {
             view = LayoutInflater.from(context).inflate(R.layout.qr_inventory_list_content, parent,false);
         }
 
-        String hash = qrInventoryDataList.get(position);
+        String hashAndScore = qrInventoryDataList.get(position);
 
-        TextView hashTV = view.findViewById(R.id.qr_inventory_list_content_hash);
+        // Split string by space ' '
+        String cut = " ";
+        String[] tStr = hashAndScore.split(cut);
 
-        hashTV.setText(hash);
+        // findView
+        TextView hashTV = view.findViewById(R.id.tv_hash_code);
+        TextView scoreTV = view.findViewById(R.id.tv_hash_score);
+
+        // setText
+        hashTV.setText(tStr[1]);
+        scoreTV.setText("Score: " + tStr[0]);
 
         return view;
     }

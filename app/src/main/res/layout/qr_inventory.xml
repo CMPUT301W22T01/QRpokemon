@@ -23,8 +23,8 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/tv_total_score"
-        android:layout_width="200dp"
+        android:id="@+id/tv_total_score_msg"
+        android:layout_width="106dp"
         android:layout_height="30dp"
         android:layout_marginStart="8dp"
         android:text="Total Score: "
@@ -52,7 +52,7 @@
     <ListView
         android:id="@+id/QR_inventory_list"
         android:layout_width="match_parent"
-        android:layout_height="485dp"
+        android:layout_height="530dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="36dp"
         android:layout_marginEnd="8dp"
@@ -61,17 +61,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_total_score" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_total_score_msg" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/bt_back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginBottom="16dp"
         android:clickable="true"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/QR_inventory_list"
         app:srcCompat="?attr/actionModeCloseDrawable" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -97,7 +97,7 @@
         android:text="Descending"
         app:layout_constraintBottom_toTopOf="@+id/QR_inventory_list"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_total_score" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_total_score_msg" />
 
     <Button
         android:id="@+id/bt_ascending"
@@ -109,6 +109,17 @@
         android:text="Ascending"
         app:layout_constraintBottom_toTopOf="@+id/QR_inventory_list"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_total_score" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_total_score_msg" />
+
+    <TextView
+        android:id="@+id/tv_total_score"
+        android:layout_width="87dp"
+        android:layout_height="30dp"
+        android:text="TextView"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tv_total_score_msg"
+        app:layout_constraintEnd_toStartOf="@+id/tv_total_count"
+        app:layout_constraintStart_toEndOf="@+id/tv_total_score_msg" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
