@@ -17,7 +17,6 @@
         <item>High Scores</item>
         <item>Highest Unique</item>
         <item>Total Scanned</item>
-        <item>Total Sum of Scores</item>
     </string-array>
     <string name="edmonton">Edmonton</string>
     <string name="region">Region</string>

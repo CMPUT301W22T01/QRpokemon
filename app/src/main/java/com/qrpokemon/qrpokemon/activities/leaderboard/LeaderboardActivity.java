@@ -48,11 +48,11 @@ public class LeaderboardActivity extends AppCompatActivity {
         // set spinner for select different sort type
         sortBy.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
                 // i=0 | High Scores (aggregate total score)
                 // i=1 | Highest Unique
                 // i=2 | Most QR Codes Scanned
-                sortMethod = i;
+                leaderboardController.sortLeaderboard(null, leaderboardList, (int) id);
             }
 
             @Override

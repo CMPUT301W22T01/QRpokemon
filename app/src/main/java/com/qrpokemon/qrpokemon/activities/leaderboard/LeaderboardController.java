@@ -31,35 +31,8 @@ public class LeaderboardController {
      * @param list A list of leaderboard items (will be cleared)
      */
     public void getLeaderboard(Context context, LeaderboardList list) {
-        // TODO: Replace db call with sortLeaderboard() (which should call db for us)
-        List<Map> temp = new ArrayList<>();  // Store our db results temporarily
-        DatabaseController databaseController = DatabaseController.getInstance();
-
-        DatabaseCallback callback = new DatabaseCallback(context) {
-            @Override
-            public void run(List<Map> playerList) {
-                // Add each player to our leaderboard list
-                for (Map<String, Object> player : playerList) {
-                    list.add(new LeaderboardItem(
-                                // Types are guaranteed so we can safely cast
-                                (String) player.get("Identifier"),
-                                (long) player.get("qrCount"),
-                                (long) player.get("totalScore")
-                    ));
-                }
-
-                list.sort(0);  // Use default sort method
-                list.notifyListUpdate();  // Tell subscribers the list is updated
-            }
-        };
-
-        try {
-            databaseController.getData(callback, temp, "Player", null);
-        } catch (Exception exception) {
-            Log.e("Leaderboard Controller: ", "Database call failed");
-            Log.e("Leaderboard Controller: ", exception.toString());
-            ((Activity) context).finish();  // Quit the activity on error
-        }
+        // Return leaderboard with the default sort method
+        sortLeaderboard(context, list, 0);
     }
 
     /**
@@ -69,7 +42,52 @@ public class LeaderboardController {
      * @param sortMethod method to be sorted with
      */
     public void sortLeaderboard(Context context, LeaderboardList list, int sortMethod) {
-        // TODO: Use binary search to get estimated ranking
-        list.sort(sortMethod);
+        // TODO: Use binary search to get estimated ranking (array index)
+        // TODO: Use String dropdown text instead of int?
+
+        // Figure out which sort method to use
+        String sortField;
+        switch(sortMethod) {
+            case 0:
+                sortField = "totalScore";
+                break;
+            //case 1:
+            //    sortField = "highestUnique";
+            //    break;
+            case 2:
+                sortField = "qrCount";
+                break;
+            default:
+                sortField = null;
+        }
+
+        DatabaseController databaseController = DatabaseController.getInstance();
+        List<Map> tempList = new ArrayList<>();  // Store our db results temporarily
+        list.clear();  // Clear our original list before adding new entries
+
+        DatabaseCallback callback = new DatabaseCallback(context) {
+            @Override
+            public void run(List<Map> playerList) {
+                // Add each player to our leaderboard list
+                for (Map<String, Object> player : playerList) {
+                    list.add(new LeaderboardItem(
+                            // Types are guaranteed so we can safely cast
+                            (String) player.get("Identifier"),
+                            (long) player.get("qrCount"),
+                            (long) player.get("totalScore")
+                    ));
+                }
+
+                list.notifyListUpdate();  // Tell subscribers the list is updated
+            }
+        };
+
+        try {
+            databaseController.getData(callback, tempList, "Player", null, sortField);
+        } catch (Exception exception) {
+            Log.e("Leaderboard Controller: ", "Database call failed");
+            Log.e("Leaderboard Controller: ", exception.toString());
+            ((Activity) context).finish();  // Quit the activity on error
+        }
     }
 }
