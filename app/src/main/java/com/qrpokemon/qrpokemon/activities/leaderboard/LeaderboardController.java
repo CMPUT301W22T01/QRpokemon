@@ -69,10 +69,11 @@ public class LeaderboardController {
             @Override
             public void run(List<Map> playerList) {
                 // Add each player to our leaderboard list
-                for (Map<String, Object> player : playerList) {
+                for (int i = 0; i < playerList.size(); i++) {
+                    Map<String, Object> player = playerList.get(i);
                     list.add(new LeaderboardItem(
                             // Types are guaranteed so we can safely cast
-                            (String) player.get("Identifier"),
+                            (String) player.get("Identifier"), i+1, 0,
                             (long) player.get("qrCount"),
                             (long) player.get("totalScore")
                     ));

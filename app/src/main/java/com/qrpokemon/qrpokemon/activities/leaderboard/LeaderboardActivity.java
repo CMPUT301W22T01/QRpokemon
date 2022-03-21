@@ -17,7 +17,6 @@ public class LeaderboardActivity extends AppCompatActivity {
     private RecyclerView leaderboardRecyclerView;
     private Spinner sortBy;
     private ImageButton backButton;
-    private int sortMethod = 0;
 
     // Leaderboard variables
     LeaderboardController leaderboardController;
@@ -37,7 +36,6 @@ public class LeaderboardActivity extends AppCompatActivity {
         // Create and fill our list with player data
         leaderboardList = new LeaderboardList();
         leaderboardController = LeaderboardController.getInstance();
-        leaderboardController.getLeaderboard(this, leaderboardList);
 
         // set adapter
         leaderboardAdapter = new LeaderboardAdapter(this, leaderboardList.getList());
