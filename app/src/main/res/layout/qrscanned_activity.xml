@@ -40,7 +40,7 @@
         android:layout_height="61dp"
         android:layout_marginBottom="50dp"
         android:background="@drawable/scan_button_background"
-        android:text="Scan"
+        android:text="Confirm"
         android:textColor="#000000"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -48,7 +48,7 @@
         app:layout_constraintRight_toRightOf="parent" />
 
 
-    <com.budiyev.android.codescanner.CodeScannerView
+    <ImageView
         android:id="@+id/code_not_found_imageView"
         android:layout_width="408dp"
         android:layout_height="337dp"
