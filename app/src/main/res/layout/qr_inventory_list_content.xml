@@ -5,7 +5,8 @@
     android:id="@+id/content_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:background="@drawable/bg_qr_inven2">
 
     <ImageView
         android:id="@+id/imageView"
@@ -25,6 +26,8 @@
         android:layout_marginStart="6dp"
         android:layout_marginTop="8dp"
         android:text="@string/qrHash"
+        android:textStyle="bold"
+        android:textColor="@color/black"
         android:textSize="20sp"
         app:layout_constraintStart_toEndOf="@+id/imageView"
         app:layout_constraintTop_toTopOf="parent" />
@@ -38,6 +41,8 @@
         android:layout_marginEnd="6dp"
         android:text="TextView"
         android:textSize="36dp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/imageView"
         app:layout_constraintTop_toBottomOf="@+id/poop" />
@@ -50,6 +55,8 @@
         android:layout_marginEnd="6dp"
         android:text="Score: "
         android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_hash_code" />
 
