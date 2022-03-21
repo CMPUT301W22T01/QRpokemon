@@ -144,7 +144,7 @@ public class QrInventoryActivity extends AppCompatActivity implements View.OnCli
 
                 // delete from arraylist
                 qrHashCodes.remove(selectedHash);
-                qrInventoryDataAdapter.remove(selectedHash);
+                qrInventoryDataAdapter.remove(qrInventoryDataAdapter.getItem(selectedPosition));
 
                 // delete from local and firebase
                 PlayerController playerController = PlayerController.getInstance();
