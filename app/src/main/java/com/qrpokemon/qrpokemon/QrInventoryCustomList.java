@@ -44,8 +44,8 @@ public class QrInventoryCustomList extends ArrayAdapter<String> {
         TextView scoreTV = view.findViewById(R.id.tv_hash_score);
 
         // setText
-        hashTV.setText(tStr[0]);
-        scoreTV.setText("Score: " + tStr[1]);
+        hashTV.setText(tStr[1]);
+        scoreTV.setText("Score: " + tStr[0]);
 
         return view;
     }

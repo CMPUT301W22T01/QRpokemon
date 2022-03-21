@@ -55,6 +55,7 @@ public class QrInventoryController {
      */
     public HashMap<String, Object> getAndSetQrCodeData(Context context, ArrayList<String> qrHashCodes, ArrayAdapter<String> qrInventory) throws Exception {
 
+        totalScore = 0;
         List<Map> result = new ArrayList<Map>();
         DatabaseCallback databaseCallback = new DatabaseCallback(context) {
 
@@ -66,12 +67,17 @@ public class QrInventoryController {
                     if (dataList != null ) {
                         data.put((String) dataList.get(dataList.size()-1).get("Identifier"), dataList);
                         ListView temp = ((Activity) context).findViewById(R.id.QR_inventory_list);
-                        qrInventory.add((String) (dataList.get(dataList.size()-1).get("Identifier"))
+
+                        qrInventory.add(String.valueOf(dataList.get(dataList.size()-1).get("score"))
                                 + " "
-                                + (String.valueOf(dataList.get(dataList.size()-1).get("score"))));
-                        Log.e(TAG, "Hash '" + (String) dataList.get(dataList.size()-1).get("Identifier")
+                                + ((String) (dataList.get(dataList.size()-1).get("Identifier"))));
+
+                        Log.e(TAG, "Hash '"
+                                + (String.valueOf(dataList.get(dataList.size()-1).get("score")))
                                 + " "
-                                + (String.valueOf(dataList.get(dataList.size()-1).get("score"))) + "' has added to datalist");
+                                + (String) (String.valueOf(dataList.get(dataList.size()-1).get("score")))
+                                + "' has added to datalist");
+
                         totalScore += Integer.valueOf(String.valueOf( dataList.get(dataList.size()-1).get("score")));
                         Log.e(TAG, "Current score: " + totalScore.toString());
 

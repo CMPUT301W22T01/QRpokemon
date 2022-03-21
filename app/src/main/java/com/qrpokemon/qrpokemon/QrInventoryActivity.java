@@ -18,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 
 public class QrInventoryActivity extends AppCompatActivity implements View.OnClickListener {
@@ -33,7 +34,6 @@ public class QrInventoryActivity extends AppCompatActivity implements View.OnCli
     private ArrayList<String> qrHashCodes;
     private ArrayAdapter<String> qrInventoryDataAdapter;
     private QrInventoryController qrInventoryController = QrInventoryController.getInstance();
-
 
     final private String TAG = "QrInventoryActivity";
 
@@ -58,6 +58,8 @@ public class QrInventoryActivity extends AppCompatActivity implements View.OnCli
 
         backButton.setOnClickListener(this);
         deleteButton.setOnClickListener(this);
+        descendingButton.setOnClickListener(this);
+        ascendingButton.setOnClickListener(this);
 
         // Get all the data of the current player's document
         try {
@@ -102,7 +104,11 @@ public class QrInventoryActivity extends AppCompatActivity implements View.OnCli
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 selectedPosition = i;
-                selectedHash = adapterView.getItemAtPosition(i).toString();
+
+                String cut = " ";
+                String curString = adapterView.getItemAtPosition(i).toString();
+                String[] tStr = curString.split(cut);
+                selectedHash = tStr[1];
 
                 Log.e(TAG, "Current hash: " + selectedHash);
                 deleteButton.setVisibility(VISIBLE);
@@ -133,7 +139,7 @@ public class QrInventoryActivity extends AppCompatActivity implements View.OnCli
                 String[] tStr = qrInventoryDataAdapter.getItem(selectedPosition).split(cut);
                 curTotalScore = Integer.valueOf((String) totalScore.getText());
 
-                curTotalScore -= Integer.valueOf(tStr[1]);
+                curTotalScore -= Integer.valueOf(tStr[0]);
                 totalScore.setText(curTotalScore.toString());
 
                 // delete from arraylist
@@ -143,21 +149,75 @@ public class QrInventoryActivity extends AppCompatActivity implements View.OnCli
                 // delete from local and firebase
                 PlayerController playerController = PlayerController.getInstance();
                 try {
-                    playerController.savePlayerData(qrHashCodes.size(), curTotalScore, qrHashCodes, null);
+                    playerController.savePlayerData(qrInventoryDataAdapter.getCount(), curTotalScore, qrHashCodes, null);
 
                     qrInventoryList.setAdapter(qrInventoryDataAdapter);
-                    totalCount.setText("Total Number: " + qrHashCodes.size());
+                    totalCount.setText("Total Number: " + qrInventoryDataAdapter.getCount());
 
                 } catch (Exception e) {
                     e.printStackTrace();
-                    Log.e(TAG, "error from Onclick (delete from local and firebase): " + e);
+                    Log.e(TAG, "Error from Onclick (delete from local and firebase): " + e);
                 }
 
                 deleteButton.setVisibility(INVISIBLE);
 
+                break;
+
             case R.id.bt_descending:
+                Log.e(TAG, "After clicking the DESCENDING button: " + qrInventoryDataAdapter.getCount());
+
+                qrInventoryDataAdapter.sort(new Comparator<String>() {
+                    @Override
+                    public int compare(String s, String t1) {
+                        String cut = " ";
+                        String[] tStr1 = s.split(cut);
+                        String[] tStr2 = t1.split(cut);
+                        Integer s1 = Integer.valueOf(tStr1[0]);
+                        Integer s2 = Integer.valueOf(tStr2[0]);
+
+                        if (s1 > s2) {
+                            return -1;
+                        }
+                        else if (s1.equals(s2)) {
+                            return 0;
+                        }
+                        else {
+                            return 1;
+                        }
+                    }
+                });
+
+                qrInventoryList.setAdapter(qrInventoryDataAdapter);
+
+                break;
 
             case R.id.bt_ascending:
+                Log.e(TAG, "After clicking the ASCENDING button: " + qrInventoryDataAdapter.getCount());
+
+                qrInventoryDataAdapter.sort(new Comparator<String>() {
+                    @Override
+                    public int compare(String s, String t1) {
+                        String cut = " ";
+                        String[] tStr1 = s.split(cut);
+                        String[] tStr2 = t1.split(cut);
+                        Integer s1 = Integer.valueOf(tStr1[0]);
+                        Integer s2 = Integer.valueOf(tStr2[0]);
+
+                        if (s1 > s2) {
+                            return 1;
+                        }
+                        else if (s1.equals(s2)) {
+                            return 0;
+                        }
+                        else {
+                            return -1;
+                        }
+                    }
+                });
+
+                qrInventoryList.setAdapter(qrInventoryDataAdapter);
+
+                break;
         }
     }
 }
