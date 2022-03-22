@@ -21,17 +21,19 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
 
-public class QrInventoryActivity extends AppCompatActivity implements View.OnClickListener {
+public class QrInventoryActivity
+        extends AppCompatActivity
+        implements View.OnClickListener, QrInventoryAddCommentFragment.OnFragmentInteractionListener {
 
     private String selectedHash, currentPlayer;
     private Integer selectedPosition;
     private TextView totalScore, totalCount;
     private Button ascendingButton, descendingButton;
-    private FloatingActionButton backButton, deleteButton;
+    private FloatingActionButton backButton, deleteButton, commentButton;
     private ListView qrInventoryList;
     private HashMap hashMapOfPlayerData;
     private HashMap<String, Object> m = new HashMap<>();
-    private ArrayList<String> qrHashCodes;
+    private ArrayList<String> qrHashCodes, commentsOfCurQrcode;
     private ArrayAdapter<String> qrInventoryDataAdapter;
     private QrInventoryController qrInventoryController = QrInventoryController.getInstance();
 
@@ -56,11 +58,13 @@ public class QrInventoryActivity extends AppCompatActivity implements View.OnCli
         deleteButton = findViewById(R.id.bt_delete);
         descendingButton = findViewById(R.id.bt_descending);
         ascendingButton = findViewById(R.id.bt_ascending);
+        commentButton = findViewById(R.id.bt_comment);
 
         backButton.setOnClickListener(this);
         deleteButton.setOnClickListener(this);
         descendingButton.setOnClickListener(this);
         ascendingButton.setOnClickListener(this);
+        commentButton.setOnClickListener(this);
 
         // Get all the data of the current player's document
         try {
@@ -113,6 +117,7 @@ public class QrInventoryActivity extends AppCompatActivity implements View.OnCli
 
                 // show the delete button
                 deleteButton.setVisibility(VISIBLE);
+                commentButton.setVisibility(VISIBLE);
             }
         });
     }
@@ -165,6 +170,7 @@ public class QrInventoryActivity extends AppCompatActivity implements View.OnCli
                 }
 
                 deleteButton.setVisibility(INVISIBLE);
+                commentButton.setVisibility(INVISIBLE);
 
                 break;
 
@@ -231,7 +237,50 @@ public class QrInventoryActivity extends AppCompatActivity implements View.OnCli
                 qrInventoryList.setAdapter(qrInventoryDataAdapter);
 
                 break;
+
+            // if the user clicked the comment button, that is, the player want to add a comment to one of his/her qrCode
+            case R.id.bt_comment:
+
+                // first, get all the comments that that qrCode('selectedHash') has
+                try {
+                    commentsOfCurQrcode = new ArrayList<>();
+                    qrInventoryController.getAllComments(this, selectedHash, commentsOfCurQrcode);
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Log.e(TAG, "Error from line getAllComments: " + e);
+                }
+
+                // call the fragment and ask player for comment
+                QrInventoryAddCommentFragment qrInventoryAddCommentFragment = new QrInventoryAddCommentFragment();
+                qrInventoryAddCommentFragment.show(getSupportFragmentManager(), "ADD_COMMENT");
+
+                break;
+
         }
+    }
+
+    /**
+     * Function used by QrInventoryAddCommentFragment, the fragment passes the argument (String) "comment"
+     * to and call this function, then it writes the new arrayList of comments of that qrCode ('selectedHash')
+     * into Firebase.
+     * @param comment comment that player just entered
+     * @throws Exception
+     */
+    public void addComment(String comment) throws Exception {
+        DatabaseController databaseController = DatabaseController.getInstance();
+        HashMap<String, ArrayList<String>> tHash = new HashMap<>();
+
+        // add the new comment into the original arrayList
+        commentsOfCurQrcode.add(comment);
+
+        // update data of Firebase
+        tHash.put("comments", commentsOfCurQrcode);
+        databaseController.writeData("QrCode", selectedHash, tHash);
+
+        deleteButton.setVisibility(INVISIBLE);
+        commentButton.setVisibility(INVISIBLE);
+
     }
 }
 

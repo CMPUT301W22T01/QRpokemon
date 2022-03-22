@@ -64,7 +64,7 @@ public class QrInventoryController {
             public void run(List<Map> dataList) {
 
                 if (!dataList.isEmpty()) {
-                    Log.e(TAG, "Found:" + dataList.toString());
+                    Log.e(TAG, "Function 'getAndSetQrCodeData' found:" + dataList.toString());
                     if (dataList != null ) {
                         data.put((String) dataList.get(dataList.size()-1).get("Identifier"), dataList);
                         ListView temp = ((Activity) context).findViewById(R.id.QR_inventory_list);
@@ -76,7 +76,7 @@ public class QrInventoryController {
                         Log.e(TAG, "Hash '"
                                 + (String.valueOf(dataList.get(dataList.size()-1).get("score")))
                                 + " "
-                                + (String) (String.valueOf(dataList.get(dataList.size()-1).get("score")))
+                                + (String) (dataList.get(dataList.size()-1).get("Identifier"))
                                 + "' has added to datalist");
 
                         totalScore += Integer.valueOf(String.valueOf( dataList.get(dataList.size()-1).get("score")));
@@ -96,6 +96,38 @@ public class QrInventoryController {
             databaseController.getData(databaseCallback, result, "QrCode", qrHashCodes.get(i));
             Log.e(TAG, "Loop now get hash: " + qrHashCodes.get(i));
         }
+
+        return data;
+    }
+
+    /**
+     * This function receive a (String) 'hashName', then store all the comments of that qrCode into
+     * an arrayList 'commentsOfCurQrcode'
+     * @param context               current activity
+     * @param hashName              which qrCode we interest
+     * @param commentsOfCurQrcode   where we store all those comments
+     * @return
+     * @throws Exception
+     */
+    public HashMap<String, Object> getAllComments (Context context, String hashName, ArrayList<String> commentsOfCurQrcode) throws Exception {
+        List<Map> result = new ArrayList<>();
+        DatabaseCallback databaseCallback = new DatabaseCallback(context) {
+            @Override
+            public void run(List<Map> dataList) {
+
+                if (!dataList.isEmpty()){
+                    Log.e(TAG, "Function 'getAllComments' found:" + dataList.toString());
+
+                    ArrayList<String> tList;
+                    tList = (ArrayList<String>) dataList.get(0).get("comments");
+
+                    for (int i = 0; i < tList.size(); i++) {
+                        commentsOfCurQrcode.add(tList.get(i));
+                    }
+                }
+            }
+        };
+        databaseController.getData(databaseCallback, result, "QrCode", hashName);
 
         return data;
     }
