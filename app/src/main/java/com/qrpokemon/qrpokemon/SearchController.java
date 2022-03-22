@@ -42,8 +42,9 @@ public class SearchController {
 
                     for (Map player : playerList){
 
-                        if (userName.equals(player.get("Identifier").toString())){
-
+                        if (userName.equals( player.get("Identifier").toString())){
+                            Log.e("SearchController: ", "Player found: " + player.get("Identifier").toString());
+                            qMyAdapter.clear();
                             qMyAdapter.add(new SearchItem(
                                     (String) player.get("Identifier"),
                                     (String) player.get("email"),
