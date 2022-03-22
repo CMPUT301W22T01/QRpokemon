@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/bg_qr_inven1">
+    android:layout_height="match_parent">
 
 
     <TextView
@@ -16,7 +15,6 @@
         android:layout_marginEnd="4dp"
         android:text="QR Inventory"
         android:textAlignment="center"
-        android:fontFamily="@font/font_qr_inven"
         android:textColor="@color/black"
         android:textSize="46sp"
         android:textStyle="bold"
@@ -74,7 +72,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:clickable="true"
-        app:backgroundTint="#1bfffe"
+        app:backgroundTint="@android:color/darker_gray"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -100,7 +98,7 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="12dp"
-        android:background="@drawable/qr_inven_bt_background"
+        android:background="@drawable/custom_button_main_menu"
         android:text="Descending"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/QR_inventory_list"
@@ -114,7 +112,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="12dp"
-        android:background="@drawable/qr_inven_bt_background"
+        android:background="@drawable/custom_button_main_menu"
         android:text="Ascending"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/QR_inventory_list"
@@ -125,10 +123,11 @@
         android:id="@+id/tv_total_score"
         android:layout_width="87dp"
         android:layout_height="30dp"
+        android:layout_marginStart="4dp"
         android:text="--"
+        android:textColor="@color/black"
         android:textSize="18sp"
         android:textStyle="bold"
-        android:textColor="@color/black"
         app:layout_constraintBaseline_toBaselineOf="@+id/tv_total_score_msg"
         app:layout_constraintEnd_toStartOf="@+id/tv_total_count"
         app:layout_constraintStart_toEndOf="@+id/tv_total_score_msg" />

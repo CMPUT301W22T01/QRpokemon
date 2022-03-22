@@ -34,7 +34,7 @@ public class QrInventoryController {
 
 
     /**
-     *
+     * Get and return all the data from collection "Player", document "currentPlayer"
      * @param currentPlayer The identifier of the current player
      * @return all the information of the current player's document, which is a hashMap
      * @throws Exception if collection is incorrect or player doesn't found
@@ -47,7 +47,8 @@ public class QrInventoryController {
     }
 
     /**
-     *
+     * Get a series of hash codes of qrcode, which is stored in argument "qrHashCodes", then put
+     * all the documents of those hash codes from collection "QrCode".
      * @param context       current activity
      * @param qrHashCodes   an ArrayList which has all the qrCodes owned by the current player
      * @return              the document of a qrHash
