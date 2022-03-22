@@ -83,4 +83,5 @@ task javadoc(type: Javadoc) {
     failOnError false
     exclude '**/BuildConfig.java'
     exclude '**/R.java'
+
 }

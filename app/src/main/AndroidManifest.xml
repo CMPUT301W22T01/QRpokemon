@@ -35,5 +35,6 @@
         <activity android:name=".QrInventoryActivity"></activity>
         <activity android:name=".ProfileActivity"></activity>
         <activity android:name=".MapActivity"></activity>
+        <activity android:name=".SearchActivity"></activity>
     </application>
 </manifest>

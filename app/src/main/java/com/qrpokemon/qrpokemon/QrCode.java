@@ -1,5 +1,6 @@
 package com.qrpokemon.qrpokemon;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -8,7 +9,7 @@ public class QrCode {
     private String indentifier;
     private Integer score;
     private String location;
-    private HashMap<Object,Object> comments;
+    private ArrayList<String> comments;
 
     /**
      *
@@ -17,7 +18,7 @@ public class QrCode {
      * @param location    "location" is the place where location where it can be found
      * @param comments    "comment" is the comments left by the current player or someone else
      */
-    public QrCode (String indentifier, Integer score, String location, HashMap<Object,Object> comments) {
+    public QrCode (String indentifier, Integer score, String location, ArrayList<String> comments) {
         this.indentifier = indentifier;
         this.score = score;
         this.location = location;
@@ -48,11 +49,11 @@ public class QrCode {
         this.location = location;
     }
 
-    public HashMap<Object, Object> getComments() {
+    public ArrayList<String> getComments() {
         return comments;
     }
 
-    public void setComments(HashMap<Object, Object> comments) {
+    public void setComments(ArrayList<String> comments) {
         this.comments = comments;
     }
 }
