@@ -15,7 +15,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
@@ -30,6 +29,7 @@ public class SearchActivity extends AppCompatActivity {
 
     private ArrayAdapter<SearchItem> mAdapter;
     private Button backButton;
+    private Button searchButton;
     private ArrayList<SearchItem> searchList;
     private SearchController searchController;
 
@@ -40,10 +40,11 @@ public class SearchActivity extends AppCompatActivity {
 
         ListView listView = findViewById(R.id.search_listview);
         backButton = findViewById(R.id.button);
+        searchButton = findViewById(R.id.search_button);
 
         // Create and fill our list with player data
-        searchList = new ArrayList<SearchItem>;
-//        searchController = SearchController.getInstance();
+        searchList = new ArrayList<SearchItem>();
+        searchController = SearchController.getInstance();
 //        searchController.getSearch(this, searchList);
 
 
@@ -51,37 +52,50 @@ public class SearchActivity extends AppCompatActivity {
         Query query = mDb.collection(PLAYER)
                 .orderBy("createdTime", Query.Direction.ASCENDING);
 
-        mAdapter = new ArrayAdapter<>(this, R.layout.search_list, searchList);
+        mAdapter = new SearchList(this, new ArrayList<SearchItem>());
         listView.setAdapter(mAdapter);
 
         EditText searchBox = findViewById(R.id.sv);
-        searchBox.addTextChangedListener(new TextWatcher() {
+
+
+
+        searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                Log.d(TAG, "SearchBox has changed to: " + s.toString());
-                Query query;
-                if (s.toString().isEmpty()) {
-                    query = mDb.collection(PLAYER)
-                            .orderBy("Identifier", Query.Direction.ASCENDING);
-                } else {
-                    query = mDb.collection(PLAYER)
-                            .whereEqualTo("Identifier", s.toString())
-                            .orderBy("Identifier", Query.Direction.ASCENDING);
-                }
-
-                mAdapter.notifyDataSetChanged();
+            public void onClick(View view) {
+                String search_content = searchBox.getText().toString();
+                Log.e("SearchActivity: ", "Seaching for " + search_content);
+                searchController.getSearch(getApplicationContext(), searchList, search_content, mAdapter);
+//                mAdapter.notifyDataSetChanged();
             }
         });
+//        searchBox.addTextChangedListener(new TextWatcher() {
+//            @Override
+//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+//
+//            }
+//
+//            @Override
+//            public void onTextChanged(CharSequence s, int start, int before, int count) {
+//
+//            }
+//
+//            @Override
+//            public void afterTextChanged(Editable s) {
+////                Log.d(TAG, "SearchBox has changed to: " + s.toString());
+////                Query query;
+////                if (s.toString().isEmpty()) {
+////                    query = mDb.collection(PLAYER)
+////                            .orderBy("Identifier", Query.Direction.ASCENDING);
+////                } else {
+////                    query = mDb.collection(PLAYER)
+////                            .whereEqualTo("Identifier", s.toString())
+////                            .orderBy("Identifier", Query.Direction.ASCENDING);
+////                }
+//                searchController.getSearch(getApplicationContext(), searchList, s.toString());
+//
+//                mAdapter.notifyDataSetChanged();
+//            }
+//        });
 
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,17 +106,4 @@ public class SearchActivity extends AppCompatActivity {
 
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        mAdapter.startListening();
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        if (mAdapter != null) {
-            mAdapter.stopListening();
-        }
-    }
 }

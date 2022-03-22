@@ -67,8 +67,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(intent);
                 break;
             case R.id.Search_Button:        // open Search Activity
-//                Intent intent = new Intent(MainActivity.this,SearchActivity.class);
-//                startActivity(intent);
+                Intent intent = new Intent(MainActivity.this,SearchActivity.class);
+                startActivity(intent);
                 break;
             case R.id.Leaderboard_Button:   // open Leaderboard Activity
                 intent = new Intent(MainActivity.this,LeaderboardActivity.class);

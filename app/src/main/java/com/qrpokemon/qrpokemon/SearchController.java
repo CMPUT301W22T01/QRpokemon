@@ -3,13 +3,16 @@ package com.qrpokemon.qrpokemon;
 import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
+import android.widget.ArrayAdapter;
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class SearchController {
+
     static private com.qrpokemon.qrpokemon.SearchController controllerInstance;
 
 
@@ -27,7 +30,7 @@ public class SearchController {
      * @param context The LeaderboardActivity context
      * @param list A list of leaderboard items (will be cleared)
      */
-    public void getSearch(Context context, ArrayList<SearchItem> list, String userName) {
+    public void getSearch(Context context, ArrayList<SearchItem> list, String userName, ArrayAdapter<SearchItem> qMyAdapter) {
         List<Map> temp = new ArrayList<>();  // Store our db results temporarily
         DatabaseController databaseController = DatabaseController.getInstance();
 
@@ -35,15 +38,22 @@ public class SearchController {
             @Override
             public void run(List<Map> playerList) {
                 // Add each player to our Search list
-                for (Map<String, Object> player : playerList) {
-                    if (userName == player.get("Identifier").toString()){
-                        list.add(new SearchItem(
+                if(!playerList.isEmpty()) {
 
-                                (String) player.get("Identifier"),
-                                (String) player.get("email"),
-                                (String) player.get("phone")
-                        ));
+                    for (Map player : playerList){
+
+                        if (userName.equals(player.get("Identifier").toString())){
+
+                            qMyAdapter.add(new SearchItem(
+                                    (String) player.get("Identifier"),
+                                    (String) player.get("email"),
+                                    (String) player.get("phone")
+                            ));
+
+                            qMyAdapter.notifyDataSetChanged();
+                        }
                     }
+
                 }
             }
         };
@@ -56,6 +66,5 @@ public class SearchController {
             ((Activity) context).finish();  // Quit the activity on error
         }
     }
-
 
 }
