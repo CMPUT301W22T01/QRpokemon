@@ -25,17 +25,6 @@ public class LeaderboardController {
     }
 
     /**
-     * Gets and fills a list of Leaderboard rankings (unsorted)
-     * (Preferred over continuously repopulating list with SnapshotListener)
-     * @param context The LeaderboardActivity context
-     * @param list A list of leaderboard items (will be cleared)
-     */
-    public void getLeaderboard(Context context, LeaderboardList list) {
-        // Return leaderboard with the default sort method
-        sortLeaderboard(context, list, 0);
-    }
-
-    /**
      * Calls the database to return player data sorted by sortMethod
      * @param context The LeaderboardActivity context
      * @param list The list to be sorted
