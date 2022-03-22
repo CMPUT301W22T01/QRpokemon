@@ -39,7 +39,8 @@ public class QrInventoryActivity extends AppCompatActivity implements View.OnCli
 
     /**
      * Displays all QrInventory related information, including a title, a total score board,
-     * a list of all qrcodes currently owned by the player, and a back button
+     * a total number board, a list of all qrcodes currently owned by the player,a delete button,
+     * and a back button
      *
      * @param savedInstanceState saved Instances so far
      */
@@ -83,34 +84,34 @@ public class QrInventoryActivity extends AppCompatActivity implements View.OnCli
         // Set the total # of the qrCodes the current user has
         totalCount.setText("Total Number: " + qrHashCodes.size());
 
-        // todo Set the total score of the current player
-        totalScore.setText("Total Score: ");
+        // Get and set the data from the documents of each qrcode in ArrayList "qrHashCode"
 
         qrInventoryDataAdapter = new QrInventoryCustomList(this, new ArrayList<String>());
         qrInventoryList.setAdapter(qrInventoryDataAdapter);
 
-        // todo Get all the scores of the qrcode that owned by the player
         try {
             qrInventoryController.getAndSetQrCodeData(this, qrHashCodes, qrInventoryDataAdapter);
             Log.e(TAG, "QrCode documents of the current player has the following: " + qrInventoryDataAdapter.getItem(0).toString());
         } catch (Exception e) {
             e.printStackTrace();
-            Log.e(TAG, "error: " + e);
+            Log.e(TAG, "Error from line 97: " + e);
         }
-
 
         // Set a click listener for the listview
         qrInventoryList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                // set "selectedPosition" as the index (Integer) of the line that player just clicked
                 selectedPosition = i;
 
+                // set "selectedHash" as the hash code (String) of the line that player just clicked
                 String cut = " ";
                 String curString = adapterView.getItemAtPosition(i).toString();
                 String[] tStr = curString.split(cut);
                 selectedHash = tStr[1];
-
                 Log.e(TAG, "Current hash: " + selectedHash);
+
+                // show the delete button
                 deleteButton.setVisibility(VISIBLE);
             }
         });
@@ -119,19 +120,23 @@ public class QrInventoryActivity extends AppCompatActivity implements View.OnCli
     /**
      * Check on which button user have entered
      * User can either choose to:
-     * delete a selected qrCodes from his inventory
-     * go back to main menu
-     *
+     *  - go back to main menu
+     *  - delete a selected qrCodes from his inventory
+     *  - sort the list in descending order by score to the qrCode with highest score
+     *  - sort the list in ascending order by score to the qrCode with lowest score
      * @param view QrInventory's view
      */
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
+            // if the player clicked the back button, that is, want to go back to main menu
             case R.id.bt_back:
                 finish();
                 break;
 
+            // if the player clicked the delete button, that is, want to delete one of his/her qrCode
             case R.id.bt_delete:
+
                 // deducted the current score from the total score
                 Integer curTotalScore;
                 String cut = " ";
@@ -142,16 +147,16 @@ public class QrInventoryActivity extends AppCompatActivity implements View.OnCli
                 curTotalScore -= Integer.valueOf(tStr[0]);
                 totalScore.setText(curTotalScore.toString());
 
-                // delete from arraylist
+                // delete from Arraylist/ListView
                 qrHashCodes.remove(selectedHash);
                 qrInventoryDataAdapter.remove(qrInventoryDataAdapter.getItem(selectedPosition));
 
-                // delete from local and firebase
+                // delete from Local and Firebase, update totalCount/totalNumber, update display
                 PlayerController playerController = PlayerController.getInstance();
                 try {
                     playerController.savePlayerData(qrInventoryDataAdapter.getCount(), curTotalScore, qrHashCodes, null);
-
                     qrInventoryList.setAdapter(qrInventoryDataAdapter);
+
                     totalCount.setText("Total Number: " + qrInventoryDataAdapter.getCount());
 
                 } catch (Exception e) {
@@ -163,15 +168,19 @@ public class QrInventoryActivity extends AppCompatActivity implements View.OnCli
 
                 break;
 
+            // if the user clicked the descending button, that is, want to sort the list in descending order by score
             case R.id.bt_descending:
                 Log.e(TAG, "After clicking the DESCENDING button: " + qrInventoryDataAdapter.getCount());
 
                 qrInventoryDataAdapter.sort(new Comparator<String>() {
                     @Override
+                    // how the "sort" function know how to sort
                     public int compare(String s, String t1) {
                         String cut = " ";
                         String[] tStr1 = s.split(cut);
                         String[] tStr2 = t1.split(cut);
+
+                        // get the score
                         Integer s1 = Integer.valueOf(tStr1[0]);
                         Integer s2 = Integer.valueOf(tStr2[0]);
 
@@ -191,15 +200,19 @@ public class QrInventoryActivity extends AppCompatActivity implements View.OnCli
 
                 break;
 
+            // if the user clicked the descending button, that is, want to sort the list in descending order by score
             case R.id.bt_ascending:
                 Log.e(TAG, "After clicking the ASCENDING button: " + qrInventoryDataAdapter.getCount());
 
                 qrInventoryDataAdapter.sort(new Comparator<String>() {
                     @Override
+                    // how the "sort" function know how to sort
                     public int compare(String s, String t1) {
                         String cut = " ";
                         String[] tStr1 = s.split(cut);
                         String[] tStr2 = t1.split(cut);
+
+                        // get the score
                         Integer s1 = Integer.valueOf(tStr1[0]);
                         Integer s2 = Integer.valueOf(tStr2[0]);
 
