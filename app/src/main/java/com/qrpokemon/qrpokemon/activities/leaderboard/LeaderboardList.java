@@ -25,28 +25,7 @@ public class LeaderboardList extends Observable {
         return list;
     }
 
-    public void sort(int sortMethod) {
-        // TODO: Add other sorting methods
-        // TODO: Use String dropdown text?
-        switch (sortMethod) {
-            case 0:
-                list.sort(new LeaderboardCompareTotalScore());
-                break;
-            //case 1:
-            //    break;
-            //case 2:
-            //    break;
-            //case 3:
-            //    break;
-        }
-
-        notifyListUpdate();
-    }
-}
-
-// NOTE: Replace if Database can do the sorting
-class LeaderboardCompareTotalScore implements Comparator<LeaderboardItem> {
-    public int compare(LeaderboardItem first, LeaderboardItem second) {
-        return (int) (second.getTotalScore() - first.getTotalScore());
+    public void clear() {
+        list.clear();
     }
 }

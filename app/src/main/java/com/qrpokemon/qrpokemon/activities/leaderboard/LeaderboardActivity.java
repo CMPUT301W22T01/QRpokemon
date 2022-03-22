@@ -17,7 +17,6 @@ public class LeaderboardActivity extends AppCompatActivity {
     private RecyclerView leaderboardRecyclerView;
     private Spinner sortBy;
     private ImageButton backButton;
-    private int sortMethod = 0;
 
     // Leaderboard variables
     LeaderboardController leaderboardController;
@@ -37,7 +36,6 @@ public class LeaderboardActivity extends AppCompatActivity {
         // Create and fill our list with player data
         leaderboardList = new LeaderboardList();
         leaderboardController = LeaderboardController.getInstance();
-        leaderboardController.getLeaderboard(this, leaderboardList);
 
         // set adapter
         leaderboardAdapter = new LeaderboardAdapter(this, leaderboardList.getList());
@@ -48,11 +46,11 @@ public class LeaderboardActivity extends AppCompatActivity {
         // set spinner for select different sort type
         sortBy.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                // 0 = i = sortMethod( one Qrcode score)
-                // 1 = i = sortMethod( total Qrcode score)
-                // 2 = i = sortMethod( numbers of  Qrcode score)
-                sortMethod = i;
+            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
+                // i=0 | High Scores (aggregate total score)
+                // i=1 | Highest Unique
+                // i=2 | Most QR Codes Scanned
+                leaderboardController.sortLeaderboard(null, leaderboardList, (int) id);
             }
 
             @Override
