@@ -38,13 +38,15 @@ public class SearchController {
             @Override
             public void run(List<Map> playerList) {
                 // Add each player to our Search list
-                if(!playerList.isEmpty()) {
-
+                if(!playerList.isEmpty() && !userName.isEmpty()) {
+                    if(!userName.isEmpty()) {
+                        qMyAdapter.clear();
+                    }
                     for (Map player : playerList){
 
                         if (player.get("Identifier").toString().contains(userName)){
                             Log.e("SearchController: ", "Player found: " + player.get("Identifier").toString());
-                            qMyAdapter.clear();
+
                             qMyAdapter.add(new SearchItem(
                                     (String) player.get("Identifier"),
                                     (String) player.get("email"),
