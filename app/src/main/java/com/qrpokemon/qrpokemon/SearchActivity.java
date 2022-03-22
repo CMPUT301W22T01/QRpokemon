@@ -59,43 +59,43 @@ public class SearchActivity extends AppCompatActivity {
 
 
 
-        searchButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String search_content = searchBox.getText().toString();
-                Log.e("SearchActivity: ", "Seaching for " + search_content);
-                searchController.getSearch(getApplicationContext(), searchList, search_content, mAdapter);
-//                mAdapter.notifyDataSetChanged();
-            }
-        });
-//        searchBox.addTextChangedListener(new TextWatcher() {
+//        searchButton.setOnClickListener(new View.OnClickListener() {
 //            @Override
-//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-//
-//            }
-//
-//            @Override
-//            public void onTextChanged(CharSequence s, int start, int before, int count) {
-//
-//            }
-//
-//            @Override
-//            public void afterTextChanged(Editable s) {
-////                Log.d(TAG, "SearchBox has changed to: " + s.toString());
-////                Query query;
-////                if (s.toString().isEmpty()) {
-////                    query = mDb.collection(PLAYER)
-////                            .orderBy("Identifier", Query.Direction.ASCENDING);
-////                } else {
-////                    query = mDb.collection(PLAYER)
-////                            .whereEqualTo("Identifier", s.toString())
-////                            .orderBy("Identifier", Query.Direction.ASCENDING);
-////                }
-//                searchController.getSearch(getApplicationContext(), searchList, s.toString());
-//
-//                mAdapter.notifyDataSetChanged();
+//            public void onClick(View view) {
+//                String search_content = searchBox.getText().toString();
+//                Log.e("SearchActivity: ", "Seaching for " + search_content);
+//                searchController.getSearch(getApplicationContext(), searchList, search_content, mAdapter);
+////                mAdapter.notifyDataSetChanged();
 //            }
 //        });
+        searchBox.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+//                Log.d(TAG, "SearchBox has changed to: " + s.toString());
+//                Query query;
+//                if (s.toString().isEmpty()) {
+//                    query = mDb.collection(PLAYER)
+//                            .orderBy("Identifier", Query.Direction.ASCENDING);
+//                } else {
+//                    query = mDb.collection(PLAYER)
+//                            .whereEqualTo("Identifier", s.toString())
+//                            .orderBy("Identifier", Query.Direction.ASCENDING);
+//                }
+                searchController.getSearch(getApplicationContext(), searchList, s.toString(), mAdapter);
+
+                mAdapter.notifyDataSetChanged();
+            }
+        });
 
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
