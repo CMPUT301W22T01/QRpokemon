@@ -34,6 +34,7 @@ public class MainMenuController {
                     if (!dataList.isEmpty()) {
                         //Display current player's username on top of the activity
                         TextView text = ((MainActivity) context).findViewById(R.id.user_textView);
+                        Log.e("Main menuController: ", "Current player is : " +dataList.toString());
                         text.setText((String) dataList.get(0).get("Identifier"));
                     }
                 }

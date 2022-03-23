@@ -1,7 +1,15 @@
 package com.qrpokemon.qrpokemon;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.ActivityResultRegistry;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -28,9 +36,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        ActivityResultLauncher<Intent> getContent = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
+            @Override
+            public void onActivityResult(ActivityResult result) {
+                try {
+                    mainMenuController.load(MainActivity.this); //load & display current player's username
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Log.e("MainActivity: ", "No current player");
+                }
+            }
+        });
+
         setContentView(R.layout.main_menu);
         Intent intent = new Intent(this, SignupActivity.class);
-        startActivity(intent);
+        getContent.launch(intent);
 
         qrInventoryMainBt = findViewById(R.id.QR_Inventory_Button);
         mapMainBt = findViewById(R.id.Map_Button);
@@ -38,12 +59,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         leaderboardMainBt = findViewById(R.id.Leaderboard_Button);
         cameraMainBt = findViewById(R.id.Camera_Button);
 
-        try {
-            mainMenuController.load(this); //load & display current player's username
-        } catch (Exception e) {
-            e.printStackTrace();
-            Log.e("MainActivity: ", "No current player");
-        }
+
+
+
         profileMainIv = findViewById(R.id.avatar_imageView);
         profileMainIv.setImageResource(R.drawable.profile_avadar);
 
@@ -77,7 +95,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(intent);
                 break;
             case R.id.Camera_Button:        // open Camera Activity
-
                 intent = new Intent(this, QrScannedActivity.class);
                 startActivity(intent);
                 break;
