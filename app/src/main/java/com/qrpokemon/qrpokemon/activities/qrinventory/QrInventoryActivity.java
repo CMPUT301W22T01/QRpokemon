@@ -1,4 +1,4 @@
-package com.qrpokemon.qrpokemon;
+package com.qrpokemon.qrpokemon.activities.qrinventory;
 
 import static android.view.View.VISIBLE;
 import static android.view.View.INVISIBLE;
@@ -16,6 +16,9 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.qrpokemon.qrpokemon.DatabaseController;
+import com.qrpokemon.qrpokemon.PlayerController;
+import com.qrpokemon.qrpokemon.R;
 
 import java.util.ArrayList;
 import java.util.Comparator;

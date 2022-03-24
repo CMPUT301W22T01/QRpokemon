@@ -1,72 +1,40 @@
-package com.qrpokemon.qrpokemon;
+package com.qrpokemon.qrpokemon.activities.qrscanned;
 
-
-
-
-import android.Manifest;
-import android.content.Context;
+import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
-import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-
-import com.budiyev.android.codescanner.CodeScanner;
-import com.budiyev.android.codescanner.CodeScannerView;
-import com.budiyev.android.codescanner.DecodeCallback;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.zxing.BinaryBitmap;
-import com.google.zxing.DecodeHintType;
-import com.google.zxing.MultiFormatReader;
-import com.google.zxing.NotFoundException;
-import com.google.zxing.RGBLuminanceSource;
-import com.google.zxing.Result;
-import com.google.zxing.common.HybridBinarizer;
-
-import org.w3c.dom.Text;
+import com.qrpokemon.qrpokemon.R;
 
 import java.io.UnsupportedEncodingException;
-import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 public class QrScannedActivity extends AppCompatActivity {
-
-//    private CodeScanner mCodeScanner;
-//    String qrMessage;
-
     // create variable for capture and save image
     private ImageView photoImage;
     private Button takePhoto;
     private ActivityResultLauncher<Intent> activityResultLauncher;
     private Bitmap photoBitmap;
     private String codeContent;
+    private Boolean savePhoto, saveLocation;
     final private String TAG = "TestCamera";
     public static final int CAMERA_ACTION_CODE = 100;
-
+    private QrScannedController qrScannedController = QrScannedController.getInstance();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -79,8 +47,8 @@ public class QrScannedActivity extends AppCompatActivity {
 
         FloatingActionButton backButton = findViewById(R.id.backButton_no_code_found);
         TextView title = findViewById(R.id.no_code_found_textView);
-        Switch photoSave = findViewById(R.id.qr_switch);
-        Switch locationSave = findViewById(R.id.location_switch);
+        @SuppressLint("UseSwitchCompatOrMaterialCode") Switch photoSave = findViewById(R.id.qr_switch);
+        @SuppressLint("UseSwitchCompatOrMaterialCode") Switch locationSave = findViewById(R.id.location_switch);
 //      Button scanButton = findViewById(R.id.scan_Button_no_code_found);
 
 
@@ -90,7 +58,9 @@ public class QrScannedActivity extends AppCompatActivity {
             public void onClick(View v){
                 if (photoSave.isChecked()){
                     Toast.makeText(QrScannedActivity.this, "QR code will be saved", Toast.LENGTH_SHORT).show();
+                    savePhoto = true;
                 } else {
+                    savePhoto = false;
                     Toast.makeText(QrScannedActivity.this, "QR code won't be saved", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -100,8 +70,10 @@ public class QrScannedActivity extends AppCompatActivity {
             @Override
             public void onClick(View v){
                 if (locationSave.isChecked()){
+                    saveLocation = true;
                     Toast.makeText(QrScannedActivity.this, "Location will be saved", Toast.LENGTH_SHORT).show();
                 } else {
+                    saveLocation = false;
                     Toast.makeText(QrScannedActivity.this, "Location won't be saved", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -116,7 +88,7 @@ public class QrScannedActivity extends AppCompatActivity {
                     photoImage.setImageBitmap(photoBitmap);
 
                     // identify if its a QR code and get the bitmap for the picture
-                    codeContent = doInBackground(photoBitmap);
+                    codeContent = qrScannedController.doInBackground(photoBitmap);
 //                    Toast.makeText(QrScannedActivity.this, codeContent, Toast.LENGTH_LONG).show();
                     MessageDigest messageDigest;
                     String hash = "";
@@ -125,9 +97,9 @@ public class QrScannedActivity extends AppCompatActivity {
                         messageDigest.update(codeContent.getBytes("UTF-8"));
 
                         // Get the hex hash string
-                        hash = byte2Hex(messageDigest.digest());
+                        hash = qrScannedController.byte2Hex(messageDigest.digest());
                         TextView qrHash = findViewById(R.id.qr_result);
-                        qrHash.setText("Score: " + String.valueOf(scoreCalculator(hash)));
+                        qrHash.setText("Score: " + String.valueOf(qrScannedController.scoreCalculator(hash)));
                     } catch (NoSuchAlgorithmException e) {
                         e.printStackTrace();
                     } catch (UnsupportedEncodingException e) {
@@ -144,97 +116,12 @@ public class QrScannedActivity extends AppCompatActivity {
         });
 
         // ask permission
-        checkPermission();
-//        // create click event for button take photo
-//        takePhoto.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                activityResultLauncher.launch(intent);
-//            }
-//        });
+        qrScannedController.checkPermission(this);
+
+        //Pop camera
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        activityResultLauncher.launch(intent);
 
     }
-
-    protected String doInBackground(Bitmap bitmap) {
-        // convert bitmap to string
-        String content = null;
-
-        int width = bitmap.getWidth();
-        int height = bitmap.getHeight();
-        int[] pixels = new int[width * height];
-        bitmap.getPixels(pixels, 0, width, 0, 0, width, height);
-
-        RGBLuminanceSource source = new RGBLuminanceSource(width, height, pixels);
-        BinaryBitmap binaryBitmap = new BinaryBitmap(new HybridBinarizer(source));
-        MultiFormatReader reader = new MultiFormatReader();
-        try {
-            Result result = reader.decode(binaryBitmap);
-            content = result.getText();
-        } catch (NotFoundException e) {
-            e.printStackTrace();
-            Log.e(TAG, "decode exception", e);
-        }
-        return content;
-    }
-
-    private String byte2Hex(byte[] bytes) {
-
-        // Converts bytes to hex string
-        StringBuffer sb = new StringBuffer();
-        String s = null;
-
-        for (int i = 0; i < bytes.length; i++) {
-            s = Integer.toHexString(bytes[i] & 0xFF);
-            if (s.length() == 1) {
-                sb.append("0");
-            }
-            sb.append(s);
-        }
-        return sb.toString();
-    }
-
-    public int scoreCalculator(String hash){
-
-        // finds repeat strings in hash string
-        ArrayList<String> list = new ArrayList<String>();
-        String s = "";
-
-        for (int i = 0; i < hash.length(); i++) {
-            char ch = hash.charAt(i);
-            if (s.isEmpty() || s.charAt(0) == ch) {
-                s += ch;
-            } else {
-                if (s.length() > 1) {
-                    list.add(s);
-                }
-                s = "" + ch;
-            }
-        }
-        if(s.length()>1){
-            list.add(s);
-        }
-        // Calculates the score base on hash string
-        int score = 0;
-        for (String str : list) {
-            int i = Integer.parseInt(str.substring(0, 1), 16);
-            score += (int) Math.pow(i, str.length() - 1);
-        }
-        return score;
-    }
-
-    private void checkPermission(){
-        // ask permission for user camera
-        if (ContextCompat.checkSelfPermission(QrScannedActivity.this,
-                Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(QrScannedActivity.this,
-                    new String[]{Manifest.permission.CAMERA},
-                    CAMERA_ACTION_CODE);
-        }
-
-    }
-
-
-
 }
 

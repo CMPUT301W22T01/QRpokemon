@@ -1,4 +1,4 @@
-package com.qrpokemon.qrpokemon;
+package com.qrpokemon.qrpokemon.activities.qrinventory;
 
 import android.app.Activity;
 import android.content.Context;
@@ -6,6 +6,11 @@ import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.qrpokemon.qrpokemon.DatabaseCallback;
+import com.qrpokemon.qrpokemon.DatabaseController;
+import com.qrpokemon.qrpokemon.PlayerController;
+import com.qrpokemon.qrpokemon.R;
 
 import java.util.ArrayList;
 import java.util.HashMap;
