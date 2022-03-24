@@ -2,14 +2,23 @@ package com.qrpokemon.qrpokemon;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.util.Log;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 
+
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.MultiFormatWriter;
+import com.google.zxing.WriterException;
+import com.google.zxing.common.BitMatrix;
+import com.journeyapps.barcodescanner.BarcodeEncoder;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class SearchController {
 
@@ -50,7 +59,8 @@ public class SearchController {
                             qMyAdapter.add(new SearchItem(
                                     (String) player.get("Identifier"),
                                     (String) player.get("email"),
-                                    (String) player.get("phone")
+                                    (String) player.get("phone"),
+                                    null
                             ));
 
                             qMyAdapter.notifyDataSetChanged();
@@ -85,14 +95,27 @@ public class SearchController {
                     for (Map player : playerList){
 
                         if (player.get("Identifier").toString().contains(location)){
-                            Log.e("SearchController: ", "Player found: " + player.get("Identifier").toString());
+                            Log.e("SearchController: ", "Player found: " + player.toString());
 
+
+                            ArrayList<String> currentQrList = new ArrayList<String>();
+//                            getQrSearch(context, currentQrList, location);
+                            Set<String> keys = player.keySet();
+                            for (String keyName : keys) {
+                                if (!keyName.equals("Identifier")) {
+                                    String [] qrArray = player.get(keyName).toString().split(",");
+                                    for (String qr : qrArray) {
+                                        currentQrList.add(qr);
+                                    }
+                                }
+                            }
                             qMyAdapter.add(new SearchItem(
                                     (String) player.get("Identifier"),
                                     null,
-                                    null
+                                    null,
+                                    currentQrList
                             ));
-
+                            Log.e("SearchController: ", "Qr found: " + currentQrList.toString());
                             qMyAdapter.notifyDataSetChanged();
                         }
                     }
@@ -109,5 +132,55 @@ public class SearchController {
             ((Activity) context).finish();  // Quit the activity on error
         }
     }
+
+    public void getQrSearch(Context context, ArrayList<String> list, String location) {
+        List<Map> temp = new ArrayList<>();  // Store our db results temporarily
+        DatabaseController databaseController = DatabaseController.getInstance();
+
+        DatabaseCallback callback = new DatabaseCallback(context) {
+            @Override
+            public void run(List<Map> qrList) {
+                // Add each player to our Search list
+                if(!qrList.isEmpty() && !location.isEmpty()) {
+                    for (Map qr : qrList){
+
+                            list.add(qr.toString());
+
+                        }
+                    }
+            }
+        };
+
+        try {
+            databaseController.getData(callback, temp, location, null);
+        } catch (Exception exception) {
+            Log.e("Search Controller: ", "Database call failed");
+            Log.e("Search Controller: ", exception.toString());
+        }
+    }
+
+
+//    public Bitmap generateQr(){
+//        MultiFormatWriter writer=new MultiFormatWriter();
+//        Bitmap bitmap = null;
+//        try {
+//            BitMatrix matrix = writer.encode(currentPlayer.get("Identifier").toString(), BarcodeFormat.QR_CODE,
+//                    350, 350);
+//            //Initialize the barcode encoder
+//            BarcodeEncoder encoder=new BarcodeEncoder();
+//
+//            //Initialize the Bitmap
+//            bitmap = encoder.createBitmap(matrix);
+//
+//            //Initialize input manager
+//            InputMethodManager manager=(InputMethodManager) mContext.getSystemService(
+//                    Context.INPUT_METHOD_SERVICE
+//            );
+//
+//        }catch (WriterException e){
+//            e.printStackTrace();
+//        }
+//        return bitmap;
+//    }
 
 }
