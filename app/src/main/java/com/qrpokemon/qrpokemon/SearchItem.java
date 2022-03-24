@@ -2,20 +2,20 @@ package com.qrpokemon.qrpokemon;
 
 public class SearchItem {
 
-        private String username;
+        private String identifier;
         private String email;
         private String phone;
 
 
-    public SearchItem(String username, String email, String phone) {
-            this.username = username;
+    public SearchItem(String identifier, String email, String phone) {
+            this.identifier = identifier;
             this.email = email;
             this.phone = phone;
         }
 
 
-        public String getUsername() {
-            return username;
+        public String getIdentifier() {
+            return identifier;
         }
 
         public String getEmail() {

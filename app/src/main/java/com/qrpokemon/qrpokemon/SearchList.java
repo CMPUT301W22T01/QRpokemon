@@ -36,7 +36,7 @@ public class SearchList extends ArrayAdapter<SearchItem> {
         TextView userName = view.findViewById(R.id.tv);
 
 
-        userName.setText(searchItem.getUsername());
+        userName.setText(searchItem.getIdentifier());
 
 
         return view;

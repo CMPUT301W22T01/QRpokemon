@@ -91,7 +91,8 @@ public class SearchActivity extends AppCompatActivity {
 //                            .whereEqualTo("Identifier", s.toString())
 //                            .orderBy("Identifier", Query.Direction.ASCENDING);
 //                }
-                searchController.getSearch(getApplicationContext(), searchList, s.toString(), mAdapter);
+                searchController.getPlayerSearch(getApplicationContext(), searchList, s.toString(), mAdapter);
+                searchController.getLocationSearch(getApplicationContext(), searchList, s.toString(), mAdapter);
 
                 mAdapter.notifyDataSetChanged();
             }

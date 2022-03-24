@@ -30,7 +30,7 @@ public class SearchController {
      * @param context The LeaderboardActivity context
      * @param list A list of leaderboard items (will be cleared)
      */
-    public void getSearch(Context context, ArrayList<SearchItem> list, String userName, ArrayAdapter<SearchItem> qMyAdapter) {
+    public void getPlayerSearch(Context context, ArrayList<SearchItem> list, String userName, ArrayAdapter<SearchItem> qMyAdapter) {
         List<Map> temp = new ArrayList<>();  // Store our db results temporarily
         DatabaseController databaseController = DatabaseController.getInstance();
 
@@ -63,6 +63,46 @@ public class SearchController {
 
         try {
             databaseController.getData(callback, temp, "Player", null);
+        } catch (Exception exception) {
+            Log.e("Search Controller: ", "Database call failed");
+            Log.e("Search Controller: ", exception.toString());
+            ((Activity) context).finish();  // Quit the activity on error
+        }
+    }
+
+    public void getLocationSearch(Context context, ArrayList<SearchItem> list, String location, ArrayAdapter<SearchItem> qMyAdapter) {
+        List<Map> temp = new ArrayList<>();  // Store our db results temporarily
+        DatabaseController databaseController = DatabaseController.getInstance();
+
+        DatabaseCallback callback = new DatabaseCallback(context) {
+            @Override
+            public void run(List<Map> playerList) {
+                // Add each player to our Search list
+                if(!playerList.isEmpty() && !location.isEmpty()) {
+                    if(!location.isEmpty()) {
+                        qMyAdapter.clear();
+                    }
+                    for (Map player : playerList){
+
+                        if (player.get("Identifier").toString().contains(location)){
+                            Log.e("SearchController: ", "Player found: " + player.get("Identifier").toString());
+
+                            qMyAdapter.add(new SearchItem(
+                                    (String) player.get("Identifier"),
+                                    null,
+                                    null
+                            ));
+
+                            qMyAdapter.notifyDataSetChanged();
+                        }
+                    }
+
+                }
+            }
+        };
+
+        try {
+            databaseController.getData(callback, temp, "LocationIndex", null);
         } catch (Exception exception) {
             Log.e("Search Controller: ", "Database call failed");
             Log.e("Search Controller: ", exception.toString());
