@@ -18,6 +18,7 @@ public class DatabaseController {
     private static DatabaseController dbInstance;
     final private FirebaseFirestore db;
     final private String[] collections = {"Player", "QrCode", "LocationIndex"};
+    final private String defaultIdentifier = "Identifier";
 
     private DatabaseController() {
         db = FirebaseFirestore.getInstance();
@@ -60,10 +61,12 @@ public class DatabaseController {
      *                   May be null to return the entire collection.
      * @param sortField (Optional) A field within a Document that should be used for sorting.
      *                  May be null to specify no sort order.
+     * @param fieldIdentifier (Optional) Specify a document field for which objectName will be
+     *                        matched with. Default="Identifier".
      * @throws Exception Throws an exception if collection is invalid.
      */
     public void getData(DatabaseCallback callback, List<Map> list, String collection,
-                        String objectName, String sortField) throws Exception {
+                        String objectName, String sortField, String fieldIdentifier) throws Exception {
 
         // Validate and get collection reference
         checkValidCollection(collection);
@@ -71,7 +74,7 @@ public class DatabaseController {
 
         // Setup query
         Query task = objectName == null ? collectionReference
-                : collectionReference.whereEqualTo("Identifier", objectName);
+                : collectionReference.whereEqualTo(fieldIdentifier, objectName);
 
         if (sortField != null)
             task = task.orderBy(sortField, Query.Direction.DESCENDING);
@@ -95,12 +98,12 @@ public class DatabaseController {
     public void getData(DatabaseCallback callback, List<Map> list, String collection,
                         String objectName) throws Exception {
         // Return the specified document/object
-        getData(callback, list, collection, objectName, null);
+        getData(callback, list, collection, objectName, null, defaultIdentifier);
     }
 
     public void getData(DatabaseCallback callback, List<Map> list, String collection) throws Exception {
         // Return the entire collection
-        getData(callback, list, collection, null, null);
+        getData(callback, list, collection, null, null, defaultIdentifier);
     }
 
     /**
