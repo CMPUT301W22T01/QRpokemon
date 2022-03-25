@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -22,6 +23,12 @@ public class LeaderboardActivity extends AppCompatActivity {
     LeaderboardController leaderboardController;
     private LeaderboardList leaderboardList;
     private LeaderboardAdapter leaderboardAdapter;
+    // User's leaderboard rank
+    private TextView playerRank;
+    private TextView playerUsername;
+    private TextView playerHighestUnique;
+    private TextView playerQrCount;
+    private TextView playerScore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +39,12 @@ public class LeaderboardActivity extends AppCompatActivity {
         leaderboardRecyclerView = findViewById(R.id.rv_leaderboard);
         sortBy = findViewById(R.id.sp_sort_selection);
         backButton = findViewById(R.id.leaderboard_back);
+
+        playerRank = findViewById(R.id.tv_leaderboard_player_rank);
+        playerUsername = findViewById(R.id.tv_leaderboard_player_username);
+        playerHighestUnique = findViewById(R.id.tv_leaderboard_player_unique);
+        playerQrCount = findViewById(R.id.tv_leaderboard_player_qrcount);
+        playerScore = findViewById(R.id.tv_leaderboard_player_score);
 
         // Create and fill our list with player data
         leaderboardList = new LeaderboardList();
@@ -50,7 +63,7 @@ public class LeaderboardActivity extends AppCompatActivity {
                 // i=0 | High Scores (aggregate total score)
                 // i=1 | Highest Unique
                 // i=2 | Most QR Codes Scanned
-                leaderboardController.sortLeaderboard(null, leaderboardList, (int) id);
+                leaderboardController.sortLeaderboard(LeaderboardActivity.this, leaderboardList, (int) id);
             }
 
             @Override
@@ -64,5 +77,13 @@ public class LeaderboardActivity extends AppCompatActivity {
                 finish();  // Return to calling activity
             }
         });
+    }
+
+    public void setPersonalRank(int rank, String username, int highestUnique, int qrCount, int score) {
+        playerRank.setText(String.valueOf(rank));
+        playerUsername.setText(username);
+        playerHighestUnique.setText(String.valueOf(highestUnique));
+        playerQrCount.setText(String.valueOf(qrCount));
+        playerScore.setText(String.valueOf(score));
     }
 }

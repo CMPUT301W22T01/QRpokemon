@@ -25,6 +25,14 @@ public class LeaderboardList extends Observable {
         return list;
     }
 
+    public LeaderboardItem get(int i) {
+        return list.get(i);
+    }
+
+    public int size() {
+        return list.size();
+    }
+
     public void clear() {
         list.clear();
     }

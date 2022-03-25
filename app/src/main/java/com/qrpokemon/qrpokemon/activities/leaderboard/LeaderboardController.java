@@ -9,6 +9,7 @@ import com.qrpokemon.qrpokemon.DatabaseController;
 import com.qrpokemon.qrpokemon.PlayerController;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -68,6 +69,8 @@ public class LeaderboardController {
                     ));
                 }
 
+                // Update leaderboard views
+                LeaderboardController.this.updateRank(context, list);
                 list.notifyListUpdate();  // Tell subscribers the list is updated
             }
         };
@@ -78,6 +81,36 @@ public class LeaderboardController {
             Log.e("Leaderboard Controller: ", "Database call failed");
             Log.e("Leaderboard Controller: ", exception.toString());
             ((Activity) context).finish();  // Quit the activity on error
+        }
+    }
+
+    public void updateRank(Context context, LeaderboardList list) {
+
+        // Try to get the user's player data
+        HashMap<String, Object> player;
+        try {
+            PlayerController playerController = PlayerController.getInstance();
+            player = playerController.getPlayer(null);
+
+            // Fetch user data
+            int rank = 0;  // Placeholder value so linter doesn't complain
+            String username = (String) player.get("Identifier");  // TODO: Change to "Username"
+            int highestUnique = 0;
+            int qrCount = (int) player.get("qrCount");
+            int score = (int) player.get("totalScore");
+
+            // We're logged in so our username exists
+            for (int i = 0; i < list.size(); i++) {
+                if (list.get(i).getUsername().equals(username)) {
+                    rank = i+1;
+                    break;
+                }
+            }
+            // Set the appropriate text views
+            ((LeaderboardActivity) context).setPersonalRank(rank, username, highestUnique, qrCount, score);
+
+        } catch (Exception exception) {
+            Log.e("Leaderboard Controller: ", exception.toString());
         }
     }
 }

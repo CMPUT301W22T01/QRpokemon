@@ -51,9 +51,9 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="4dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="8dp"
         android:textAlignment="center"
-        app:layout_constraintBottom_toTopOf="@+id/leaderboard_back"
+        app:layout_constraintBottom_toTopOf="@+id/tv_leaderboard_divider"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_leaderboard_unique" />
@@ -117,4 +117,95 @@
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/sp_sort_selection" />
+
+    <TextView
+        android:id="@+id/tv_leaderboard_player_rank"
+        android:layout_width="38dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="16dp"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/leaderboard_back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_leaderboard_divider"
+        tools:text="1" />
+
+    <TextView
+        android:id="@+id/tv_leaderboard_player_username"
+        android:layout_width="155dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginBottom="8dp"
+        android:text="Username"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/leaderboard_back"
+        app:layout_constraintStart_toEndOf="@+id/tv_leaderboard_player_rank" />
+
+    <TextView
+        android:id="@+id/tv_leaderboard_player_unique"
+        android:layout_width="48dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="16dp"
+        android:textAlignment="textEnd"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display2"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/leaderboard_back"
+        app:layout_constraintEnd_toStartOf="@+id/tv_leaderboard_player_qrcount"
+        app:layout_constraintStart_toEndOf="@+id/tv_leaderboard_player_username"
+        app:layout_constraintTop_toBottomOf="@+id/tv_leaderboard_divider"
+        tools:text="5" />
+
+    <TextView
+        android:id="@+id/tv_leaderboard_player_score"
+        android:layout_width="48dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:textAlignment="textEnd"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display2"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/leaderboard_back"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_leaderboard_divider"
+        tools:text="999" />
+
+    <TextView
+        android:id="@+id/tv_leaderboard_player_qrcount"
+        android:layout_width="48dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="16dp"
+        android:textAlignment="textEnd"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display2"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/leaderboard_back"
+        app:layout_constraintEnd_toStartOf="@+id/tv_leaderboard_player_score"
+        app:layout_constraintTop_toBottomOf="@+id/tv_leaderboard_divider"
+        tools:text="50" />
+
+    <TextView
+        android:id="@+id/tv_leaderboard_divider"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="#424242"
+        android:text="My Score"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@+id/tv_leaderboard_player_username"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:text="My Score" />
 </androidx.constraintlayout.widget.ConstraintLayout>
