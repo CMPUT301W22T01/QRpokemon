@@ -33,7 +33,6 @@ public class SearchActivity extends AppCompatActivity {
     private ArrayAdapter<SearchItem> mAdapter;
     private ArrayAdapter<String> newAdapter;
     private Button backButton;
-    private Button searchButton;
     private ArrayList<SearchItem> searchList;
     private SearchController searchController;
     private SearchItem selected;
@@ -45,7 +44,7 @@ public class SearchActivity extends AppCompatActivity {
 
         ListView listView = findViewById(R.id.search_listview);
         backButton = findViewById(R.id.button);
-        searchButton = findViewById(R.id.search_button);
+
 
         // Create and fill our list with player data
         searchList = new ArrayList<SearchItem>();
@@ -82,21 +81,6 @@ public class SearchActivity extends AppCompatActivity {
 
 
 
-        searchButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String search_content = searchBox.getText().toString();
-                Log.e("SearchActivity: ", "Seaching for " + search_content);
-                listView.setAdapter(mAdapter);
-                searchController.getPlayerSearch(getApplicationContext(), search_content, mAdapter);
-                Log.e("SearchController: ", "Adapter after player search: " + mAdapter.toString());
-                searchController.getLocationSearch(getApplicationContext(), search_content, mAdapter);
-                Log.e("SearchController: ", "Adapter after location search: " + searchList.toString());
-
-            }
-        });
-        mAdapter.notifyDataSetChanged();
-
         searchBox.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -111,11 +95,10 @@ public class SearchActivity extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s) {
 
-//                listView.setAdapter(mAdapter);
-//                searchController.getPlayerSearch(getApplicationContext(), searchList, s.toString(), mAdapter);
-//                mAdapter.notifyDataSetChanged();
-//                searchController.getLocationSearch(getApplicationContext(), searchList, s.toString(), mAdapter);
-//                mAdapter.notifyDataSetChanged();
+                listView.setAdapter(mAdapter);
+                searchController.getPlayerSearch(getApplicationContext(), s.toString(), mAdapter);
+                searchController.getLocationSearch(getApplicationContext(), s.toString(), mAdapter);
+                mAdapter.notifyDataSetChanged();
             }
         });
 

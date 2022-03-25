@@ -16,18 +16,14 @@
         <EditText
             android:id="@+id/sv"
             android:queryHint="Username / Geolocation"
-            android:layout_width="300dp"
+            android:layout_width="match_parent"
             android:layout_height="76dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:background="#f0f0f0"
              />
-        <Button
-            android:id="@+id/search_button"
-            android:layout_width="60dp"
-            android:layout_height="50dp"
-            />
+
     </LinearLayout>
 
 

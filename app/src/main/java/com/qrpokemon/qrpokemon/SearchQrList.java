@@ -46,7 +46,7 @@ public class SearchQrList extends ArrayAdapter<String> {
         ImageView qrcode = view.findViewById(R.id.imageView);
 
 
-//        userName.setText(searchItem.getIdentifier());
+        userName.setText(qr);
 
         MultiFormatWriter writer = new MultiFormatWriter();
         Bitmap bitmap = null;

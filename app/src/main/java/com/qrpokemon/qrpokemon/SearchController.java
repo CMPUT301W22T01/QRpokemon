@@ -41,26 +41,36 @@ public class SearchController {
     public void getPlayerSearch(Context context, String userName, ArrayAdapter<SearchItem> qMyAdapter) {
         List<Map> temp = new ArrayList<>();  // Store our db results temporarily
         DatabaseController databaseController = DatabaseController.getInstance();
-
+        if(!userName.isEmpty()) {
+            qMyAdapter.clear();
+        }
         DatabaseCallback callback = new DatabaseCallback(context) {
             @Override
             public void run(List<Map> playerList) {
                 // Add each player to our Search list
                 if(!playerList.isEmpty() && !userName.isEmpty()) {
                     // clear previous search result when searching for a new thing
-                    if(!userName.isEmpty()) {
-                        qMyAdapter.clear();
-                    }
+
                     for (Map player : playerList){
 
                         ArrayList<String> currentQrList = new ArrayList<String>();
                         if (player.get("Identifier").toString().contains(userName)){
                             Log.e("SearchController: ", "Player found: " + player.get("Identifier").toString());
+                            HashMap contactInfo = new HashMap();
+                            if (player.get("contact") == null){
+                                contactInfo.put("email", "no email");
+                                contactInfo.put("phone", "no phone");
+                            }else{
+                                contactInfo = (HashMap) player.get("contact");
+                            }
+                            Log.e("SearchController: ", "Player found email: " + player.get("contact").toString());
+//                            Log.e("SearchController: ", "Player found phone: " + player.get("phone").toString());
+
 
                             qMyAdapter.add(new SearchItem(
                                     (String) player.get("Identifier"),
-                                    (String) player.get("email"),
-                                    (String) player.get("phone"),
+                                    (String) contactInfo.get("email"),
+                                    (String) contactInfo.get("phone"),
                                     currentQrList
                             ));
 
@@ -85,14 +95,18 @@ public class SearchController {
         List<Map> temp = new ArrayList<>();  // Store our db results temporarily
         DatabaseController databaseController = DatabaseController.getInstance();
 
+        if(!location.isEmpty()) {
+            qMyAdapter.clear();
+        }
+
         DatabaseCallback callback = new DatabaseCallback(context) {
             @Override
             public void run(List<Map> locationList) {
                 // Add each location to our Search list
                 if(!locationList.isEmpty() && !location.isEmpty()) {
-                    if(!location.isEmpty()) {
-                        qMyAdapter.clear();
-                    }
+//                    if(!location.isEmpty()) {
+//                        qMyAdapter.clear();
+//                    }
                     for (Map currentLocation : locationList){
 
                         if (currentLocation.get("Identifier").toString().contains(location)){
@@ -110,6 +124,7 @@ public class SearchController {
                                     }
                                 }
                             }
+
                             qMyAdapter.add(new SearchItem(
                                     (String) currentLocation.get("Identifier"),
                                     null,
