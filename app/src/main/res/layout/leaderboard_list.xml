@@ -6,13 +6,12 @@
     android:layout_height="wrap_content">
 
     <TextView
-        android:id="@+id/rand_order_list"
+        android:id="@+id/leaderboard_item_rank"
         android:layout_width="38dp"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:padding="0dp"
-        android:text="@string/rank_order"
         android:textAlignment="textStart"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         android:textSize="16sp"
@@ -21,56 +20,53 @@
         tools:text="1234" />
 
     <TextView
-        android:id="@+id/username_list"
+        android:id="@+id/leaderboard_item_username"
         android:layout_width="180dp"
         android:layout_height="32dp"
         android:layout_marginStart="4dp"
         android:layout_marginTop="4dp"
         android:padding="0dp"
-        android:text="@string/user_name"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textSize="24sp"
-        app:layout_constraintStart_toEndOf="@+id/rand_order_list"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toEndOf="@+id/leaderboard_item_rank"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Username" />
 
     <TextView
-        android:id="@+id/highestscore_list"
+        android:id="@+id/leaderboard_item_unique"
         android:layout_width="48dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:text="@string/highest_score"
         android:textAlignment="textEnd"
         android:textAppearance="@style/TextAppearance.AppCompat.Display2"
         android:textSize="16sp"
-        app:layout_constraintEnd_toStartOf="@+id/qr_quantity_list"
+        app:layout_constraintEnd_toStartOf="@+id/leaderboard_item_qrcount"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/username_list"
+        app:layout_constraintStart_toEndOf="@+id/leaderboard_item_username"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="0" />
 
     <TextView
-        android:id="@+id/qr_quantity_list"
+        android:id="@+id/leaderboard_item_qrcount"
         android:layout_width="48dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:text="@string/qr_quantity"
         android:textAlignment="textEnd"
         android:textAppearance="@style/TextAppearance.AppCompat.Display2"
         android:textSize="16sp"
-        app:layout_constraintEnd_toStartOf="@+id/total_score_list"
+        app:layout_constraintEnd_toStartOf="@+id/leaderboard_item_score"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="0" />
 
     <TextView
-        android:id="@+id/total_score_list"
+        android:id="@+id/leaderboard_item_score"
         android:layout_width="48dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:text="@string/total_score"
         android:textAlignment="textEnd"
         android:textAppearance="@style/TextAppearance.AppCompat.Display2"
         android:textSize="16sp"

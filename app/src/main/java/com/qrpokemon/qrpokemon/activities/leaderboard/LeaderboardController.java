@@ -32,7 +32,7 @@ public class LeaderboardController {
      * @param sortMethod method to be sorted with
      */
     public void sortLeaderboard(Context context, LeaderboardList list, int sortMethod) {
-        // TODO: Use binary search to get estimated ranking (array index)
+        // TODO: Use binary search to get estimated ranking (array index)?
         // TODO: Use String dropdown text instead of int?
 
         // Figure out which sort method to use

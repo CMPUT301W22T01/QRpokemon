@@ -37,7 +37,7 @@ public class LeaderboardActivity extends AppCompatActivity {
 
         // data binding
         leaderboardRecyclerView = findViewById(R.id.rv_leaderboard);
-        sortBy = findViewById(R.id.sp_sort_selection);
+        sortBy = findViewById(R.id.leaderboard_sort_selector);
         backButton = findViewById(R.id.leaderboard_back);
 
         playerRank = findViewById(R.id.tv_leaderboard_player_rank);

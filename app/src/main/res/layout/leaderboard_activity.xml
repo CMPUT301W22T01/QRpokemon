@@ -10,7 +10,7 @@
         android:layout_width="350dp"
         android:layout_height="80dp"
         android:layout_marginTop="24dp"
-        android:text="@string/leaderboard"
+        android:text="@string/leaderboard_title"
         android:textAlignment="center"
         android:textColor="#000000"
         android:textSize="48sp"
@@ -22,7 +22,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Spinner
-        android:id="@+id/sp_sort_selection"
+        android:id="@+id/leaderboard_sort_selector"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -64,12 +64,12 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="24dp"
-        android:text="Rank"
+        android:text="@string/leaderboard_rank"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Small"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sp_sort_selection" />
+        app:layout_constraintTop_toBottomOf="@+id/leaderboard_sort_selector" />
 
     <TextView
         android:id="@+id/tv_leaderboard_username"
@@ -78,12 +78,12 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="8dp"
-        android:text="Username"
+        android:text="@string/leaderboard_username"
         android:textAppearance="@style/TextAppearance.AppCompat.Small"
         android:textSize="14sp"
         app:layout_constraintEnd_toStartOf="@+id/tv_leaderboard_unique"
         app:layout_constraintStart_toEndOf="@+id/tv_leaderboard_rank"
-        app:layout_constraintTop_toBottomOf="@+id/sp_sort_selection" />
+        app:layout_constraintTop_toBottomOf="@+id/leaderboard_sort_selector" />
 
     <TextView
         android:id="@+id/tv_leaderboard_unique"
@@ -91,10 +91,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
-        android:text="Highest\nUnique"
+        android:text="@string/leaderboard_unique"
         android:textAlignment="center"
         app:layout_constraintEnd_toStartOf="@+id/tv_leaderboard_qrcount"
-        app:layout_constraintTop_toBottomOf="@+id/sp_sort_selection" />
+        app:layout_constraintTop_toBottomOf="@+id/leaderboard_sort_selector" />
 
     <TextView
         android:id="@+id/tv_leaderboard_qrcount"
@@ -102,10 +102,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
-        android:text="Total\nScanned"
+        android:text="@string/leaderboard_qrcount"
         android:textAlignment="center"
         app:layout_constraintEnd_toStartOf="@+id/tv_leaderboard_score"
-        app:layout_constraintTop_toBottomOf="@+id/sp_sort_selection" />
+        app:layout_constraintTop_toBottomOf="@+id/leaderboard_sort_selector" />
 
     <TextView
         android:id="@+id/tv_leaderboard_score"
@@ -113,10 +113,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="12dp"
-        android:text="Total\nScore"
+        android:text="@string/leaderboard_score"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sp_sort_selection" />
+        app:layout_constraintTop_toBottomOf="@+id/leaderboard_sort_selector" />
 
     <TextView
         android:id="@+id/tv_leaderboard_player_rank"
@@ -139,11 +139,11 @@
         android:layout_height="32dp"
         android:layout_marginStart="12dp"
         android:layout_marginBottom="8dp"
-        android:text="Username"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/leaderboard_back"
-        app:layout_constraintStart_toEndOf="@+id/tv_leaderboard_player_rank" />
+        app:layout_constraintStart_toEndOf="@+id/tv_leaderboard_player_rank"
+        tools:text="Username" />
 
     <TextView
         android:id="@+id/tv_leaderboard_player_unique"
@@ -200,7 +200,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:background="#424242"
-        android:text="My Score"
+        android:text="@string/leaderboard_div_text"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="12sp"

@@ -65,11 +65,11 @@ public class LeaderboardAdapter extends RecyclerView.Adapter implements Observer
             super(itemView);
 
             // Link views to their variables
-            ranking = itemView.findViewById(R.id.rand_order_list);
-            username = itemView.findViewById(R.id.username_list);
-            highestScore = itemView.findViewById(R.id.highestscore_list);
-            qrQuantity = itemView.findViewById(R.id.qr_quantity_list);
-            totalScore = itemView.findViewById(R.id.total_score_list);
+            ranking = itemView.findViewById(R.id.leaderboard_item_rank);
+            username = itemView.findViewById(R.id.leaderboard_item_username);
+            highestScore = itemView.findViewById(R.id.leaderboard_item_unique);
+            qrQuantity = itemView.findViewById(R.id.leaderboard_item_qrcount);
+            totalScore = itemView.findViewById(R.id.leaderboard_item_score);
         }
 
         public void bind(LeaderboardItem leaderboardItem) {

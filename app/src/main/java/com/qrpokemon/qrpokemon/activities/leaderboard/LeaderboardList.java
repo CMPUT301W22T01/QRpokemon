@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Observable;
 
 public class LeaderboardList extends Observable {
-    private ArrayList<LeaderboardItem> list;
+    final private ArrayList<LeaderboardItem> list;
 
     LeaderboardList() {
         list = new ArrayList<>();

@@ -4,11 +4,11 @@ package com.qrpokemon.qrpokemon.activities.leaderboard;
 * An item in leaderboard
 */
 public class LeaderboardItem {
-    private int rank;
-    private String username;
-    private long highestScore;  // Firestore stores numbers as long
-    private long qrCount;
-    private long totalScore;
+    final private int rank;
+    final private String username;
+    final private long highestScore;  // Firestore stores numbers as long
+    final private long qrCount;
+    final private long totalScore;
 
     public LeaderboardItem(String username, int rank, long highestScore, long qrCount, long totalScore) {
         this.username = username;
