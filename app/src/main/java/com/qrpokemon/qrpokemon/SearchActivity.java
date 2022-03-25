@@ -1,11 +1,13 @@
 package com.qrpokemon.qrpokemon;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -28,10 +30,12 @@ public class SearchActivity extends AppCompatActivity {
     private final FirebaseFirestore mDb = FirebaseFirestore.getInstance();
 
     private ArrayAdapter<SearchItem> mAdapter;
+    private ArrayAdapter<String> newAdapter;
     private Button backButton;
     private Button searchButton;
     private ArrayList<SearchItem> searchList;
     private SearchController searchController;
+    private SearchItem selected;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +58,20 @@ public class SearchActivity extends AppCompatActivity {
 
         mAdapter = new SearchList(this, new ArrayList<SearchItem>());
         listView.setAdapter(mAdapter);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                selected = (SearchItem) adapterView.getItemAtPosition(i);
+                if (!selected.getQrList().isEmpty()) {
+                    mAdapter.clear();
+                    newAdapter = new SearchQrList(getApplicationContext(), selected.getQrList());
+                    listView.setAdapter(newAdapter);
+                }
+
+                int position =  i;
+            }
+        });
 
         EditText searchBox = findViewById(R.id.sv);
 
@@ -81,16 +99,8 @@ public class SearchActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-//                Log.d(TAG, "SearchBox has changed to: " + s.toString());
-//                Query query;
-//                if (s.toString().isEmpty()) {
-//                    query = mDb.collection(PLAYER)
-//                            .orderBy("Identifier", Query.Direction.ASCENDING);
-//                } else {
-//                    query = mDb.collection(PLAYER)
-//                            .whereEqualTo("Identifier", s.toString())
-//                            .orderBy("Identifier", Query.Direction.ASCENDING);
-//                }
+
+                listView.setAdapter(mAdapter);
                 searchController.getPlayerSearch(getApplicationContext(), searchList, s.toString(), mAdapter);
                 searchController.getLocationSearch(getApplicationContext(), searchList, s.toString(), mAdapter);
 

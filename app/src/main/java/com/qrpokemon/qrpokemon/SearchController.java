@@ -53,6 +53,7 @@ public class SearchController {
                     }
                     for (Map player : playerList){
 
+                        ArrayList<String> currentQrList = new ArrayList<String>();
                         if (player.get("Identifier").toString().contains(userName)){
                             Log.e("SearchController: ", "Player found: " + player.get("Identifier").toString());
 
@@ -60,7 +61,7 @@ public class SearchController {
                                     (String) player.get("Identifier"),
                                     (String) player.get("email"),
                                     (String) player.get("phone"),
-                                    null
+                                    currentQrList
                             ));
 
                             qMyAdapter.notifyDataSetChanged();
@@ -133,31 +134,7 @@ public class SearchController {
         }
     }
 
-    public void getQrSearch(Context context, ArrayList<String> list, String location) {
-        List<Map> temp = new ArrayList<>();  // Store our db results temporarily
-        DatabaseController databaseController = DatabaseController.getInstance();
 
-        DatabaseCallback callback = new DatabaseCallback(context) {
-            @Override
-            public void run(List<Map> qrList) {
-                // Add each player to our Search list
-                if(!qrList.isEmpty() && !location.isEmpty()) {
-                    for (Map qr : qrList){
-
-                            list.add(qr.toString());
-
-                        }
-                    }
-            }
-        };
-
-        try {
-            databaseController.getData(callback, temp, location, null);
-        } catch (Exception exception) {
-            Log.e("Search Controller: ", "Database call failed");
-            Log.e("Search Controller: ", exception.toString());
-        }
-    }
 
 
 //    public Bitmap generateQr(){
