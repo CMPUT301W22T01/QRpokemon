@@ -12,6 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -62,14 +63,18 @@ public class SearchActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                selected = (SearchItem) adapterView.getItemAtPosition(i);
-                if (!selected.getQrList().isEmpty()) {
-                    mAdapter.clear();
-                    newAdapter = new SearchQrList(getApplicationContext(), selected.getQrList());
-                    listView.setAdapter(newAdapter);
+                try {
+                    selected = (SearchItem) adapterView.getItemAtPosition(i);
+                    if (!selected.getQrList().isEmpty()) {
+//                        mAdapter.clear();
+                        newAdapter = new SearchQrList(getApplicationContext(), selected.getQrList());
+                        listView.setAdapter(newAdapter);
+                    }
+                }catch (Exception exception) {
+                    Toast.makeText(getApplicationContext(), "Invalid click", Toast.LENGTH_SHORT).show();
                 }
 
-                int position =  i;
+
             }
         });
 
