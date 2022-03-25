@@ -6,13 +6,17 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.qrpokemon.qrpokemon.activities.leaderboard.LeaderboardActivity;
 import com.qrpokemon.qrpokemon.activities.qrinventory.QrInventoryActivity;
@@ -58,7 +62,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         leaderboardMainBt = findViewById(R.id.Leaderboard_Button);
         cameraMainBt = findViewById(R.id.Camera_Button);
 
+        //setup for getting location:
+        MapController mapController  = MapController.getInstance();
+        LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        FusedLocationProviderClient fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
 
+        //get location in mapController
+        mapController.run(this, null, locationManager,  fusedLocationProviderClient);
 
 
         profileMainIv = findViewById(R.id.avatar_imageView);

@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.provider.ContactsContract;
 import android.util.Log;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.core.app.ActivityCompat;
@@ -17,12 +18,21 @@ import com.google.zxing.NotFoundException;
 import com.google.zxing.RGBLuminanceSource;
 import com.google.zxing.Result;
 import com.google.zxing.common.HybridBinarizer;
+import com.qrpokemon.qrpokemon.DatabaseCallback;
+import com.qrpokemon.qrpokemon.DatabaseController;
+import com.qrpokemon.qrpokemon.FileSystemController;
+import com.qrpokemon.qrpokemon.QrCodeController;
+
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class QrScannedController {
     final private String TAG = "QrSannedCotroller: ";
     private ActivityResultLauncher<Intent> activityResultLauncher;
-    public static final int CAMERA_ACTION_CODE = 100;
+    private static final int CAMERA_ACTION_CODE = 100;
+    private QrCodeController qrCodeController = QrCodeController.getInstance();
 
     private static QrScannedController currentInstance;
 
@@ -116,6 +126,25 @@ public class QrScannedController {
         return score;
     }
 
+    public void saveQrCode(Context context, String qrHash, int score, String location, Bitmap bitmap) throws Exception {
+        DatabaseCallback databaseCallback = new DatabaseCallback(context) {
+            @Override
+            public void run(List<Map> dataList) {
+                if (!dataList.isEmpty()){ //this QR code is in Database
+
+                }
+                else { //new QrCode added
+                    HashMap<String, Bitmap> bitmapHash = new HashMap<>();
+                    FileSystemController fileSystemController = new FileSystemController();
+                    bitmapHash.put(fileSystemController.readToFile(context, "name"),bitmap);
+//                    qrCodeController.saveQr(qrHash, score, location,null ,bitmapHash );
+                }
+            }
+        };
+//        qrCodeController.getQR(databaseCallback, );
+
+    }
+
     /**
      * Check the permission of the camera
      * @param context QrScannedActivity
@@ -128,6 +157,6 @@ public class QrScannedController {
                     new String[]{Manifest.permission.CAMERA},
                     CAMERA_ACTION_CODE);
         }
-
     }
+
 }

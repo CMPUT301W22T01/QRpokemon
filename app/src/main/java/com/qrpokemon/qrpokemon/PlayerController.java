@@ -1,4 +1,6 @@
 package com.qrpokemon.qrpokemon;
+import android.provider.ContactsContract;
+
 import androidx.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -9,7 +11,7 @@ import java.util.Observable;
 public class PlayerController extends Observable {
     private static PlayerController currentInstance;
     private Player currentPlayer = null;
-
+    private DatabaseController databaseController = DatabaseController.getInstance();
     private PlayerController() {}
 
     public static PlayerController getInstance() {
@@ -25,7 +27,7 @@ public class PlayerController extends Observable {
      * @return a HashMap consists of username, qrInventory, contactInfo, qrCount, totalScore
      * @throws Exception if collection is incorrect
      */
-    public HashMap getPlayer(@Nullable String username) throws Exception {
+    public HashMap getPlayer(@Nullable DatabaseCallback databaseCallback,@Nullable List<Map> list, @Nullable String username) throws Exception {
         HashMap<String, Object> info = new HashMap<>();
         if (username == null) {  // Get the current user
             info.put("Identifier",  currentPlayer.getUsername());
@@ -34,19 +36,12 @@ public class PlayerController extends Observable {
             info.put("totalScore",  currentPlayer.getTotalScore());
             info.put("contact",     currentPlayer.getContactInfo());
         } else {
-            // Temp array to hold player in callback
-            ArrayList<Map> temp = new ArrayList<>();  
-            DatabaseController databaseController = DatabaseController.getInstance();
-            DatabaseCallback callback = new DatabaseCallback(null) {
-                @Override
-                public void run(List<Map> list) {}
-            };
-
-            databaseController.getData(callback, temp, "Player", username);
-            info = (HashMap) temp.get(0);
+            databaseController.getData(databaseCallback,list , "Player", username);
         }
-
         return info;
+    }
+    public HashMap getPlayer(String username) throws Exception {
+        return getPlayer(null, null, username);
     }
 
     /**

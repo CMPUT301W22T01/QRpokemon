@@ -18,8 +18,8 @@ import java.util.Observer;
 public class SignupController {
     private static SignupController currentInstance;
     private FileSystemController fileSystemController = new FileSystemController();
-    private DatabaseController databaseController = DatabaseController.getInstance();
     private SignupController(){}
+    private PlayerController playerController = PlayerController.getInstance();
 
     public static SignupController getInstance() {
         if (currentInstance == null)
@@ -51,8 +51,7 @@ public class SignupController {
                         contact.put("email", email);
                         contact.put("phone", phone);
 
-                        //Get playerController class there is only one PlayerController class
-                        PlayerController playerController = PlayerController.getInstance();
+
 
                         try {
                             //Create current Player class in PlayerController class
@@ -74,7 +73,7 @@ public class SignupController {
                 }
             };
             // this will run first
-            databaseController.getData(databaseCallback, result, "Player", newUsername);
+            playerController.getPlayer(databaseCallback, result, newUsername);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -113,7 +112,7 @@ public class SignupController {
                     }
                 };
                 // this will run first
-                databaseController.getData(databaseCallback, result, "Player", fileSystemController.readToFile(context, filename));
+                playerController.getPlayer(databaseCallback, result, fileSystemController.readToFile(context, filename));
                 Log.e("SignupController: ", "Current player is : " );
             } catch (Exception e) {
                 e.printStackTrace();

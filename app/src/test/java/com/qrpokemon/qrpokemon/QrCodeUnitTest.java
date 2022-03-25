@@ -1,5 +1,6 @@
 package com.qrpokemon.qrpokemon;
 
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.jupiter.api.Test;
@@ -16,8 +17,9 @@ public class QrCodeUnitTest {
         comments.add("good");
         comments.add("bad");
         comments.add("so bad");
-
-        return new QrCode("abc", 100, "28ave", comments,null);
+        ArrayList<String> location = new ArrayList<>();
+        location.add("28ave");
+        return new QrCode("abc", 100,location , comments,null);
     }
     @Test
     void testGetAndSetIdentifier(){
@@ -38,10 +40,12 @@ public class QrCodeUnitTest {
     @Test
     void testGetAndSetLocation(){
         QrCode qrcode = mockQrCode();
-        assertTrue(qrcode.getLocation().equals("28ave"));
+        assertTrue(qrcode.getLocation().get(0).equals("28ave"));
 
-        qrcode.setLocation("42ave");
-        assertTrue(qrcode.getLocation().equals("42ave"));
+        ArrayList<String> location = new ArrayList<>();
+        location.add("42ave");
+        qrcode.setLocation(location);
+        assertTrue(qrcode.getLocation().get(0).equals("42ave"));
     }
     @Test
     void testGetAndSetComments(){
@@ -55,10 +59,10 @@ public class QrCodeUnitTest {
     @Test
     void testGetAndSetBitmap(){
         QrCode qrcode = mockQrCode();
-        assertTrue(qrcode.getBitmap().equals(null));
+        assertNull(qrcode.getBitmap());
 
         qrcode.setBitmap(null);
-        assertTrue(qrcode.getBitmap().equals(null));
+        assertNull(qrcode.getBitmap());
 
     }
 }
