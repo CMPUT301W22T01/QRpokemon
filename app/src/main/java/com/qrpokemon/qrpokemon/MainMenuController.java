@@ -19,7 +19,7 @@ public class MainMenuController {
     }
 
     /**
-     * load current player from local
+     * load current username from firestore
      * @param context context of current activity
      */
     public void load(Context context){

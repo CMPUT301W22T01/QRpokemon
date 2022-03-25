@@ -46,6 +46,13 @@ public class QrScannedActivity extends AppCompatActivity {
         takePhoto = findViewById(R.id.scan_Button_no_code_found);
 
         FloatingActionButton backButton = findViewById(R.id.backButton_no_code_found);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
         TextView title = findViewById(R.id.no_code_found_textView);
         @SuppressLint("UseSwitchCompatOrMaterialCode") Switch photoSave = findViewById(R.id.qr_switch);
         @SuppressLint("UseSwitchCompatOrMaterialCode") Switch locationSave = findViewById(R.id.location_switch);
