@@ -37,9 +37,8 @@ public class SearchController {
     /**
      * Gets and fills a list of Leaderboard rankings (unsorted)
      * @param context The LeaderboardActivity context
-     * @param list A list of leaderboard items (will be cleared)
      */
-    public void getPlayerSearch(Context context, ArrayList<SearchItem> list, String userName, ArrayAdapter<SearchItem> qMyAdapter) {
+    public void getPlayerSearch(Context context, String userName, ArrayAdapter<SearchItem> qMyAdapter) {
         List<Map> temp = new ArrayList<>();  // Store our db results temporarily
         DatabaseController databaseController = DatabaseController.getInstance();
 
@@ -48,6 +47,7 @@ public class SearchController {
             public void run(List<Map> playerList) {
                 // Add each player to our Search list
                 if(!playerList.isEmpty() && !userName.isEmpty()) {
+                    // clear previous search result when searching for a new thing
                     if(!userName.isEmpty()) {
                         qMyAdapter.clear();
                     }
@@ -81,37 +81,37 @@ public class SearchController {
         }
     }
 
-    public void getLocationSearch(Context context, ArrayList<SearchItem> list, String location, ArrayAdapter<SearchItem> qMyAdapter) {
+    public void getLocationSearch(Context context, String location, ArrayAdapter<SearchItem> qMyAdapter) {
         List<Map> temp = new ArrayList<>();  // Store our db results temporarily
         DatabaseController databaseController = DatabaseController.getInstance();
 
         DatabaseCallback callback = new DatabaseCallback(context) {
             @Override
-            public void run(List<Map> playerList) {
-                // Add each player to our Search list
-                if(!playerList.isEmpty() && !location.isEmpty()) {
+            public void run(List<Map> locationList) {
+                // Add each location to our Search list
+                if(!locationList.isEmpty() && !location.isEmpty()) {
                     if(!location.isEmpty()) {
                         qMyAdapter.clear();
                     }
-                    for (Map player : playerList){
+                    for (Map currentLocation : locationList){
 
-                        if (player.get("Identifier").toString().contains(location)){
-                            Log.e("SearchController: ", "Player found: " + player.toString());
+                        if (currentLocation.get("Identifier").toString().contains(location)){
+                            Log.e("SearchController: ", "currentLocation found: " + currentLocation.toString());
 
 
                             ArrayList<String> currentQrList = new ArrayList<String>();
 //                            getQrSearch(context, currentQrList, location);
-                            Set<String> keys = player.keySet();
+                            Set<String> keys = currentLocation.keySet();
                             for (String keyName : keys) {
                                 if (!keyName.equals("Identifier")) {
-                                    String [] qrArray = player.get(keyName).toString().split(",");
+                                    String [] qrArray = currentLocation.get(keyName).toString().split(",");
                                     for (String qr : qrArray) {
                                         currentQrList.add(qr);
                                     }
                                 }
                             }
                             qMyAdapter.add(new SearchItem(
-                                    (String) player.get("Identifier"),
+                                    (String) currentLocation.get("Identifier"),
                                     null,
                                     null,
                                     currentQrList
@@ -136,28 +136,5 @@ public class SearchController {
 
 
 
-
-//    public Bitmap generateQr(){
-//        MultiFormatWriter writer=new MultiFormatWriter();
-//        Bitmap bitmap = null;
-//        try {
-//            BitMatrix matrix = writer.encode(currentPlayer.get("Identifier").toString(), BarcodeFormat.QR_CODE,
-//                    350, 350);
-//            //Initialize the barcode encoder
-//            BarcodeEncoder encoder=new BarcodeEncoder();
-//
-//            //Initialize the Bitmap
-//            bitmap = encoder.createBitmap(matrix);
-//
-//            //Initialize input manager
-//            InputMethodManager manager=(InputMethodManager) mContext.getSystemService(
-//                    Context.INPUT_METHOD_SERVICE
-//            );
-//
-//        }catch (WriterException e){
-//            e.printStackTrace();
-//        }
-//        return bitmap;
-//    }
 
 }
