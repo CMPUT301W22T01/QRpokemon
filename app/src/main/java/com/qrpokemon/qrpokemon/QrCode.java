@@ -13,7 +13,7 @@ public class QrCode {
     private String identifier;
     private Integer score;
     private ArrayList<String> location;
-    private ArrayList<String> comments;
+    private HashMap<String,ArrayList<String>> comments;
     private HashMap<String,Bitmap> bitmap;
 
     /**
@@ -24,7 +24,7 @@ public class QrCode {
      * @param comments    "comment" is the comments left by the current player or someone else
      * @param bitmap      "bitmap"is the photo of this qrCode
      */
-    public QrCode (String identifier, Integer score, ArrayList<String > location, ArrayList<String> comments, HashMap<String,Bitmap> bitmap)  {
+    public QrCode (String identifier, Integer score, ArrayList<String > location, HashMap<String,ArrayList<String>> comments, HashMap<String,Bitmap> bitmap)  {
         this.identifier = identifier;
         this.score = score;
         this.location = location;
@@ -54,11 +54,11 @@ public class QrCode {
         this.location = location;
     }
 
-    public ArrayList<String> getComments() {
+    public HashMap<String, ArrayList<String>> getComments() {
         return comments;
     }
 
-    public void setComments(ArrayList<String> comments) {
+    public void setComments(HashMap<String,ArrayList<String>> comments) {
         this.comments = comments;
     }
 

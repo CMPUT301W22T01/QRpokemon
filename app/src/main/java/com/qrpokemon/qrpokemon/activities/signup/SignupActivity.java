@@ -1,4 +1,4 @@
-package com.qrpokemon.qrpokemon;
+package com.qrpokemon.qrpokemon.activities.signup;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,6 +10,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.qrpokemon.qrpokemon.PlayerController;
+import com.qrpokemon.qrpokemon.R;
+
 import java.util.Observable;
 import java.util.Observer;
 

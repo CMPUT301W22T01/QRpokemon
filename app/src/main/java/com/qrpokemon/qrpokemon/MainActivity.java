@@ -21,6 +21,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.qrpokemon.qrpokemon.activities.leaderboard.LeaderboardActivity;
 import com.qrpokemon.qrpokemon.activities.qrinventory.QrInventoryActivity;
 import com.qrpokemon.qrpokemon.activities.qrscanned.QrScannedActivity;
+import com.qrpokemon.qrpokemon.activities.signup.SignupActivity;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private Intent intent;

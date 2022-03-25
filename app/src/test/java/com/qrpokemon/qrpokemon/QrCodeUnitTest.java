@@ -10,13 +10,14 @@ import java.util.HashMap;
 
 public class QrCodeUnitTest {
 
-    private ArrayList<String> comments = new ArrayList<>();
+    private HashMap<String, ArrayList<String>> comments = new HashMap<>();
 
     private QrCode mockQrCode(){
-
-        comments.add("good");
-        comments.add("bad");
-        comments.add("so bad");
+        ArrayList<String> comment = new ArrayList<>();
+        comment.add("good");
+        comment.add("bad");
+        comment.add("so bad");
+        comments.put("user1",comment);
         ArrayList<String> location = new ArrayList<>();
         location.add("28ave");
         return new QrCode("abc", 100,location , comments,null);

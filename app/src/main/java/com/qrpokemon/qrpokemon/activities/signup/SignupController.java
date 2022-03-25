@@ -1,4 +1,4 @@
-package com.qrpokemon.qrpokemon;
+package com.qrpokemon.qrpokemon.activities.signup;
 
 import android.app.Activity;
 import android.content.Context;
@@ -8,12 +8,15 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
+import com.qrpokemon.qrpokemon.DatabaseCallback;
+import com.qrpokemon.qrpokemon.FileSystemController;
+import com.qrpokemon.qrpokemon.PlayerController;
+import com.qrpokemon.qrpokemon.R;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Observable;
-import java.util.Observer;
 
 public class SignupController {
     private static SignupController currentInstance;

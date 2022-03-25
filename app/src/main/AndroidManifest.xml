@@ -32,9 +32,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".activities.leaderboard.LeaderboardActivity"></activity>
-        <activity android:name=".SignupActivity"></activity>
+        <activity android:name=".activities.signup.SignupActivity"></activity>
         <activity
-            android:name=".SignupActivity"
+            android:name=".activities.signup.SignupActivity"
             tools:ignore="DuplicateActivity" />
         <activity android:name=".activities.qrscanned.QrScannedActivity" />
         <activity android:name=".activities.qrinventory.QrInventoryActivity" />
