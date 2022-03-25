@@ -57,15 +57,23 @@ public class SearchController {
                         if (player.get("Identifier").toString().contains(userName)){
                             Log.e("SearchController: ", "Player found: " + player.get("Identifier").toString());
                             HashMap contactInfo = new HashMap();
-                            if (player.get("contact") == null){
-                                contactInfo.put("email", "no email");
-                                contactInfo.put("phone", "no phone");
-                            }else{
-                                contactInfo = (HashMap) player.get("contact");
-                            }
-                            Log.e("SearchController: ", "Player found email: " + player.get("contact").toString());
-//                            Log.e("SearchController: ", "Player found phone: " + player.get("phone").toString());
 
+                            try {
+                                Log.e("SearchController: ", "Player found email: " + player.get("contact").toString());
+                                contactInfo = (HashMap) player.get("contact");
+                            } catch (Exception e){
+                                contactInfo.put("email", "no email");
+                                contactInfo.put("phone", "no phone number");
+                            }
+//                            Log.e("SearchController: ", "Player found email: " + player.get("contact").toString());
+//                            Log.e("SearchController: ", "Player found phone: " + player.get("phone").toString());
+                            if (contactInfo.get("email") == null){
+                                contactInfo.put("email", "no email");
+                            }
+
+                            if (contactInfo.get("phone") == null){
+                                contactInfo.put("phone", "no phone number");
+                            }
 
                             qMyAdapter.add(new SearchItem(
                                     (String) player.get("Identifier"),
@@ -74,6 +82,8 @@ public class SearchController {
                                     currentQrList
                             ));
 
+                            contactInfo.put("email", null);
+                            contactInfo.put("phone", null);
                             qMyAdapter.notifyDataSetChanged();
                         }
                     }
@@ -114,7 +124,7 @@ public class SearchController {
 
 
                             ArrayList<String> currentQrList = new ArrayList<String>();
-//                            getQrSearch(context, currentQrList, location);
+
                             Set<String> keys = currentLocation.keySet();
                             for (String keyName : keys) {
                                 if (!keyName.equals("Identifier")) {

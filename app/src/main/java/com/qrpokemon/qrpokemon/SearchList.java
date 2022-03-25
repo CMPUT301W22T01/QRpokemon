@@ -55,6 +55,10 @@ public class SearchList extends ArrayAdapter<SearchItem> {
             userEmail.setText("email: " + searchItem.getEmail());
             userPhone.setText("phone: " + searchItem.getPhone());
             qrcode.setImageResource(R.drawable.profile_avadar);
+        } else{
+            qrcode.setImageResource(R.drawable.map_logo);
+            userEmail.setText("");
+            userPhone.setText("");
         }
 
 
