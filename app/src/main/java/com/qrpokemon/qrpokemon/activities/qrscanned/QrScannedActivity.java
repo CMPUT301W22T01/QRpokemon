@@ -125,7 +125,7 @@ public class QrScannedActivity extends AppCompatActivity {
         // ask permission
         qrScannedController.checkPermission(this);
 
-        //Pop camera
+        // Pop camera
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         activityResultLauncher.launch(intent);
 

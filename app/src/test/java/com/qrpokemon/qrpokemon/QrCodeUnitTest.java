@@ -17,15 +17,15 @@ public class QrCodeUnitTest {
         comments.add("bad");
         comments.add("so bad");
 
-        return new QrCode("abc", 100, "28ave", comments);
+        return new QrCode("abc", 100, "28ave", comments,null);
     }
     @Test
-    void testGetAndSetIndentifier(){
+    void testGetAndSetIdentifier(){
         QrCode qrcode = mockQrCode();
-        assertTrue(qrcode.getIndentifier().equals("abc"));
+        assertTrue(qrcode.getIdentifier().equals("abc"));
 
-        qrcode.setIndentifier("def");
-        assertTrue(qrcode.getIndentifier().equals("def"));
+        qrcode.setIdentifier("def");
+        assertTrue(qrcode.getIdentifier().equals("def"));
     }
     @Test
     void testGetAndSetScore(){
@@ -50,5 +50,15 @@ public class QrCodeUnitTest {
 
         qrcode.setComments(comments);
         assertTrue(qrcode.getComments().equals(comments));
+    }
+
+    @Test
+    void testGetAndSetBitmap(){
+        QrCode qrcode = mockQrCode();
+        assertTrue(qrcode.getBitmap().equals(null));
+
+        qrcode.setBitmap(null);
+        assertTrue(qrcode.getBitmap().equals(null));
+
     }
 }
