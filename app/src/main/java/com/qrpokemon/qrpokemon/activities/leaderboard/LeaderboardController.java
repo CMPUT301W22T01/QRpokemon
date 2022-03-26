@@ -14,9 +14,9 @@ import java.util.List;
 import java.util.Map;
 
 public class LeaderboardController {
-    static private LeaderboardController controllerInstance;
+    static protected LeaderboardController controllerInstance;
 
-    private LeaderboardController() {}
+    protected LeaderboardController() {}  // Being protected allows us to Mock it
 
     public static LeaderboardController getInstance() {
         if (controllerInstance == null)

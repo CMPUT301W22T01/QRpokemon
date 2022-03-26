@@ -20,9 +20,10 @@ public class LeaderboardActivity extends AppCompatActivity {
     private ImageButton backButton;
 
     // Leaderboard variables
-    LeaderboardController leaderboardController;
+    private LeaderboardController leaderboardController;
     private LeaderboardList leaderboardList;
     private LeaderboardAdapter leaderboardAdapter;
+
     // User's leaderboard rank
     private TextView playerRank;
     private TextView playerUsername;
@@ -48,7 +49,7 @@ public class LeaderboardActivity extends AppCompatActivity {
 
         // Create and fill our list with player data
         leaderboardList = new LeaderboardList();
-        leaderboardController = LeaderboardController.getInstance();
+        setLeaderboardController(LeaderboardController.getInstance());
 
         // set adapter
         leaderboardAdapter = new LeaderboardAdapter(this, leaderboardList.getList());
@@ -85,5 +86,21 @@ public class LeaderboardActivity extends AppCompatActivity {
         playerHighestUnique.setText(String.valueOf(highestUnique));
         playerQrCount.setText(String.valueOf(qrCount));
         playerScore.setText(String.valueOf(score));
+    }
+
+    /**
+     * Set the leaderboard controller which handles activity functionality.
+     * @param controller The LeaderboardController to be set
+     */
+    public void setLeaderboardController(LeaderboardController controller) {
+        leaderboardController = controller;
+    }
+
+    /**
+     * Get the amount of items being displayed
+     * @return The amount of items displayed
+     */
+    public int getItemCount() {
+        return leaderboardAdapter.getItemCount();
     }
 }
