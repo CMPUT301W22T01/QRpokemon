@@ -21,7 +21,7 @@ public class ProfileController {
         this.currentPlayerController = PlayerController.getInstance();
 
         try {
-            currentPlayer = currentPlayerController.getPlayer(null);
+            currentPlayer = currentPlayerController.getPlayer(null,null,null,null);
         } catch (Exception e) {
             e.printStackTrace();
         }

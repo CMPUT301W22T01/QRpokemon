@@ -9,6 +9,7 @@ import android.app.Activity;
 import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.rule.ActivityTestRule;
 
+import com.qrpokemon.qrpokemon.activities.leaderboard.LeaderboardActivity;
 import com.qrpokemon.qrpokemon.activities.qrinventory.QrInventoryActivity;
 import com.robotium.solo.Solo;
 
@@ -61,23 +62,17 @@ public class MainActivityTest {
         solo.assertCurrentActivity("Wrong Activity", MapActivity.class);
     }
 
-//    @Test
-//    public void checkSearchButton() {
-//        solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
-//        solo.clickOnButton("SEARCH"); //Click on SEARCH Button
-//        solo.assertCurrentActivity("Wrong Activity", SearchActivity.class);
-//    }
+    @Test
+    public void checkSearchButton() {
+        solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
+        solo.clickOnButton("SEARCH"); //Click on SEARCH Button
+        solo.assertCurrentActivity("Wrong Activity", SearchActivity.class);
+    }
 
     @Test
     public void checkLeaderboardButton() {
         solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
         solo.clickOnView(solo.getView(R.id.Leaderboard_Button));//Click on LEADERBOARD Button
         solo.assertCurrentActivity("Wrong Activity", LeaderboardActivity.class);
-    }
-
-    @After
-    public void cleanUp(){
-//        FileSystemController fileSystemController = new FileSystemController();
-//        fileSystemController.deleteFile(solo.getCurrentActivity());
     }
 }

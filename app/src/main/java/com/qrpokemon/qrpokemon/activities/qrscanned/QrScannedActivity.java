@@ -98,8 +98,8 @@ public class QrScannedActivity extends AppCompatActivity {
                     photoImage.setImageBitmap(photoBitmap);
 
                     // identify if its a QR code and get the bitmap for the picture
-                    codeContent = qrScannedController.doInBackground(photoBitmap);
-//                    Toast.makeText(QrScannedActivity.this, codeContent, Toast.LENGTH_LONG).show();
+                    codeContent = qrScannedController.analyzeImage(photoBitmap);
+                    Toast.makeText(QrScannedActivity.this, codeContent, Toast.LENGTH_LONG).show();
                     MessageDigest messageDigest;
 
                     try {

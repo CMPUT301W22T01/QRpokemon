@@ -51,7 +51,7 @@ public class QrScannedController {
      * @param bitmap photo current player takes
      * @return A string decoded from QRhash found in photo
      */
-    protected String doInBackground(Bitmap bitmap) {
+    public String analyzeImage(Bitmap bitmap) {
         // convert bitmap to string
         String content = null;
 

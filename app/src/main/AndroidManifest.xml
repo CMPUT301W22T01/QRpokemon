@@ -31,8 +31,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.leaderboard.LeaderboardActivity"></activity>
-        <activity android:name=".activities.signup.SignupActivity"></activity>
+        <activity android:name=".activities.leaderboard.LeaderboardActivity"/>
+        <activity android:name=".activities.signup.SignupActivity"/>
+        <activity android:name=".activities.signup.RestoreSession"/>
         <activity
             android:name=".activities.signup.SignupActivity"
             tools:ignore="DuplicateActivity" />

@@ -2,7 +2,6 @@ package com.qrpokemon.qrpokemon.activities.signup;
 
 import android.app.Activity;
 import android.content.Context;
-import android.provider.Settings;
 import android.util.Log;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -79,13 +78,12 @@ public class SignupController {
 
     /**
      * Invoke PlayerController to get player with DeviceId given
-     * @param context SignupActivity
      * @param databaseCallback Callback function for DatabaseController
      * @param result Result List<Map>, contains player's info
      * @param id DeviceId
      * @throws Exception if collection name is wrong inside PlayerController class.
      */
-    public void load(Context context,DatabaseCallback databaseCallback,List<Map> result, String id) throws Exception {
+    public void load(DatabaseCallback databaseCallback,List<Map> result, String id) throws Exception {
         playerController.getPlayer(databaseCallback, result, id, "DeviceId");
     }
 

@@ -47,7 +47,7 @@ public class QrInventoryController {
     public HashMap<String, Object> getPlayerInfo (String currentPlayer) throws Exception {
 
         HashMap<String, Object> temp;
-        temp = playerController.getPlayer(currentPlayer);
+        temp = playerController.getPlayer(null,null,null,null);
         return temp;
     }
 

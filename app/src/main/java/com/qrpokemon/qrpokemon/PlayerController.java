@@ -23,10 +23,13 @@ public class PlayerController extends Observable {
     }
 
     /**
-     * takes currentPlayer's data and put them into one HashMap
-     * @param username unique user's name. Can be null if read off from current player
-     * @return a HashMap consists of username, qrInventory, contactInfo, qrCount, totalScore
-     * @throws Exception if collection is incorrect
+     * Takes in data related to a Player and find them from database/local
+     * @param databaseCallback DatabaseCallback passed from Activity calls it
+     * @param list A List of HashMaps as a holder for holding results from Firestore
+     * @param username username to be found, can be null
+     * @param IdentifierField A option check device id specifically, will look for Identifier (e.g. username) if null
+     * @return A hashMap which contains local
+     * @throws Exception if collection is incorrect in DatabaseController
      */
     public HashMap getPlayer(@Nullable DatabaseCallback databaseCallback,@Nullable List<Map> list, @Nullable String username, @Nullable String IdentifierField) throws Exception {
         HashMap<String, Object> info = new HashMap<>();
@@ -44,8 +47,8 @@ public class PlayerController extends Observable {
         }
         return info;
     }
-    public HashMap getPlayer(String username) throws Exception {
-        return getPlayer(null, null, username, null);
+    public HashMap getPlayer(DatabaseCallback databaseCallback, String username) throws Exception {
+        return getPlayer(databaseCallback, null, username, null);
     }
 
     /**

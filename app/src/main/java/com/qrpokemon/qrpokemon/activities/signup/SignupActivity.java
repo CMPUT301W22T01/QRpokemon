@@ -30,6 +30,7 @@ public class SignupActivity extends AppCompatActivity  implements View.OnClickLi
     private String name,phone,email;
     private Button bt_submit;
     private TextView tv_have;
+    private PlayerController playerController;
     private SignupController signupController = SignupController.getInstance();
 
     /**
@@ -39,19 +40,12 @@ public class SignupActivity extends AppCompatActivity  implements View.OnClickLi
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.signup_activity);
-        et_email = findViewById(R.id.et_email);
-        et_name = findViewById(R.id.et_name);
-        et_phone = findViewById(R.id.et_phone);
-        bt_submit = findViewById(R.id.bt_submit);
-        tv_have = findViewById(R.id.tv_have);
 
         DatabaseCallback databaseCallback = new DatabaseCallback(this) {
             @Override
             public void run(List<Map> dataList) {
                 if (!dataList.isEmpty()){// user found, login automatically
-
+                    Log.e("SignupActivity: ",dataList.toString());
                     signupController.write((String) dataList.get(0).get("Identifier"),
                                         (ArrayList<String>) dataList.get(0).get("qrInventory"),
                                         (HashMap<String, String>) dataList.get(0).get("contact"),
@@ -59,16 +53,24 @@ public class SignupActivity extends AppCompatActivity  implements View.OnClickLi
                                         ((Long) dataList.get(0).get("totalScore")).intValue(),
                                         Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID)); //init Player class locally via PlayerController
 
-                    Log.e("SignupAcitivity: get player ",(String) dataList.get(0).get("Identifier"));
+                    Log.e("SignupAcitivity: get player ","" + ((String) dataList.get(0).get("Identifier")));
                     finish();
                 } else {
+                    setContentView(R.layout.signup_activity);
+                    et_email = findViewById(R.id.et_email);
+                    et_name = findViewById(R.id.et_name);
+                    et_phone = findViewById(R.id.et_phone);
+                    bt_submit = findViewById(R.id.bt_submit);
+                    tv_have = findViewById(R.id.tv_have);
+
                     bt_submit.setOnClickListener(SignupActivity.this);
                     tv_have.setOnClickListener(SignupActivity.this);
                 }
             }
         };
+        super.onCreate(savedInstanceState);
         try {
-            signupController.load(this,databaseCallback, new ArrayList<>(), Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID));
+            signupController.load(databaseCallback, new ArrayList<>(), Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID));
         } catch (Exception e) {
             e.printStackTrace();
             Log.e("SignupActivity Error: ", e.toString());
@@ -88,8 +90,18 @@ public class SignupActivity extends AppCompatActivity  implements View.OnClickLi
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.tv_have:
-                Intent signup_intent = new Intent(SignupActivity.this, SignupActivity.class);
+                Intent signup_intent = new Intent(SignupActivity.this, RestoreSession.class);
                 startActivity(signup_intent);
+                playerController = PlayerController.getInstance();
+                try {
+                    if (playerController.getPlayer(null,null,null,null).get("Identifier") != null){
+                        finish();
+                    }
+                } catch(Exception e) {
+                    e.printStackTrace();
+                    Log.e("SignupActivity: ", e.toString());
+                }
+
                 break;
 
             case R.id.bt_submit:
@@ -110,7 +122,7 @@ public class SignupActivity extends AppCompatActivity  implements View.OnClickLi
                 }
 
                 try{
-                    PlayerController playerController = PlayerController.getInstance();
+                    playerController = PlayerController.getInstance();
                     playerController.addObserver(this);
                     signupController.addNewPlayer(this, name, email, phone, Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID));
                 } catch (Exception e) {
