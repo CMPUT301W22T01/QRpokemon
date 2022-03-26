@@ -1,8 +1,13 @@
 package com.qrpokemon.qrpokemon.activities.signup;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.provider.Settings;
@@ -17,7 +22,9 @@ import com.qrpokemon.qrpokemon.DatabaseCallback;
 import com.qrpokemon.qrpokemon.Player;
 import com.qrpokemon.qrpokemon.PlayerController;
 import com.qrpokemon.qrpokemon.R;
+import com.qrpokemon.qrpokemon.activities.qrscanned.QrScannedActivity;
 
+import java.security.MessageDigest;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -25,10 +32,11 @@ import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
 
-public class SignupActivity extends AppCompatActivity  implements View.OnClickListener, Observer {
+public class SignupActivity extends AppCompatActivity  implements View.OnClickListener {
     private EditText et_name,et_phone,et_email;
     private String name,phone,email;
     private Button bt_submit;
+    private ActivityResultLauncher<Intent> activityResultLauncher;
     private TextView tv_have;
     private PlayerController playerController;
     private SignupController signupController = SignupController.getInstance();
@@ -75,6 +83,25 @@ public class SignupActivity extends AppCompatActivity  implements View.OnClickLi
             e.printStackTrace();
             Log.e("SignupActivity Error: ", e.toString());
         }
+
+        activityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
+            @Override
+            public void onActivityResult(ActivityResult result) { //restore session is over
+                playerController = PlayerController.getInstance();
+                try {
+                    if (playerController.getPlayer(null, null, null, null).get("Identifier") != null) {
+                        finish();
+                    } else {
+                        Log.e("SignupActivity: ", "User/QR not found, login failed");
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Log.e("SignupActivity: ", e.toString());
+                }
+
+            }
+        });
+
     }
 
     /**
@@ -91,17 +118,7 @@ public class SignupActivity extends AppCompatActivity  implements View.OnClickLi
         switch (view.getId()){
             case R.id.tv_have:
                 Intent signup_intent = new Intent(SignupActivity.this, RestoreSession.class);
-                startActivity(signup_intent);
-                playerController = PlayerController.getInstance();
-                try {
-                    if (playerController.getPlayer(null,null,null,null).get("Identifier") != null){
-                        finish();
-                    }
-                } catch(Exception e) {
-                    e.printStackTrace();
-                    Log.e("SignupActivity: ", e.toString());
-                }
-
+                activityResultLauncher.launch(signup_intent);
                 break;
 
             case R.id.bt_submit:
@@ -123,8 +140,9 @@ public class SignupActivity extends AppCompatActivity  implements View.OnClickLi
 
                 try{
                     playerController = PlayerController.getInstance();
-                    playerController.addObserver(this);
+//                    playerController.addObserver(this);
                     signupController.addNewPlayer(this, name, email, phone, Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID));
+                    finish();
                 } catch (Exception e) {
                     Log.e("TrackRecordActivity", String.valueOf(e));
                 }
@@ -137,8 +155,8 @@ public class SignupActivity extends AppCompatActivity  implements View.OnClickLi
      * @param observable observable object
      * @param o object being observed
      */
-    @Override
-    public void update(Observable observable, Object o) {
-        finish();
-    }
+//    @Override
+//    public void update(Observable observable, Object o) {
+//        finish();
+//    }
 }

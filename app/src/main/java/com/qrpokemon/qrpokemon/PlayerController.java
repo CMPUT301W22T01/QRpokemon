@@ -1,6 +1,7 @@
 package com.qrpokemon.qrpokemon;
 import android.provider.ContactsContract;
 import android.provider.Settings;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
 import java.util.ArrayList;
@@ -65,10 +66,8 @@ public class PlayerController extends Observable {
                             @Nullable Integer qrCount,
                             @Nullable Integer totalScore,
                             String id) {
-        if (this.currentPlayer == null){
-            this.currentPlayer = new Player(username, qrInventory, contact, qrCount, totalScore, id);
-            setChanged();
-            notifyObservers(null);
+        if (currentPlayer == null){
+            currentPlayer = new Player(username, qrInventory, contact, qrCount, totalScore, id);
         }
 //        Log.e("PlayerController: A player is created with : ", username + contact.toString());
     }
@@ -125,7 +124,7 @@ public class PlayerController extends Observable {
 
         if (addIdentifier)
             info.put("Identifier", currentPlayer.getUsername());
-
-        databaseController.writeData("Player", currentPlayer.getUsername() ,info ,true);
+        Log.e("PlayerController: ", "User at savePlayerData is: "+currentPlayer.getUsername());
+        databaseController.writeData("Player", currentPlayer.getUsername() ,info ,false);
     }
 }
