@@ -1,5 +1,6 @@
 package com.qrpokemon.qrpokemon;
 import android.provider.ContactsContract;
+import android.provider.Settings;
 
 import androidx.annotation.Nullable;
 import java.util.ArrayList;
@@ -27,7 +28,7 @@ public class PlayerController extends Observable {
      * @return a HashMap consists of username, qrInventory, contactInfo, qrCount, totalScore
      * @throws Exception if collection is incorrect
      */
-    public HashMap getPlayer(@Nullable DatabaseCallback databaseCallback,@Nullable List<Map> list, @Nullable String username) throws Exception {
+    public HashMap getPlayer(@Nullable DatabaseCallback databaseCallback,@Nullable List<Map> list, @Nullable String username, @Nullable String IdentifierField) throws Exception {
         HashMap<String, Object> info = new HashMap<>();
         if (username == null) {  // Get the current user
             info.put("Identifier",  currentPlayer.getUsername());
@@ -35,18 +36,20 @@ public class PlayerController extends Observable {
             info.put("qrCount",     currentPlayer.getQrCount());
             info.put("totalScore",  currentPlayer.getTotalScore());
             info.put("contact",     currentPlayer.getContactInfo());
+
+        } else if (IdentifierField == null){ // find player by username
+            databaseController.getData(databaseCallback, list , "Player", username);
         } else {
-            databaseController.getData(databaseCallback,list , "Player", username);
+            databaseController.getData(databaseCallback, list, "Player", username, null, IdentifierField);
         }
         return info;
     }
     public HashMap getPlayer(String username) throws Exception {
-        return getPlayer(null, null, username);
+        return getPlayer(null, null, username, null);
     }
 
     /**
-     * Create a new player if app is in first run
-     * Load current player otherwise
+     * Load current Player class locally
      * @param username is guaranteed to be unique, it notifies Observer once player is created
      * @param qrInventory a ArrayList object store player's qr code(s)
      * @param contact player's contact info
@@ -57,9 +60,10 @@ public class PlayerController extends Observable {
                             @Nullable ArrayList<String> qrInventory,
                             @Nullable HashMap contact,
                             @Nullable Integer qrCount,
-                            @Nullable Integer totalScore) {
+                            @Nullable Integer totalScore,
+                            String id) {
         if (this.currentPlayer == null){
-            this.currentPlayer = new Player(username, qrInventory, contact, qrCount, totalScore);
+            this.currentPlayer = new Player(username, qrInventory, contact, qrCount, totalScore, id);
             setChanged();
             notifyObservers(null);
         }
@@ -79,6 +83,7 @@ public class PlayerController extends Observable {
                                @Nullable Integer totalScore,
                                @Nullable ArrayList<String> qrInventory,
                                @Nullable HashMap contact,
+                               @Nullable String id,
                                Boolean addIdentifier) throws Exception {
         DatabaseController databaseController = DatabaseController.getInstance();
         HashMap<String, Object> info = new HashMap<>();
@@ -100,6 +105,11 @@ public class PlayerController extends Observable {
             info.put("qrInventory", currentPlayer.getQrInventory());
         }
 
+        if (id != null) {
+            currentPlayer.setId(id);
+            info.put("DeviceId",id);
+        }
+
         if (contact != null) {
             currentPlayer.setContactInfo(contact);
             info.put("contact", currentPlayer.getContactInfo());
@@ -114,13 +124,5 @@ public class PlayerController extends Observable {
             info.put("Identifier", currentPlayer.getUsername());
 
         databaseController.writeData("Player", currentPlayer.getUsername() ,info ,true);
-    }
-
-    // boolean flag is false in default, updating user only.
-    public void savePlayerData(@Nullable Integer qrCount,
-                               @Nullable Integer totalScore,
-                               @Nullable ArrayList<String> qrInventory,
-                               @Nullable HashMap contact) throws Exception {
-        savePlayerData(qrCount, totalScore, qrInventory, contact, true);
     }
 }

@@ -1,7 +1,12 @@
 package com.qrpokemon.qrpokemon;
 import android.content.Context;
+import android.os.Parcelable;
 import android.util.Log;
 import android.widget.TextView;
+
+import com.qrpokemon.qrpokemon.activities.signup.SignupActivity;
+import com.qrpokemon.qrpokemon.activities.signup.SignupController;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -40,7 +45,8 @@ public class MainMenuController {
                 }
             };
             // read player's data from firestore
-            database.getData(databaseCallback, result, "Player", fileSystemController.readToFile(context, "name"));
+            PlayerController playerController = PlayerController.getInstance();
+            database.getData(databaseCallback, result, "Player", (String) playerController.getPlayer(null,null,null,null).get("Identifier") );
             Log.e("Main menuController: ", "Current player is : " +fileSystemController.readToFile(context, "name"));
             } catch (Exception e) {
                 e.printStackTrace();

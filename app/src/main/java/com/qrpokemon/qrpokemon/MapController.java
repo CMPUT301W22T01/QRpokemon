@@ -42,6 +42,7 @@ public class MapController implements OnMapReadyCallback, LocationListener {
     }
 
     public void run(Context contextActivity, @Nullable SupportMapFragment supportMapFragmentActivity, LocationManager locationManager, FusedLocationProviderClient fusedLocationProviderClientActivity) {
+
         context = contextActivity;
         supportMapFragment = supportMapFragmentActivity;
         fusedLocationProviderClient = fusedLocationProviderClientActivity;
@@ -49,12 +50,14 @@ public class MapController implements OnMapReadyCallback, LocationListener {
             ActivityCompat.requestPermissions((Activity) context,new String[] {Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_CODE);
         }
         if (currentLocation == null){
+            Log.e("MapController ","currentLocation is null.");
             try{
                 locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
             } catch(Exception e){ //if permission is not given:
                 ActivityCompat.requestPermissions((Activity) context,new String[] {Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_CODE);
             }
-
+        } else {
+            getCurrentLocation();
         }
     }
 

@@ -78,7 +78,7 @@ public class DatabaseController {
 
         if (sortField != null)
             task = task.orderBy(sortField, Query.Direction.DESCENDING);
-
+        Log.e("DatabaseController: ", objectName+" " + fieldIdentifier);
         // Run query
         task.get().addOnCompleteListener((OnCompleteListener<QuerySnapshot>) runningTask -> {
             if (runningTask.isSuccessful()) {

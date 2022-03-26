@@ -10,13 +10,23 @@ public class Player {
     private HashMap contactInfo;
     private Integer qrCount;
     private Integer totalScore;
+    private String id;
 
-    public Player(String username, ArrayList<String> qrInventory, HashMap contactInfo, Integer qrCount, Integer totalScore) {
+    public Player(String username, ArrayList<String> qrInventory, HashMap contactInfo, Integer qrCount, Integer totalScore, String id) {
         this.username = username;
+        this.id = id;
         this.qrInventory = qrInventory;
         this.contactInfo = contactInfo;
         this.qrCount = qrCount;
         this.totalScore = totalScore;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getUsername() {

@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.ContactsContract;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -11,9 +13,15 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.qrpokemon.qrpokemon.DatabaseCallback;
+import com.qrpokemon.qrpokemon.Player;
 import com.qrpokemon.qrpokemon.PlayerController;
 import com.qrpokemon.qrpokemon.R;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -33,24 +41,38 @@ public class SignupActivity extends AppCompatActivity  implements View.OnClickLi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.signup_activity);
-        if(signupController.load(this, "firstRun") == null) { // program is in first run:
-            signupController.write(this, "firstRun", null);
-        }
-        else { //app has run before
-            if (signupController.load(this, "name") != null){ //if a user has been successfully created
-                signupController.load(this, "name", false);
-                finish(); // we won't be back once user has correctly registered the app
-            }
-        }
-
         et_email = findViewById(R.id.et_email);
         et_name = findViewById(R.id.et_name);
         et_phone = findViewById(R.id.et_phone);
         bt_submit = findViewById(R.id.bt_submit);
         tv_have = findViewById(R.id.tv_have);
 
-        bt_submit.setOnClickListener(this);
-        tv_have.setOnClickListener(this);
+        DatabaseCallback databaseCallback = new DatabaseCallback(this) {
+            @Override
+            public void run(List<Map> dataList) {
+                if (!dataList.isEmpty()){// user found, login automatically
+
+                    signupController.write((String) dataList.get(0).get("Identifier"),
+                                        (ArrayList<String>) dataList.get(0).get("qrInventory"),
+                                        (HashMap<String, String>) dataList.get(0).get("contact"),
+                                        ((Long) dataList.get(0).get("qrCount")).intValue(),
+                                        ((Long) dataList.get(0).get("totalScore")).intValue(),
+                                        Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID)); //init Player class locally via PlayerController
+
+                    Log.e("SignupAcitivity: get player ",(String) dataList.get(0).get("Identifier"));
+                    finish();
+                } else {
+                    bt_submit.setOnClickListener(SignupActivity.this);
+                    tv_have.setOnClickListener(SignupActivity.this);
+                }
+            }
+        };
+        try {
+            signupController.load(this,databaseCallback, new ArrayList<>(), Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID));
+        } catch (Exception e) {
+            e.printStackTrace();
+            Log.e("SignupActivity Error: ", e.toString());
+        }
     }
 
     /**
@@ -90,9 +112,9 @@ public class SignupActivity extends AppCompatActivity  implements View.OnClickLi
                 try{
                     PlayerController playerController = PlayerController.getInstance();
                     playerController.addObserver(this);
-                    signupController.addNewPlayer(this, name, email, phone);
+                    signupController.addNewPlayer(this, name, email, phone, Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID));
                 } catch (Exception e) {
-                    Log.e("TrackRecordActivity" , String.valueOf(e));
+                    Log.e("TrackRecordActivity", String.valueOf(e));
                 }
                 break;
         }

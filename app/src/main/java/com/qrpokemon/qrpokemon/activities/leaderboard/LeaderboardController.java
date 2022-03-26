@@ -73,7 +73,7 @@ public class LeaderboardController {
         };
 
         try {
-            databaseController.getData(callback, tempList, "Player", null, sortField);
+            databaseController.getData(callback, tempList, "Player", null, sortField,"Identifier");
         } catch (Exception exception) {
             Log.e("Leaderboard Controller: ", "Database call failed");
             Log.e("Leaderboard Controller: ", exception.toString());

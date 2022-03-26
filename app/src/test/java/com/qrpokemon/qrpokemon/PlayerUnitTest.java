@@ -19,7 +19,7 @@ public class PlayerUnitTest {
         contactInfo.put("email", "abc@ualberta.ca");
         contactInfo.put("phone", "74188965532");
 
-        return new Player("Hatsune", qrInventory, contactInfo, 100, 100);
+//        return new Player("Hatsune", qrInventory, contactInfo, 100, 100,);
     }
 
     @Test
