@@ -85,35 +85,7 @@ public class QrScannedActivity extends AppCompatActivity {
         });
 
 
-        // two switch buttons let user choose either to save image and location or not
-        photoSave.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                if (photoSave.isChecked()){
-                    Toast.makeText(QrScannedActivity.this, "QR code will be saved", Toast.LENGTH_SHORT).show();
-                    savePhoto = true;
-                } else {
-                    savePhoto = false;
-                    Toast.makeText(QrScannedActivity.this, "QR code won't be saved", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
 
-        locationSave.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                if (locationSave.isChecked()){
-                    saveLocation = true;
-                    location = mapController.returnLocation();
-                    Log.e("QrScannedActivity: ", String.valueOf(location.getLatitude()) + String.valueOf(location.getLongitude()));
-                    Toast.makeText(QrScannedActivity.this, "Location will be saved", Toast.LENGTH_SHORT).show();
-                    Toast.makeText(QrScannedActivity.this, String.valueOf(location.getLatitude()) + String.valueOf(location.getLongitude()), Toast.LENGTH_SHORT).show();
-                } else {
-                    saveLocation = false;
-                    Toast.makeText(QrScannedActivity.this, "Location won't be saved", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
 
         activityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
             @Override
@@ -135,6 +107,62 @@ public class QrScannedActivity extends AppCompatActivity {
                         hash = qrScannedController.byte2Hex(messageDigest.digest());
                         TextView qrHash = findViewById(R.id.qr_result);
                         qrHash.setText("Score: " + String.valueOf(qrScannedController.scoreCalculator(hash)));
+
+                        // two switch buttons let user choose either to save image and location or not
+                        photoSave.setOnClickListener(new View.OnClickListener(){
+                            @Override
+                            public void onClick(View v){
+                                if (photoSave.isChecked()){
+                                    Toast.makeText(QrScannedActivity.this, "QR code will be saved", Toast.LENGTH_SHORT).show();
+                                    savePhoto = true;
+                                } else {
+                                    savePhoto = false;
+                                    Toast.makeText(QrScannedActivity.this, "QR code won't be saved", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
+
+                        locationSave.setOnClickListener(new View.OnClickListener(){
+                            @Override
+                            public void onClick(View v){
+                                if (locationSave.isChecked()){
+                                    saveLocation = true;
+                                    location = mapController.returnLocation();
+                                    Log.e("QrScannedActivity: ", String.valueOf(location.getLatitude()) + String.valueOf(location.getLongitude()));
+                                    Toast.makeText(QrScannedActivity.this, "Location will be saved", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(QrScannedActivity.this, String.valueOf(location.getLatitude()) + String.valueOf(location.getLongitude()), Toast.LENGTH_SHORT).show();
+                                } else {
+                                    saveLocation = false;
+                                    Toast.makeText(QrScannedActivity.this, "Location won't be saved", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
+
+                        confirmButton.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                try {
+                                    String currentLocation = null;
+                                    Bitmap bitmap = null;
+                                    if (saveLocation) {
+                                        //if user chooses to save location
+                                        currentLocation = String.valueOf(location.getLatitude()) + "," + String.valueOf(location.getLongitude());
+                                        Toast.makeText(QrScannedActivity.this, "LOCATION SAVED", Toast.LENGTH_SHORT).show();
+                                        Log.e("QrScannedActivity: ",currentLocation);
+                                        finish();
+                                    }
+                                    if (savePhoto){
+                                        //if user chooses to save of QR code
+                                        bitmap = photoBitmap;
+                                    }
+                                    qrScannedController.saveQrCode(QrScannedActivity.this, hash, qrScannedController.scoreCalculator(hash), currentLocation, bitmap);
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                    Log.e("QrScannedActivity: ",e.toString());
+
+                                }
+                            }
+                        });
 
                     } catch (NoSuchAlgorithmException e) {
                         e.printStackTrace();
@@ -162,29 +190,7 @@ public class QrScannedActivity extends AppCompatActivity {
             activityResultLauncher.launch(intent);
         }
 
-        confirmButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                try {
-                    String currentLocation = null;
-                    Bitmap bitmap = null;
-                    if (saveLocation) {
-                        //if user chooses to save location
-                        currentLocation = String.valueOf(location.getLatitude()) + "," + String.valueOf(location.getLongitude());
-                        Toast.makeText(QrScannedActivity.this, "LOCATION SAVED", Toast.LENGTH_SHORT).show();
-                    }
-                    if (savePhoto){
-                        //if user chooses to save of QR code
-                        bitmap = photoBitmap;
-                    }
-                    qrScannedController.saveQrCode(QrScannedActivity.this, hash, qrScannedController.scoreCalculator(hash), currentLocation, bitmap);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    Log.e("QrScannedActivity: ",e.toString());
-                }
 
-            }
-        });
 
 
 

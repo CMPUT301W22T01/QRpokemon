@@ -3,6 +3,7 @@ package com.qrpokemon.qrpokemon;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.provider.ContactsContract;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
 
@@ -35,11 +36,11 @@ public class QrCodeController {
 
         if (newCode) {
             current.put("Identifier", qrHash);
-            current.put("Photo", bitmap);
             current.put("Score", score);
             current.put("Comments", comments);
             current.put("Location",location);
             current.put("Bitmap", bitmap);
+            Log.e("Qrcode controller", location.toString());
             databaseController.writeData("QrCode", qrHash,current,true);
         }
         else {
@@ -56,6 +57,7 @@ public class QrCodeController {
             if (bitmap != null) {
                 current.put("Bitmap", bitmap);
             }
+            Log.e("Qrcode controller", location.toString());
 
             databaseController.writeData("QrCode", qrHash,current,false);
         }

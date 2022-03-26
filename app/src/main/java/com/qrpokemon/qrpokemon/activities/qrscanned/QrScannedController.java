@@ -130,24 +130,37 @@ public class QrScannedController {
         DatabaseCallback databaseCallback = new DatabaseCallback(context) {
             @Override
             public void run(List<Map> dataList) {
+                Log.e("QrScannedController","start run");
                 if (!dataList.isEmpty()){
-                    //this QR code is in Database
+                    Log.e("QrScannedController","if");
+
+                    // this QR code is in Database
+                    // 可能空也可能有东西
+                    ArrayList<String> location1 = new ArrayList<>();
+                    location1.add(location);
+                    HashMap<String, Bitmap> bitmapHash = new HashMap<>();
+                    FileSystemController fileSystemController = new FileSystemController();
+                    bitmapHash.put(fileSystemController.readToFile(context, "name"),bitmap);
                     try {
                         qrCodeController.saveQr(qrHash, score, location1, null, bitmapHash,false);
+                        Log.e("QrScannedController","Qrcode found");
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
 
                 }
+
                 else {
                     //new QrCode added
+                    Log.e("QrScannedController","else");
                     HashMap<String, Bitmap> bitmapHash = new HashMap<>();
                     FileSystemController fileSystemController = new FileSystemController();
                     bitmapHash.put(fileSystemController.readToFile(context, "name"),bitmap);
-                    ArrayList<String> location1 = (ArrayList<String>)dataList.get(0).get("Location");
+                    ArrayList<String> location1 = new ArrayList<>();
                     location1.add(location);
+                    Log.e("QrScannedController",location);
                     try {
-                        qrCodeController.saveQr(qrHash, score, location1,null ,bitmapHash);
+                        qrCodeController.saveQr(qrHash, score, location1,null ,null, true);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
