@@ -2,6 +2,7 @@ package com.qrpokemon.qrpokemon;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
+import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.not;
@@ -22,7 +23,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-// TODO: Use JUnit5?
+// TODO: Make Mock classes inherit base Mock class
 @RunWith(AndroidJUnit4.class)
 public class LeaderboardActivityTest {
 
@@ -46,7 +47,7 @@ public class LeaderboardActivityTest {
      * Checks that the list can successfully add an item
      */
     @Test
-    public void checkLeaderboardListHasItem() {
+    public void checkListHasItem() {
         class MockLeaderboardController extends LeaderboardController {
             final private LeaderboardItem mockItem;
             //final private LeaderboardItem mockItem2;
@@ -84,7 +85,7 @@ public class LeaderboardActivityTest {
      * Checks that the list can add many items
      */
     @Test
-    public void checkLeaderboardListHasManyItems() {
+    public void checkListHasManyItems() {
         class MockLeaderboardController extends LeaderboardController {
             final private LeaderboardItem mockItem;
 
@@ -112,10 +113,59 @@ public class LeaderboardActivityTest {
         });
 
         // Click the sort selector to update the list
+        // NOTE: Test may finish before we can see the update
+        onView(withId(R.id.leaderboard_sort_selector)).perform(click());
+        onView(withText("High Scores")).perform(click());
+    }
+
+    /**
+     * Checks that a player's ranking is displayed
+     */
+    @Test
+    public void checkPersonalRank() {
+        class MockLeaderboardController extends LeaderboardController {
+            private LeaderboardItem mockItem;
+
+            MockLeaderboardController(LeaderboardItem mockItem) {
+                this.mockItem = mockItem;
+            }
+
+            @Override
+            public void sortLeaderboard(Context context, LeaderboardList list, int sortMethod) {
+                list.clear();
+                list.add(mockItem);
+                list.notifyListUpdate();
+
+                updateRank(context, list);
+            }
+
+            @Override
+            public void updateRank(Context context, LeaderboardList list) {
+                ((LeaderboardActivity) context).setPersonalRank(mockItem.getRank(), mockItem.getUsername(),
+                        (int) mockItem.getHighestScore(), (int) mockItem.getQrQuantity(), (int) mockItem.getTotalScore());
+
+                // Checking here ensures the data has updated
+                onView(withId(R.id.tv_leaderboard_player_rank)).check(matches(withText(mockItem.getRank())));
+                onView(withId(R.id.tv_leaderboard_player_username)).check(matches(withText(mockItem.getUsername())));
+                onView(withId(R.id.tv_leaderboard_player_unique)).check(matches(withText((int) mockItem.getHighestScore())));
+                onView(withId(R.id.tv_leaderboard_player_qrcount)).check(matches(withText((int) mockItem.getQrQuantity())));
+                onView(withId(R.id.tv_leaderboard_player_score)).check(matches(withText((int) mockItem.getTotalScore())));
+            }
+        }
+
+        // Override the leaderboard controller so we can insert our own values
+        LeaderboardItem mockItem = new LeaderboardItem("mockItem", 1, 123, 999, 999);
+        MockLeaderboardController mockLeaderboardController = new MockLeaderboardController(mockItem);
+        activityRule.getScenario().onActivity(activity -> {
+            activity.setLeaderboardController(mockLeaderboardController);
+        });
+
+        // Click the sort selector to update the list
+        // NOTE: Test may finish before we can see the update
         onView(withId(R.id.leaderboard_sort_selector)).perform(click());
         onView(withText("High Scores")).perform(click());
     }
 
     // TODO: Verify sorting works
-    // TODO: Check rank displayed
+    // TODO: Verify player has correct rank
 }
