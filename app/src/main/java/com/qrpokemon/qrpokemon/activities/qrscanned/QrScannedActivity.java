@@ -29,7 +29,9 @@ import androidx.core.content.ContextCompat;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.qrpokemon.qrpokemon.MainActivity;
 import com.qrpokemon.qrpokemon.MapController;
+import com.qrpokemon.qrpokemon.QrCodeController;
 import com.qrpokemon.qrpokemon.R;
 
 import java.io.UnsupportedEncodingException;
@@ -37,49 +39,53 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 public class QrScannedActivity extends AppCompatActivity {
-    // create variable for capture and save image
+
+    // init variable
     private ImageView photoImage;
     private Button confirmButton;
     private ActivityResultLauncher<Intent> activityResultLauncher;
     private Bitmap photoBitmap;
     private String codeContent;
     private String hash = "";
-    private Boolean savePhoto, saveLocation;
+    private Boolean savePhoto = false, saveLocation = false;
     private Location location;
     final private String TAG = "TestCamera";
     public static final int CAMERA_ACTION_CODE = 100;
     private QrScannedController qrScannedController = QrScannedController.getInstance();
+    private QrCodeController qrCodeController = QrCodeController.getInstance();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.qrscanned_activity);
 
-        //setup for getting location:
+        // setup for getting location:
         MapController mapController  = MapController.getInstance();
         LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         FusedLocationProviderClient fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
 
-        //get location in mapController
+        // get location in mapController
         mapController.run(this, null, locationManager,  fusedLocationProviderClient);
 
         // binding variables with layout
         photoImage = findViewById(R.id.code_not_found_imageView);
         confirmButton = findViewById(R.id.scan_Button_no_code_found);
-
         FloatingActionButton backButton = findViewById(R.id.backButton_no_code_found);
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
-
         TextView title = findViewById(R.id.no_code_found_textView);
         @SuppressLint("UseSwitchCompatOrMaterialCode") Switch photoSave = findViewById(R.id.qr_switch);
         @SuppressLint("UseSwitchCompatOrMaterialCode") Switch locationSave = findViewById(R.id.location_switch);
 
-        // two switch buttons
+        // set click listener for back button
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(QrScannedActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
+        // two switch buttons let user choose either to save image and location or not
         photoSave.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
@@ -119,16 +125,17 @@ public class QrScannedActivity extends AppCompatActivity {
 
                     // identify if its a QR code and get the bitmap for the picture
                     codeContent = qrScannedController.doInBackground(photoBitmap);
-                    Toast.makeText(QrScannedActivity.this, codeContent, Toast.LENGTH_LONG).show();
+//                    Toast.makeText(QrScannedActivity.this, codeContent, Toast.LENGTH_LONG).show();
                     MessageDigest messageDigest;
+
                     try {
                         messageDigest = MessageDigest.getInstance("SHA-256");
                         messageDigest.update(codeContent.getBytes("UTF-8"));
-
                         // Get the hex hash string
                         hash = qrScannedController.byte2Hex(messageDigest.digest());
                         TextView qrHash = findViewById(R.id.qr_result);
                         qrHash.setText("Score: " + String.valueOf(qrScannedController.scoreCalculator(hash)));
+
                     } catch (NoSuchAlgorithmException e) {
                         e.printStackTrace();
                     } catch (UnsupportedEncodingException e) {
@@ -155,28 +162,34 @@ public class QrScannedActivity extends AppCompatActivity {
             activityResultLauncher.launch(intent);
         }
 
-
         confirmButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 try {
                     String currentLocation = null;
                     Bitmap bitmap = null;
-                    if (saveLocation) { //if user chooses to save loaction
-                        currentLocation = String.valueOf(location.getLatitude()) + String.valueOf(location.getLongitude());
+                    if (saveLocation) {
+                        //if user chooses to save location
+                        currentLocation = String.valueOf(location.getLatitude()) + "," + String.valueOf(location.getLongitude());
+                        Toast.makeText(QrScannedActivity.this, "LOCATION SAVED", Toast.LENGTH_SHORT).show();
                     }
-                    if (savePhoto){ //if user chooses to save of QRcode
+                    if (savePhoto){
+                        //if user chooses to save of QR code
                         bitmap = photoBitmap;
                     }
-                    qrScannedController.saveQrCode(QrScannedActivity.this, hash, qrScannedController.scoreCalculator(hash),currentLocation,bitmap);
+                    qrScannedController.saveQrCode(QrScannedActivity.this, hash, qrScannedController.scoreCalculator(hash), currentLocation, bitmap);
                 } catch (Exception e) {
                     e.printStackTrace();
                     Log.e("QrScannedActivity: ",e.toString());
                 }
-                finish();
+
             }
         });
+
+
+
     }
+
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         switch (requestCode) {

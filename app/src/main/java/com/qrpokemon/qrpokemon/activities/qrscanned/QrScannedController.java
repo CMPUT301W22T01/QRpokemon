@@ -130,18 +130,34 @@ public class QrScannedController {
         DatabaseCallback databaseCallback = new DatabaseCallback(context) {
             @Override
             public void run(List<Map> dataList) {
-                if (!dataList.isEmpty()){ //this QR code is in Database
+                if (!dataList.isEmpty()){
+                    //this QR code is in Database
+                    try {
+                        qrCodeController.saveQr(qrHash, score, location1, null, bitmapHash,false);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
 
                 }
-                else { //new QrCode added
+                else {
+                    //new QrCode added
                     HashMap<String, Bitmap> bitmapHash = new HashMap<>();
                     FileSystemController fileSystemController = new FileSystemController();
                     bitmapHash.put(fileSystemController.readToFile(context, "name"),bitmap);
-//                    qrCodeController.saveQr(qrHash, score, location,null ,bitmapHash );
+                    ArrayList<String> location1 = (ArrayList<String>)dataList.get(0).get("Location");
+                    location1.add(location);
+                    try {
+                        qrCodeController.saveQr(qrHash, score, location1,null ,bitmapHash);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         };
-//        qrCodeController.getQR(databaseCallback, );
+
+        // create a list map to store Identifier
+        List<Map> list = new ArrayList<>();
+        qrCodeController.getQR(databaseCallback, list, "QrCode");
 
     }
 
