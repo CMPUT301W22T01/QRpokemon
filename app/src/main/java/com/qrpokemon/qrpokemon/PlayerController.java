@@ -122,9 +122,13 @@ public class PlayerController extends Observable {
         info.put("qrInventory", this.currentPlayer.getQrInventory());
         info.put("contact", this.currentPlayer.getContactInfo());
 
-        if (addIdentifier)
+        if (addIdentifier) { //ading a new user
             info.put("Identifier", currentPlayer.getUsername());
-        Log.e("PlayerController: ", "User at savePlayerData is: "+currentPlayer.getUsername());
-        databaseController.writeData("Player", currentPlayer.getUsername() ,info ,false);
+            databaseController.writeData("Player", currentPlayer.getUsername() ,info ,true);
+        } else { //update a user
+            Log.e("PlayerController: ", "User at savePlayerData is: "+currentPlayer.getUsername());
+            databaseController.writeData("Player", currentPlayer.getUsername() ,info ,false);
+        }
+
     }
 }
