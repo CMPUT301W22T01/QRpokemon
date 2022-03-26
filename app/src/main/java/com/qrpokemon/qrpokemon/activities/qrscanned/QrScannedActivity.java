@@ -10,6 +10,7 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -34,6 +35,7 @@ import com.qrpokemon.qrpokemon.MapController;
 import com.qrpokemon.qrpokemon.QrCodeController;
 import com.qrpokemon.qrpokemon.R;
 
+import java.io.ByteArrayOutputStream;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -155,7 +157,13 @@ public class QrScannedActivity extends AppCompatActivity {
                                         //if user chooses to save of QR code
                                         bitmap = photoBitmap;
                                     }
-                                    qrScannedController.saveQrCode(QrScannedActivity.this, hash, qrScannedController.scoreCalculator(hash), currentLocation, bitmap);
+                                    // convert bitmap to string
+                                    ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+                                    bitmap.compress(Bitmap.CompressFormat.PNG,100, byteArrayOutputStream);
+                                    byte[] b = byteArrayOutputStream.toByteArray();
+                                    String bitMapString = Base64.encodeToString(b, Base64.DEFAULT);
+
+                                    qrScannedController.saveQrCode(QrScannedActivity.this, hash, qrScannedController.scoreCalculator(hash), currentLocation, bitMapString);
                                 } catch (Exception e) {
                                     e.printStackTrace();
                                     Log.e("QrScannedActivity: ",e.toString());
