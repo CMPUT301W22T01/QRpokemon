@@ -151,11 +151,12 @@ public class QrScannedActivity extends AppCompatActivity {
                                         currentLocation = String.valueOf(location.getLatitude()) + "," + String.valueOf(location.getLongitude());
                                         Toast.makeText(QrScannedActivity.this, "LOCATION SAVED", Toast.LENGTH_SHORT).show();
                                         Log.e("QrScannedActivity: ",currentLocation);
-                                        finish();
+
                                     }
                                     if (savePhoto){
                                         //if user chooses to save of QR code
                                         bitmap = photoBitmap;
+
                                     }
                                     // convert bitmap to string
                                     ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
@@ -164,6 +165,7 @@ public class QrScannedActivity extends AppCompatActivity {
                                     String bitMapString = Base64.encodeToString(b, Base64.DEFAULT);
 
                                     qrScannedController.saveQrCode(QrScannedActivity.this, hash, qrScannedController.scoreCalculator(hash), currentLocation, bitMapString);
+                                    finish();
                                 } catch (Exception e) {
                                     e.printStackTrace();
                                     Log.e("QrScannedActivity: ",e.toString());
