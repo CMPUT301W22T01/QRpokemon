@@ -195,10 +195,6 @@ public class QrScannedController {
         }
     }
 
-//    public HashMap getQr(@Nullable DatabaseCallback databaseCallback, String qrHash) throws Exception{
-//        HashMap<String, Object> info = new HashMap<>();
-//        info.put("Identifier", this.)
-//    }
 
 
 

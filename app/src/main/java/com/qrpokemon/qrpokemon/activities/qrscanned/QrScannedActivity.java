@@ -59,6 +59,11 @@ public class QrScannedActivity extends AppCompatActivity {
     private QrScannedController qrScannedController = QrScannedController.getInstance();
     private QrCodeController qrCodeController = QrCodeController.getInstance();
 
+    /**
+     * open camera collaborate with player controller and map controller
+     * to get current player info and called qr scanned controller to save data
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -89,22 +94,17 @@ public class QrScannedActivity extends AppCompatActivity {
             }
         });
 
-
-
-
         activityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
             @Override
             public void onActivityResult(ActivityResult result) {
 
-
                 if (result.getResultCode() == RESULT_OK && result.getData() != null) {
+
                     Bundle bundle = result.getData().getExtras();
                     photoBitmap = (Bitmap) bundle.get("data");
                     photoImage.setImageBitmap(photoBitmap);
-
                     // identify if its a QR code and get the bitmap for the picture
                     codeContent = qrScannedController.analyzeImage(photoBitmap);
-//                    Toast.makeText(QrScannedActivity.this, codeContent, Toast.LENGTH_LONG).show();
                     MessageDigest messageDigest;
 
                     try {
@@ -114,12 +114,13 @@ public class QrScannedActivity extends AppCompatActivity {
                         hash = qrScannedController.byte2Hex(messageDigest.digest());
                         PlayerController playerController = PlayerController.getInstance();
 
-                        // if th Qr code already exist in player's file
+                        // if th Qr code already scanned by player
                         if((((ArrayList<String>)(playerController.getPlayer(null, null,null,null).get("qrInventory"))).contains(hash))){
                             Toast.makeText(QrScannedActivity.this, "Already have this QR code", Toast.LENGTH_SHORT).show();
                             finish();
                         }
 
+                        // if this QR code is the first time scanned by player
                         else{
                             HashMap player = (HashMap) playerController.getPlayer(null, null,null,null);
                             ArrayList<String> qrInventory = (ArrayList<String>) player.get("qrInventory");
@@ -127,7 +128,6 @@ public class QrScannedActivity extends AppCompatActivity {
                             int qrTotal = (int)player.get("totalScore") + qrScannedController.scoreCalculator(hash);
                             qrInventory.add(hash);
                             playerController.savePlayerData(qrCount,qrTotal,qrInventory,null, null,false);
-
                         }
 
                         TextView qrHash = findViewById(R.id.qr_result);
@@ -167,32 +167,35 @@ public class QrScannedActivity extends AppCompatActivity {
                             @Override
                             public void onClick(View view) {
                                 try {
+
                                     String currentLocation = null;
                                     Bitmap bitmap = null;
+                                    String bitMapString = null;
                                     if (saveLocation) {
-                                        //if user chooses to save location
+                                        //if player chooses to save location
                                         currentLocation = String.valueOf(location.getLatitude()) + "," + String.valueOf(location.getLongitude());
                                         Toast.makeText(QrScannedActivity.this, "LOCATION SAVED", Toast.LENGTH_SHORT).show();
-                                        Log.e("QrScannedActivity: ",currentLocation);
+//                                        Log.e("QrScannedActivity: ",currentLocation);
 
                                     }
+
                                     if (savePhoto){
                                         //if user chooses to save of QR code
                                         bitmap = photoBitmap;
-
+                                        // convert bitmap to string
+                                        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+                                        bitmap.compress(Bitmap.CompressFormat.PNG,100, byteArrayOutputStream);
+                                        byte[] b = byteArrayOutputStream.toByteArray();
+                                        bitMapString = Base64.encodeToString(b, Base64.DEFAULT);
+                                        Toast.makeText(QrScannedActivity.this, "Photo saved", Toast.LENGTH_SHORT).show();
                                     }
-                                    // convert bitmap to string
-                                    ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-                                    bitmap.compress(Bitmap.CompressFormat.PNG,100, byteArrayOutputStream);
-                                    byte[] b = byteArrayOutputStream.toByteArray();
-                                    String bitMapString = Base64.encodeToString(b, Base64.DEFAULT);
 
                                     qrScannedController.saveQrCode(QrScannedActivity.this, hash, qrScannedController.scoreCalculator(hash), currentLocation, bitMapString);
+                                    Toast.makeText(QrScannedActivity.this, "QR saved", Toast.LENGTH_SHORT).show();
                                     finish();
                                 } catch (Exception e) {
                                     e.printStackTrace();
-                                    Log.e("QrScannedActivity: ",e.toString());
-
+//                                    Log.e("QrScannedActivity: ",e.toString());
                                 }
                             }
                         });
@@ -202,7 +205,8 @@ public class QrScannedActivity extends AppCompatActivity {
                     } catch (UnsupportedEncodingException e) {
                         e.printStackTrace();
 
-                    } catch (Exception e){ // if a qr isn't found
+                    } catch (Exception e){
+                        // if a qr isn't found
                         e.printStackTrace();
                         Toast.makeText(QrScannedActivity.this, "No QR found!", Toast.LENGTH_SHORT).show();
                         finish();
@@ -224,6 +228,12 @@ public class QrScannedActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Ask permission for device to open camera
+     * @param requestCode permission code
+     * @param permissions the array of permission app asked
+     * @param grantResults the result of permission asked
+     */
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         Log.e("QrScannedActivity: ", "Request now has the result");
@@ -239,5 +249,7 @@ public class QrScannedActivity extends AppCompatActivity {
 
         }
     }
+
+
 }
 
