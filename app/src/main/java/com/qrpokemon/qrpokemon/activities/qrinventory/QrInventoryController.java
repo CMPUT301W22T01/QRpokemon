@@ -69,7 +69,7 @@ public class QrInventoryController {
             public void run(List<Map> dataList) {
 
                 if (!dataList.isEmpty()) {
-                    Log.e(TAG, "Function 'getAndSetQrCodeData' found:" + dataList.toString());
+//                    Log.e(TAG, "Function 'getAndSetQrCodeData' found:" + dataList.toString());
                     if (dataList != null ) {
                         data.put((String) dataList.get(dataList.size()-1).get("Identifier"), dataList);
                         ListView temp = ((Activity) context).findViewById(R.id.QR_inventory_list);
@@ -78,14 +78,14 @@ public class QrInventoryController {
                                 + " "
                                 + ((String) (dataList.get(dataList.size()-1).get("Identifier"))));
 
-                        Log.e(TAG, "Hash '"
-                                + (String.valueOf(dataList.get(dataList.size()-1).get("Score")))
-                                + " "
-                                + (String) (dataList.get(dataList.size()-1).get("Identifier"))
-                                + "' has added to datalist");
+//                        Log.e(TAG, "Hash '"
+//                                + (String.valueOf(dataList.get(dataList.size()-1).get("Score")))
+//                                + " "
+//                                + (String) (dataList.get(dataList.size()-1).get("Identifier"))
+//                                + "' has added to datalist");
 
                         totalScore += Integer.valueOf(String.valueOf( dataList.get(dataList.size()-1).get("Score")));
-                        Log.e(TAG, "Current score: " + totalScore.toString());
+//                        Log.e(TAG, "Current score: " + totalScore.toString());
 
                         // set the value of total score
                         TextView tvScore = ((Activity) context).findViewById(R.id.tv_total_score);
@@ -99,7 +99,7 @@ public class QrInventoryController {
         };
         for (int i = 0; i < qrHashCodes.size(); i++) {
             databaseController.getData(databaseCallback, result, "QrCode", qrHashCodes.get(i));
-            Log.e(TAG, "Loop now get hash: " + qrHashCodes.get(i));
+//            Log.e(TAG, "Loop now get hash: " + qrHashCodes.get(i));
         }
 
         return data;
@@ -107,27 +107,37 @@ public class QrInventoryController {
 
     /**
      * This function receive a (String) 'hashName', then store all the comments of that qrCode into
-     * an arrayList 'commentsOfCurQrcode'
+     * an HashMap 'commentsOfCurQrcode'
      * @param context               current activity
      * @param hashName              which qrCode we interest
-     * @param commentsOfCurQrcode   where we store all those comments
+     * @param commentsOfCurQrcode   where we store all those comments of a qrCode
      * @return
      * @throws Exception
      */
-    public HashMap<String, Object> getAllComments (Context context, String hashName, ArrayList<String> commentsOfCurQrcode) throws Exception {
+    public HashMap<String, Object> getAllComments (Context context, String hashName, HashMap<String, ArrayList<String>> commentsOfCurQrcode) throws Exception {
         List<Map> result = new ArrayList<>();
         DatabaseCallback databaseCallback = new DatabaseCallback(context) {
             @Override
             public void run(List<Map> dataList) {
 
                 if (!dataList.isEmpty()){
-                    Log.e(TAG, "Function 'getAllComments' found:" + dataList.toString());
+//                    Log.e(TAG, "Function 'getAllComments' found:" + dataList.toString());
 
-                    ArrayList<String> tList;
-                    tList = (ArrayList<String>) dataList.get(0).get("comments");
+                    HashMap<String, ArrayList<String>> tMap;
+                    String[] tKeys;
+                    ArrayList<String> keys = new ArrayList<>();
 
-                    for (int i = 0; i < tList.size(); i++) {
-                        commentsOfCurQrcode.add(tList.get(i));
+                    // Get all keys (ArrayList<String>) and store them in ArrayList keys
+                    tMap = (HashMap<String, ArrayList<String>>) dataList.get(0).get("Comments");
+                    tKeys = tMap.keySet().toArray(new String[0]);
+                    for (String k : tKeys) {
+                        keys.add(k);
+                    }
+
+                    // Store all the comments of qrCode into HashMap 'commentsOfCurQrcode'
+                    for (int i = 0; i < tMap.size(); i++) {
+                        Log.e(TAG, "loop: " + keys.get(i) + " " + tMap.get(keys.get(i)));
+                        commentsOfCurQrcode.put(keys.get(i), tMap.get(keys.get(i)));
                     }
                 }
             }

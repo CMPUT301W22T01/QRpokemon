@@ -34,9 +34,9 @@ public class QrInventoryActivity
     private Button ascendingButton, descendingButton;
     private FloatingActionButton backButton, deleteButton, commentButton;
     private ListView qrInventoryList;
-    private HashMap hashMapOfPlayerData;
+    private HashMap hashMapOfPlayerData, commentsOfCurQrcode;
     private HashMap<String, Object> m = new HashMap<>();
-    private ArrayList<String> qrHashCodes, commentsOfCurQrcode;
+    private ArrayList<String> qrHashCodes;
     private ArrayAdapter<String> qrInventoryDataAdapter;
     private QrInventoryController qrInventoryController = QrInventoryController.getInstance();
 
@@ -74,7 +74,7 @@ public class QrInventoryActivity
             // So far, 'listOfPlayData' should have contained all the information of the current player's
             // document, which is a hashMap.
             hashMapOfPlayerData = qrInventoryController.getPlayerInfo(null);
-            Log.e(TAG, "All info of the current player: " + hashMapOfPlayerData.toString());
+//            Log.e(TAG, "All info of the current player: " + hashMapOfPlayerData.toString());
         } catch (Exception e) {
             e.printStackTrace();
             Log.e(TAG, e.toString());
@@ -82,11 +82,11 @@ public class QrInventoryActivity
 
         // Get the identifier of the current player
         currentPlayer = hashMapOfPlayerData.get("Identifier").toString();
-        Log.e(TAG, "Current player is: " + currentPlayer);
+//        Log.e(TAG, "Current player is: " + currentPlayer);
 
         // Get all hashcode of the qrcode that owned by the player
         qrHashCodes = (ArrayList<String>) hashMapOfPlayerData.get("qrInventory");
-        Log.e(TAG, "Current player has the following qrCodes: " + qrHashCodes.toString());
+//        Log.e(TAG, "Current player has the following qrCodes: " + qrHashCodes.toString());
 
         // Set the total # of the qrCodes the current user has
         totalCount.setText("Total Number: " + qrHashCodes.size());
@@ -98,10 +98,10 @@ public class QrInventoryActivity
 
         try {
             qrInventoryController.getAndSetQrCodeData(this, qrHashCodes, qrInventoryDataAdapter);
-            Log.e(TAG, "QrCode documents of the current player has the following: " + qrInventoryDataAdapter.getItem(0).toString());
+//            Log.e(TAG, "QrCode documents of the current player has the following: " + qrInventoryDataAdapter.getItem(0).toString());
         } catch (Exception e) {
             e.printStackTrace();
-            Log.e(TAG, "Error from line 97: " + e);
+//            Log.e(TAG, "Error from line 97: " + e);
         }
 
         // Set a click listener for the listview
@@ -116,7 +116,7 @@ public class QrInventoryActivity
                 String curString = adapterView.getItemAtPosition(i).toString();
                 String[] tStr = curString.split(cut);
                 selectedHash = tStr[1];
-                Log.e(TAG, "Current hash: " + selectedHash);
+//                Log.e(TAG, "Current hash: " + selectedHash);
 
                 // show the delete button
                 deleteButton.setVisibility(VISIBLE);
@@ -169,7 +169,7 @@ public class QrInventoryActivity
 
                 } catch (Exception e) {
                     e.printStackTrace();
-                    Log.e(TAG, "Error from Onclick (delete from local and firebase): " + e);
+//                    Log.e(TAG, "Error from Onclick (delete from local and firebase): " + e);
                 }
 
                 deleteButton.setVisibility(INVISIBLE);
@@ -179,7 +179,7 @@ public class QrInventoryActivity
 
             // if the user clicked the descending button, that is, want to sort the list in descending order by score
             case R.id.bt_descending:
-                Log.e(TAG, "After clicking the DESCENDING button: " + qrInventoryDataAdapter.getCount());
+//                Log.e(TAG, "After clicking the DESCENDING button: " + qrInventoryDataAdapter.getCount());
 
                 qrInventoryDataAdapter.sort(new Comparator<String>() {
                     @Override
@@ -211,7 +211,7 @@ public class QrInventoryActivity
 
             // if the user clicked the descending button, that is, want to sort the list in descending order by score
             case R.id.bt_ascending:
-                Log.e(TAG, "After clicking the ASCENDING button: " + qrInventoryDataAdapter.getCount());
+//                Log.e(TAG, "After clicking the ASCENDING button: " + qrInventoryDataAdapter.getCount());
 
                 qrInventoryDataAdapter.sort(new Comparator<String>() {
                     @Override
@@ -246,7 +246,7 @@ public class QrInventoryActivity
 
                 // first, get all the comments that that qrCode('selectedHash') has
                 try {
-                    commentsOfCurQrcode = new ArrayList<>();
+                    commentsOfCurQrcode = new HashMap<String, ArrayList<String>>();
                     qrInventoryController.getAllComments(this, selectedHash, commentsOfCurQrcode);
 
                 } catch (Exception e) {
@@ -266,19 +266,22 @@ public class QrInventoryActivity
     /**
      * Function used by QrInventoryAddCommentFragment, the fragment passes the argument (String) "comment"
      * to and call this function, then it writes the new arrayList of comments of that qrCode ('selectedHash')
-     * into Firebase.
+     * for the current player into Firebase.
      * @param comment comment that player just entered
      * @throws Exception
      */
     public void addComment(String comment) throws Exception {
         DatabaseController databaseController = DatabaseController.getInstance();
-        HashMap<String, ArrayList<String>> tHash = new HashMap<>();
+        HashMap<String, HashMap> tHash = new HashMap<>();
+        ArrayList<String> tList;
 
-        // add the new comment into the original arrayList
-        commentsOfCurQrcode.add(comment);
+        // add the new comment into the original HashMap
+        tList = (ArrayList<String>) commentsOfCurQrcode.get(currentPlayer);
+        tList.add(comment);
+        commentsOfCurQrcode.put(currentPlayer, tList);
 
         // update data of Firebase
-        tHash.put("comments", commentsOfCurQrcode);
+        tHash.put("Comments", commentsOfCurQrcode);
         databaseController.writeData("QrCode", selectedHash, tHash);
 
         deleteButton.setVisibility(INVISIBLE);
