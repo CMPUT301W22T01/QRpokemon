@@ -13,18 +13,23 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.qrpokemon.qrpokemon.DatabaseCallback;
 import com.qrpokemon.qrpokemon.DatabaseController;
 import com.qrpokemon.qrpokemon.PlayerController;
+import com.qrpokemon.qrpokemon.QrCodeController;
 import com.qrpokemon.qrpokemon.R;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class QrInventoryActivity
         extends AppCompatActivity
@@ -37,6 +42,7 @@ public class QrInventoryActivity
     private FloatingActionButton backButton, deleteButton, commentButton, showCommentsButton;
     private ListView qrInventoryList;
     private HashMap hashMapOfPlayerData, commentsOfCurQrcode;
+    private Map currentQR;
     private HashMap<String, Object> m = new HashMap<>();
     private ArrayList<String> qrHashCodes;
     private ArrayAdapter<String> qrInventoryDataAdapter;
@@ -117,6 +123,7 @@ public class QrInventoryActivity
                 // show the delete button
                 deleteButton.setVisibility(VISIBLE);
                 commentButton.setVisibility(VISIBLE);
+                showCommentsButton.setVisibility(VISIBLE);
             }
         });
     }
@@ -239,40 +246,127 @@ public class QrInventoryActivity
 
             // if the user clicked the comment button, that is, the player want to add a comment to one of his/her qrCode
             case R.id.bt_comment:
-
+                commentsOfCurQrcode = new HashMap<String, ArrayList<String>>();
                 // first, get all the comments that that qrCode('selectedHash') has
                 try {
-                    commentsOfCurQrcode = new HashMap<String, ArrayList<String>>();
-                    qrInventoryController.getAllComments(this, selectedHash, commentsOfCurQrcode);
+                    DatabaseCallback databaseCallback = new DatabaseCallback(this) {
+                        @Override
+                        public void run(List<Map> dataList) {
 
-                    Log.e(TAG, "comment: " + commentsOfCurQrcode.toString());
+                            // call the fragment and ask player for comment
+                            QrInventoryAddCommentFragment qrInventoryAddCommentFragment = new QrInventoryAddCommentFragment();
+                            qrInventoryAddCommentFragment.show(getSupportFragmentManager(), "ADD_COMMENT");
+
+                            if (!dataList.isEmpty()){
+                                currentQR = dataList.get(0);
+                                if (dataList.get(0).get("Comments") == null){
+                                    Log.e("QrInventory OnClick case bt_comment: ", "There is no comment for this user!");
+                                } else {
+                                    Log.e(TAG, "Function 'getAllComments' found:" + dataList.get(0).get("Comments").toString());
+
+                                    HashMap<String, ArrayList<String>> tMap;
+                                    String[] tKeys;
+                                    ArrayList<String> keys = new ArrayList<>();
+
+                                    try {
+                                        // Get all keys (ArrayList<String>) and store them in ArrayList keys
+                                        tMap = (HashMap<String, ArrayList<String>>) dataList.get(0).get("Comments");
+                                        tKeys = tMap.keySet().toArray(new String[0]);
+
+                                        //get all data related to selected QRcode:
+                                        Log.e("QrInventory OnClick case bt_comment: ", "CurrentQR is: "+currentQR.get("Identifier").toString());
+
+                                        for (String k : tKeys) {
+                                            keys.add(k);
+                                        }
+
+                                        // Store all the comments of qrCode into HashMap 'commentsOfCurQrcode'
+                                        for (int i = 0; i < tMap.size(); i++) {
+    //                            Log.e(TAG, "loop: " + keys.get(i) + " " + tMap.get(keys.get(i)));
+                                            commentsOfCurQrcode.put(keys.get(i), tMap.get(keys.get(i)));
+                                        }
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                            }
+
+                        }
+                    };
+                    List<Map> result = new ArrayList<>();
+                    qrInventoryController.getAllComments(databaseCallback, selectedHash, result);
+
+                    Log.e(TAG, "Get comment: " + commentsOfCurQrcode.toString());
 
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-
-                // call the fragment and ask player for comment
-                QrInventoryAddCommentFragment qrInventoryAddCommentFragment = new QrInventoryAddCommentFragment();
-                qrInventoryAddCommentFragment.show(getSupportFragmentManager(), "ADD_COMMENT");
 
                 break;
 
             // if the user clicked the show comments button, that is, the player want to see all the comments of the code
             case R.id.bt_show_comments:
-
+                commentsOfCurQrcode = new HashMap<String, ArrayList<String>>();
                 // todo setVisibility
+                DatabaseCallback databaseCallback = new DatabaseCallback(this) {
+                    @Override
+                    public void run(List<Map> dataList) {
+                        if (!dataList.isEmpty()){ // if this qrcode is found:
+
+                            currentQR = dataList.get(0);
+
+                            if (dataList.get(0).get("Comments") == null){
+                                Toast.makeText(QrInventoryActivity.this, "There is no comment for this QR Code", Toast.LENGTH_SHORT);
+                                Log.e("QrInventory OnClick case bt_comment: ", "There is no comment for this user!");
+
+                            } else {//there are comments to show:
+                                HashMap<String, ArrayList<String>> tMap;
+                                String[] tKeys;
+                                ArrayList<String> keys = new ArrayList<>();
+
+                                try {
+                                    // Get all keys (ArrayList<String>) and store them in ArrayList keys
+                                    tMap = (HashMap<String, ArrayList<String>>) dataList.get(0).get("Comments");
+                                    tKeys = tMap.keySet().toArray(new String[0]);
+
+                                    //get all data related to selected QRcode:
+                                    Log.e("QrInventory OnClick case bt_comment: ", "CurrentQR is: "+currentQR.get("Identifier").toString());
+
+                                    for (String k : tKeys) {
+                                        keys.add(k);
+                                    }
+
+                                    // Store all the comments of qrCode into HashMap 'commentsOfCurQrcode'
+                                    for (int i = 0; i < tMap.size(); i++) {
+                                        //                            Log.e(TAG, "loop: " + keys.get(i) + " " + tMap.get(keys.get(i)));
+                                        commentsOfCurQrcode.put(keys.get(i), tMap.get(keys.get(i)));
+                                    }
+
+                                    // new intent to activity 'QrInventoryShowComments'
+                                    Intent intent = new Intent(QrInventoryActivity.this, QrInventoryShowComments.class);
+                                    intent.putExtra("commentsOfCurQrcode", commentsOfCurQrcode);
+                                    startActivity(intent);
+
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                            }
+
+
+                        } else {
+                            Toast.makeText(QrInventoryActivity.this, "There is no comment to show", Toast.LENGTH_SHORT).show();
+                        }
+                        showCommentsButton.setVisibility(INVISIBLE);
+                    }
+                };
 
                 // first, get all the comments that that qrCode('selectedHash') has
                 try {
-                    commentsOfCurQrcode = new HashMap<String, ArrayList<String>>();
-                    qrInventoryController.getAllComments(this, selectedHash, commentsOfCurQrcode);
+                    List<Map> result = new ArrayList<>();
+                    qrInventoryController.getAllComments(databaseCallback, selectedHash, result);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-
-                // new intent to activity 'QrInventoryShowComments'
-                Intent intent = new Intent(QrInventoryActivity.this, QrInventoryShowComments.class);
-//                intent
         }
     }
 
@@ -284,7 +378,7 @@ public class QrInventoryActivity
      * @throws Exception
      */
     public void addComment(String comment) throws Exception {
-        DatabaseController databaseController = DatabaseController.getInstance();
+//        DatabaseController databaseController = DatabaseController.getInstance();
         HashMap<String, HashMap> tHash = new HashMap<>();
         ArrayList<String> tList;
 
@@ -298,10 +392,11 @@ public class QrInventoryActivity
         }
 
         commentsOfCurQrcode.put(currentPlayer, tList);
-
         // update data of Firebase
         tHash.put("Comments", commentsOfCurQrcode);
-        databaseController.writeData("QrCode", selectedHash, tHash);
+        Log.e("QrInventoryActivity: ", (String) currentQR.toString());
+        qrInventoryController.updateQR((String) currentQR.get("Identifier"), null, null, commentsOfCurQrcode, null);
+//        databaseController.writeData("QrCode", selectedHash, tHash);
 
         deleteButton.setVisibility(INVISIBLE);
         commentButton.setVisibility(INVISIBLE);
@@ -309,7 +404,5 @@ public class QrInventoryActivity
     }
 }
 
-// todo: line 304, 'writeData' -> 'saveQr'
-// todo: start from line 261, 'commentsOfCurQrcode' is what is needed to be passed into Activity "QrInventoryShowComments"
 
 

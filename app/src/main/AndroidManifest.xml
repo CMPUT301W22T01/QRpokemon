@@ -44,6 +44,7 @@
             android:name=".MapActivity"
             android:exported="true" />
         <activity android:name=".SearchActivity" />
+        <activity android:name=".activities.qrinventory.QrInventoryShowComments"/>
     </application>
 
 </manifest>

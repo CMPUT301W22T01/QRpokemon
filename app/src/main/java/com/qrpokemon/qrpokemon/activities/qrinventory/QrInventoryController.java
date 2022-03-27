@@ -7,9 +7,13 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
+
 import com.qrpokemon.qrpokemon.DatabaseCallback;
 import com.qrpokemon.qrpokemon.DatabaseController;
 import com.qrpokemon.qrpokemon.PlayerController;
+import com.qrpokemon.qrpokemon.QrCode;
+import com.qrpokemon.qrpokemon.QrCodeController;
 import com.qrpokemon.qrpokemon.R;
 
 import java.util.ArrayList;
@@ -21,9 +25,10 @@ public class QrInventoryController {
 
     private Integer totalScore = 0;
     private HashMap<String, Object> data = new HashMap<>();
-    private DatabaseController databaseController = DatabaseController.getInstance();
+//    private DatabaseController databaseController = DatabaseController.getInstance();
     private PlayerController player = PlayerController.getInstance();
     private PlayerController playerController = PlayerController.getInstance();
+    private QrCodeController qrCodeController = QrCodeController.getInstance();
 
     private static QrInventoryController currentInstance;
     final private String TAG = "QrInventoryController";
@@ -97,56 +102,22 @@ public class QrInventoryController {
             }
         };
         for (int i = 0; i < qrHashCodes.size(); i++) {
-            databaseController.getData(databaseCallback, result, "QrCode", qrHashCodes.get(i));
+            qrCodeController.getQR(databaseCallback, result, qrHashCodes.get(i));
+//            databaseController.getData(databaseCallback, result, "QrCode", qrHashCodes.get(i));
         }
 
         return data;
     }
 
-    /**
-     * This function receive a (String) 'hashName', then store all the comments of that qrCode into
-     * an HashMap 'commentsOfCurQrcode'
-     * @param context               current activity
-     * @param hashName              which qrCode we interest
-     * @param commentsOfCurQrcode   where we store all those comments of a qrCode
-     * @return
-     * @throws Exception
-     */
-    public HashMap<String, Object> getAllComments (Context context, String hashName, HashMap<String, ArrayList<String>> commentsOfCurQrcode) throws Exception {
-        List<Map> result = new ArrayList<>();
-        DatabaseCallback databaseCallback = new DatabaseCallback(context) {
-            @Override
-            public void run(List<Map> dataList) {
-
-                if (!dataList.isEmpty()){
-//                    Log.e(TAG, "Function 'getAllComments' found:" + dataList.toString());
-
-                    HashMap<String, ArrayList<String>> tMap;
-                    String[] tKeys;
-                    ArrayList<String> keys = new ArrayList<>();
-
-                    try {
-                        // Get all keys (ArrayList<String>) and store them in ArrayList keys
-                        tMap = (HashMap<String, ArrayList<String>>) dataList.get(0).get("Comments");
-                        tKeys = tMap.keySet().toArray(new String[0]);
-                        for (String k : tKeys) {
-                            keys.add(k);
-                        }
-
-                        // Store all the comments of qrCode into HashMap 'commentsOfCurQrcode'
-                        for (int i = 0; i < tMap.size(); i++) {
-//                            Log.e(TAG, "loop: " + keys.get(i) + " " + tMap.get(keys.get(i)));
-                            commentsOfCurQrcode.put(keys.get(i), tMap.get(keys.get(i)));
-                        }
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        };
-        databaseController.getData(databaseCallback, result, "QrCode", hashName);
+    public HashMap<String, Object> getAllComments (DatabaseCallback databaseCallback, String hashName, List<Map> result) throws Exception {
+            qrCodeController.getQR(databaseCallback, result, hashName);
+//        databaseController.getData(databaseCallback, result, "QrCode", hashName);
 
         return data;
+    }
+
+    public void updateQR (String qrHash, @Nullable Integer score, @Nullable ArrayList<String> location, @Nullable HashMap<String, Object> comments, @Nullable HashMap<String,String> bitmap) throws Exception {
+        qrCodeController.saveQr(qrHash,score,location,comments,bitmap);
     }
 
 }

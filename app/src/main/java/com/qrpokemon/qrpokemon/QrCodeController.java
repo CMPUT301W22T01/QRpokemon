@@ -30,7 +30,7 @@ public class QrCodeController {
     // Todo: Waiting for more implementation, currently not used
 
     public void saveQr(String qrHash, @Nullable Integer score, @Nullable ArrayList<String> location,
-                       @Nullable ArrayList<String> comments, @Nullable HashMap<String,String> bitmap, Boolean newCode) throws Exception {
+                       @Nullable HashMap<String, Object> comments, @Nullable HashMap<String,String> bitmap, Boolean newCode) throws Exception {
 
         HashMap<String, Object> current = new HashMap<>();
 
@@ -57,14 +57,14 @@ public class QrCodeController {
             if (bitmap != null) {
                 current.put("Bitmap", bitmap);
             }
-            Log.e("Qrcode controller", location.toString());
+//            Log.e("Qrcode controller", location.toString());
 
             databaseController.writeData("QrCode", qrHash,current,false);
         }
 
     }
     public void saveQr(String qrHash, @Nullable Integer score, @Nullable ArrayList<String> location,
-                       @Nullable ArrayList<String> comments, @Nullable HashMap<String,String> bitmap) throws Exception {
+                       @Nullable HashMap<String, Object> comments, @Nullable HashMap<String,String> bitmap) throws Exception {
         saveQr(qrHash,score,location,comments,bitmap,false);
     }
 
