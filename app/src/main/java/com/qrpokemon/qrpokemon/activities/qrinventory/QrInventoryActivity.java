@@ -3,7 +3,9 @@ package com.qrpokemon.qrpokemon.activities.qrinventory;
 import static android.view.View.VISIBLE;
 import static android.view.View.INVISIBLE;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -32,7 +34,7 @@ public class QrInventoryActivity
     private Integer selectedPosition;
     private TextView totalScore, totalCount;
     private Button ascendingButton, descendingButton;
-    private FloatingActionButton backButton, deleteButton, commentButton;
+    private FloatingActionButton backButton, deleteButton, commentButton, showCommentsButton;
     private ListView qrInventoryList;
     private HashMap hashMapOfPlayerData, commentsOfCurQrcode;
     private HashMap<String, Object> m = new HashMap<>();
@@ -62,12 +64,14 @@ public class QrInventoryActivity
         descendingButton = findViewById(R.id.bt_descending);
         ascendingButton = findViewById(R.id.bt_ascending);
         commentButton = findViewById(R.id.bt_comment);
+        showCommentsButton = findViewById(R.id.bt_show_comments);
 
         backButton.setOnClickListener(this);
         deleteButton.setOnClickListener(this);
         descendingButton.setOnClickListener(this);
         ascendingButton.setOnClickListener(this);
         commentButton.setOnClickListener(this);
+        showCommentsButton.setOnClickListener(this);
 
         // Get all the data of the current player's document
         try {
@@ -241,9 +245,10 @@ public class QrInventoryActivity
                     commentsOfCurQrcode = new HashMap<String, ArrayList<String>>();
                     qrInventoryController.getAllComments(this, selectedHash, commentsOfCurQrcode);
 
+                    Log.e(TAG, "comment: " + commentsOfCurQrcode.toString());
+
                 } catch (Exception e) {
                     e.printStackTrace();
-                    Log.e(TAG, "Error from line getAllComments: " + e);
                 }
 
                 // call the fragment and ask player for comment
@@ -252,6 +257,22 @@ public class QrInventoryActivity
 
                 break;
 
+            // if the user clicked the show comments button, that is, the player want to see all the comments of the code
+            case R.id.bt_show_comments:
+
+                // todo setVisibility
+
+                // first, get all the comments that that qrCode('selectedHash') has
+                try {
+                    commentsOfCurQrcode = new HashMap<String, ArrayList<String>>();
+                    qrInventoryController.getAllComments(this, selectedHash, commentsOfCurQrcode);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                // new intent to activity 'QrInventoryShowComments'
+                Intent intent = new Intent(QrInventoryActivity.this, QrInventoryShowComments.class);
+//                intent
         }
     }
 
@@ -287,4 +308,8 @@ public class QrInventoryActivity
 
     }
 }
+
+// todo: line 304, 'writeData' -> 'saveQr'
+// todo: start from line 261, 'commentsOfCurQrcode' is what is needed to be passed into Activity "QrInventoryShowComments"
+
 

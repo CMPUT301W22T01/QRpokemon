@@ -135,7 +135,7 @@ public class QrInventoryController {
 
                         // Store all the comments of qrCode into HashMap 'commentsOfCurQrcode'
                         for (int i = 0; i < tMap.size(); i++) {
-                            Log.e(TAG, "loop: " + keys.get(i) + " " + tMap.get(keys.get(i)));
+//                            Log.e(TAG, "loop: " + keys.get(i) + " " + tMap.get(keys.get(i)));
                             commentsOfCurQrcode.put(keys.get(i), tMap.get(keys.get(i)));
                         }
                     } catch (Exception e) {
