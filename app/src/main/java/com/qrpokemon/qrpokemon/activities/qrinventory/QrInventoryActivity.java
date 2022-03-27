@@ -277,7 +277,14 @@ public class QrInventoryActivity
 
         // add the new comment into the original HashMap
         tList = (ArrayList<String>) commentsOfCurQrcode.get(currentPlayer);
-        tList.add(comment);
+        try {
+            tList.add(comment);
+        } catch(Exception e) {
+            Log.e(TAG, "woshabi");
+            tList = new ArrayList<>();
+            tList.add(comment);
+        }
+
         commentsOfCurQrcode.put(currentPlayer, tList);
 
         // update data of Firebase

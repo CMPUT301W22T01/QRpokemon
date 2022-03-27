@@ -127,17 +127,21 @@ public class QrInventoryController {
                     String[] tKeys;
                     ArrayList<String> keys = new ArrayList<>();
 
-                    // Get all keys (ArrayList<String>) and store them in ArrayList keys
-                    tMap = (HashMap<String, ArrayList<String>>) dataList.get(0).get("Comments");
-                    tKeys = tMap.keySet().toArray(new String[0]);
-                    for (String k : tKeys) {
-                        keys.add(k);
-                    }
+                    try {
+                        // Get all keys (ArrayList<String>) and store them in ArrayList keys
+                        tMap = (HashMap<String, ArrayList<String>>) dataList.get(0).get("Comments");
+                        tKeys = tMap.keySet().toArray(new String[0]);
+                        for (String k : tKeys) {
+                            keys.add(k);
+                        }
 
-                    // Store all the comments of qrCode into HashMap 'commentsOfCurQrcode'
-                    for (int i = 0; i < tMap.size(); i++) {
-                        Log.e(TAG, "loop: " + keys.get(i) + " " + tMap.get(keys.get(i)));
-                        commentsOfCurQrcode.put(keys.get(i), tMap.get(keys.get(i)));
+                        // Store all the comments of qrCode into HashMap 'commentsOfCurQrcode'
+                        for (int i = 0; i < tMap.size(); i++) {
+                            Log.e(TAG, "loop: " + keys.get(i) + " " + tMap.get(keys.get(i)));
+                            commentsOfCurQrcode.put(keys.get(i), tMap.get(keys.get(i)));
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
                 }
             }
