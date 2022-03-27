@@ -16,8 +16,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.qrpokemon.qrpokemon.R;
+import com.qrpokemon.qrpokemon.models.PlayerController;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class QrInventoryCustomList extends ArrayAdapter<String> {
 
@@ -53,9 +55,16 @@ public class QrInventoryCustomList extends ArrayAdapter<String> {
         // setText
         hashTV.setText(tStr[1].substring(0, 16) + "...");
         scoreTV.setText("Score: " + tStr[0]);
-
+//        Log.e("QrInventoryCustomList: get qrhash",hashAndScore);
         // setImageBitmap
-        String encodedString = tStr[2];
+        String encodedString = tStr[tStr.length-1];
+        PlayerController playerController = PlayerController.getInstance();
+        try { // get current player to match with his/her qrcode photo
+            HashMap tempPlayer = playerController.getPlayer(null, null, null, null);
+            String playerName  = (String) tempPlayer.get("Identifier");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         Bitmap bitmap = StringToBitMap(encodedString);
         codeIV.setImageBitmap(bitmap);
 
