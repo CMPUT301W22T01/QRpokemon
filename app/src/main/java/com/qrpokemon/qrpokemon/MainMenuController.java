@@ -27,29 +27,13 @@ public class MainMenuController {
      * load current username from firestore
      * @param context context of current activity
      */
-    public void load(Context context){
-        String data = null;
-             // load local user
-            List<Map> result = new ArrayList<Map>();
-            try{
-                DatabaseCallback databaseCallback = new DatabaseCallback(context) {
-                //this runs after datalist is collected from Database class
-                @Override
-                public void run(List<Map> dataList) {
-                    if (!dataList.isEmpty()) {
-                        //Display current player's username on top of the activity
-                        TextView text = ((MainActivity) context).findViewById(R.id.user_textView);
-                        Log.e("Main menuController: ", "Current player is : " +dataList.toString());
-                        text.setText((String) dataList.get(0).get("Identifier"));
-                    }
-                }
-            };
-            // read player's data from firestore
-            PlayerController playerController = PlayerController.getInstance();
-            database.getData(databaseCallback, result, "Player", (String) playerController.getPlayer(null,null,null,null).get("Identifier") );
-            Log.e("Main menuController: ", "Current player is : " +fileSystemController.readToFile(context, "name"));
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+    public void load(Context context) {
+        TextView text = ((MainActivity) context).findViewById(R.id.user_textView);
+        PlayerController playerController = PlayerController.getInstance();
+        try {
+            text.setText((String) playerController.getPlayer(null, null, null, null).get("Identifier"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

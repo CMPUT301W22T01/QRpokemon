@@ -32,7 +32,7 @@ import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
 
-public class SignupActivity extends AppCompatActivity  implements View.OnClickListener {
+public class SignupActivity extends AppCompatActivity  implements View.OnClickListener,Observer {
     private EditText et_name,et_phone,et_email;
     private String name,phone,email;
     private Button bt_submit;
@@ -140,9 +140,8 @@ public class SignupActivity extends AppCompatActivity  implements View.OnClickLi
 
                 try{
                     playerController = PlayerController.getInstance();
-//                    playerController.addObserver(this);
+                    playerController.addObserver(this);
                     signupController.addNewPlayer(this, name, email, phone, Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID));
-                    finish();
                 } catch (Exception e) {
                     Log.e("TrackRecordActivity", String.valueOf(e));
                 }
@@ -155,8 +154,8 @@ public class SignupActivity extends AppCompatActivity  implements View.OnClickLi
      * @param observable observable object
      * @param o object being observed
      */
-//    @Override
-//    public void update(Observable observable, Object o) {
-//        finish();
-//    }
+    @Override
+    public void update(Observable observable, Object o) {
+        finish();
+    }
 }

@@ -35,11 +35,11 @@ public class PlayerController extends Observable {
     public HashMap getPlayer(@Nullable DatabaseCallback databaseCallback,@Nullable List<Map> list, @Nullable String username, @Nullable String IdentifierField) throws Exception {
         HashMap<String, Object> info = new HashMap<>();
         if (username == null) {  // Get the current user
-            info.put("Identifier",  currentPlayer.getUsername());
-            info.put("qrInventory", currentPlayer.getQrInventory());
-            info.put("qrCount",     currentPlayer.getQrCount());
-            info.put("totalScore",  currentPlayer.getTotalScore());
-            info.put("contact",     currentPlayer.getContactInfo());
+            info.put("Identifier",  this.currentPlayer.getUsername());
+            info.put("qrInventory", this.currentPlayer.getQrInventory());
+            info.put("qrCount",     this.currentPlayer.getQrCount());
+            info.put("totalScore",  this.currentPlayer.getTotalScore());
+            info.put("contact",     this.currentPlayer.getContactInfo());
 
         } else if (IdentifierField == null){ // find player by username
             databaseController.getData(databaseCallback, list , "Player", username);
@@ -66,10 +66,12 @@ public class PlayerController extends Observable {
                             @Nullable Integer qrCount,
                             @Nullable Integer totalScore,
                             String id) {
-        if (currentPlayer == null){
-            currentPlayer = new Player(username, qrInventory, contact, qrCount, totalScore, id);
+        if (this.currentPlayer == null){
+            this.currentPlayer = new Player(username, qrInventory, contact, qrCount, totalScore, id);
         }
-//        Log.e("PlayerController: A player is created with : ", username + contact.toString());
+        setChanged();
+        notifyObservers();
+        Log.e("PlayerController: A player is created with : ", this.currentPlayer.getUsername());
     }
 
     /**
@@ -93,27 +95,27 @@ public class PlayerController extends Observable {
         // Update player's data.
         // Don't update parameter if null
         if (qrCount != null) {
-            currentPlayer.setQrCount(qrCount);
+            this.currentPlayer.setQrCount(qrCount);
             info.put("qrCount", currentPlayer.getQrCount());
         }
 
         if (totalScore != null) {
-            currentPlayer.setTotalScore(totalScore);
+            this.currentPlayer.setTotalScore(totalScore);
             info.put("totalScore", currentPlayer.getTotalScore());
         }
 
         if (qrInventory != null) {
-            currentPlayer.setQrInventory(qrInventory);
+            this.currentPlayer.setQrInventory(qrInventory);
             info.put("qrInventory", currentPlayer.getQrInventory());
         }
 
         if (id != null) {
-            currentPlayer.setId(id);
+            this.currentPlayer.setId(id);
             info.put("DeviceId",id);
         }
 
         if (contact != null) {
-            currentPlayer.setContactInfo(contact);
+            this.currentPlayer.setContactInfo(contact);
             info.put("contact", currentPlayer.getContactInfo());
         }
 
@@ -124,10 +126,10 @@ public class PlayerController extends Observable {
 
         if (addIdentifier) { //ading a new user
             info.put("Identifier", currentPlayer.getUsername());
-            databaseController.writeData("Player", currentPlayer.getUsername() ,info ,true);
+            databaseController.writeData("Player", this.currentPlayer.getUsername() ,info ,true);
         } else { //update a user
-            Log.e("PlayerController: ", "User at savePlayerData is: "+currentPlayer.getUsername());
-            databaseController.writeData("Player", currentPlayer.getUsername() ,info ,false);
+            Log.e("PlayerController: ", "User at savePlayerData is: "+ this.currentPlayer.getUsername());
+            databaseController.writeData("Player", this.currentPlayer.getUsername() ,info ,false);
         }
 
     }

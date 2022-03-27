@@ -63,7 +63,7 @@ public class SignupController {
                         } catch (Exception e) {
                             Log.e("SignupController: ", e.toString());
                         }
-//                        Log.e("DatabaseController: ", "addNewPlayer") ;
+//                        Log.e("DatabaseController: ", "addNewPlayer");
                     } else{
                         EditText email = (EditText) ((Activity) context).findViewById(R.id.et_email);
                         Toast.makeText(context, "Username is not unique!", Toast.LENGTH_SHORT).show();
