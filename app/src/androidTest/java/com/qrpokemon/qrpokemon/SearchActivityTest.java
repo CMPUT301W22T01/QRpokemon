@@ -1,9 +1,14 @@
 package com.qrpokemon.qrpokemon;
 import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 import android.app.Activity;
+import android.app.Instrumentation;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.SimpleAdapter;
+import android.widget.TextView;
 
 import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.rule.ActivityTestRule;
@@ -15,8 +20,8 @@ import org.junit.Test;
 public class SearchActivityTest {
     private Solo solo;
     @Rule
-    public ActivityTestRule<SearchActivity> rule =
-            new ActivityTestRule<>(SearchActivity.class, true, true);
+    public ActivityTestRule<MainActivity> rule =
+            new ActivityTestRule<>(MainActivity.class, true, true);
 
     @Before
     public void setUp() throws Exception{
@@ -26,15 +31,16 @@ public class SearchActivityTest {
     @Test
     public void start() throws Exception{
         Activity activity = rule.getActivity();
+        solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
     }
     @Test
     public void checkBackButton(){
-        solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
         solo.clickOnView(solo.getView(R.id.Search_Button));
         solo.waitForActivity(SearchActivity.class, 2000);
         solo.assertCurrentActivity("Wrong Activity", SearchActivity.class);
 
         solo.clickOnView(solo.getView(R.id.button));
+        solo.waitForActivity(SearchActivity.class, 2000);
         solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
     }
     @Test
@@ -43,11 +49,11 @@ public class SearchActivityTest {
         solo.clickOnView(solo.getView(R.id.Search_Button));
         solo.waitForActivity(SearchActivity.class, 2000);
         solo.assertCurrentActivity("Wrong Activity", SearchActivity.class);
-
         solo.enterText((EditText) solo.getView(R.id.sv), "Heather");
-        solo.waitForActivity(SearchActivity.class, 2000);
+        solo.waitForActivity(SearchActivity.class, 200);
         solo.clickOnView(solo.getView(R.id.button));
-        solo.assertCurrentActivity("Not in SearchActivity", MainActivity.class);
+        //ListView listview = (ListView) rule.getActivity().findViewById(R.id.search_listview);
+        //assertThat((String)listview.getItemAtPosition(0), is("Heather"));
     }
     @Test
     public void locationSearch() throws Exception{
@@ -55,9 +61,35 @@ public class SearchActivityTest {
         solo.clickOnView(solo.getView(R.id.Search_Button));
         solo.waitForActivity(SearchActivity.class, 2000);
         solo.assertCurrentActivity("Wrong Activity", SearchActivity.class);
-        solo.enterText((EditText) solo.getView(R.id.sv), "Edmonton");
+        solo.enterText((EditText) solo.getView(R.id.sv), "Calgary");
         solo.waitForActivity(SearchActivity.class, 2000);
-        ListView listview = (ListView) rule.getActivity().findViewById(R.id.search_listview);
-        assertThat((String)listview.getItemAtPosition(0), is("Edmonton"));
     }
+    @Test
+    public void partialSearch() throws Exception{
+        solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
+        solo.clickOnView(solo.getView(R.id.Search_Button));
+        solo.waitForActivity(SearchActivity.class, 2000);
+        solo.assertCurrentActivity("Wrong Activity", SearchActivity.class);
+        solo.enterText((EditText) solo.getView(R.id.sv), "C");
+        solo.waitForActivity(SearchActivity.class, 200);
+    }
+//    @Test
+//    public void testShouldShowTheItemDetailWhenAnItemIsClicked() throws Exception {
+//        Instrumentation instrumentation = InstrumentationRegistry.getInstrumentation();
+//        final ListView listview = (ListView) rule.getActivity().findViewById(R.id.search_listview);
+//
+//        instrumentation.runOnMainSync(new Runnable() {
+//            @Override
+//            public void run() {
+//                int position = 0;
+//                listview.performItemClick(listview.getChildAt(position), position, listview.getAdapter().getItemId(position));
+//            }
+//        });
+//
+//        Instrumentation.ActivityMonitor monitor = instrumentation.addMonitor(SearchActivity.class.getName(), null, false);
+//        Activity itemDetailActivity = instrumentation.waitForMonitorWithTimeout(monitor, 5000);
+//
+//        TextView detailView = (TextView) itemDetailActivity.findViewById(R.id.search_listview);
+//        assertThat(detailView.getText().toString(), is("7D75F8FA97CA6D7C7"));
+//    }
 }

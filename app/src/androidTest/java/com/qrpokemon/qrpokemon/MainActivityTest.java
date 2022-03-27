@@ -16,6 +16,7 @@ import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.rule.ActivityTestRule;
 
+import com.qrpokemon.qrpokemon.activities.leaderboard.LeaderboardActivity;
 import com.robotium.solo.Solo;
 
 import org.junit.After;
