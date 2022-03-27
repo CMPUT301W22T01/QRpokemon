@@ -71,10 +71,8 @@ public class QrInventoryActivity
 
         // Get all the data of the current player's document
         try {
-            // So far, 'listOfPlayData' should have contained all the information of the current player's
-            // document, which is a hashMap.
+            // So far, 'listOfPlayData' should have contained all the information of the current player's document, which is a hashMap.
             hashMapOfPlayerData = qrInventoryController.getPlayerInfo(null);
-//            Log.e(TAG, "All info of the current player: " + hashMapOfPlayerData.toString());
         } catch (Exception e) {
             e.printStackTrace();
             Log.e(TAG, e.toString());
@@ -82,26 +80,21 @@ public class QrInventoryActivity
 
         // Get the identifier of the current player
         currentPlayer = hashMapOfPlayerData.get("Identifier").toString();
-//        Log.e(TAG, "Current player is: " + currentPlayer);
 
         // Get all hashcode of the qrcode that owned by the player
         qrHashCodes = (ArrayList<String>) hashMapOfPlayerData.get("qrInventory");
-//        Log.e(TAG, "Current player has the following qrCodes: " + qrHashCodes.toString());
 
         // Set the total # of the qrCodes the current user has
         totalCount.setText("Total Number: " + qrHashCodes.size());
 
         // Get and set the data from the documents of each qrcode in ArrayList "qrHashCode"
-
         qrInventoryDataAdapter = new QrInventoryCustomList(this, new ArrayList<String>());
         qrInventoryList.setAdapter(qrInventoryDataAdapter);
 
         try {
-            qrInventoryController.getAndSetQrCodeData(this, qrHashCodes, qrInventoryDataAdapter);
-//            Log.e(TAG, "QrCode documents of the current player has the following: " + qrInventoryDataAdapter.getItem(0).toString());
+            qrInventoryController.getAndSetQrCodeData(this, qrHashCodes, qrInventoryDataAdapter, currentPlayer);
         } catch (Exception e) {
             e.printStackTrace();
-//            Log.e(TAG, "Error from line 97: " + e);
         }
 
         // Set a click listener for the listview
@@ -116,7 +109,6 @@ public class QrInventoryActivity
                 String curString = adapterView.getItemAtPosition(i).toString();
                 String[] tStr = curString.split(cut);
                 selectedHash = tStr[1];
-//                Log.e(TAG, "Current hash: " + selectedHash);
 
                 // show the delete button
                 deleteButton.setVisibility(VISIBLE);
@@ -280,7 +272,6 @@ public class QrInventoryActivity
         try {
             tList.add(comment);
         } catch(Exception e) {
-            Log.e(TAG, "woshabi");
             tList = new ArrayList<>();
             tList.add(comment);
         }
