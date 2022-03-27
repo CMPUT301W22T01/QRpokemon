@@ -32,6 +32,7 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.qrpokemon.qrpokemon.MainActivity;
 import com.qrpokemon.qrpokemon.MapController;
+import com.qrpokemon.qrpokemon.PlayerController;
 import com.qrpokemon.qrpokemon.QrCodeController;
 import com.qrpokemon.qrpokemon.R;
 
@@ -39,6 +40,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class QrScannedActivity extends AppCompatActivity {
 
@@ -92,6 +95,8 @@ public class QrScannedActivity extends AppCompatActivity {
         activityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
             @Override
             public void onActivityResult(ActivityResult result) {
+
+
                 if (result.getResultCode() == RESULT_OK && result.getData() != null) {
                     Bundle bundle = result.getData().getExtras();
                     photoBitmap = (Bitmap) bundle.get("data");
@@ -99,7 +104,7 @@ public class QrScannedActivity extends AppCompatActivity {
 
                     // identify if its a QR code and get the bitmap for the picture
                     codeContent = qrScannedController.analyzeImage(photoBitmap);
-                    Toast.makeText(QrScannedActivity.this, codeContent, Toast.LENGTH_LONG).show();
+//                    Toast.makeText(QrScannedActivity.this, codeContent, Toast.LENGTH_LONG).show();
                     MessageDigest messageDigest;
 
                     try {
@@ -107,6 +112,24 @@ public class QrScannedActivity extends AppCompatActivity {
                         messageDigest.update(codeContent.getBytes("UTF-8"));
                         // Get the hex hash string
                         hash = qrScannedController.byte2Hex(messageDigest.digest());
+                        PlayerController playerController = PlayerController.getInstance();
+
+                        // if th Qr code already exist in player's file
+                        if((((ArrayList<String>)(playerController.getPlayer(null, null,null,null).get("qrInventory"))).contains(hash))){
+                            Toast.makeText(QrScannedActivity.this, "Already have this QR code", Toast.LENGTH_SHORT).show();
+                            finish();
+                        }
+
+                        else{
+                            HashMap player = (HashMap) playerController.getPlayer(null, null,null,null);
+                            ArrayList<String> qrInventory = (ArrayList<String>) player.get("qrInventory");
+                            int qrCount = qrInventory.size() + 1;
+                            int qrTotal = (int)player.get("totalScore") + qrScannedController.scoreCalculator(hash);
+                            qrInventory.add(hash);
+                            playerController.savePlayerData(qrCount,qrTotal,qrInventory,null, null,false);
+
+                        }
+
                         TextView qrHash = findViewById(R.id.qr_result);
                         qrHash.setText("Score: " + String.valueOf(qrScannedController.scoreCalculator(hash)));
 

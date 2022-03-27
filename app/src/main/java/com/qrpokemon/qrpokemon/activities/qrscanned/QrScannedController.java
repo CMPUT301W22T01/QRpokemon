@@ -9,6 +9,7 @@ import android.graphics.Bitmap;
 import android.provider.ContactsContract;
 import android.util.Log;
 import androidx.activity.result.ActivityResultLauncher;
+import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
@@ -141,7 +142,6 @@ public class QrScannedController {
                     location1.add(location);
                     HashMap<String, String> bitmapHash = (HashMap<String, String>) dataList.get(0).get("Bitmap");
 
-
                     try {
                         HashMap currentPlayer = playerController.getPlayer(null,null,null,null);
                         bitmapHash.put((String) currentPlayer.get("Identifier"), bitmap);
@@ -150,7 +150,6 @@ public class QrScannedController {
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-
                 }
 
                 else {
@@ -164,10 +163,14 @@ public class QrScannedController {
                         HashMap currentPlayer = playerController.getPlayer(null,null,null,null);
                         bitmapHash.put((String) currentPlayer.get("Identifier"), bitmap);
                         qrCodeController.saveQr(qrHash, score, location1,null ,bitmapHash, true);
+//                        playerController.savePlayerData()
+
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
                 }
+
+
             }
         };
 
@@ -182,6 +185,7 @@ public class QrScannedController {
      * @param context QrScannedActivity
      */
     public void checkPermission(Context context){
+
         // ask permission for user camera
         if (ContextCompat.checkSelfPermission(context,
                 Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
@@ -190,6 +194,11 @@ public class QrScannedController {
                     CAMERA_ACTION_CODE);
         }
     }
+
+//    public HashMap getQr(@Nullable DatabaseCallback databaseCallback, String qrHash) throws Exception{
+//        HashMap<String, Object> info = new HashMap<>();
+//        info.put("Identifier", this.)
+//    }
 
 
 

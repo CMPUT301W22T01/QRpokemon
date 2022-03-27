@@ -12,6 +12,7 @@ import java.util.Observable;
 
 public class PlayerController extends Observable {
     private static PlayerController currentInstance;
+    public Object savePlayerData;
     private Player currentPlayer = null;
     private DatabaseController databaseController = DatabaseController.getInstance();
     private PlayerController() {}
@@ -133,4 +134,6 @@ public class PlayerController extends Observable {
         }
 
     }
+
+
 }
