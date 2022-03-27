@@ -27,7 +27,7 @@
         android:id="@+id/tv_total_score_msg"
         android:layout_width="106dp"
         android:layout_height="30dp"
-        android:layout_marginStart="24dp"
+        android:layout_marginStart="14dp"
         android:text="Total Score: "
         android:textAlignment="center"
         android:textAllCaps="false"
@@ -45,24 +45,24 @@
         android:text="Total Number: "
         android:textAlignment="center"
         android:textAllCaps="false"
+        android:textColor="@color/black"
         android:textIsSelectable="false"
         android:textSize="18sp"
         android:textStyle="bold"
-        android:textColor="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/QR_inventory_title" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/tv_total_score_msg"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <ListView
         android:id="@+id/QR_inventory_list"
-        android:layout_width="match_parent"
-        android:layout_height="530dp"
-        android:layout_marginStart="8dp"
+        android:layout_width="394dp"
+        android:layout_height="465dp"
+        android:layout_marginStart="4dp"
         android:layout_marginTop="56dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="4dp"
         android:choiceMode="singleChoice"
         android:listSelector="#999999"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.076"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_total_score_msg" />
 
@@ -82,13 +82,13 @@
         android:id="@+id/bt_delete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginBottom="4dp"
         android:clickable="true"
         android:visibility="invisible"
         app:backgroundTint="#ff0000"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/QR_inventory_list"
         app:srcCompat="?attr/actionModeCutDrawable" />
 
     <Button
@@ -117,13 +117,12 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/QR_inventory_list"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_total_score_msg" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_total_count" />
 
     <TextView
         android:id="@+id/tv_total_score"
         android:layout_width="87dp"
         android:layout_height="30dp"
-        android:layout_marginStart="4dp"
         android:text="--"
         android:textColor="@color/black"
         android:textSize="18sp"
@@ -137,12 +136,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginBottom="4dp"
         android:clickable="true"
         android:visibility="invisible"
         app:backgroundTint="#6fbbd3"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/QR_inventory_list"
         app:srcCompat="@android:drawable/ic_menu_edit" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

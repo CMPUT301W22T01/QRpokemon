@@ -39,7 +39,7 @@ public class QrInventoryController {
 
 
     /**
-     * Get and return all the data from collection "Player", document "currentPlayer"
+     * Get and return all the data of "currentPlayer" from local file.
      * @param currentPlayer The identifier of the current player
      * @return all the information of the current player's document, which is a hashMap
      * @throws Exception if collection is incorrect or player doesn't found
@@ -74,17 +74,17 @@ public class QrInventoryController {
                         data.put((String) dataList.get(dataList.size()-1).get("Identifier"), dataList);
                         ListView temp = ((Activity) context).findViewById(R.id.QR_inventory_list);
 
-                        qrInventory.add(String.valueOf(dataList.get(dataList.size()-1).get("score"))
+                        qrInventory.add(String.valueOf(dataList.get(dataList.size()-1).get("Score"))
                                 + " "
                                 + ((String) (dataList.get(dataList.size()-1).get("Identifier"))));
 
                         Log.e(TAG, "Hash '"
-                                + (String.valueOf(dataList.get(dataList.size()-1).get("score")))
+                                + (String.valueOf(dataList.get(dataList.size()-1).get("Score")))
                                 + " "
                                 + (String) (dataList.get(dataList.size()-1).get("Identifier"))
                                 + "' has added to datalist");
 
-                        totalScore += Integer.valueOf(String.valueOf( dataList.get(dataList.size()-1).get("score")));
+                        totalScore += Integer.valueOf(String.valueOf( dataList.get(dataList.size()-1).get("Score")));
                         Log.e(TAG, "Current score: " + totalScore.toString());
 
                         // set the value of total score

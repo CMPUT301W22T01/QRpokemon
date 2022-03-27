@@ -162,7 +162,7 @@ public class QrInventoryActivity
                 // delete from Local and Firebase, update totalCount/totalNumber, update display
                 PlayerController playerController = PlayerController.getInstance();
                 try {
-                    playerController.savePlayerData(qrInventoryDataAdapter.getCount(), curTotalScore, qrHashCodes, null, null, true);
+                    playerController.savePlayerData(qrInventoryDataAdapter.getCount(), curTotalScore, qrHashCodes, null, null, false);
                     qrInventoryList.setAdapter(qrInventoryDataAdapter);
 
                     totalCount.setText("Total Number: " + qrInventoryDataAdapter.getCount());
