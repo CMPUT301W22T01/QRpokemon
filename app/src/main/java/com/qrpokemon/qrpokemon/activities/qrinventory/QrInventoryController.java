@@ -56,10 +56,11 @@ public class QrInventoryController {
      * all the documents of those hash codes from collection "QrCode".
      * @param context       current activity
      * @param qrHashCodes   an ArrayList which has all the qrCodes owned by the current player
+     * @param currentPlayer String of the current player
      * @return              the document of a qrHash
      * @throws Exception if collection name is incorrect
      */
-    public HashMap<String, Object> getAndSetQrCodeData(Context context, ArrayList<String> qrHashCodes, ArrayAdapter<String> qrInventory) throws Exception {
+    public HashMap<String, Object> getAndSetQrCodeData(Context context, ArrayList<String> qrHashCodes, ArrayAdapter<String> qrInventory, String currentPlayer) throws Exception {
 
         totalScore = 0;
         List<Map> result = new ArrayList<Map>();
@@ -74,18 +75,16 @@ public class QrInventoryController {
                         data.put((String) dataList.get(dataList.size()-1).get("Identifier"), dataList);
                         ListView temp = ((Activity) context).findViewById(R.id.QR_inventory_list);
 
+                        HashMap tMap = (HashMap) dataList.get(dataList.size()-1).get("Bitmap");
+                        String bitmap = (String) tMap.get(currentPlayer);
+
                         qrInventory.add(String.valueOf(dataList.get(dataList.size()-1).get("Score"))
                                 + " "
-                                + ((String) (dataList.get(dataList.size()-1).get("Identifier"))));
-
-//                        Log.e(TAG, "Hash '"
-//                                + (String.valueOf(dataList.get(dataList.size()-1).get("Score")))
-//                                + " "
-//                                + (String) (dataList.get(dataList.size()-1).get("Identifier"))
-//                                + "' has added to datalist");
+                                + (String) (dataList.get(dataList.size()-1).get("Identifier"))
+                                + " "
+                                + bitmap);
 
                         totalScore += Integer.valueOf(String.valueOf( dataList.get(dataList.size()-1).get("Score")));
-//                        Log.e(TAG, "Current score: " + totalScore.toString());
 
                         // set the value of total score
                         TextView tvScore = ((Activity) context).findViewById(R.id.tv_total_score);
@@ -99,7 +98,6 @@ public class QrInventoryController {
         };
         for (int i = 0; i < qrHashCodes.size(); i++) {
             databaseController.getData(databaseCallback, result, "QrCode", qrHashCodes.get(i));
-//            Log.e(TAG, "Loop now get hash: " + qrHashCodes.get(i));
         }
 
         return data;
@@ -127,17 +125,21 @@ public class QrInventoryController {
                     String[] tKeys;
                     ArrayList<String> keys = new ArrayList<>();
 
-                    // Get all keys (ArrayList<String>) and store them in ArrayList keys
-                    tMap = (HashMap<String, ArrayList<String>>) dataList.get(0).get("Comments");
-                    tKeys = tMap.keySet().toArray(new String[0]);
-                    for (String k : tKeys) {
-                        keys.add(k);
-                    }
+                    try {
+                        // Get all keys (ArrayList<String>) and store them in ArrayList keys
+                        tMap = (HashMap<String, ArrayList<String>>) dataList.get(0).get("Comments");
+                        tKeys = tMap.keySet().toArray(new String[0]);
+                        for (String k : tKeys) {
+                            keys.add(k);
+                        }
 
-                    // Store all the comments of qrCode into HashMap 'commentsOfCurQrcode'
-                    for (int i = 0; i < tMap.size(); i++) {
-                        Log.e(TAG, "loop: " + keys.get(i) + " " + tMap.get(keys.get(i)));
-                        commentsOfCurQrcode.put(keys.get(i), tMap.get(keys.get(i)));
+                        // Store all the comments of qrCode into HashMap 'commentsOfCurQrcode'
+                        for (int i = 0; i < tMap.size(); i++) {
+                            Log.e(TAG, "loop: " + keys.get(i) + " " + tMap.get(keys.get(i)));
+                            commentsOfCurQrcode.put(keys.get(i), tMap.get(keys.get(i)));
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
                 }
             }
