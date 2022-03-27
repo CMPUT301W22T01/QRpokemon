@@ -3,6 +3,8 @@ package com.qrpokemon.qrpokemon;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
+import com.qrpokemon.qrpokemon.models.QrCode;
+
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;

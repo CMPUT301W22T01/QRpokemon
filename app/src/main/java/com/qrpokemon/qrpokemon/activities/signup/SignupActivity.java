@@ -7,9 +7,7 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
@@ -18,13 +16,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.qrpokemon.qrpokemon.DatabaseCallback;
-import com.qrpokemon.qrpokemon.Player;
-import com.qrpokemon.qrpokemon.PlayerController;
+import com.qrpokemon.qrpokemon.models.DatabaseCallback;
+import com.qrpokemon.qrpokemon.models.PlayerController;
 import com.qrpokemon.qrpokemon.R;
-import com.qrpokemon.qrpokemon.activities.qrscanned.QrScannedActivity;
 
-import java.security.MessageDigest;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;

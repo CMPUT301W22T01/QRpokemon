@@ -8,11 +8,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -21,10 +18,13 @@ import android.widget.ImageView;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.zxing.BinaryBitmap;
 import com.qrpokemon.qrpokemon.activities.leaderboard.LeaderboardActivity;
+import com.qrpokemon.qrpokemon.activities.map.MapActivity;
+import com.qrpokemon.qrpokemon.activities.map.MapController;
+import com.qrpokemon.qrpokemon.activities.profile.ProfileActivity;
 import com.qrpokemon.qrpokemon.activities.qrinventory.QrInventoryActivity;
 import com.qrpokemon.qrpokemon.activities.qrscanned.QrScannedActivity;
+import com.qrpokemon.qrpokemon.activities.search.SearchActivity;
 import com.qrpokemon.qrpokemon.activities.signup.SignupActivity;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -101,7 +101,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(intent);
                 break;
             case R.id.Search_Button:        // open Search Activity
-                Intent intent = new Intent(MainActivity.this,SearchActivity.class);
+                Intent intent = new Intent(MainActivity.this, SearchActivity.class);
                 startActivity(intent);
                 break;
             case R.id.Leaderboard_Button:   // open Leaderboard Activity

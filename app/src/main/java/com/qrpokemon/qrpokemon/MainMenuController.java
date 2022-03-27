@@ -1,15 +1,10 @@
 package com.qrpokemon.qrpokemon;
 import android.content.Context;
-import android.os.Parcelable;
-import android.util.Log;
 import android.widget.TextView;
 
-import com.qrpokemon.qrpokemon.activities.signup.SignupActivity;
-import com.qrpokemon.qrpokemon.activities.signup.SignupController;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import com.qrpokemon.qrpokemon.models.DatabaseController;
+import com.qrpokemon.qrpokemon.models.FileSystemController;
+import com.qrpokemon.qrpokemon.models.PlayerController;
 
 public class MainMenuController {
     private static MainMenuController currentInstance;

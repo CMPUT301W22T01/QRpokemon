@@ -1,4 +1,4 @@
-package com.qrpokemon.qrpokemon;
+package com.qrpokemon.qrpokemon.activities.map;
 
 import android.Manifest;
 import android.app.Activity;

@@ -1,4 +1,4 @@
-package com.qrpokemon.qrpokemon;
+package com.qrpokemon.qrpokemon.models;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;

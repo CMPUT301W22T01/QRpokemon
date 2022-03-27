@@ -8,9 +8,9 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
-import com.qrpokemon.qrpokemon.DatabaseCallback;
-import com.qrpokemon.qrpokemon.FileSystemController;
-import com.qrpokemon.qrpokemon.PlayerController;
+import com.qrpokemon.qrpokemon.models.DatabaseCallback;
+import com.qrpokemon.qrpokemon.models.FileSystemController;
+import com.qrpokemon.qrpokemon.models.PlayerController;
 import com.qrpokemon.qrpokemon.R;
 
 import java.util.ArrayList;

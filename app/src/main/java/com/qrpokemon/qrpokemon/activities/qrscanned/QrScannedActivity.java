@@ -31,9 +31,9 @@ import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.qrpokemon.qrpokemon.MainActivity;
-import com.qrpokemon.qrpokemon.MapController;
-import com.qrpokemon.qrpokemon.PlayerController;
-import com.qrpokemon.qrpokemon.QrCodeController;
+import com.qrpokemon.qrpokemon.activities.map.MapController;
+import com.qrpokemon.qrpokemon.models.PlayerController;
+import com.qrpokemon.qrpokemon.models.QrCodeController;
 import com.qrpokemon.qrpokemon.R;
 
 import java.io.ByteArrayOutputStream;

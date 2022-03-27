@@ -6,10 +6,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.provider.ContactsContract;
 import android.util.Log;
 import androidx.activity.result.ActivityResultLauncher;
-import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
@@ -19,11 +17,9 @@ import com.google.zxing.NotFoundException;
 import com.google.zxing.RGBLuminanceSource;
 import com.google.zxing.Result;
 import com.google.zxing.common.HybridBinarizer;
-import com.qrpokemon.qrpokemon.DatabaseCallback;
-import com.qrpokemon.qrpokemon.DatabaseController;
-import com.qrpokemon.qrpokemon.FileSystemController;
-import com.qrpokemon.qrpokemon.PlayerController;
-import com.qrpokemon.qrpokemon.QrCodeController;
+import com.qrpokemon.qrpokemon.models.DatabaseCallback;
+import com.qrpokemon.qrpokemon.models.PlayerController;
+import com.qrpokemon.qrpokemon.models.QrCodeController;
 
 import java.util.ArrayList;
 import java.util.HashMap;

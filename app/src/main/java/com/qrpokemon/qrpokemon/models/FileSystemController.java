@@ -1,4 +1,4 @@
-package com.qrpokemon.qrpokemon;
+package com.qrpokemon.qrpokemon.models;
 
 import android.app.Activity;
 import android.content.Context;

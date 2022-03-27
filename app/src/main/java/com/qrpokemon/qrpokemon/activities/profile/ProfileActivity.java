@@ -1,4 +1,4 @@
-package com.qrpokemon.qrpokemon;
+package com.qrpokemon.qrpokemon.activities.profile;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.qrpokemon.qrpokemon.R;
 
 public class ProfileActivity extends AppCompatActivity implements View.OnClickListener {
     private SharedPreferences sp;

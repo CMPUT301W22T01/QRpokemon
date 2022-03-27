@@ -1,8 +1,5 @@
-package com.qrpokemon.qrpokemon;
+package com.qrpokemon.qrpokemon.models;
 
-import android.content.Context;
-import android.graphics.Bitmap;
-import android.provider.ContactsContract;
 import android.util.Log;
 
 import androidx.annotation.Nullable;

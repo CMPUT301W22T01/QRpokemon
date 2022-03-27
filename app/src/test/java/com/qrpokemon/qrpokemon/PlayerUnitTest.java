@@ -2,7 +2,7 @@ package com.qrpokemon.qrpokemon;
 
 import static org.junit.Assert.assertTrue;
 
-import android.provider.Settings;
+import com.qrpokemon.qrpokemon.models.Player;
 
 import org.junit.jupiter.api.Test;
 

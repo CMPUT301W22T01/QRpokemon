@@ -5,7 +5,6 @@ import static android.view.View.INVISIBLE;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -19,10 +18,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.qrpokemon.qrpokemon.DatabaseCallback;
-import com.qrpokemon.qrpokemon.DatabaseController;
-import com.qrpokemon.qrpokemon.PlayerController;
-import com.qrpokemon.qrpokemon.QrCodeController;
+import com.qrpokemon.qrpokemon.models.DatabaseCallback;
+import com.qrpokemon.qrpokemon.models.PlayerController;
 import com.qrpokemon.qrpokemon.R;
 
 import java.util.ArrayList;

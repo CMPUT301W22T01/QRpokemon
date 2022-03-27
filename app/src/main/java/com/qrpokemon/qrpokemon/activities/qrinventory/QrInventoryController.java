@@ -2,18 +2,15 @@ package com.qrpokemon.qrpokemon.activities.qrinventory;
 
 import android.app.Activity;
 import android.content.Context;
-import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
-import com.qrpokemon.qrpokemon.DatabaseCallback;
-import com.qrpokemon.qrpokemon.DatabaseController;
-import com.qrpokemon.qrpokemon.PlayerController;
-import com.qrpokemon.qrpokemon.QrCode;
-import com.qrpokemon.qrpokemon.QrCodeController;
+import com.qrpokemon.qrpokemon.models.DatabaseCallback;
+import com.qrpokemon.qrpokemon.models.PlayerController;
+import com.qrpokemon.qrpokemon.models.QrCodeController;
 import com.qrpokemon.qrpokemon.R;
 
 import java.util.ArrayList;

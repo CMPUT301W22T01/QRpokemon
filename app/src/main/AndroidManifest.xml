@@ -39,11 +39,11 @@
             tools:ignore="DuplicateActivity" />
         <activity android:name=".activities.qrscanned.QrScannedActivity" />
         <activity android:name=".activities.qrinventory.QrInventoryActivity" />
-        <activity android:name=".ProfileActivity" />
+        <activity android:name=".activities.profile.ProfileActivity" />
         <activity
-            android:name=".MapActivity"
+            android:name=".activities.map.MapActivity"
             android:exported="true" />
-        <activity android:name=".SearchActivity" />
+        <activity android:name=".activities.search.SearchActivity" />
         <activity android:name=".activities.qrinventory.QrInventoryShowComments"/>
     </application>
 

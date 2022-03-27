@@ -1,9 +1,8 @@
-package com.qrpokemon.qrpokemon;
-import android.provider.ContactsContract;
-import android.provider.Settings;
+package com.qrpokemon.qrpokemon.models;
 import android.util.Log;
 
 import androidx.annotation.Nullable;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -33,7 +32,7 @@ public class PlayerController extends Observable {
      * @return A hashMap which contains local
      * @throws Exception if collection is incorrect in DatabaseController
      */
-    public HashMap getPlayer(@Nullable DatabaseCallback databaseCallback,@Nullable List<Map> list, @Nullable String username, @Nullable String IdentifierField) throws Exception {
+    public HashMap getPlayer(@Nullable DatabaseCallback databaseCallback, @Nullable List<Map> list, @Nullable String username, @Nullable String IdentifierField) throws Exception {
         HashMap<String, Object> info = new HashMap<>();
         if (username == null) {  // Get the current user
             info.put("Identifier",  this.currentPlayer.getUsername());

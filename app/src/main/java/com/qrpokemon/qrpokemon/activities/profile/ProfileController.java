@@ -1,4 +1,4 @@
-package com.qrpokemon.qrpokemon;
+package com.qrpokemon.qrpokemon.activities.profile;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.view.inputmethod.InputMethodManager;
@@ -7,6 +7,8 @@ import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import com.journeyapps.barcodescanner.BarcodeEncoder;
+import com.qrpokemon.qrpokemon.models.PlayerController;
+
 import java.util.HashMap;
 public class ProfileController {
 

@@ -4,9 +4,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
 
-import com.qrpokemon.qrpokemon.DatabaseCallback;
-import com.qrpokemon.qrpokemon.DatabaseController;
-import com.qrpokemon.qrpokemon.PlayerController;
+import com.qrpokemon.qrpokemon.models.DatabaseCallback;
+import com.qrpokemon.qrpokemon.models.DatabaseController;
 
 import java.util.ArrayList;
 import java.util.List;

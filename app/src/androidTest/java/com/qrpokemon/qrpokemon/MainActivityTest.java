@@ -1,19 +1,19 @@
 package com.qrpokemon.qrpokemon;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-
 import android.app.Activity;
 
 import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.rule.ActivityTestRule;
 
 import com.qrpokemon.qrpokemon.activities.leaderboard.LeaderboardActivity;
+import com.qrpokemon.qrpokemon.activities.map.MapActivity;
+import com.qrpokemon.qrpokemon.activities.profile.ProfileActivity;
 import com.qrpokemon.qrpokemon.activities.qrinventory.QrInventoryActivity;
+
+import com.qrpokemon.qrpokemon.activities.search.SearchActivity;
+import com.qrpokemon.qrpokemon.models.FileSystemController;
 import com.robotium.solo.Solo;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;

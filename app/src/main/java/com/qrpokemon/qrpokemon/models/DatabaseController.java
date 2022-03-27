@@ -1,8 +1,7 @@
-package com.qrpokemon.qrpokemon;
+package com.qrpokemon.qrpokemon.models;
 import android.util.Log;
 
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
