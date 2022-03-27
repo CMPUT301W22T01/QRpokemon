@@ -68,6 +68,7 @@ public class SearchActivity extends AppCompatActivity {
 //                        mAdapter.clear();
                         newAdapter = new SearchQrList(getApplicationContext(), selected.getQrList());
                         listView.setAdapter(newAdapter);
+
                     }
                 }catch (Exception exception) {
                     Toast.makeText(getApplicationContext(), "Invalid click", Toast.LENGTH_SHORT).show();

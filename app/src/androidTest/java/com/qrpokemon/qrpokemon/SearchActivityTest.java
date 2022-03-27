@@ -2,6 +2,7 @@ package com.qrpokemon.qrpokemon;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 import android.app.Activity;
 import android.app.Instrumentation;
 import android.view.View;
@@ -51,9 +52,12 @@ public class SearchActivityTest {
         solo.assertCurrentActivity("Wrong Activity", SearchActivity.class);
         solo.enterText((EditText) solo.getView(R.id.sv), "Heather");
         solo.waitForActivity(SearchActivity.class, 200);
-        solo.clickOnView(solo.getView(R.id.button));
-        //ListView listview = (ListView) rule.getActivity().findViewById(R.id.search_listview);
-        //assertThat((String)listview.getItemAtPosition(0), is("Heather"));
+        solo.waitForText("Heather", 2, 3000);
+
+        ListView listview = (ListView) solo.getView(R.id.search_listview);
+        View view = listview.getAdapter().getView(0, null, listview);
+        TextView tv = view.findViewById(R.id.tv);
+        assertEquals(tv.getText(), "Heather");
     }
     @Test
     public void locationSearch() throws Exception{
@@ -62,7 +66,12 @@ public class SearchActivityTest {
         solo.waitForActivity(SearchActivity.class, 2000);
         solo.assertCurrentActivity("Wrong Activity", SearchActivity.class);
         solo.enterText((EditText) solo.getView(R.id.sv), "Calgary");
-        solo.waitForActivity(SearchActivity.class, 2000);
+        solo.waitForText("Calgary", 1, 5000);
+        ListView listview = (ListView) solo.getView(R.id.search_listview);
+        View view = listview.getAdapter().getView(0, null, listview);
+        solo.clickOnView(view);
+        solo.waitForText("7D75F8FA97CA6D7C7", 1, 5000);
+        assertTrue(listview.getCount() > 0);
     }
     @Test
     public void partialSearch() throws Exception{
