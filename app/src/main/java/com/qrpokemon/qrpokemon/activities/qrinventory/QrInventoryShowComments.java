@@ -53,26 +53,17 @@ public class QrInventoryShowComments extends AppCompatActivity implements View.O
         selectedBitmap = (String) getIntent().getExtras().get("selectedBitmap");
         codeImage.setImageBitmap(StringToBitMap(selectedBitmap));
 
-
-
-        // set done the ExpandableListView
+        // set the ExpandableListView
         String[] tKeys;
         playerList = new ArrayList<>();
         tKeys = (String[]) commentsOfCurQrcode.keySet().toArray(new String[0]);
 
         for (String player : tKeys) {
             playerList.add(player);
-//            Log.e(TAG, "loop has: " + player);
         }
 
         commentsOfPlayersAdapter = new QrInventoryShowCommentsCustomAdapter(playerList, commentsOfCurQrcode);
         commentsOfPlayers.setAdapter(commentsOfPlayersAdapter);
-
-
-
-
-
-
 
     }
 
