@@ -141,6 +141,12 @@ public class QrInventoryActivity
         switch (view.getId()) {
             // if the player clicked the back button, that is, want to go back to main menu
             case R.id.bt_back:
+                try {
+                    qrInventoryController.getPlayerInfo(null,true,this);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Log.e("QrInventory: ", "Error when retrieve back to current player");
+                }
                 finish();
                 break;
 

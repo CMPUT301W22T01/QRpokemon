@@ -111,7 +111,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void onActivityResult(ActivityResult result) {
                 if (result.getResultCode() == RESULT_OK && result.getData() != null) {
                     try {
-                        mainMenuController.findOtherPlayer(result);
+                        mainMenuController.findOtherPlayer(result, MainActivity.this);
                     } catch (Exception e) {
                         e.printStackTrace();
                         Toast.makeText(MainActivity.this, "No QR found!", Toast.LENGTH_SHORT).show();

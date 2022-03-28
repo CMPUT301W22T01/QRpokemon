@@ -1,47 +1,24 @@
 package com.qrpokemon.qrpokemon;
-import android.Manifest;
-import android.app.Activity;
 import android.content.Context;
-
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.provider.MediaStore;
+import android.util.Log;
 import android.widget.TextView;
-
+import com.qrpokemon.qrpokemon.activities.qrinventory.QrInventoryActivity;
 import com.qrpokemon.qrpokemon.activities.qrscanned.QrScannedController;
+import com.qrpokemon.qrpokemon.models.DatabaseCallback;
 import com.qrpokemon.qrpokemon.models.DatabaseController;
 import com.qrpokemon.qrpokemon.models.FileSystemController;
 import com.qrpokemon.qrpokemon.models.PlayerController;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
-import android.util.Log;
-import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.activity.result.ActivityResult;
-import androidx.activity.result.ActivityResultCallback;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-
-import com.qrpokemon.qrpokemon.activities.signup.SignupActivity;
-import com.qrpokemon.qrpokemon.activities.signup.SignupController;
-
-import java.io.UnsupportedEncodingException;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class MainMenuController  {
-    private static final int RESULT_OK = -1;
     private static MainMenuController currentInstance;
     private DatabaseController database = DatabaseController.getInstance();
     private FileSystemController fileSystemController = new FileSystemController();
@@ -81,24 +58,35 @@ public class MainMenuController  {
         qrScannedController.checkPermission(context);
     }
 
-    public void findOtherPlayer(ActivityResult result) throws  Exception{
+    public void findOtherPlayer(ActivityResult result, Context context) throws  Exception {
+        PlayerController playerController = PlayerController.getInstance();
         Bundle bundle = result.getData().getExtras();
         photoBitmap = (Bitmap) bundle.get("data");
         photoContent = qrScannedController.analyzeImage(photoBitmap);
-        MessageDigest messageDigest = null;
+        DatabaseCallback databaseCallback = new DatabaseCallback(context) {
+            @Override
+            public void run(List<Map> dataList) {
+                if (dataList.isEmpty()){ //no player found:
+                    Toast.makeText(context, "Player not found", Toast.LENGTH_SHORT).show();
+                }
+                else { // if player found:
+                    Map player = dataList.get(0);
+                    playerController.setupPlayer( (String) player.get("Identifier"),
+                            (ArrayList<String>) player.get("qrInventory"),
+                            (HashMap) player.get("contact"),
+                            ((Long) player.get("qrCount")).intValue(),
+                            ((Long)player.get("totalScore")).intValue(),
+                            (String) player.get("id"));
+                    Log.e("MainMenuController : ", "other User is :" +(String) player.get("Identifier"));
+                    Intent intent = new Intent(context, QrInventoryActivity.class);
+                    context.startActivity(intent);
+                }
+            }
+        };
 
-        try {
-            messageDigest = MessageDigest.getInstance("SHA-256");
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
-        try {
-            messageDigest.update(photoContent.getBytes("UTF-8"));
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
-        // Get the hex hash string
-        hash = qrScannedController.byte2Hex(messageDigest.digest());
+
+        List<Map> dataList = new ArrayList<>();
+        playerController.getPlayer(databaseCallback, dataList,photoContent,"Identifier");
     }
 
 }

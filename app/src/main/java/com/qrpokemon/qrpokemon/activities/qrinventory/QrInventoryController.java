@@ -1,7 +1,9 @@
 package com.qrpokemon.qrpokemon.activities.qrinventory;
 
 import android.app.Activity;
+import android.content.ContentResolver;
 import android.content.Context;
+import android.provider.Settings;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -22,7 +24,6 @@ public class QrInventoryController {
 
     private Integer totalScore = 0;
     private HashMap<String, Object> data = new HashMap<>();
-//    private DatabaseController databaseController = DatabaseController.getInstance();
     private PlayerController player = PlayerController.getInstance();
     private PlayerController playerController = PlayerController.getInstance();
     private QrCodeController qrCodeController = QrCodeController.getInstance();
@@ -46,11 +47,30 @@ public class QrInventoryController {
      * @return all the information of the current player's document, which is a hashMap
      * @throws Exception if collection is incorrect or player doesn't found
      */
-    public HashMap<String, Object> getPlayerInfo (String currentPlayer) throws Exception {
-
-        HashMap<String, Object> temp;
-        temp = playerController.getPlayer(null,null,null,null);
-        return temp;
+    public HashMap<String, Object> getPlayerInfo (String currentPlayer, Boolean otherPlayer, @Nullable Context context) throws Exception {
+        if (otherPlayer){ // if this qrInventory currently serving for other player, fetch original player before head back
+            DatabaseCallback databaseCallback = new DatabaseCallback(context) {
+                @Override
+                public void run(List<Map> dataList) {
+                    Map currentPlayer = dataList.get(0);
+                    playerController.setupPlayer((String) currentPlayer.get("Identifier"),
+                            (ArrayList<String>) currentPlayer.get("qrInventory"),
+                            (HashMap) currentPlayer.get("contact"),
+                            ((Long) currentPlayer.get("qrCount")).intValue(),
+                            ((Long)currentPlayer.get("totalScore")).intValue(),
+                            (String) currentPlayer.get("id"));
+                }
+            };
+            playerController.getPlayer(databaseCallback,new ArrayList<>(), Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID),"DeviceId");
+        }
+        else {
+            HashMap<String, Object> temp;
+            temp = playerController.getPlayer(null,null,null,null);
+            return temp;
+        }
+        return new HashMap<>();
+    } public HashMap<String,Object> getPlayerInfo (String currentPlayer) throws Exception { // if qrInventory serves for current player
+        return getPlayerInfo(currentPlayer, false, null);
     }
 
     /**
