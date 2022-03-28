@@ -13,6 +13,7 @@ import android.content.Context;
 import android.content.Intent;
 
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.location.LocationManager;
 import android.os.Bundle;
@@ -52,6 +53,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private MainMenuController mainMenuController = MainMenuController.getInstance();
     private static final int CAMERA_ACTION_CODE = 100;
     private ActivityResultLauncher<Intent> activityResultLauncher;
+    private Context context;
 
     /**
      * MainMenu is created here, it sends user to different activities by pressing buttons
@@ -61,12 +63,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        context = this;
 
         ActivityResultLauncher<Intent> getContent = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
             @Override
             public void onActivityResult(ActivityResult result) {
                 try {
-                    mainMenuController.load(MainActivity.this); //load & display current player's username
+                    mainMenuController.load(context); //load & display current player's username
+                } catch (Resources.NotFoundException e) {
+                    Toast.makeText(context, "QR code not found", Toast.LENGTH_SHORT).show();
                 } catch (Exception e) {
                     e.printStackTrace();
                     Log.e("MainActivity: ", "No current player");
@@ -111,7 +116,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void onActivityResult(ActivityResult result) {
                 if (result.getResultCode() == RESULT_OK && result.getData() != null) {
                     try {
-                        mainMenuController.findOtherPlayer(result, MainActivity.this);
+                        mainMenuController.findOtherPlayer(result, context);
+                        Log.e("MainActivity: ", "An activity is closed");
                     } catch (Exception e) {
                         e.printStackTrace();
                         Toast.makeText(MainActivity.this, "No QR found!", Toast.LENGTH_SHORT).show();

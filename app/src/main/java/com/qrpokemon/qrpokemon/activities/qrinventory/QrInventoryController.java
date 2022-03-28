@@ -1,24 +1,21 @@
 package com.qrpokemon.qrpokemon.activities.qrinventory;
 
 import android.app.Activity;
-import android.content.ContentResolver;
 import android.content.Context;
 import android.provider.Settings;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-
 import androidx.annotation.Nullable;
-
 import com.qrpokemon.qrpokemon.models.DatabaseCallback;
 import com.qrpokemon.qrpokemon.models.PlayerController;
 import com.qrpokemon.qrpokemon.models.QrCodeController;
 import com.qrpokemon.qrpokemon.R;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Observer;
 
 public class QrInventoryController {
 
@@ -40,25 +37,35 @@ public class QrInventoryController {
         return currentInstance;
     }
 
-
     /**
      * Get and return all the data of "currentPlayer" from local file.
      * @param currentPlayer The identifier of the current player
      * @return all the information of the current player's document, which is a hashMap
      * @throws Exception if collection is incorrect or player doesn't found
      */
-    public HashMap<String, Object> getPlayerInfo (String currentPlayer, Boolean otherPlayer, @Nullable Context context) throws Exception {
+    public HashMap<String, Object> getPlayerInfo (String currentPlayer, Boolean otherPlayer, @Nullable Context context , @Nullable Observer o) throws Exception {
         if (otherPlayer){ // if this qrInventory currently serving for other player, fetch original player before head back
             DatabaseCallback databaseCallback = new DatabaseCallback(context) {
                 @Override
-                public void run(List<Map> dataList) {
+                public void run(List<Map> dataList) { //find owner of this device:
                     Map currentPlayer = dataList.get(0);
-                    playerController.setupPlayer((String) currentPlayer.get("Identifier"),
-                            (ArrayList<String>) currentPlayer.get("qrInventory"),
-                            (HashMap) currentPlayer.get("contact"),
-                            ((Long) currentPlayer.get("qrCount")).intValue(),
-                            ((Long)currentPlayer.get("totalScore")).intValue(),
-                            (String) currentPlayer.get("id"));
+
+                    try {
+
+                        HashMap player = playerController.getPlayer(null,null,null,null); // user qrInventory is currently SERVING:
+
+                        if (!((String)player.get("Identifier")).equals((String) currentPlayer.get("Identifier"))){ // if user is not owner of this device:
+                            playerController.addObserver(o);
+                            playerController.setupPlayer((String) currentPlayer.get("Identifier"),
+                                    (ArrayList<String>) currentPlayer.get("qrInventory"),
+                                    (HashMap) currentPlayer.get("contact"),
+                                    ((Long) currentPlayer.get("qrCount")).intValue(),
+                                    ((Long)currentPlayer.get("totalScore")).intValue(),
+                                    (String) currentPlayer.get("id"));
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
             };
             playerController.getPlayer(databaseCallback,new ArrayList<>(), Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID),"DeviceId");
@@ -70,7 +77,7 @@ public class QrInventoryController {
         }
         return new HashMap<>();
     } public HashMap<String,Object> getPlayerInfo (String currentPlayer) throws Exception { // if qrInventory serves for current player
-        return getPlayerInfo(currentPlayer, false, null);
+        return getPlayerInfo(currentPlayer, false, null, null);
     }
 
     /**
@@ -92,7 +99,6 @@ public class QrInventoryController {
             public void run(List<Map> dataList) {
 
                 if (!dataList.isEmpty()) {
-//                    Log.e(TAG, "Function 'getAndSetQrCodeData' found:" + dataList.toString());
                     if (dataList != null ) {
                         data.put((String) dataList.get(dataList.size()-1).get("Identifier"), dataList);
                         ListView temp = ((Activity) context).findViewById(R.id.QR_inventory_list);
@@ -120,16 +126,12 @@ public class QrInventoryController {
         };
         for (int i = 0; i < qrHashCodes.size(); i++) {
             qrCodeController.getQR(databaseCallback, result, qrHashCodes.get(i));
-//            databaseController.getData(databaseCallback, result, "QrCode", qrHashCodes.get(i));
         }
-
         return data;
     }
 
     public HashMap<String, Object> getAllComments (DatabaseCallback databaseCallback, String hashName, List<Map> result) throws Exception {
             qrCodeController.getQR(databaseCallback, result, hashName);
-//        databaseController.getData(databaseCallback, result, "QrCode", hashName);
-
         return data;
     }
 

@@ -28,10 +28,12 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Observable;
+import java.util.Observer;
 
 public class QrInventoryActivity
         extends AppCompatActivity
-        implements View.OnClickListener, QrInventoryAddCommentFragment.OnFragmentInteractionListener {
+        implements View.OnClickListener, QrInventoryAddCommentFragment.OnFragmentInteractionListener, Observer {
 
     private String selectedHash, selectedBitmap, currentPlayer;
     private Integer selectedPosition;
@@ -142,7 +144,7 @@ public class QrInventoryActivity
             // if the player clicked the back button, that is, want to go back to main menu
             case R.id.bt_back:
                 try {
-                    qrInventoryController.getPlayerInfo(null,true,this);
+                    qrInventoryController.getPlayerInfo(null,true,this, this);
                 } catch (Exception e) {
                     e.printStackTrace();
                     Log.e("QrInventory: ", "Error when retrieve back to current player");
@@ -412,6 +414,18 @@ public class QrInventoryActivity
         commentButton.setVisibility(INVISIBLE);
         showCommentsButton.setVisibility(INVISIBLE);
 
+    }
+
+    /**
+     * If user is done browsing other player reset playerController to owner' of this device
+     * Then finish itself so user can head back to MainActivity.
+     * @param observable PlayerController
+     * @param o QrInventoryActivity
+     */
+    @Override
+    public void update(Observable observable, Object o) {
+        Log.e("QrInventoryActivity: ", "Being notified by playerController!");
+        finish();
     }
 }
 

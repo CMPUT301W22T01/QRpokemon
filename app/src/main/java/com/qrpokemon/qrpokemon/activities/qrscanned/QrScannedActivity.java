@@ -30,6 +30,7 @@ import androidx.core.content.ContextCompat;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.zxing.NotFoundException;
 import com.qrpokemon.qrpokemon.MainActivity;
 import com.qrpokemon.qrpokemon.activities.map.MapController;
 import com.qrpokemon.qrpokemon.models.PlayerController;
@@ -104,7 +105,12 @@ public class QrScannedActivity extends AppCompatActivity {
                     photoBitmap = (Bitmap) bundle.get("data");
                     photoImage.setImageBitmap(photoBitmap);
                     // identify if its a QR code and get the bitmap for the picture
-                    codeContent = qrScannedController.analyzeImage(photoBitmap);
+                    try {
+                        codeContent = qrScannedController.analyzeImage(photoBitmap);
+                    } catch (NotFoundException e) {
+                        e.printStackTrace();
+                        Toast.makeText(QrScannedActivity.this, "QRcode not found!", Toast.LENGTH_SHORT).show();
+                    }
                     MessageDigest messageDigest;
 
                     try {

@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.util.Log;
+import android.widget.Toast;
+
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -48,7 +50,7 @@ public class QrScannedController {
      * @param bitmap photo current player takes
      * @return A string decoded from QRhash found in photo
      */
-    public String analyzeImage(Bitmap bitmap) {
+    public String analyzeImage(Bitmap bitmap) throws NotFoundException {
         // convert bitmap to string
         String content = null;
 
@@ -60,13 +62,9 @@ public class QrScannedController {
         RGBLuminanceSource source = new RGBLuminanceSource(width, height, pixels);
         BinaryBitmap binaryBitmap = new BinaryBitmap(new HybridBinarizer(source));
         MultiFormatReader reader = new MultiFormatReader();
-        try {
-            Result result = reader.decode(binaryBitmap);
-            content = result.getText();
-        } catch (NotFoundException e) {
-            e.printStackTrace();
-            Log.e(TAG, "decode exception", e);
-        }
+
+        Result result = reader.decode(binaryBitmap);
+        content = result.getText();
         return content;
     }
 

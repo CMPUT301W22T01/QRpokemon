@@ -3,6 +3,8 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.util.Log;
 import android.widget.TextView;
+
+import com.google.zxing.NotFoundException;
 import com.qrpokemon.qrpokemon.activities.qrinventory.QrInventoryActivity;
 import com.qrpokemon.qrpokemon.activities.qrscanned.QrScannedController;
 import com.qrpokemon.qrpokemon.models.DatabaseCallback;
@@ -60,7 +62,7 @@ public class MainMenuController implements Observer {
         qrScannedController.checkPermission(context);
     }
 
-    public void findOtherPlayer(ActivityResult result, Context context) throws  Exception {
+    public void findOtherPlayer(ActivityResult result, Context context) throws NotFoundException, Exception {
         main = context;
         Bundle bundle = result.getData().getExtras();
         photoBitmap = (Bitmap) bundle.get("data");
@@ -74,13 +76,16 @@ public class MainMenuController implements Observer {
                 else { // if player found:
                     Map player = dataList.get(0);
                     playerController.addObserver(MainMenuController.this);
+                    Log.e("MainMenuController : ", "other User is :" + (String) player.get("Identifier"));
                     playerController.setupPlayer((String) player.get("Identifier"),
                             (ArrayList<String>) player.get("qrInventory"),
                             (HashMap) player.get("contact"),
                             ((Long) player.get("qrCount")).intValue(),
                             ((Long)player.get("totalScore")).intValue(),
                             (String) player.get("id"));
+
                 }
+
             }
         };
 
@@ -97,7 +102,8 @@ public class MainMenuController implements Observer {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        Log.e("MainMenuController : ", "other User is :" + temp.toString());
+        playerController.deleteObserver(MainMenuController.this);
+        Log.e("MainMenuController : ", "other User is :" + observable.toString());
         Intent intent = new Intent(main, QrInventoryActivity.class);
         main.startActivity(intent);
     }

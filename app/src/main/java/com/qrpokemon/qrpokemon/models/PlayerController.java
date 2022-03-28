@@ -68,10 +68,13 @@ public class PlayerController extends Observable {
                             String id) {
         if (this.currentPlayer == null){
             this.currentPlayer = new Player(username, qrInventory, contact, qrCount, totalScore, id);
+        } else if (username != this.currentPlayer.getUsername()) { //require to switch another player:
+            this.currentPlayer = new Player(username, qrInventory, contact, qrCount, totalScore, id);
         }
+        Log.e("PlayerController: A player is created with : ", this.currentPlayer.getUsername());
         setChanged();
         notifyObservers();
-        Log.e("PlayerController: A player is created with : ", this.currentPlayer.getUsername());
+
     }
 
     /**

@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.provider.Settings;
 import android.util.Log;
+import android.widget.Toast;
+
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
@@ -15,6 +17,8 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+
+import com.google.zxing.NotFoundException;
 import com.qrpokemon.qrpokemon.models.DatabaseCallback;
 import com.qrpokemon.qrpokemon.models.PlayerController;
 import com.qrpokemon.qrpokemon.activities.qrscanned.QrScannedController;
@@ -44,7 +48,12 @@ public class RestoreSession extends AppCompatActivity {
                     photoBitmap = (Bitmap) bundle.get("data");
 
                     // identify if its a QR code and get the bitmap for the picture
-                    codeContent = qrScannedController.analyzeImage(photoBitmap);
+                    try {
+                        codeContent = qrScannedController.analyzeImage(photoBitmap);
+                    } catch (NotFoundException e) {
+                        e.printStackTrace();
+                        Toast.makeText(RestoreSession.this, "QRcode Not found",Toast.LENGTH_SHORT).show();
+                    }
                     MessageDigest messageDigest;
                     try {
                         DatabaseCallback databaseCallback = new DatabaseCallback(RestoreSession.this) {
@@ -65,11 +74,10 @@ public class RestoreSession extends AppCompatActivity {
                                     } catch (Exception e) { // if collection is incorrect for DatabaseController:
                                         e.printStackTrace();
                                     }
-                                    finish();
                                 } else {
                                     Log.e("RestoreSession: ", "User "+codeContent +" Not found!");
-                                    finish();
                                 }
+                                finish();
                             }
                         };
                         Log.e("Restore Session: ", "Getting data");
