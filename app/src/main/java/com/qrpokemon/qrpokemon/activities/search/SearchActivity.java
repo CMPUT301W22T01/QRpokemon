@@ -24,9 +24,6 @@ public class SearchActivity extends AppCompatActivity {
 
     private static final String TAG = "FirestoreSearchActivity";
     private static final String PLAYER = "Player";
-
-    private final FirebaseFirestore mDb = FirebaseFirestore.getInstance();
-
     private ArrayAdapter<SearchItem> mAdapter;
     private ArrayAdapter<String> newAdapter;
     private Button backButton;
@@ -46,12 +43,6 @@ public class SearchActivity extends AppCompatActivity {
         // Create and fill our list with player data
         searchList = new ArrayList<SearchItem>();
         searchController = SearchController.getInstance();
-//        searchController.getSearch(this, searchList);
-
-
-
-        Query query = mDb.collection(PLAYER)
-                .orderBy("createdTime", Query.Direction.ASCENDING);
 
         mAdapter = new SearchList(this, searchList);
         listView.setAdapter(mAdapter);

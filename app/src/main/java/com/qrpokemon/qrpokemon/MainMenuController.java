@@ -17,17 +17,19 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Observable;
+import java.util.Observer;
 
-public class MainMenuController  {
+public class MainMenuController implements Observer {
     private static MainMenuController currentInstance;
     private DatabaseController database = DatabaseController.getInstance();
     private FileSystemController fileSystemController = new FileSystemController();
     private QrScannedController qrScannedController = new QrScannedController();
-    public static final int CAMERA_ACTION_CODE = 101;
     private Bitmap photoBitmap;
     private String photoContent;
     private String hash = "";
-
+    private PlayerController playerController = PlayerController.getInstance();
+    private Context main;
 
     public static MainMenuController getInstance() {
         if (currentInstance == null)
@@ -59,7 +61,7 @@ public class MainMenuController  {
     }
 
     public void findOtherPlayer(ActivityResult result, Context context) throws  Exception {
-        PlayerController playerController = PlayerController.getInstance();
+        main = context;
         Bundle bundle = result.getData().getExtras();
         photoBitmap = (Bitmap) bundle.get("data");
         photoContent = qrScannedController.analyzeImage(photoBitmap);
@@ -71,15 +73,13 @@ public class MainMenuController  {
                 }
                 else { // if player found:
                     Map player = dataList.get(0);
-                    playerController.setupPlayer( (String) player.get("Identifier"),
+                    playerController.addObserver(MainMenuController.this);
+                    playerController.setupPlayer((String) player.get("Identifier"),
                             (ArrayList<String>) player.get("qrInventory"),
                             (HashMap) player.get("contact"),
                             ((Long) player.get("qrCount")).intValue(),
                             ((Long)player.get("totalScore")).intValue(),
                             (String) player.get("id"));
-                    Log.e("MainMenuController : ", "other User is :" +(String) player.get("Identifier"));
-                    Intent intent = new Intent(context, QrInventoryActivity.class);
-                    context.startActivity(intent);
                 }
             }
         };
@@ -89,6 +89,18 @@ public class MainMenuController  {
         playerController.getPlayer(databaseCallback, dataList,photoContent,"Identifier");
     }
 
+    @Override
+    public void update(Observable observable, Object o) {
+        HashMap temp = new HashMap();
+        try {
+            temp = playerController.getPlayer(null,null,null,null);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        Log.e("MainMenuController : ", "other User is :" + temp.toString());
+        Intent intent = new Intent(main, QrInventoryActivity.class);
+        main.startActivity(intent);
+    }
 }
 
 

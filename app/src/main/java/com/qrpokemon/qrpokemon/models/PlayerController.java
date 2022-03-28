@@ -13,13 +13,13 @@ public class PlayerController extends Observable {
     private static PlayerController currentInstance;
     public Object savePlayerData;
     private Player currentPlayer = null;
+    private String player = "Player";
     private DatabaseController databaseController = DatabaseController.getInstance();
     private PlayerController() {}
 
     public static PlayerController getInstance() {
         if (currentInstance == null)
             currentInstance = new PlayerController();
-
         return currentInstance;
     }
 
@@ -42,9 +42,9 @@ public class PlayerController extends Observable {
             info.put("contact",     this.currentPlayer.getContactInfo());
 
         } else if (IdentifierField == null){ // find player by username
-            databaseController.getData(databaseCallback, list , "Player", username);
+            databaseController.getData(databaseCallback, list , player, username);
         } else {
-            databaseController.getData(databaseCallback, list, "Player", username, null, IdentifierField);
+            databaseController.getData(databaseCallback, list, player, username, null, IdentifierField);
         }
         return info;
     }
@@ -131,8 +131,5 @@ public class PlayerController extends Observable {
             Log.e("PlayerController: ", "User at savePlayerData is: "+ this.currentPlayer.getUsername());
             databaseController.writeData("Player", this.currentPlayer.getUsername() ,info ,false);
         }
-
     }
-
-
 }
