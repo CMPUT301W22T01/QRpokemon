@@ -6,12 +6,14 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.location.LocationManager;
 import android.os.Bundle;
 
@@ -20,6 +22,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -33,6 +36,10 @@ import com.qrpokemon.qrpokemon.activities.qrscanned.QrScannedActivity;
 import com.qrpokemon.qrpokemon.activities.search.SearchActivity;
 import com.qrpokemon.qrpokemon.activities.signup.SignupActivity;
 
+import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private Intent intent;
     private Button qrInventoryMainBt;
@@ -43,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private FloatingActionButton cameraMainBt;
     private ImageView profileMainIv;
     private MainMenuController mainMenuController = MainMenuController.getInstance();
-    private static final int CAMERA_ACTION_CODE = 101;
+    private static final int CAMERA_ACTION_CODE = 100;
     private ActivityResultLauncher<Intent> activityResultLauncher;
 
     /**
@@ -99,6 +106,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         profileMainIv.setOnClickListener(this);
         otherProfileBt.setOnClickListener(this);
 
+        activityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
+            @Override
+            public void onActivityResult(ActivityResult result) {
+                if (result.getResultCode() == RESULT_OK && result.getData() != null) {
+                    try {
+                        mainMenuController.findOtherPlayer(result);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        Toast.makeText(MainActivity.this, "No QR found!", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+        });
+
     }
 
     @Override
@@ -129,7 +150,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(intent);
                 break;
             case R.id.Other_Player_Button:  // open Inventory Activity
-                mainMenuController.checkPermission(this);
+                if (ContextCompat.checkSelfPermission(this,
+                        Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                    // ask permission
+                    mainMenuController.checkPermission(this);
+                }
+                else {
+                    // Pop camera
+                    intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                    activityResultLauncher.launch(intent);
+                }
+
                 break;
 
         }

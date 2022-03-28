@@ -40,52 +40,23 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class MainMenuController extends AppCompatActivity {
+public class MainMenuController  {
     private static final int RESULT_OK = -1;
     private static MainMenuController currentInstance;
     private DatabaseController database = DatabaseController.getInstance();
     private FileSystemController fileSystemController = new FileSystemController();
     private QrScannedController qrScannedController = new QrScannedController();
-    private ActivityResultLauncher<Intent> activityResultLauncher;
     public static final int CAMERA_ACTION_CODE = 101;
     private Bitmap photoBitmap;
     private String photoContent;
     private String hash = "";
+
 
     public static MainMenuController getInstance() {
         if (currentInstance == null)
             currentInstance = new MainMenuController();
 
         return currentInstance;
-    }
-    @Override
-    protected void onCreate( Bundle saveInstanceState) {
-        super.onCreate(saveInstanceState);
-
-        activityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
-            @Override
-            public void onActivityResult(ActivityResult result) {
-                if (result.getResultCode() == RESULT_OK && result.getData() != null) {
-                    Bundle bundle = result.getData().getExtras();
-                    photoBitmap = (Bitmap) bundle.get("data");
-                    photoContent = qrScannedController.analyzeImage(photoBitmap);
-                    MessageDigest messageDigest = null;
-
-                    try {
-                        messageDigest = MessageDigest.getInstance("SHA-256");
-                    } catch (NoSuchAlgorithmException e) {
-                        e.printStackTrace();
-                    }
-                    try {
-                        messageDigest.update(photoContent.getBytes("UTF-8"));
-                    } catch (UnsupportedEncodingException e) {
-                        e.printStackTrace();
-                    }
-                    // Get the hex hash string
-                    hash = qrScannedController.byte2Hex(messageDigest.digest());
-                }
-            }
-        });
     }
 
 
@@ -107,20 +78,28 @@ public class MainMenuController extends AppCompatActivity {
     }
 
     public void checkPermission(Context context) {
-        Log.e("checkPermission","Start");
-        if(ContextCompat.checkSelfPermission(context,
-                Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED){
-            Log.e("checkPermission","if");
-            qrScannedController.checkPermission(context);
-        }
-        else{
-            Log.e("checkPermission","else");
-            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            activityResultLauncher.launch(intent);
-        }
+        qrScannedController.checkPermission(context);
     }
 
+    public void findOtherPlayer(ActivityResult result) throws  Exception{
+        Bundle bundle = result.getData().getExtras();
+        photoBitmap = (Bitmap) bundle.get("data");
+        photoContent = qrScannedController.analyzeImage(photoBitmap);
+        MessageDigest messageDigest = null;
 
+        try {
+            messageDigest = MessageDigest.getInstance("SHA-256");
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        try {
+            messageDigest.update(photoContent.getBytes("UTF-8"));
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        // Get the hex hash string
+        hash = qrScannedController.byte2Hex(messageDigest.digest());
+    }
 
 }
 
