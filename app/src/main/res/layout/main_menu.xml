@@ -96,7 +96,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/Leaderboard_Button"
             app:layout_constraintVertical_bias="0.416"
-            app:srcCompat="@drawable/ic_add" />
+            app:srcCompat="@drawable/ic_user" />
 
         <ImageView
             android:layout_height="150dp"
