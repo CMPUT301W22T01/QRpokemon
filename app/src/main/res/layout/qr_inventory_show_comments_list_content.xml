@@ -8,10 +8,12 @@
     <TextView
         android:id="@+id/tv_player"
         android:layout_width="match_parent"
-        android:layout_height="66sp"
-        android:text="player_Id"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
         android:gravity=""
-        android:textSize="26sp"
+        android:text="player_Id"
+        android:textColor="@color/black"
+        android:textSize="36sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

@@ -4,6 +4,7 @@ import static android.view.View.VISIBLE;
 import static android.view.View.INVISIBLE;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -32,7 +33,7 @@ public class QrInventoryActivity
         extends AppCompatActivity
         implements View.OnClickListener, QrInventoryAddCommentFragment.OnFragmentInteractionListener {
 
-    private String selectedHash, currentPlayer;
+    private String selectedHash, selectedBitmap, currentPlayer;
     private Integer selectedPosition;
     private TextView totalScore, totalCount;
     private Button ascendingButton, descendingButton;
@@ -116,6 +117,7 @@ public class QrInventoryActivity
                 String curString = adapterView.getItemAtPosition(i).toString();
                 String[] tStr = curString.split(cut);
                 selectedHash = tStr[1];
+                selectedBitmap = tStr[2];
 
                 // show the delete button
                 deleteButton.setVisibility(VISIBLE);
@@ -174,6 +176,7 @@ public class QrInventoryActivity
 
                 deleteButton.setVisibility(INVISIBLE);
                 commentButton.setVisibility(INVISIBLE);
+                showCommentsButton.setVisibility(INVISIBLE);
 
                 break;
 
@@ -342,6 +345,7 @@ public class QrInventoryActivity
                                     // new intent to activity 'QrInventoryShowComments'
                                     Intent intent = new Intent(QrInventoryActivity.this, QrInventoryShowComments.class);
                                     intent.putExtra("commentsOfCurQrcode", commentsOfCurQrcode);
+                                    intent.putExtra("selectedBitmap", selectedBitmap);
                                     startActivity(intent);
 
                                 } catch (Exception e) {
@@ -353,6 +357,9 @@ public class QrInventoryActivity
                         } else {
                             Toast.makeText(QrInventoryActivity.this, "There is no comment to show", Toast.LENGTH_SHORT).show();
                         }
+
+                        deleteButton.setVisibility(INVISIBLE);
+                        commentButton.setVisibility(INVISIBLE);
                         showCommentsButton.setVisibility(INVISIBLE);
                     }
                 };
@@ -397,6 +404,7 @@ public class QrInventoryActivity
 
         deleteButton.setVisibility(INVISIBLE);
         commentButton.setVisibility(INVISIBLE);
+        showCommentsButton.setVisibility(INVISIBLE);
 
     }
 }
