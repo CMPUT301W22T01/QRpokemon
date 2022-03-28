@@ -52,7 +52,7 @@ public class ProfileController {
         try {
             playerEmail = playerContact.get("email").toString();
         } catch (Exception e) {
-            playerEmail = "";
+            playerEmail = "null";
         }
         return playerEmail;
     }
@@ -67,7 +67,7 @@ public class ProfileController {
         try{
             playerPhone = playerContact.get("phone").toString();
         } catch (Exception e) {
-            playerPhone = "";
+            playerPhone = "null";
         }
 
         return playerPhone;
