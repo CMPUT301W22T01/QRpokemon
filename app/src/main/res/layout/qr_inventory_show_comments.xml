@@ -37,25 +37,19 @@
         app:srcCompat="?attr/actionModeCloseDrawable" />
 
     <TextView
-        android:id="@+id/textView"
-        android:layout_width="131dp"
-        android:layout_height="102dp"
-        android:layout_marginStart="8dp"
+        android:id="@+id/I_m_so_tired_this_semester_TAT_But_thank_God_I_still_have_an_amazing_buddy"
+        android:layout_width="154dp"
+        android:layout_height="228dp"
+        android:layout_marginStart="2dp"
         android:layout_marginTop="16dp"
+        android:layout_marginEnd="2dp"
+        android:gravity="center"
         android:text="COMMENT SECTION"
-        android:textSize="26sp"
+        android:textSize="30sp"
         android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/iv_show_comments"
+        app:layout_constraintHorizontal_bias="0.444"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="130dp"
-        android:layout_height="127dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        app:srcCompat="@drawable/yutong"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
