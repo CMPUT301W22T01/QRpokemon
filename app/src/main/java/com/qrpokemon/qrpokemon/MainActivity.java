@@ -4,12 +4,18 @@ import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+
+import android.content.pm.PackageManager;
 import android.location.LocationManager;
 import android.os.Bundle;
+
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -33,12 +39,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button mapMainBt;
     private Button searchMainBt;
     private Button leaderboardMainBt;
+    private FloatingActionButton otherProfileBt;
     private FloatingActionButton cameraMainBt;
     private ImageView profileMainIv;
     private MainMenuController mainMenuController = MainMenuController.getInstance();
+    private static final int CAMERA_ACTION_CODE = 101;
+    private ActivityResultLauncher<Intent> activityResultLauncher;
 
     /**
      * MainMenu is created here, it sends user to different activities by pressing buttons
+     *
      * @param savedInstanceState saved instance state
      */
     @Override
@@ -66,14 +76,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         searchMainBt = findViewById(R.id.Search_Button);
         leaderboardMainBt = findViewById(R.id.Leaderboard_Button);
         cameraMainBt = findViewById(R.id.Camera_Button);
+        otherProfileBt = findViewById(R.id.Other_Player_Button);
 
         //setup for getting location:
-        MapController mapController  = MapController.getInstance();
+        MapController mapController = MapController.getInstance();
         LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         FusedLocationProviderClient fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
 
         //get location in mapController
-        mapController.run(this, null, locationManager,  fusedLocationProviderClient);
+        mapController.run(this, null, locationManager, fusedLocationProviderClient);
 
 
         profileMainIv = findViewById(R.id.avatar_imageView);
@@ -86,6 +97,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         leaderboardMainBt.setOnClickListener(this);
         cameraMainBt.setOnClickListener(this);
         profileMainIv.setOnClickListener(this);
+        otherProfileBt.setOnClickListener(this);
 
     }
 
@@ -116,7 +128,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 intent = new Intent(MainActivity.this, ProfileActivity.class);
                 startActivity(intent);
                 break;
+            case R.id.Other_Player_Button:  // open Inventory Activity
+                mainMenuController.checkPermission(this);
+                break;
 
+        }
+
+    }
+
+
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults){
+        Log.e("MainMenuController: ", "Request now has the result");
+        switch (requestCode){
+            case CAMERA_ACTION_CODE:
+                if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                    // Pop camera
+                    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                    activityResultLauncher.launch(intent);
+                    Log.e("MainMenuController", "asking permission");
+                    break;
+                }
         }
     }
 }
