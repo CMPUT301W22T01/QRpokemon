@@ -249,6 +249,7 @@ public class QrScannedActivity extends AppCompatActivity {
      */
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         Log.e("QrScannedActivity: ", "Request now has the result");
         switch (requestCode) {
             case CAMERA_ACTION_CODE:

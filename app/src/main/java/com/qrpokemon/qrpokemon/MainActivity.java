@@ -172,11 +172,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults){
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         Log.e("MainMenuController: ", "Request now has the result");
-        switch (requestCode){
+        switch (requestCode) {
             case CAMERA_ACTION_CODE:
-                if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     // Pop camera
                     Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                     activityResultLauncher.launch(intent);
