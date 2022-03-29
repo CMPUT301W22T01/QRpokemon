@@ -32,18 +32,15 @@ public class LeaderboardController {
      * @param sortMethod method to be sorted with
      */
     public void sortLeaderboard(Context context, LeaderboardList list, int sortMethod) {
-        // TODO: Use binary search to get estimated ranking (array index)?
-        // TODO: Use String dropdown text instead of int?
-
         // Figure out which sort method to use
         String sortField;
         switch(sortMethod) {
             case 0:
                 sortField = "totalScore";
                 break;
-            //case 1:
-            //    sortField = "highestUnique";
-            //    break;
+            case 1:
+                sortField = "highestUnique";
+                break;
             case 2:
                 sortField = "qrCount";
                 break;

@@ -165,7 +165,4 @@ public class LeaderboardActivityTest {
         onView(withId(R.id.leaderboard_sort_selector)).perform(click());
         onView(withText("High Scores")).perform(click());
     }
-
-    // TODO: Verify sorting works
-    // TODO: Verify player has correct rank
 }
