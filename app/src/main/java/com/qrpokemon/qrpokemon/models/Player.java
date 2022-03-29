@@ -11,9 +11,9 @@ public class Player {
     private Integer qrCount;
     private Integer totalScore;
     private String id;
-    private Integer highest,lowest;
+    private Integer highestUnique;
 
-    public Player(String username, ArrayList<String> qrInventory, HashMap contactInfo, Integer qrCount, Integer totalScore, String id, Integer highest, Integer lowest) {
+    public Player(String username, ArrayList<String> qrInventory, HashMap contactInfo, Integer qrCount, Integer totalScore, String id, Integer highestUnique) {
         this.username = username;
         this.id = id;
         this.qrInventory = qrInventory;
@@ -31,19 +31,11 @@ public class Player {
     }
 
     public Integer getHighest() {
-        return highest;
+        return highestUnique;
     }
 
-    public void setHighest(Integer highest) {
-        this.highest = highest;
-    }
-
-    public Integer getLowest() {
-        return lowest;
-    }
-
-    public void setLowest(Integer lowest) {
-        this.lowest = lowest;
+    public void setHighestUnique(Integer highestUnique) {
+        this.highestUnique = highestUnique;
     }
 
     public String getUsername() {

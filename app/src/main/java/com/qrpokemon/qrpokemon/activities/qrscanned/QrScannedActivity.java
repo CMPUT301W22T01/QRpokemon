@@ -166,24 +166,21 @@ public class QrScannedActivity extends AppCompatActivity {
                                     }
 
                                     // if this QR code is the first time scanned by player
-                                    else{
-                                        HashMap player = (HashMap) playerController.getPlayer(null, null,null,null);
+                                    else {
+                                        HashMap player = (HashMap) playerController.getPlayer(null, null, null, null);
                                         ArrayList<String> qrInventory = (ArrayList<String>) player.get("qrInventory");
 
                                         // update player's total score and counts
                                         int qrCount = qrInventory.size() + 1;
                                         int qrTotal = (int) player.get("totalScore") + qrScannedController.scoreCalculator(hash);
 
-                                        // update highest and lowest scores
-                                        Integer highest = null, lowest = null;
-                                        if ( (Integer) player.get("highest") == null || qrScannedController.scoreCalculator(hash) > (int) player.get("highest")) {
-                                            highest = qrScannedController.scoreCalculator(hash);
-                                        }
-                                        if ( (Integer) player.get("lowest") == null ||qrScannedController.scoreCalculator(hash) < (int) player.get("lowest")) {
-                                            lowest = qrScannedController.scoreCalculator(hash);
+                                        // update highest scores
+                                        Integer highestUnique = null;
+                                        if ( (Integer) player.get("highestUnique") == null || qrScannedController.scoreCalculator(hash) > (int) player.get("highestUnique")) {
+                                            highestUnique = qrScannedController.scoreCalculator(hash);
                                         }
                                         qrInventory.add(hash);
-                                        playerController.savePlayerData(qrCount,qrTotal,qrInventory,null, highest, lowest, null, false);
+                                        playerController.savePlayerData(qrCount, qrTotal, qrInventory, null, highestUnique, null, false);
                                     }
 
                                     String currentLocation = null;

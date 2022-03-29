@@ -61,8 +61,7 @@ public class QrInventoryController {
                                     (HashMap) currentPlayer.get("contact"),
                                     ((Long) currentPlayer.get("qrCount")).intValue(),
                                     ((Long)currentPlayer.get("totalScore")).intValue(),
-                                    ((Long)currentPlayer.get("highest")).intValue(),
-                                    ((Long)currentPlayer.get("lowest")).intValue(),
+                                    ((Long)currentPlayer.get("highestUnique")).intValue(),
                                     (String) currentPlayer.get("id"));
                         }
                     } catch (Exception e) {

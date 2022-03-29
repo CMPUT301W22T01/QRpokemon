@@ -66,13 +66,12 @@ public class RestoreSession extends AppCompatActivity {
                                                                 (HashMap) mapList.get("contact"),
                                                                 ((Long) mapList.get("qrCount")).intValue(),
                                                                 ((Long) mapList.get("totalScore")).intValue(),
-                                                                ((Long) mapList.get("highest")).intValue(),
-                                                                ((Long) mapList.get("lowest")).intValue(),
+                                                                ((Long) mapList.get("highestUnique")).intValue(),
                                                                 Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID));
 
                                     try {
                                         Log.e("RestoreSession: ", "User "+(String ) mapList.get("Identifier")+" found!");
-                                        playerController.savePlayerData(null,null,null,null, null, null, Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID), false);
+                                        playerController.savePlayerData(null, null, null, null, null, Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID), false);
                                     } catch (Exception e) { // if collection is incorrect for DatabaseController:
                                         e.printStackTrace();
                                     }
@@ -108,7 +107,8 @@ public class RestoreSession extends AppCompatActivity {
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        Log.e("RestoreSession: ", "Request now has the result: "+String.valueOf(requestCode));
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        Log.e("RestoreSession: ", "Request now has the result: " + String.valueOf(requestCode));
         switch (requestCode) {
             case CAMERA_ACTION_CODE:
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {

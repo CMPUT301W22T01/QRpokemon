@@ -56,10 +56,10 @@ public class SignupController {
 
                         try {
                             //Create current Player class in PlayerController class
-                            playerController.setupPlayer(newUsername, new ArrayList<String>(), contact, 0,0, 0, 0, id);
+                            playerController.setupPlayer(newUsername, new ArrayList<String>(), contact, 0,0, 0, id);
 
                             // add player on firestore
-                            playerController.savePlayerData(0,0, new ArrayList<String>(), contact, 0, 0,  id, true);
+                            playerController.savePlayerData(0,0, new ArrayList<String>(), contact, 0, id, true);
                         } catch (Exception e) {
                             Log.e("SignupController: ", e.toString());
                         }
@@ -87,7 +87,7 @@ public class SignupController {
         playerController.getPlayer(databaseCallback, result, id, "DeviceId");
     }
 
-    public void write(String username, ArrayList<String> qrInventory, HashMap<String, String> contact, Integer qrCount, Integer totalScore, Integer highest, Integer lowest, String id){
-        playerController.setupPlayer(username, qrInventory, contact, qrCount, totalScore, highest, lowest, id);
+    public void write(String username, ArrayList<String> qrInventory, HashMap<String, String> contact, Integer qrCount, Integer totalScore, Integer highestUnique, String id){
+        playerController.setupPlayer(username, qrInventory, contact, qrCount, totalScore, highestUnique, id);
     }
 }
