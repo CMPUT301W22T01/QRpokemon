@@ -6,6 +6,7 @@ import android.util.Log;
 
 import com.qrpokemon.qrpokemon.models.DatabaseCallback;
 import com.qrpokemon.qrpokemon.models.DatabaseController;
+import com.qrpokemon.qrpokemon.models.PlayerController;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -31,7 +32,6 @@ public class LeaderboardController {
      * @param sortMethod method to be sorted with
      */
     public void sortLeaderboard(Context context, LeaderboardList list, int sortMethod) {
-        // Figure out which sort method to use
         String sortField;
         switch(sortMethod) {
             case 0:
@@ -48,9 +48,6 @@ public class LeaderboardController {
         }
 
         DatabaseController databaseController = DatabaseController.getInstance();
-        List<Map> tempList = new ArrayList<>();  // Store our db results temporarily
-        list.clear();  // Clear our original list before adding new entries
-
         DatabaseCallback callback = new DatabaseCallback(context) {
             @Override
             public void run(List<Map> playerList) {
@@ -58,7 +55,7 @@ public class LeaderboardController {
                 for (int i = 0; i < playerList.size(); i++) {
                     Map<String, Object> player = playerList.get(i);
                     list.add(new LeaderboardItem(
-                            // Types are guaranteed to exist so we can safely cast
+                            // Guaranteed to exist so we can safely cast
                             (String) player.get("Identifier"), i+1,
                             (int) player.get("highestUnique"),
                             (int) player.get("qrCount"),
@@ -73,7 +70,10 @@ public class LeaderboardController {
         };
 
         try {
-            databaseController.getData(callback, tempList, "Player", null, sortField,"Identifier");
+            // Fetch data and update our leaderboard list
+            list.clear();
+            databaseController.getData(callback, new ArrayList<>(), "Player",
+                    null, sortField,"Identifier");
         } catch (Exception exception) {
             Log.e("Leaderboard Controller: ", "Database call failed");
             Log.e("Leaderboard Controller: ", exception.toString());
@@ -87,7 +87,7 @@ public class LeaderboardController {
         HashMap<String, Object> player;
         try {
             PlayerController playerController = PlayerController.getInstance();
-            player = playerController.getPlayer(null);
+            player = playerController.getPlayer(null, null);
 
             // Fetch user data
             int rank = 0;  // Placeholder value so linter doesn't complain
@@ -108,6 +108,7 @@ public class LeaderboardController {
 
         } catch (Exception exception) {
             Log.e("Leaderboard Controller: ", exception.toString());
+            ((Activity) context).finish();
         }
     }
 }
