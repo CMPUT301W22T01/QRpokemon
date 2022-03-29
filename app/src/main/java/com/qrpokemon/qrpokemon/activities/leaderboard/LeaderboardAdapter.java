@@ -75,7 +75,7 @@ public class LeaderboardAdapter extends RecyclerView.Adapter implements Observer
         public void bind(LeaderboardItem leaderboardItem) {
             ranking.setText(String.valueOf(leaderboardItem.getRank()));
             username.setText(leaderboardItem.getUsername());
-            highestUnique.setText(String.valueOf(leaderboardItem.getHighestScore()));
+            highestUnique.setText(String.valueOf(leaderboardItem.getHighestUnique()));
             qrQuantity.setText(String.valueOf(leaderboardItem.getQrQuantity()));
             totalScore.setText(String.valueOf(leaderboardItem.getTotalScore()));
         }

@@ -40,7 +40,7 @@ public class PlayerController extends Observable {
             info.put("qrCount",       this.currentPlayer.getQrCount());
             info.put("totalScore",    this.currentPlayer.getTotalScore());
             info.put("contact",       this.currentPlayer.getContactInfo());
-            info.put("highestUnique", this.currentPlayer.getHighest());
+            info.put("highestUnique", this.currentPlayer.getHighestUnique());
 
         } else if (IdentifierField == null) { // find player by username
             databaseController.getData(databaseCallback, list , player, username);
@@ -127,14 +127,14 @@ public class PlayerController extends Observable {
 
         if (highestUnique != null) {
             this.currentPlayer.setHighestUnique(highestUnique);
-            info.put("highestUnique", currentPlayer.getHighest());
+            info.put("highestUnique", currentPlayer.getHighestUnique());
         }
 
         info.put("qrCount",this.currentPlayer.getQrCount());
         info.put("totalScore", this.currentPlayer.getTotalScore());
         info.put("qrInventory", this.currentPlayer.getQrInventory());
         info.put("contact", this.currentPlayer.getContactInfo());
-        info.put("highestUnique", this.currentPlayer.getHighest());
+        info.put("highestUnique", this.currentPlayer.getHighestUnique());
 
         if (addIdentifier) { //ading a new user
             info.put("Identifier", currentPlayer.getUsername());

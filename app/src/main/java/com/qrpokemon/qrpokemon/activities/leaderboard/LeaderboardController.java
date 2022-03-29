@@ -57,9 +57,9 @@ public class LeaderboardController {
                     list.add(new LeaderboardItem(
                             // Guaranteed to exist so we can safely cast
                             (String) player.get("Identifier"), i+1,
-                            (int) player.get("highestUnique"),
-                            (int) player.get("qrCount"),
-                            (int) player.get("totalScore")
+                            (int)(long) player.get("highestUnique"),  // Cannot cast Long (not long) to int
+                            (int)(long) player.get("qrCount"),
+                            (int)(long) player.get("totalScore")
                     ));
                 }
 
@@ -107,6 +107,7 @@ public class LeaderboardController {
             ((LeaderboardActivity) context).setPersonalRank(rank, username, highestUnique, qrCount, score);
 
         } catch (Exception exception) {
+            Log.e("Leaderboard Controller: ", "Failed to update rank");
             Log.e("Leaderboard Controller: ", exception.toString());
             ((Activity) context).finish();
         }

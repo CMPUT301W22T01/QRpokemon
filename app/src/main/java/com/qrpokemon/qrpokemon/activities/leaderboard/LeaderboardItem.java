@@ -26,7 +26,7 @@ public class LeaderboardItem {
         return username;
     }
 
-    public int getHighestScore() {
+    public int getHighestUnique() {
         return highestUnique;
     }
 

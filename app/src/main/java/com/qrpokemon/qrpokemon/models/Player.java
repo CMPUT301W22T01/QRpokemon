@@ -18,6 +18,7 @@ public class Player {
         this.id = id;
         this.qrInventory = qrInventory;
         this.contactInfo = contactInfo;
+        this.highestUnique = highestUnique;
         this.qrCount = qrCount;
         this.totalScore = totalScore;
     }
@@ -30,7 +31,7 @@ public class Player {
         this.id = id;
     }
 
-    public Integer getHighest() {
+    public Integer getHighestUnique() {
         return highestUnique;
     }
 

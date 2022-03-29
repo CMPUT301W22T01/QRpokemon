@@ -140,12 +140,12 @@ public class LeaderboardActivityTest {
             @Override
             public void updateRank(Context context, LeaderboardList list) {
                 ((LeaderboardActivity) context).setPersonalRank(mockItem.getRank(), mockItem.getUsername(),
-                        mockItem.getHighestScore(), mockItem.getQrQuantity(), mockItem.getTotalScore());
+                        mockItem.getHighestUnique(), mockItem.getQrQuantity(), mockItem.getTotalScore());
 
                 // Checking here ensures the data has updated
                 onView(withId(R.id.tv_leaderboard_player_rank)).check(matches(withText(mockItem.getRank())));
                 onView(withId(R.id.tv_leaderboard_player_username)).check(matches(withText(mockItem.getUsername())));
-                onView(withId(R.id.tv_leaderboard_player_unique)).check(matches(withText(mockItem.getHighestScore())));
+                onView(withId(R.id.tv_leaderboard_player_unique)).check(matches(withText(mockItem.getHighestUnique())));
                 onView(withId(R.id.tv_leaderboard_player_qrcount)).check(matches(withText(mockItem.getQrQuantity())));
                 onView(withId(R.id.tv_leaderboard_player_score)).check(matches(withText(mockItem.getTotalScore())));
             }
