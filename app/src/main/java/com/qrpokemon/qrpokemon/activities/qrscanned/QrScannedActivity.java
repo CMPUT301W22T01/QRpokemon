@@ -31,10 +31,9 @@ import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.zxing.NotFoundException;
+import com.qrpokemon.qrpokemon.LocationController;
 import com.qrpokemon.qrpokemon.MainActivity;
-import com.qrpokemon.qrpokemon.activities.map.MapController;
 import com.qrpokemon.qrpokemon.models.PlayerController;
-import com.qrpokemon.qrpokemon.models.QrCodeController;
 import com.qrpokemon.qrpokemon.R;
 
 import java.io.ByteArrayOutputStream;
@@ -51,14 +50,11 @@ public class QrScannedActivity extends AppCompatActivity {
     private Button confirmButton;
     private ActivityResultLauncher<Intent> activityResultLauncher;
     private Bitmap photoBitmap;
-    private String codeContent;
-    private String hash = "";
+    private String codeContent, hash = "", cityName = null;
     private Boolean savePhoto = false, saveLocation = false;
     private Location location;
-    final private String TAG = "TestCamera";
     public static final int CAMERA_ACTION_CODE = 100;
     private QrScannedController qrScannedController = QrScannedController.getInstance();
-    private QrCodeController qrCodeController = QrCodeController.getInstance();
 
     /**
      * open camera collaborate with player controller and map controller
@@ -71,12 +67,12 @@ public class QrScannedActivity extends AppCompatActivity {
         setContentView(R.layout.qrscanned_activity);
 
         // setup for getting location:
-        MapController mapController  = MapController.getInstance();
+        LocationController locationController  = LocationController.getInstance();
         LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         FusedLocationProviderClient fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
 
-        // get location in mapController
-        mapController.run(this, null, locationManager,  fusedLocationProviderClient);
+        // get location in locationController
+        locationController.run(this, null, locationManager,  fusedLocationProviderClient);
 
         // binding variables with layout
         photoImage = findViewById(R.id.code_not_found_imageView);
@@ -158,10 +154,10 @@ public class QrScannedActivity extends AppCompatActivity {
                             public void onClick(View v){
                                 if (locationSave.isChecked()){
                                     saveLocation = true;
-                                    location = mapController.returnLocation();
+                                    cityName = locationController.getCity(QrScannedActivity.this);
+                                    location = locationController.returnLocation();
                                     Log.e("QrScannedActivity: ", String.valueOf(location.getLatitude()) + String.valueOf(location.getLongitude()));
-                                    Toast.makeText(QrScannedActivity.this, "Location will be saved", Toast.LENGTH_SHORT).show();
-                                    Toast.makeText(QrScannedActivity.this, String.valueOf(location.getLatitude()) + String.valueOf(location.getLongitude()), Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(QrScannedActivity.this, "Location will be saved " + String.valueOf(location.getLatitude()) + String.valueOf(location.getLongitude()), Toast.LENGTH_SHORT).show();
                                 } else {
                                     saveLocation = false;
                                     Toast.makeText(QrScannedActivity.this, "Location won't be saved", Toast.LENGTH_SHORT).show();
@@ -173,7 +169,6 @@ public class QrScannedActivity extends AppCompatActivity {
                             @Override
                             public void onClick(View view) {
                                 try {
-
                                     String currentLocation = null;
                                     Bitmap bitmap = null;
                                     String bitMapString = null;
@@ -182,7 +177,6 @@ public class QrScannedActivity extends AppCompatActivity {
                                         currentLocation = String.valueOf(location.getLatitude()) + "," + String.valueOf(location.getLongitude());
                                         Toast.makeText(QrScannedActivity.this, "LOCATION SAVED", Toast.LENGTH_SHORT).show();
 //                                        Log.e("QrScannedActivity: ",currentLocation);
-
                                     }
 
                                     if (savePhoto){
@@ -197,6 +191,7 @@ public class QrScannedActivity extends AppCompatActivity {
                                     }
 
                                     qrScannedController.saveQrCode(QrScannedActivity.this, hash, qrScannedController.scoreCalculator(hash), currentLocation, bitMapString);
+                                    locationController.saveLocation(cityName, String.valueOf(location.getLatitude()) +"," + String.valueOf(location.getLongitude()), QrScannedActivity.this, hash);
                                     Toast.makeText(QrScannedActivity.this, "QR saved", Toast.LENGTH_SHORT).show();
                                     finish();
                                 } catch (Exception e) {
@@ -210,7 +205,6 @@ public class QrScannedActivity extends AppCompatActivity {
                         e.printStackTrace();
                     } catch (UnsupportedEncodingException e) {
                         e.printStackTrace();
-
                     } catch (Exception e){
                         // if a qr isn't found
                         e.printStackTrace();
@@ -252,7 +246,6 @@ public class QrScannedActivity extends AppCompatActivity {
                     activityResultLauncher.launch(intent);
                     break;
                 }
-
         }
     }
 

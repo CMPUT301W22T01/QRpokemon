@@ -166,9 +166,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                     activityResultLauncher.launch(intent);
                 }
-
                 break;
-
         }
 
     }
