@@ -59,10 +59,11 @@ public class LeaderboardController {
                 for (int i = 0; i < playerList.size(); i++) {
                     Map<String, Object> player = playerList.get(i);
                     list.add(new LeaderboardItem(
-                            // Types are guaranteed so we can safely cast
-                            (String) player.get("Identifier"), i+1, 0,
-                            (long) player.get("qrCount"),
-                            (long) player.get("totalScore")
+                            // Types are guaranteed to exist so we can safely cast
+                            (String) player.get("Identifier"), i+1,
+                            (int) player.get("highestUnique"),
+                            (int) player.get("qrCount"),
+                            (int) player.get("totalScore")
                     ));
                 }
 
@@ -91,8 +92,8 @@ public class LeaderboardController {
 
             // Fetch user data
             int rank = 0;  // Placeholder value so linter doesn't complain
-            String username = (String) player.get("Identifier");  // TODO: Change to "Username"
-            int highestUnique = 0;
+            String username = (String) player.get("Identifier");
+            int highestUnique = (int) player.get("highestUnique");
             int qrCount = (int) player.get("qrCount");
             int score = (int) player.get("totalScore");
 

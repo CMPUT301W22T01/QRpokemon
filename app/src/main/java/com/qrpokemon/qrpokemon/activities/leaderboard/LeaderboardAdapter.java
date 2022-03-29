@@ -18,7 +18,7 @@ import java.util.Observer;
  * Adapter for leaderboard listview
   */
 public class LeaderboardAdapter extends RecyclerView.Adapter implements Observer {
-    private Context context;
+    final private Context context;
     private List<LeaderboardItem> leaderboardList;
 
     public LeaderboardAdapter(Context context, List<LeaderboardItem> leaderboardList) {
@@ -57,7 +57,7 @@ public class LeaderboardAdapter extends RecyclerView.Adapter implements Observer
     static class ViewHolder extends RecyclerView.ViewHolder {
         TextView ranking;
         TextView username;
-        TextView highestScore;
+        TextView highestUnique;
         TextView qrQuantity;
         TextView totalScore;
 
@@ -67,7 +67,7 @@ public class LeaderboardAdapter extends RecyclerView.Adapter implements Observer
             // Link views to their variables
             ranking = itemView.findViewById(R.id.leaderboard_item_rank);
             username = itemView.findViewById(R.id.leaderboard_item_username);
-            highestScore = itemView.findViewById(R.id.leaderboard_item_unique);
+            highestUnique = itemView.findViewById(R.id.leaderboard_item_unique);
             qrQuantity = itemView.findViewById(R.id.leaderboard_item_qrcount);
             totalScore = itemView.findViewById(R.id.leaderboard_item_score);
         }
@@ -75,7 +75,7 @@ public class LeaderboardAdapter extends RecyclerView.Adapter implements Observer
         public void bind(LeaderboardItem leaderboardItem) {
             ranking.setText(String.valueOf(leaderboardItem.getRank()));
             username.setText(leaderboardItem.getUsername());
-            highestScore.setText(String.valueOf(leaderboardItem.getHighestScore()));
+            highestUnique.setText(String.valueOf(leaderboardItem.getHighestScore()));
             qrQuantity.setText(String.valueOf(leaderboardItem.getQrQuantity()));
             totalScore.setText(String.valueOf(leaderboardItem.getTotalScore()));
         }
