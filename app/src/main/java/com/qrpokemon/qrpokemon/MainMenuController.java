@@ -82,6 +82,8 @@ public class MainMenuController implements Observer {
                             (HashMap) player.get("contact"),
                             ((Long) player.get("qrCount")).intValue(),
                             ((Long)player.get("totalScore")).intValue(),
+                            ((Long)player.get("highest")).intValue(),
+                            ((Long)player.get("lowest")).intValue(),
                             (String) player.get("id"));
 
                 }

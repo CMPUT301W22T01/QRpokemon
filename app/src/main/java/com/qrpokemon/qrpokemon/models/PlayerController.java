@@ -40,6 +40,8 @@ public class PlayerController extends Observable {
             info.put("qrCount",     this.currentPlayer.getQrCount());
             info.put("totalScore",  this.currentPlayer.getTotalScore());
             info.put("contact",     this.currentPlayer.getContactInfo());
+            info.put("highest",     this.currentPlayer.getHighest());
+            info.put("lowest",     this.currentPlayer.getLowest());
 
         } else if (IdentifierField == null){ // find player by username
             databaseController.getData(databaseCallback, list , player, username);
@@ -65,11 +67,13 @@ public class PlayerController extends Observable {
                             @Nullable HashMap contact,
                             @Nullable Integer qrCount,
                             @Nullable Integer totalScore,
+                            @Nullable Integer highest,
+                            @Nullable Integer lowest,
                             String id) {
         if (this.currentPlayer == null){
-            this.currentPlayer = new Player(username, qrInventory, contact, qrCount, totalScore, id);
+            this.currentPlayer = new Player(username, qrInventory, contact, qrCount, totalScore, id, highest, lowest);
         } else if (username != this.currentPlayer.getUsername()) { //require to switch another player:
-            this.currentPlayer = new Player(username, qrInventory, contact, qrCount, totalScore, id);
+            this.currentPlayer = new Player(username, qrInventory, contact, qrCount, totalScore, id, highest, lowest);
         }
         Log.e("PlayerController: A player is created with : ", this.currentPlayer.getUsername());
         setChanged();
@@ -90,6 +94,8 @@ public class PlayerController extends Observable {
                                @Nullable Integer totalScore,
                                @Nullable ArrayList<String> qrInventory,
                                @Nullable HashMap contact,
+                               @Nullable Integer highest,
+                               @Nullable Integer lowest,
                                @Nullable String id,
                                Boolean addIdentifier) throws Exception {
         DatabaseController databaseController = DatabaseController.getInstance();
@@ -122,10 +128,22 @@ public class PlayerController extends Observable {
             info.put("contact", currentPlayer.getContactInfo());
         }
 
+        if (highest != null) {
+            this.currentPlayer.setHighest(highest);
+            info.put("highest", currentPlayer.getHighest());
+        }
+
+        if (lowest != null) {
+            this.currentPlayer.setLowest(lowest);
+            info.put("lowest", currentPlayer.getLowest());
+        }
+
         info.put("qrCount",this.currentPlayer.getQrCount());
         info.put("totalScore", this.currentPlayer.getTotalScore());
         info.put("qrInventory", this.currentPlayer.getQrInventory());
         info.put("contact", this.currentPlayer.getContactInfo());
+        info.put("highest", this.currentPlayer.getHighest());
+        info.put("lowest", this.currentPlayer.getLowest());
 
         if (addIdentifier) { //ading a new user
             info.put("Identifier", currentPlayer.getUsername());

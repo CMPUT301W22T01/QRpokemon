@@ -66,11 +66,13 @@ public class RestoreSession extends AppCompatActivity {
                                                                 (HashMap) mapList.get("contact"),
                                                                 ((Long) mapList.get("qrCount")).intValue(),
                                                                 ((Long) mapList.get("totalScore")).intValue(),
+                                                                ((Long) mapList.get("highest")).intValue(),
+                                                                ((Long) mapList.get("lowest")).intValue(),
                                                                 Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID));
 
                                     try {
                                         Log.e("RestoreSession: ", "User "+(String ) mapList.get("Identifier")+" found!");
-                                        playerController.savePlayerData(null,null,null,null,Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID), false);
+                                        playerController.savePlayerData(null,null,null,null, null, null, Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID), false);
                                     } catch (Exception e) { // if collection is incorrect for DatabaseController:
                                         e.printStackTrace();
                                     }

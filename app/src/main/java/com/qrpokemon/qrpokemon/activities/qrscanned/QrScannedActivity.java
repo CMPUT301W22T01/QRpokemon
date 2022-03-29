@@ -96,45 +96,32 @@ public class QrScannedActivity extends AppCompatActivity {
             public void onActivityResult(ActivityResult result) {
 
                 if (result.getResultCode() == RESULT_OK && result.getData() != null) {
-
+                    // identify if its a QR code and get the bitmap for the picture
                     Bundle bundle = result.getData().getExtras();
                     photoBitmap = (Bitmap) bundle.get("data");
                     photoImage.setImageBitmap(photoBitmap);
-                    // identify if its a QR code and get the bitmap for the picture
-                    try {
-                        codeContent = qrScannedController.analyzeImage(photoBitmap);
-                    } catch (NotFoundException e) {
-                        e.printStackTrace();
-                        Toast.makeText(QrScannedActivity.this, "QRcode not found!", Toast.LENGTH_SHORT).show();
-                    }
-                    MessageDigest messageDigest;
 
                     try {
+                        codeContent = qrScannedController.analyzeImage(photoBitmap);
+                        MessageDigest messageDigest;
                         messageDigest = MessageDigest.getInstance("SHA-256");
                         messageDigest.update(codeContent.getBytes("UTF-8"));
                         // Get the hex hash string
                         hash = qrScannedController.byte2Hex(messageDigest.digest());
-                        PlayerController playerController = PlayerController.getInstance();
-
-                        // if th Qr code already scanned by player
-                        if((((ArrayList<String>)(playerController.getPlayer(null, null,null,null).get("qrInventory"))).contains(hash))){
-                            Toast.makeText(QrScannedActivity.this, "Already have this QR code", Toast.LENGTH_SHORT).show();
-                            finish();
-                        }
-
-                        // if this QR code is the first time scanned by player
-                        else{
-                            HashMap player = (HashMap) playerController.getPlayer(null, null,null,null);
-                            ArrayList<String> qrInventory = (ArrayList<String>) player.get("qrInventory");
-                            int qrCount = qrInventory.size() + 1;
-                            int qrTotal = (int)player.get("totalScore") + qrScannedController.scoreCalculator(hash);
-                            qrInventory.add(hash);
-                            playerController.savePlayerData(qrCount,qrTotal,qrInventory,null, null,false);
-                        }
-
                         TextView qrHash = findViewById(R.id.qr_result);
                         qrHash.setText("Score: " + String.valueOf(qrScannedController.scoreCalculator(hash)));
+                    } catch (NotFoundException e) {
+                        e.printStackTrace();
+                        Toast.makeText(QrScannedActivity.this, "QRcode not found!", Toast.LENGTH_SHORT).show();
+                        finish();
+                    } catch (UnsupportedEncodingException e) {
+                        e.printStackTrace();
+                    } catch (NoSuchAlgorithmException e) {
+                        e.printStackTrace();
+                    }
 
+
+                    try {
                         // two switch buttons let user choose either to save image and location or not
                         photoSave.setOnClickListener(new View.OnClickListener(){
                             @Override
@@ -165,32 +152,65 @@ public class QrScannedActivity extends AppCompatActivity {
                             }
                         });
 
-                        confirmButton.setOnClickListener(new View.OnClickListener() {
+                        confirmButton.setOnClickListener(new View.OnClickListener() { // save QR code after user made her/his decision. Now saving code via QrCodeController, PlayerController and DatabaseController:
                             @Override
                             public void onClick(View view) {
-                                try {
+
+                                try { // save user's information
+                                    PlayerController playerController = PlayerController.getInstance();
+
+                                    // if th Qr code already scanned by player
+                                    if((((ArrayList<String>) (playerController.getPlayer(null, null,null,null).get("qrInventory"))).contains(hash))){
+                                        Toast.makeText(QrScannedActivity.this, "Already have this QR code", Toast.LENGTH_SHORT).show();
+                                        finish();
+                                    }
+
+                                    // if this QR code is the first time scanned by player
+                                    else{
+                                        HashMap player = (HashMap) playerController.getPlayer(null, null,null,null);
+                                        ArrayList<String> qrInventory = (ArrayList<String>) player.get("qrInventory");
+
+                                        // update player's total score and counts
+                                        int qrCount = qrInventory.size() + 1;
+                                        int qrTotal = (int) player.get("totalScore") + qrScannedController.scoreCalculator(hash);
+
+                                        // update highest and lowest scores
+                                        Integer highest = null, lowest = null;
+                                        if ( (Integer) player.get("highest") == null || qrScannedController.scoreCalculator(hash) > (int) player.get("highest")) {
+                                            highest = qrScannedController.scoreCalculator(hash);
+                                        }
+                                        if ( (Integer) player.get("lowest") == null ||qrScannedController.scoreCalculator(hash) < (int) player.get("lowest")) {
+                                            lowest = qrScannedController.scoreCalculator(hash);
+                                        }
+                                        qrInventory.add(hash);
+                                        playerController.savePlayerData(qrCount,qrTotal,qrInventory,null, highest, lowest, null, false);
+                                    }
+
                                     String currentLocation = null;
                                     Bitmap bitmap = null;
                                     String bitMapString = null;
                                     if (saveLocation) {
                                         //if player chooses to save location
                                         currentLocation = String.valueOf(location.getLatitude()) + "," + String.valueOf(location.getLongitude());
-                                        Toast.makeText(QrScannedActivity.this, "LOCATION SAVED", Toast.LENGTH_SHORT).show();
+//                                        Toast.makeText(QrScannedActivity.this, "LOCATION SAVED", Toast.LENGTH_SHORT).show();
 //                                        Log.e("QrScannedActivity: ",currentLocation);
                                     }
 
                                     if (savePhoto){
                                         //if user chooses to save of QR code
                                         bitmap = photoBitmap;
+
                                         // convert bitmap to string
                                         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
                                         bitmap.compress(Bitmap.CompressFormat.PNG,100, byteArrayOutputStream);
                                         byte[] b = byteArrayOutputStream.toByteArray();
                                         bitMapString = Base64.encodeToString(b, Base64.DEFAULT);
-                                        Toast.makeText(QrScannedActivity.this, "Photo saved", Toast.LENGTH_SHORT).show();
+//                                        Toast.makeText(QrScannedActivity.this, "Photo saved", Toast.LENGTH_SHORT).show();
                                     }
-
+                                    //save qrcode information
                                     qrScannedController.saveQrCode(QrScannedActivity.this, hash, qrScannedController.scoreCalculator(hash), currentLocation, bitMapString);
+
+                                    // save location information
                                     locationController.saveLocation(cityName, String.valueOf(location.getLatitude()) +"," + String.valueOf(location.getLongitude()), QrScannedActivity.this, hash);
                                     Toast.makeText(QrScannedActivity.this, "QR saved", Toast.LENGTH_SHORT).show();
                                     finish();
@@ -201,10 +221,6 @@ public class QrScannedActivity extends AppCompatActivity {
                             }
                         });
 
-                    } catch (NoSuchAlgorithmException e) {
-                        e.printStackTrace();
-                    } catch (UnsupportedEncodingException e) {
-                        e.printStackTrace();
                     } catch (Exception e){
                         // if a qr isn't found
                         e.printStackTrace();
