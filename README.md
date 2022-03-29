@@ -4,7 +4,14 @@ Repository for QRpokemon (Team 1).
 
 Please see the wiki for list of members and contributing guidelines.
 
-## License:
+## License
+
+See the `LICENSE` file.
+
+## Legal Notice
+
+### Notice for the ZXing Library
+
 ```
 Copyright (C) 2012-201 ZXing authors, Journey Mobile
 
