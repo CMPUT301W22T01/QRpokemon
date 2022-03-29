@@ -5,13 +5,10 @@ import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
-import static org.hamcrest.Matchers.not;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertTrue;
 
 import android.content.Context;
-import android.util.Log;
 
 import androidx.lifecycle.Lifecycle;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
@@ -23,9 +20,18 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-// TODO: Make Mock classes inherit base Mock class
 @RunWith(AndroidJUnit4.class)
 public class LeaderboardActivityTest {
+    LeaderboardItem mockItem = new LeaderboardItem("mockItem", 1, 123, 999, 999);
+
+    // Base class which will be extended and overridden to mock test cases
+    static class MockLeaderboardControllerBase extends LeaderboardController {
+        final protected LeaderboardItem mockItem;
+
+        public MockLeaderboardControllerBase(LeaderboardItem mockItem) {
+            this.mockItem = mockItem;
+        }
+    }
 
     @Rule
     public ActivityScenarioRule<LeaderboardActivity> activityRule =
@@ -48,13 +54,9 @@ public class LeaderboardActivityTest {
      */
     @Test
     public void checkListHasItem() {
-        class MockLeaderboardController extends LeaderboardController {
-            final private LeaderboardItem mockItem;
-            //final private LeaderboardItem mockItem2;
-
-            MockLeaderboardController() {
-                mockItem = new LeaderboardItem("mockItem", 0, 123, 999, 999);
-                //mockItem = new LeaderboardItem("testItem2", 0, 0, 0, 0);
+        class MockLeaderboardController extends MockLeaderboardControllerBase {
+            public MockLeaderboardController(LeaderboardItem mockItem) {
+                super(mockItem);
             }
 
             @Override
@@ -70,7 +72,7 @@ public class LeaderboardActivityTest {
         }
 
         // Override the leaderboard controller so we can insert our own values
-        MockLeaderboardController mockLeaderboardController = new MockLeaderboardController();
+        MockLeaderboardController mockLeaderboardController = new MockLeaderboardController(mockItem);
         activityRule.getScenario().onActivity(activity -> {
             activity.setLeaderboardController(mockLeaderboardController);
         });
@@ -86,11 +88,9 @@ public class LeaderboardActivityTest {
      */
     @Test
     public void checkListHasManyItems() {
-        class MockLeaderboardController extends LeaderboardController {
-            final private LeaderboardItem mockItem;
-
-            MockLeaderboardController() {
-                mockItem = new LeaderboardItem("mockItem", 0, 0, 0, 0);
+        class MockLeaderboardController extends MockLeaderboardControllerBase {
+            public MockLeaderboardController(LeaderboardItem mockItem) {
+                super(mockItem);
             }
 
             @Override
@@ -107,7 +107,7 @@ public class LeaderboardActivityTest {
         }
 
         // Override the leaderboard controller so we can insert our own values
-        MockLeaderboardController mockLeaderboardController = new MockLeaderboardController();
+        MockLeaderboardController mockLeaderboardController = new MockLeaderboardController(mockItem);
         activityRule.getScenario().onActivity(activity -> {
             activity.setLeaderboardController(mockLeaderboardController);
         });
@@ -123,11 +123,9 @@ public class LeaderboardActivityTest {
      */
     @Test
     public void checkPersonalRank() {
-        class MockLeaderboardController extends LeaderboardController {
-            private LeaderboardItem mockItem;
-
-            MockLeaderboardController(LeaderboardItem mockItem) {
-                this.mockItem = mockItem;
+        class MockLeaderboardController extends MockLeaderboardControllerBase {
+            public MockLeaderboardController(LeaderboardItem mockItem) {
+                super(mockItem);
             }
 
             @Override
@@ -154,7 +152,6 @@ public class LeaderboardActivityTest {
         }
 
         // Override the leaderboard controller so we can insert our own values
-        LeaderboardItem mockItem = new LeaderboardItem("mockItem", 1, 123, 999, 999);
         MockLeaderboardController mockLeaderboardController = new MockLeaderboardController(mockItem);
         activityRule.getScenario().onActivity(activity -> {
             activity.setLeaderboardController(mockLeaderboardController);
