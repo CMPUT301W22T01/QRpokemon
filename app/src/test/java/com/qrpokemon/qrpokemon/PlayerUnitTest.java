@@ -2,6 +2,8 @@ package com.qrpokemon.qrpokemon;
 
 import static org.junit.Assert.assertTrue;
 
+import com.qrpokemon.qrpokemon.models.Player;
+
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -19,7 +21,7 @@ public class PlayerUnitTest {
         contactInfo.put("email", "abc@ualberta.ca");
         contactInfo.put("phone", "74188965532");
 
-        return new Player("Hatsune", qrInventory, contactInfo, 100, 100);
+        return new Player("Hatsune", qrInventory, contactInfo, 100, 100, "aaabbb", 100);
     }
 
     @Test

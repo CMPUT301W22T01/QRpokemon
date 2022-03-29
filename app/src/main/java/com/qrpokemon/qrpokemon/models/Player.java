@@ -1,4 +1,4 @@
-package com.qrpokemon.qrpokemon;
+package com.qrpokemon.qrpokemon.models;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -10,13 +10,32 @@ public class Player {
     private HashMap contactInfo;
     private Integer qrCount;
     private Integer totalScore;
+    private String id;
+    private Integer highestUnique;
 
-    public Player(String username, ArrayList<String> qrInventory, HashMap contactInfo, Integer qrCount, Integer totalScore) {
+    public Player(String username, ArrayList<String> qrInventory, HashMap contactInfo, Integer qrCount, Integer totalScore, String id, Integer highestUnique) {
         this.username = username;
+        this.id = id;
         this.qrInventory = qrInventory;
         this.contactInfo = contactInfo;
         this.qrCount = qrCount;
         this.totalScore = totalScore;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public Integer getHighest() {
+        return highestUnique;
+    }
+
+    public void setHighestUnique(Integer highestUnique) {
+        this.highestUnique = highestUnique;
     }
 
     public String getUsername() {

@@ -1,6 +1,9 @@
 package com.qrpokemon.qrpokemon;
 
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
+
+import com.qrpokemon.qrpokemon.models.QrCode;
 
 import org.junit.jupiter.api.Test;
 
@@ -9,23 +12,25 @@ import java.util.HashMap;
 
 public class QrCodeUnitTest {
 
-    private ArrayList<String> comments = new ArrayList<>();
+    private HashMap<String, ArrayList<String>> comments = new HashMap<>();
 
     private QrCode mockQrCode(){
-
-        comments.add("good");
-        comments.add("bad");
-        comments.add("so bad");
-
-        return new QrCode("abc", 100, "28ave", comments);
+        ArrayList<String> comment = new ArrayList<>();
+        comment.add("good");
+        comment.add("bad");
+        comment.add("so bad");
+        comments.put("user1",comment);
+        ArrayList<String> location = new ArrayList<>();
+        location.add("28ave");
+        return new QrCode("abc", 100,location , comments,null);
     }
     @Test
-    void testGetAndSetIndentifier(){
+    void testGetAndSetIdentifier(){
         QrCode qrcode = mockQrCode();
-        assertTrue(qrcode.getIndentifier().equals("abc"));
+        assertTrue(qrcode.getIdentifier().equals("abc"));
 
-        qrcode.setIndentifier("def");
-        assertTrue(qrcode.getIndentifier().equals("def"));
+        qrcode.setIdentifier("def");
+        assertTrue(qrcode.getIdentifier().equals("def"));
     }
     @Test
     void testGetAndSetScore(){
@@ -38,10 +43,12 @@ public class QrCodeUnitTest {
     @Test
     void testGetAndSetLocation(){
         QrCode qrcode = mockQrCode();
-        assertTrue(qrcode.getLocation().equals("28ave"));
+        assertTrue(qrcode.getLocation().get(0).equals("28ave"));
 
-        qrcode.setLocation("42ave");
-        assertTrue(qrcode.getLocation().equals("42ave"));
+        ArrayList<String> location = new ArrayList<>();
+        location.add("42ave");
+        qrcode.setLocation(location);
+        assertTrue(qrcode.getLocation().get(0).equals("42ave"));
     }
     @Test
     void testGetAndSetComments(){
@@ -50,5 +57,15 @@ public class QrCodeUnitTest {
 
         qrcode.setComments(comments);
         assertTrue(qrcode.getComments().equals(comments));
+    }
+
+    @Test
+    void testGetAndSetBitmap(){
+        QrCode qrcode = mockQrCode();
+        assertNull(qrcode.getBitmap());
+
+        qrcode.setBitmap(null);
+        assertNull(qrcode.getBitmap());
+
     }
 }

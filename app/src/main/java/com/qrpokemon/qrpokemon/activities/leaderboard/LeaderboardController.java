@@ -4,9 +4,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
 
-import com.qrpokemon.qrpokemon.DatabaseCallback;
-import com.qrpokemon.qrpokemon.DatabaseController;
-import com.qrpokemon.qrpokemon.PlayerController;
+import com.qrpokemon.qrpokemon.models.DatabaseCallback;
+import com.qrpokemon.qrpokemon.models.DatabaseController;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -74,7 +73,7 @@ public class LeaderboardController {
         };
 
         try {
-            databaseController.getData(callback, tempList, "Player", null, sortField);
+            databaseController.getData(callback, tempList, "Player", null, sortField,"Identifier");
         } catch (Exception exception) {
             Log.e("Leaderboard Controller: ", "Database call failed");
             Log.e("Leaderboard Controller: ", exception.toString());

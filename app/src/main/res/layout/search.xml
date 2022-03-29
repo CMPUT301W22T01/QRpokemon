@@ -16,27 +16,24 @@
         <EditText
             android:id="@+id/sv"
             android:queryHint="Username / Geolocation"
-            android:layout_width="300dp"
+            android:layout_width="match_parent"
             android:layout_height="76dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:background="#f0f0f0"
              />
-        <Button
-            android:id="@+id/search_button"
-            android:layout_width="60dp"
-            android:layout_height="50dp"
-            />
+
     </LinearLayout>
 
 
     <ScrollView
         android:layout_width="374dp"
-        android:layout_height="450dp"
+        android:layout_height="500dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="44dp"
         android:layout_marginEnd="16dp"
+        android:fillViewport="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -45,7 +42,7 @@
         <ListView
             android:id="@+id/search_listview"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="450dp" />
     </ScrollView>
 
     <Button

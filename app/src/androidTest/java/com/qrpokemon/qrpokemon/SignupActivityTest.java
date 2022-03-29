@@ -7,6 +7,10 @@ import android.widget.TextView;
 
 import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.rule.ActivityTestRule;
+
+import com.qrpokemon.qrpokemon.activities.profile.ProfileActivity;
+import com.qrpokemon.qrpokemon.models.DatabaseController;
+import com.qrpokemon.qrpokemon.models.FileSystemController;
 import com.robotium.solo.Solo;
 import org.junit.*;
 

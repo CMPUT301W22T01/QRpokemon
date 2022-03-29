@@ -1,24 +1,19 @@
 package com.qrpokemon.qrpokemon;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-
 import android.app.Activity;
-import android.content.Context;
-import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.TextView;
 
-import androidx.core.content.FileProvider;
-import androidx.test.core.app.ActivityScenario;
-import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.rule.ActivityTestRule;
 
+import com.qrpokemon.qrpokemon.activities.leaderboard.LeaderboardActivity;
+import com.qrpokemon.qrpokemon.activities.map.MapActivity;
+import com.qrpokemon.qrpokemon.activities.profile.ProfileActivity;
+import com.qrpokemon.qrpokemon.activities.qrinventory.QrInventoryActivity;
+
+import com.qrpokemon.qrpokemon.activities.search.SearchActivity;
+import com.qrpokemon.qrpokemon.models.FileSystemController;
 import com.robotium.solo.Solo;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -67,23 +62,17 @@ public class MainActivityTest {
         solo.assertCurrentActivity("Wrong Activity", MapActivity.class);
     }
 
-//    @Test
-//    public void checkSearchButton() {
-//        solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
-//        solo.clickOnButton("SEARCH"); //Click on SEARCH Button
-//        solo.assertCurrentActivity("Wrong Activity", SearchActivity.class);
-//    }
+    @Test
+    public void checkSearchButton() {
+        solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
+        solo.clickOnButton("SEARCH"); //Click on SEARCH Button
+        solo.assertCurrentActivity("Wrong Activity", SearchActivity.class);
+    }
 
     @Test
     public void checkLeaderboardButton() {
         solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
         solo.clickOnView(solo.getView(R.id.Leaderboard_Button));//Click on LEADERBOARD Button
         solo.assertCurrentActivity("Wrong Activity", LeaderboardActivity.class);
-    }
-
-    @After
-    public void cleanUp(){
-//        FileSystemController fileSystemController = new FileSystemController();
-//        fileSystemController.deleteFile(solo.getCurrentActivity());
     }
 }

@@ -1,4 +1,4 @@
-package com.qrpokemon.qrpokemon;
+package com.qrpokemon.qrpokemon.activities.profile;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.view.inputmethod.InputMethodManager;
@@ -7,6 +7,8 @@ import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import com.journeyapps.barcodescanner.BarcodeEncoder;
+import com.qrpokemon.qrpokemon.models.PlayerController;
+
 import java.util.HashMap;
 public class ProfileController {
 
@@ -21,7 +23,7 @@ public class ProfileController {
         this.currentPlayerController = PlayerController.getInstance();
 
         try {
-            currentPlayer = currentPlayerController.getPlayer(null);
+            currentPlayer = currentPlayerController.getPlayer(null,null,null,null);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -50,7 +52,7 @@ public class ProfileController {
         try {
             playerEmail = playerContact.get("email").toString();
         } catch (Exception e) {
-            playerEmail = "";
+            playerEmail = "null";
         }
         return playerEmail;
     }
@@ -65,7 +67,7 @@ public class ProfileController {
         try{
             playerPhone = playerContact.get("phone").toString();
         } catch (Exception e) {
-            playerPhone = "";
+            playerPhone = "null";
         }
 
         return playerPhone;

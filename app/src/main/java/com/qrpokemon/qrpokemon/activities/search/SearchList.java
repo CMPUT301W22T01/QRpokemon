@@ -1,15 +1,19 @@
-package com.qrpokemon.qrpokemon;
+package com.qrpokemon.qrpokemon.activities.search;
 import android.content.Context;
-        import android.view.LayoutInflater;
+import android.util.Log;
+import android.view.LayoutInflater;
         import android.view.View;
         import android.view.ViewGroup;
-        import android.widget.ArrayAdapter;
-        import android.widget.TextView;
+import android.widget.ArrayAdapter;
+import android.widget.ImageView;
+import android.widget.TextView;
 
         import androidx.annotation.NonNull;
         import androidx.annotation.Nullable;
 
-        import java.util.ArrayList;
+import com.qrpokemon.qrpokemon.R;
+
+import java.util.ArrayList;
 
 public class SearchList extends ArrayAdapter<SearchItem> {
 
@@ -34,11 +38,27 @@ public class SearchList extends ArrayAdapter<SearchItem> {
 
         SearchItem searchItem = searchItems.get(position);
         TextView userName = view.findViewById(R.id.tv);
+        TextView userEmail = view.findViewById(R.id.search_email);
+        TextView userPhone = view.findViewById(R.id.search_phone);
+        ImageView qrcode = view.findViewById(R.id.imageView);
 
 
-        userName.setText(searchItem.getUsername());
+        userName.setText(searchItem.getIdentifier());
+        if (searchItem.getEmail() != null && searchItem.getPhone() != null) {
+            Log.e("Search Controller: ", "email found");
+            userEmail.setText("email: " + searchItem.getEmail());
+            userPhone.setText("phone: " + searchItem.getPhone());
+            qrcode.setImageResource(R.drawable.profile_avadar);
+        } else{
+            qrcode.setImageResource(R.drawable.map_logo);
+            userEmail.setText("");
+            userPhone.setText("");
+        }
+
 
 
         return view;
     }
+
+
 }

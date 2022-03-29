@@ -2,11 +2,10 @@ package com.qrpokemon.qrpokemon;
 
 import android.app.Activity;
 
-import androidx.test.core.app.ActivityScenario;
-import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.rule.ActivityTestRule;
 
+import com.qrpokemon.qrpokemon.activities.profile.ProfileActivity;
 import com.robotium.solo.Solo;
 
 import org.junit.Before;
