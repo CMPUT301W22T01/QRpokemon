@@ -31,7 +31,7 @@ import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.zxing.NotFoundException;
-import com.qrpokemon.qrpokemon.LocationController;
+import com.qrpokemon.qrpokemon.models.LocationController;
 import com.qrpokemon.qrpokemon.MainActivity;
 import com.qrpokemon.qrpokemon.models.PlayerController;
 import com.qrpokemon.qrpokemon.R;

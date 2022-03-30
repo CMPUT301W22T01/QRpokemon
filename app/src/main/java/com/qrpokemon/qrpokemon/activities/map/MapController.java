@@ -7,7 +7,7 @@ import android.util.Log;
 import androidx.annotation.Nullable;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.qrpokemon.qrpokemon.LocationController;
+import com.qrpokemon.qrpokemon.models.LocationController;
 import com.qrpokemon.qrpokemon.models.DatabaseCallback;
 import com.qrpokemon.qrpokemon.models.QrCodeController;
 

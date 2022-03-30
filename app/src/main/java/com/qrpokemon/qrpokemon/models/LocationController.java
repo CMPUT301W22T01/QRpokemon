@@ -1,4 +1,4 @@
-package com.qrpokemon.qrpokemon;
+package com.qrpokemon.qrpokemon.models;
 
 import android.Manifest;
 import android.app.Activity;
@@ -10,7 +10,6 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.location.LocationRequest;
-import android.provider.ContactsContract;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -26,19 +25,13 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.qrpokemon.qrpokemon.activities.map.MapController;
-import com.qrpokemon.qrpokemon.activities.qrscanned.QrScannedActivity;
-import com.qrpokemon.qrpokemon.models.DatabaseCallback;
-import com.qrpokemon.qrpokemon.models.DatabaseController;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Set;
 
 public class LocationController implements OnMapReadyCallback, LocationListener {
 
