@@ -31,6 +31,12 @@ public class SearchActivity extends AppCompatActivity {
     private SearchController searchController;
     private SearchItem selected;
 
+    /**
+     * Init Listview EditText object and set up listeners
+     * If user entered something in the search bar, the search result will show up in the listview
+     * If user click the location search result, he can see all the qr codes in this location
+     * @param savedInstanceState saved instances 
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -30,8 +30,10 @@ public class SearchController {
     }
 
     /**
-     * Gets and fills a list of Leaderboard rankings (unsorted)
-     * @param context The LeaderboardActivity context
+     * Gets the player list from database and update arrayAdapter
+     * @param context The SearchActivity context
+     * @param userName The user input
+     * @param qMyAdapter The arrayAdapter we need to update
      */
     public void getPlayerSearch(Context context, String userName, ArrayAdapter<SearchItem> qMyAdapter) {
         List<Map> temp = new ArrayList<>();  // Store our db results temporarily
@@ -96,6 +98,12 @@ public class SearchController {
         }
     }
 
+    /**
+     * Gets the location list from database and update arrayAdapter
+     * @param context The SearchActivity context
+     * @param location The user input
+     * @param qMyAdapter The arrayAdapter we need to update
+     */
     public void getLocationSearch(Context context, String location, ArrayAdapter<SearchItem> qMyAdapter) {
         List<Map> temp = new ArrayList<>();  // Store our db results temporarily
         DatabaseController databaseController = DatabaseController.getInstance();
