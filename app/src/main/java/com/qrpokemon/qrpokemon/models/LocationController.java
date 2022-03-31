@@ -42,7 +42,7 @@ public class LocationController implements OnMapReadyCallback, LocationListener 
     private LocationManager locationManager;
     private SupportMapFragment supportMapFragment;
     private Context context;
-    private DatabaseController databaseController = DatabaseController.getInstance();
+    private DatabaseProxy databaseProxy = DatabaseProxy.getInstance();
     private static LocationController currentInstance;
     private ArrayList<String> qrhashList = new ArrayList<>();
     private List<Map>  qrHashList;
@@ -183,7 +183,7 @@ public class LocationController implements OnMapReadyCallback, LocationListener 
                     qrhashList.add(qrhash);
                     data.put(coordinate,qrhashList);
                     try {
-                        databaseController.writeData("LocationIndex",cityName, data, true);
+                        databaseProxy.writeData("LocationIndex",cityName, data, true);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -204,7 +204,7 @@ public class LocationController implements OnMapReadyCallback, LocationListener 
                     cityInfo.put(coordinate,qrhashList);
                     Log.e("LocationController: ", "Location is now saved with :"+qrhashList.toString());
                     try { //Save City with modified information
-                        databaseController.writeData("LocationIndex",cityName, data, true);
+                        databaseProxy.writeData("LocationIndex",cityName, data, true);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -212,7 +212,7 @@ public class LocationController implements OnMapReadyCallback, LocationListener 
             }
         };
         try {
-            databaseController.getData(databaseCallback,new ArrayList<>(), "LocationIndex", cityName, null, "Identifier");
+            databaseProxy.getData(databaseCallback,new ArrayList<>(), "LocationIndex", cityName, null, "Identifier");
         } catch (Exception e) {
             e.printStackTrace();
             Log.e("LocatioinController: ", "city not found!");

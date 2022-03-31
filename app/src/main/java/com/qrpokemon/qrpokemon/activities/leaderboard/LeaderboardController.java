@@ -5,7 +5,7 @@ import android.content.Context;
 import android.util.Log;
 
 import com.qrpokemon.qrpokemon.models.DatabaseCallback;
-import com.qrpokemon.qrpokemon.models.DatabaseController;
+import com.qrpokemon.qrpokemon.models.DatabaseProxy;
 import com.qrpokemon.qrpokemon.models.PlayerController;
 
 import java.util.ArrayList;
@@ -47,7 +47,7 @@ public class LeaderboardController {
                 sortField = null;
         }
 
-        DatabaseController databaseController = DatabaseController.getInstance();
+        DatabaseProxy databaseProxy = DatabaseProxy.getInstance();
         DatabaseCallback callback = new DatabaseCallback(context) {
             @Override
             public void run(List<Map> playerList) {
@@ -72,7 +72,7 @@ public class LeaderboardController {
         try {
             // Fetch data and update our leaderboard list
             list.clear();
-            databaseController.getData(callback, new ArrayList<>(), "Player",
+            databaseProxy.getData(callback, new ArrayList<>(), "Player",
                     null, sortField,"Identifier");
         } catch (Exception exception) {
             Log.e("Leaderboard Controller: ", "Database call failed");

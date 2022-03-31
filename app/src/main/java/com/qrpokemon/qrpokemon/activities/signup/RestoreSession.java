@@ -72,7 +72,7 @@ public class RestoreSession extends AppCompatActivity {
                                     try {
                                         Log.e("RestoreSession: ", "User "+(String ) mapList.get("Identifier")+" found!");
                                         playerController.savePlayerData(null, null, null, null, null, Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID), false);
-                                    } catch (Exception e) { // if collection is incorrect for DatabaseController:
+                                    } catch (Exception e) { // if collection is incorrect for DatabaseProxy:
                                         e.printStackTrace();
                                     }
                                 } else {

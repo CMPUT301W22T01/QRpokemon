@@ -46,7 +46,7 @@ public class SignupController {
 
         try{
             DatabaseCallback databaseCallback = new DatabaseCallback(context) {
-                //this runs after datalist is collected from DatabaseController class
+                //this runs after datalist is collected from DatabaseProxy class
                 @Override
                 public void run(List<Map> dataList) {
                     if (dataList.isEmpty()){
@@ -63,7 +63,7 @@ public class SignupController {
                         } catch (Exception e) {
                             Log.e("SignupController: ", e.toString());
                         }
-//                        Log.e("DatabaseController: ", "addNewPlayer");
+//                        Log.e("DatabaseProxy: ", "addNewPlayer");
                     } else{
                         EditText email = (EditText) ((Activity) context).findViewById(R.id.et_email);
                         Toast.makeText(context, "Username is not unique!", Toast.LENGTH_SHORT).show();
@@ -78,7 +78,7 @@ public class SignupController {
 
     /**
      * Invoke PlayerController to get player with DeviceId given
-     * @param databaseCallback Callback function for DatabaseController
+     * @param databaseCallback Callback function for DatabaseProxy
      * @param result Result List<Map>, contains player's info
      * @param id DeviceId
      * @throws Exception if collection name is wrong inside PlayerController class.

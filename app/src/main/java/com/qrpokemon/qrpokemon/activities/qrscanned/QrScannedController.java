@@ -135,7 +135,7 @@ public class QrScannedController {
      * @param location Location of where this QR is captured
      * @param bitmap A small size photo of this QR code.
      * @throws Exception getQR() may throw exception, but highly unlikely since the error is raised
-     * from DatabaseController complaining about incorrect collection name
+     * from DatabaseProxy complaining about incorrect collection name
      */
     public void saveQrCode(Context context, String qrHash, int score, String location, String bitmap) throws Exception {
         DatabaseCallback databaseCallback = new DatabaseCallback(context) {

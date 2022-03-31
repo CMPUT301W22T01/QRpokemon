@@ -7,7 +7,7 @@ import android.widget.ArrayAdapter;
 
 
 import com.qrpokemon.qrpokemon.models.DatabaseCallback;
-import com.qrpokemon.qrpokemon.models.DatabaseController;
+import com.qrpokemon.qrpokemon.models.DatabaseProxy;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -37,7 +37,7 @@ public class SearchController {
      */
     public void getPlayerSearch(Context context, String userName, ArrayAdapter<SearchItem> qMyAdapter) {
         List<Map> temp = new ArrayList<>();  // Store our db results temporarily
-        DatabaseController databaseController = DatabaseController.getInstance();
+        DatabaseProxy databaseProxy = DatabaseProxy.getInstance();
         if(!userName.isEmpty()) {
             qMyAdapter.clear();
         }
@@ -90,7 +90,7 @@ public class SearchController {
         };
 
         try {
-            databaseController.getData(callback, temp, "Player", null);
+            databaseProxy.getData(callback, temp, "Player", null);
         } catch (Exception exception) {
             Log.e("Search Controller: ", "Database call failed");
             Log.e("Search Controller: ", exception.toString());
@@ -106,7 +106,7 @@ public class SearchController {
      */
     public void getLocationSearch(Context context, String location, ArrayAdapter<SearchItem> qMyAdapter) {
         List<Map> temp = new ArrayList<>();  // Store our db results temporarily
-        DatabaseController databaseController = DatabaseController.getInstance();
+        DatabaseProxy databaseProxy = DatabaseProxy.getInstance();
 
         if(!location.isEmpty()) {
             qMyAdapter.clear();
@@ -154,7 +154,7 @@ public class SearchController {
         };
 
         try {
-            databaseController.getData(callback, temp, "LocationIndex", null);
+            databaseProxy.getData(callback, temp, "LocationIndex", null);
         } catch (Exception exception) {
             Log.e("Search Controller: ", "Database call failed");
             Log.e("Search Controller: ", exception.toString());

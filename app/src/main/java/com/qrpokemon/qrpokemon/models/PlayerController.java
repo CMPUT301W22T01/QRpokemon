@@ -14,7 +14,7 @@ public class PlayerController extends Observable {
     public Object savePlayerData;
     private Player currentPlayer = null;
     private String player = "Player";
-    private DatabaseController databaseController = DatabaseController.getInstance();
+    private DatabaseProxy databaseProxy = DatabaseProxy.getInstance();
     private PlayerController() {}
 
     public static PlayerController getInstance() {
@@ -30,7 +30,7 @@ public class PlayerController extends Observable {
      * @param username username to be found, can be null
      * @param IdentifierField A option check device id specifically, will look for Identifier (e.g. username) if null
      * @return A hashMap which contains local
-     * @throws Exception if collection is incorrect in DatabaseController
+     * @throws Exception if collection is incorrect in DatabaseProxy
      */
     public HashMap getPlayer(@Nullable DatabaseCallback databaseCallback, @Nullable List<Map> list, @Nullable String username, @Nullable String IdentifierField) throws Exception {
         HashMap<String, Object> info = new HashMap<>();
@@ -43,9 +43,9 @@ public class PlayerController extends Observable {
             info.put("highestUnique", this.currentPlayer.getHighestUnique());
 
         } else if (IdentifierField == null) { // find player by username
-            databaseController.getData(databaseCallback, list , player, username);
+            databaseProxy.getData(databaseCallback, list , player, username);
         } else {
-            databaseController.getData(databaseCallback, list, player, username, null, IdentifierField);
+            databaseProxy.getData(databaseCallback, list, player, username, null, IdentifierField);
         }
         return info;
     }
@@ -95,7 +95,7 @@ public class PlayerController extends Observable {
                                @Nullable Integer highestUnique,
                                @Nullable String id,
                                Boolean addIdentifier) throws Exception {
-        DatabaseController databaseController = DatabaseController.getInstance();
+        DatabaseProxy databaseProxy = DatabaseProxy.getInstance();
         HashMap<String, Object> info = new HashMap<>();
 
         // Update player's data.
@@ -138,10 +138,10 @@ public class PlayerController extends Observable {
 
         if (addIdentifier) { //ading a new user
             info.put("Identifier", currentPlayer.getUsername());
-            databaseController.writeData("Player", this.currentPlayer.getUsername() ,info ,true);
+            databaseProxy.writeData("Player", this.currentPlayer.getUsername() ,info ,true);
         } else { //update a user
             Log.e("PlayerController: ", "User at savePlayerData is: "+ this.currentPlayer.getUsername());
-            databaseController.writeData("Player", this.currentPlayer.getUsername() ,info ,false);
+            databaseProxy.writeData("Player", this.currentPlayer.getUsername() ,info ,false);
         }
     }
 }

@@ -8,7 +8,7 @@ import com.google.zxing.NotFoundException;
 import com.qrpokemon.qrpokemon.activities.qrinventory.QrInventoryActivity;
 import com.qrpokemon.qrpokemon.activities.qrscanned.QrScannedController;
 import com.qrpokemon.qrpokemon.models.DatabaseCallback;
-import com.qrpokemon.qrpokemon.models.DatabaseController;
+import com.qrpokemon.qrpokemon.models.DatabaseProxy;
 import com.qrpokemon.qrpokemon.models.FileSystemController;
 import com.qrpokemon.qrpokemon.models.PlayerController;
 import android.content.Intent;
@@ -24,7 +24,7 @@ import java.util.Observer;
 
 public class MainMenuController implements Observer {
     private static MainMenuController currentInstance;
-    private DatabaseController database = DatabaseController.getInstance();
+    private DatabaseProxy database = DatabaseProxy.getInstance();
     private FileSystemController fileSystemController = new FileSystemController();
     private QrScannedController qrScannedController = new QrScannedController();
     private Bitmap photoBitmap;

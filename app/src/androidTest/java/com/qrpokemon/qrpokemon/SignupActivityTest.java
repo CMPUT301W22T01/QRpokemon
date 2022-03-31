@@ -9,7 +9,7 @@ import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.rule.ActivityTestRule;
 
 import com.qrpokemon.qrpokemon.activities.profile.ProfileActivity;
-import com.qrpokemon.qrpokemon.models.DatabaseController;
+import com.qrpokemon.qrpokemon.models.DatabaseProxy;
 import com.qrpokemon.qrpokemon.models.FileSystemController;
 import com.robotium.solo.Solo;
 import org.junit.*;
@@ -21,7 +21,7 @@ import org.junit.*;
  */
 public class SignupActivityTest {
     private Solo solo;
-    private DatabaseController databaseController = DatabaseController.getInstance();
+    private DatabaseProxy databaseProxy = DatabaseProxy.getInstance();
     @Rule
     public ActivityTestRule<MainActivity> rule = new ActivityTestRule<>(MainActivity.class, true, true);
 
@@ -36,7 +36,7 @@ public class SignupActivityTest {
 
         // Asserts that the current activity is the SignupActivity
         solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
-        databaseController.deleteData("Player", "ABCD");
+        databaseProxy.deleteData("Player", "ABCD");
     }
 
     /**
@@ -60,7 +60,7 @@ public class SignupActivityTest {
     @Test
     public void testUS_03_01_01() throws Exception{
 
-        databaseController.deleteData("Player", "Heather");
+        databaseProxy.deleteData("Player", "Heather");
         // enter user information in signup page
         solo.enterText((EditText) solo.getView(R.id.et_name), "Heather");
         solo.enterText((EditText) solo.getView(R.id.et_email), "123@gmail.com");

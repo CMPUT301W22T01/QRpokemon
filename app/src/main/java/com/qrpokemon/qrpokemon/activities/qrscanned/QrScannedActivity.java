@@ -152,7 +152,7 @@ public class QrScannedActivity extends AppCompatActivity {
                             }
                         });
 
-                        confirmButton.setOnClickListener(new View.OnClickListener() { // save QR code after user made her/his decision. Now saving code via QrCodeController, PlayerController and DatabaseController:
+                        confirmButton.setOnClickListener(new View.OnClickListener() { // save QR code after user made her/his decision. Now saving code via QrCodeController, PlayerController and DatabaseProxy:
                             @Override
                             public void onClick(View view) {
 

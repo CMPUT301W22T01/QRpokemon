@@ -12,7 +12,7 @@ import java.util.Map;
 public class QrCodeController {
 
     private static QrCodeController currentInstance;
-    private DatabaseController databaseController = DatabaseController.getInstance();
+    private DatabaseProxy databaseProxy = DatabaseProxy.getInstance();
     private QrCode currentQrCode = null;
 
     private QrCodeController() {}
@@ -38,7 +38,7 @@ public class QrCodeController {
             current.put("Location",location);
             current.put("Bitmap", bitmap);
             Log.e("Qrcode controller", location.toString());
-            databaseController.writeData("QrCode", qrHash,current,true);
+            databaseProxy.writeData("QrCode", qrHash,current,true);
         }
         else {
             current = new HashMap<>();
@@ -56,7 +56,7 @@ public class QrCodeController {
             }
 //            Log.e("Qrcode controller", location.toString());
 
-            databaseController.writeData("QrCode", qrHash,current,false);
+            databaseProxy.writeData("QrCode", qrHash,current,false);
         }
 
     }
@@ -66,6 +66,6 @@ public class QrCodeController {
     }
 
     public void getQR(DatabaseCallback databaseCallback, List<Map> list, String objectName) throws Exception {
-        databaseController.getData(databaseCallback, list, "QrCode", objectName);
+        databaseProxy.getData(databaseCallback, list, "QrCode", objectName);
     }
 }

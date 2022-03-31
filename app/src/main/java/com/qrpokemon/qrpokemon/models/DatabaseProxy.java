@@ -13,23 +13,23 @@ import java.util.List;
 import java.util.Map;
 
 
-public class DatabaseController {
-    private static DatabaseController dbInstance;
+public class DatabaseProxy {
+    private static DatabaseProxy dbInstance;
     final private FirebaseFirestore db;
     final private String[] collections = {"Player", "QrCode", "LocationIndex"};
     final private String defaultIdentifier = "Identifier";
 
-    private DatabaseController() {
+    private DatabaseProxy() {
         db = FirebaseFirestore.getInstance();
     }
 
     /**
-     * Get the Singleton instance of the DatabaseController
-     * @return DatabaseController
+     * Get the Singleton instance of the DatabaseProxy
+     * @return DatabaseProxy
      */
-    public static DatabaseController getInstance() {
+    public static DatabaseProxy getInstance() {
         if (dbInstance == null)
-            dbInstance = new DatabaseController();
+            dbInstance = new DatabaseProxy();
 
         return dbInstance;
     }

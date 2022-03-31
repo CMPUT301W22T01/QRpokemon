@@ -390,7 +390,7 @@ public class QrInventoryActivity
      * @throws Exception
      */
     public void addComment(String comment) throws Exception {
-//        DatabaseController databaseController = DatabaseController.getInstance();
+//        DatabaseProxy databaseController = DatabaseProxy.getInstance();
         HashMap<String, HashMap> tHash = new HashMap<>();
         ArrayList<String> tList;
 
