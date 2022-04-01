@@ -9,7 +9,7 @@
     android:layout_height="match_parent"
     android:id="@+id/constraint_layout_no_code_found"
     tools:ignore="UseSwitchCompatOrMaterialXml"
-    tools:context=".activities.profile.ProfileActivity">
+    tools:context=".views.profile.ProfileActivity">
 
 
     <TextView
