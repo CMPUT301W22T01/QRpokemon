@@ -5,7 +5,7 @@ import android.app.Activity;
 import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.rule.ActivityTestRule;
 
-import com.qrpokemon.qrpokemon.activities.profile.ProfileActivity;
+import com.qrpokemon.qrpokemon.views.profile.ProfileActivity;
 import com.robotium.solo.Solo;
 
 import org.junit.Before;

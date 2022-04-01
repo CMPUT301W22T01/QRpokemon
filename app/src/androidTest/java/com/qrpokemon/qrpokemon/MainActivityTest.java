@@ -5,13 +5,13 @@ import android.app.Activity;
 import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.rule.ActivityTestRule;
 
-import com.qrpokemon.qrpokemon.activities.leaderboard.LeaderboardActivity;
-import com.qrpokemon.qrpokemon.activities.map.MapActivity;
-import com.qrpokemon.qrpokemon.activities.profile.ProfileActivity;
-import com.qrpokemon.qrpokemon.activities.qrinventory.QrInventoryActivity;
+import com.qrpokemon.qrpokemon.views.leaderboard.LeaderboardActivity;
+import com.qrpokemon.qrpokemon.views.map.MapActivity;
+import com.qrpokemon.qrpokemon.views.profile.ProfileActivity;
+import com.qrpokemon.qrpokemon.views.qrinventory.QrInventoryActivity;
 
-import com.qrpokemon.qrpokemon.activities.search.SearchActivity;
-import com.qrpokemon.qrpokemon.models.FileSystemController;
+import com.qrpokemon.qrpokemon.views.search.SearchActivity;
+import com.qrpokemon.qrpokemon.controllers.FileSystemController;
 import com.robotium.solo.Solo;
 
 import org.junit.Before;
