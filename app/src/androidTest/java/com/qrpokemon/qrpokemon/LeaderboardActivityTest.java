@@ -14,7 +14,8 @@ import androidx.lifecycle.Lifecycle;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
-import com.qrpokemon.qrpokemon.activities.leaderboard.*;
+import com.qrpokemon.qrpokemon.controllers.LeaderboardController;
+import com.qrpokemon.qrpokemon.views.leaderboard.*;
 
 import org.junit.Rule;
 import org.junit.Test;

@@ -1,7 +1,8 @@
 package com.qrpokemon.qrpokemon;
+
 import static org.junit.Assert.assertTrue;
 
-import com.qrpokemon.qrpokemon.activities.search.SearchItem;
+import com.qrpokemon.qrpokemon.views.search.SearchItem;
 
 import org.junit.jupiter.api.Test;
 import java.util.ArrayList;

@@ -1,20 +1,23 @@
 package com.qrpokemon.qrpokemon;
+
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
+import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.activity.result.ActivityResult;
 
 import com.google.zxing.NotFoundException;
-import com.qrpokemon.qrpokemon.activities.qrinventory.QrInventoryActivity;
-import com.qrpokemon.qrpokemon.activities.qrscanned.QrScannedController;
-import com.qrpokemon.qrpokemon.models.DatabaseCallback;
-import com.qrpokemon.qrpokemon.models.DatabaseProxy;
-import com.qrpokemon.qrpokemon.models.FileSystemController;
-import com.qrpokemon.qrpokemon.models.PlayerController;
-import android.content.Intent;
-import android.os.Bundle;
-import android.widget.Toast;
-import androidx.activity.result.ActivityResult;
+import com.qrpokemon.qrpokemon.controllers.QrScannedController;
+import com.qrpokemon.qrpokemon.controllers.DatabaseCallback;
+import com.qrpokemon.qrpokemon.controllers.DatabaseProxy;
+import com.qrpokemon.qrpokemon.controllers.FileSystemController;
+import com.qrpokemon.qrpokemon.controllers.PlayerController;
+import com.qrpokemon.qrpokemon.views.qrinventory.QrInventoryActivity;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;

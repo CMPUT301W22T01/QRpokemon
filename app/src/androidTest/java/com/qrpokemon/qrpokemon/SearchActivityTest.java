@@ -1,7 +1,6 @@
 package com.qrpokemon.qrpokemon;
-import static org.hamcrest.CoreMatchers.is;
+
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 import android.app.Activity;
 import android.view.View;
@@ -12,8 +11,9 @@ import android.widget.TextView;
 import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.rule.ActivityTestRule;
 
-import com.qrpokemon.qrpokemon.activities.search.SearchActivity;
+import com.qrpokemon.qrpokemon.views.search.SearchActivity;
 import com.robotium.solo.Solo;
+
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;

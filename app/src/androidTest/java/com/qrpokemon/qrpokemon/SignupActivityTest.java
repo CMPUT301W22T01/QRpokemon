@@ -1,4 +1,5 @@
 package com.qrpokemon.qrpokemon;
+
 import static org.junit.Assert.assertEquals;
 
 import android.app.Activity;
@@ -8,10 +9,11 @@ import android.widget.TextView;
 import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.rule.ActivityTestRule;
 
-import com.qrpokemon.qrpokemon.activities.profile.ProfileActivity;
-import com.qrpokemon.qrpokemon.models.DatabaseProxy;
-import com.qrpokemon.qrpokemon.models.FileSystemController;
+import com.qrpokemon.qrpokemon.views.profile.ProfileActivity;
+import com.qrpokemon.qrpokemon.controllers.DatabaseProxy;
+import com.qrpokemon.qrpokemon.controllers.FileSystemController;
 import com.robotium.solo.Solo;
+
 import org.junit.*;
 
 /**

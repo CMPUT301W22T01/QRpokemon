@@ -28,18 +28,15 @@ import android.widget.Toast;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.qrpokemon.qrpokemon.activities.leaderboard.LeaderboardActivity;
-import com.qrpokemon.qrpokemon.activities.map.MapActivity;
-import com.qrpokemon.qrpokemon.activities.map.MapController;
-import com.qrpokemon.qrpokemon.activities.profile.ProfileActivity;
-import com.qrpokemon.qrpokemon.activities.qrinventory.QrInventoryActivity;
-import com.qrpokemon.qrpokemon.activities.qrscanned.QrScannedActivity;
-import com.qrpokemon.qrpokemon.activities.search.SearchActivity;
-import com.qrpokemon.qrpokemon.activities.signup.SignupActivity;
 
-import java.io.UnsupportedEncodingException;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
+import com.qrpokemon.qrpokemon.controllers.MapController;
+import com.qrpokemon.qrpokemon.views.leaderboard.LeaderboardActivity;
+import com.qrpokemon.qrpokemon.views.map.*;
+import com.qrpokemon.qrpokemon.views.profile.ProfileActivity;
+import com.qrpokemon.qrpokemon.views.qrinventory.QrInventoryActivity;
+import com.qrpokemon.qrpokemon.views.qrscanned.QrScannedActivity;
+import com.qrpokemon.qrpokemon.views.search.SearchActivity;
+import com.qrpokemon.qrpokemon.views.signup.SignupActivity;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private Intent intent;
@@ -170,7 +167,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
     }
-
 
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
