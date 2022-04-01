@@ -3,6 +3,7 @@ package com.qrpokemon.qrpokemon.views.search;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -33,7 +34,7 @@ public class SearchActivity extends AppCompatActivity {
      * Init Listview EditText object and set up listeners
      * If user entered something in the search bar, the search result will show up in the listview
      * If user click the location search result, he can see all the qr codes in this location
-     * @param savedInstanceState saved instances 
+     * @param savedInstanceState saved instances
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,12 +83,12 @@ public class SearchActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-
+                //Log.e("SearchActivity: ", "count: " + count);
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-
+                Log.e("SearchActivity: ","current input: " + s.toString());
                 listView.setAdapter(mAdapter);
                 searchController.getPlayerSearch(getApplicationContext(), s.toString(), mAdapter);
                 searchController.getLocationSearch(getApplicationContext(), s.toString(), mAdapter);

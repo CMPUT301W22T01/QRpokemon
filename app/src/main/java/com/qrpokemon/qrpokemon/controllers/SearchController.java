@@ -36,6 +36,7 @@ public class SearchController {
     public void getPlayerSearch(Context context, String userName, ArrayAdapter<SearchItem> qMyAdapter) {
         List<Map> temp = new ArrayList<>();  // Store our db results temporarily
         DatabaseProxy databaseProxy = DatabaseProxy.getInstance();
+
         if(!userName.isEmpty()) {
             qMyAdapter.clear();
         }
@@ -43,6 +44,10 @@ public class SearchController {
             @Override
             public void run(List<Map> playerList) {
                 // Add each player to our Search list
+                //Log.e("SearchController: ", "Inside run");
+                if(!userName.isEmpty()) {
+                    qMyAdapter.clear();
+                }
                 if(!playerList.isEmpty() && !userName.isEmpty()) {
                     // clear previous search result when searching for a new thing
 
