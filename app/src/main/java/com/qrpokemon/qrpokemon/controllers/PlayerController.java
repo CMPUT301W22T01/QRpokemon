@@ -151,4 +151,16 @@ public class PlayerController extends Observable {
             databaseProxy.writeData("Player", this.currentPlayer.getUsername() ,info ,false);
         }
     }
+
+    public void getAllPlayer(DatabaseCallback databaseCallback, List<Map> result){
+        try {
+            databaseProxy.getData(databaseCallback, result, player);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void deletePlayer(String playerName) throws Exception {
+        databaseProxy.deleteData(player, playerName);
+    }
 }

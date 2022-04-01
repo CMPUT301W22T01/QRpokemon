@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout tools:layout_editor_absoluteX="0dp"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <TextView
+        android:layout_width="300dp"
+        android:layout_height="match_parent"
+        android:layout_marginStart="10dp"
+        android:textSize="25sp"
+        android:id="@+id/username"
+        />
+
+    <Button
+        android:id="@+id/player_delete_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_gravity="right"
+        android:textSize="20dp"
+        android:layout_weight="1"
+        android:text="Del" />
+
+</LinearLayout>
