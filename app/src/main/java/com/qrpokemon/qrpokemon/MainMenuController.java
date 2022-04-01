@@ -79,14 +79,15 @@ public class MainMenuController implements Observer {
                 else { // if player found:
                     Map player = dataList.get(0);
                     playerController.addObserver(MainMenuController.this);
-                    Log.e("MainMenuController : ", "other User is :" + (String) player.get("Identifier"));
+                    Log.e("MainMenuController : ", "other User is :" + player.toString());
                     playerController.setupPlayer((String) player.get("Identifier"),
                             (ArrayList<String>) player.get("qrInventory"),
                             (HashMap) player.get("contact"),
                             ((Long) player.get("qrCount")).intValue(),
                             ((Long)player.get("totalScore")).intValue(),
                             ((Long)player.get("highestUnique")).intValue(),
-                            (String) player.get("id"));
+                            (Boolean)player.get("Owner"),
+                            (String) player.get("DeviceId"));
 
                 }
 

@@ -68,12 +68,13 @@ public class RestoreSession extends AppCompatActivity {
                                                                 ((Long) mapList.get("qrCount")).intValue(),
                                                                 ((Long) mapList.get("totalScore")).intValue(),
                                                                 ((Long) mapList.get("highestUnique")).intValue(),
+                                                                (Boolean) mapList.get("Owner"),
                                                                 Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID));
 
                                     try {
                                         Log.e("RestoreSession: ", "User "+(String ) mapList.get("Identifier")+" found!");
-                                        playerController.savePlayerData(null, null, null, null, null, Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID), false);
-                                    } catch (Exception e) { // if collection is incorrect for DatabaseProxy:
+                                        playerController.savePlayerData(null, null, null, null, null, Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID), null, false);
+                                    } catch (Exception e) { // if collection is incorrect for DatabaseController:
                                         e.printStackTrace();
                                     }
                                 } else {

@@ -56,6 +56,7 @@ public class SignupActivity extends AppCompatActivity  implements View.OnClickLi
                                         ((Long) dataList.get(0).get("qrCount")).intValue(),
                                         ((Long) dataList.get(0).get("totalScore")).intValue(),
                                         ((Long) dataList.get(0).get("highestUnique")).intValue(),
+                                        (Boolean) dataList.get(0).get("Owner"),
                                         Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID)); //init Player class locally via PlayerController
 
                     Log.e("SignupAcitivity: get player ","" + ((String) dataList.get(0).get("Identifier")));

@@ -133,13 +133,12 @@ public class QrScannedController {
      * @throws Exception getQR() may throw exception, but highly unlikely since the error is raised
      * from DatabaseProxy complaining about incorrect collection name
      */
-    public void saveQrCode(Context context, String qrHash, int score, String location, String bitmap) throws Exception {
+    public void saveQrCode(Context context, String qrHash, int score, String location, String bitmap, String codeContent) throws Exception {
         DatabaseCallback databaseCallback = new DatabaseCallback(context) {
             @Override
             public void run(List<Map> dataList) {
-                Log.e("QrScannedController",qrHash);
+//                Log.e("QrScannedController",qrHash);
                 if (!dataList.isEmpty()){
-                    Log.e("QrScannedController","if");
                     // this QR code is in Database
                     ArrayList<String> location1 = (ArrayList<String>) dataList.get(0).get("Location");
                     location1.add(location);
@@ -147,8 +146,7 @@ public class QrScannedController {
 
                     try {
                         HashMap currentPlayer = playerController.getPlayer(null,null,null,null);
-                        bitmapHash.put((String) currentPlayer.get("Identifier"), bitmap);
-                        qrCodeController.saveQr(qrHash, score, location1, null, bitmapHash,true);
+                        qrCodeController.saveQr(qrHash, score, location1, null, bitmapHash,null );
                         Log.e("QrScannedController","Qrcode found");
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -157,7 +155,6 @@ public class QrScannedController {
 
                 else {
                     // new QrCode added
-                    Log.e("QrScannedController","else");
                     ArrayList<String> location1 = new ArrayList<>();
                     location1.add(location);
                     HashMap<String, String> bitmapHash = new HashMap<>();
@@ -165,8 +162,8 @@ public class QrScannedController {
                     try {
                         HashMap currentPlayer = playerController.getPlayer(null,null,null,null);
                         bitmapHash.put((String) currentPlayer.get("Identifier"), bitmap);
-                        qrCodeController.saveQr(qrHash, score, location1,null ,bitmapHash, true);
-//                        playerController.savePlayerData()
+                        bitmapHash.put("Content", codeContent);
+                        qrCodeController.saveQr(qrHash, score, location1,null ,bitmapHash,codeContent, true);
 
                     } catch (Exception e) {
                         e.printStackTrace();
