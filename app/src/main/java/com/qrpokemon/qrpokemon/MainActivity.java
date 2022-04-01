@@ -14,7 +14,6 @@ import android.content.Intent;
 
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
-import android.graphics.Bitmap;
 import android.location.LocationManager;
 import android.os.Bundle;
 
@@ -40,12 +39,8 @@ import com.qrpokemon.qrpokemon.views.signup.SignupActivity;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private Intent intent;
-    private Button qrInventoryMainBt;
-    private Button mapMainBt;
-    private Button searchMainBt;
-    private Button leaderboardMainBt;
-    private FloatingActionButton otherProfileBt;
-    private FloatingActionButton cameraMainBt;
+    private Button qrInventoryMainBt, mapMainBt, searchMainBt, leaderboardMainBt;
+    private FloatingActionButton otherProfileBt, cameraMainBt, adminBtn;
     private ImageView profileMainIv;
     private MainMenuController mainMenuController = MainMenuController.getInstance();
     private static final int CAMERA_ACTION_CODE = 100;
@@ -86,13 +81,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         leaderboardMainBt = findViewById(R.id.Leaderboard_Button);
         cameraMainBt = findViewById(R.id.Camera_Button);
         otherProfileBt = findViewById(R.id.Other_Player_Button);
+        adminBtn = findViewById(R.id.admin_Button);
+        adminBtn.setVisibility(View.INVISIBLE);
 
         //setup for getting location:
         MapController mapController = MapController.getInstance();
         LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         FusedLocationProviderClient fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
 
-        //get location in mapController
+        //get location in mapController, set username in main menu and check if current player is an owner
         mapController.run(this, null, locationManager, fusedLocationProviderClient);
 
 
@@ -107,6 +104,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         cameraMainBt.setOnClickListener(this);
         profileMainIv.setOnClickListener(this);
         otherProfileBt.setOnClickListener(this);
+        adminBtn.setOnClickListener(this);
 
         activityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
             @Override
@@ -132,26 +130,37 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 intent = new Intent(MainActivity.this, QrInventoryActivity.class);
                 startActivity(intent);
                 break;
+
             case R.id.Map_Button:           // open Map Activity
                 intent = new Intent(MainActivity.this, MapActivity.class);
                 startActivity(intent);
                 break;
+
             case R.id.Search_Button:        // open Search Activity
                 Intent intent = new Intent(MainActivity.this, SearchActivity.class);
                 startActivity(intent);
                 break;
+
             case R.id.Leaderboard_Button:   // open Leaderboard Activity
                 intent = new Intent(MainActivity.this, LeaderboardActivity.class);
                 startActivity(intent);
                 break;
+
             case R.id.Camera_Button:        // open Camera Activity
                 intent = new Intent(this, QrScannedActivity.class);
                 startActivity(intent);
                 break;
+
             case R.id.avatar_imageView:     // open Profile Activity
                 intent = new Intent(MainActivity.this, ProfileActivity.class);
                 startActivity(intent);
                 break;
+
+            case R.id.admin_Button:
+                intent = new Intent(this, OwnerActivity.class);
+                startActivity(intent);
+                break;
+
             case R.id.Other_Player_Button:  // open Inventory Activity
                 if (ContextCompat.checkSelfPermission(this,
                         Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {

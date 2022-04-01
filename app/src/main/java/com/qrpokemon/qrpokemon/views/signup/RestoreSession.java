@@ -33,7 +33,7 @@ public class RestoreSession extends AppCompatActivity {
     private static final int CAMERA_ACTION_CODE = 100;
     private ActivityResultLauncher<Intent> activityResultLauncher;
     private Bitmap photoBitmap;
-    private String codeContent,hash;
+    private String codeContent;
     private QrScannedController qrScannedController = QrScannedController.getInstance();
     private PlayerController playerController = PlayerController.getInstance();
 

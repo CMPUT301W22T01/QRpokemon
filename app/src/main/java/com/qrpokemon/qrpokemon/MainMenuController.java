@@ -1,15 +1,21 @@
 package com.qrpokemon.qrpokemon;
 
+import static android.view.View.VISIBLE;
+
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResult;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.zxing.NotFoundException;
 import com.qrpokemon.qrpokemon.controllers.QrScannedController;
 import com.qrpokemon.qrpokemon.controllers.DatabaseCallback;
@@ -46,7 +52,7 @@ public class MainMenuController implements Observer {
 
     /**
      * load current username from firestore
-     *
+     * it also checks if user is an owner, if ture make admin button visible.
      * @param context context of current activity
      */
     public void load(Context context) {
@@ -55,6 +61,9 @@ public class MainMenuController implements Observer {
         PlayerController playerController = PlayerController.getInstance();
 
         try {
+            if ((Boolean) playerController.getPlayer(null, null, null, null).get("Owner") == true){
+                ((FloatingActionButton) (((Activity) context)).findViewById(R.id.admin_Button)).setVisibility(VISIBLE);
+            }
             text.setText((String) playerController.getPlayer(null, null, null, null).get("Identifier"));
         } catch (Exception e) {
             e.printStackTrace();
