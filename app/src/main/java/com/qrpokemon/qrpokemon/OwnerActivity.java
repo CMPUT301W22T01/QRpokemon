@@ -61,11 +61,16 @@ public class OwnerActivity extends AppCompatActivity implements PlayerRecyclerAd
 
         Log.e("OwnerActivity: ",players.get(position).toString());
         try {
-            playerController.deletePlayer((String)players.get(position).get("Identifier"));
-            Toast.makeText(this, players.get(position).get("Identifier").toString() + " is deleted",Toast.LENGTH_SHORT).show();
-            players.remove(position);
-            radapter.notifyItemRemoved(position);
-            radapter.notifyItemRangeChanged(position, players.size());
+            if (((String)players.get(position).get("Identifier")).equals(playerController.getPlayer(null,null,null,null).get("Identifier"))){ //if user chooses to delete itself:
+                Toast.makeText(this, "You cannot delete yourself",Toast.LENGTH_SHORT).show();
+            } else {
+                playerController.deletePlayer((String)players.get(position).get("Identifier"));
+                Toast.makeText(this, players.get(position).get("Identifier").toString() + " is deleted",Toast.LENGTH_SHORT).show();
+                players.remove(position);
+                radapter.notifyItemRemoved(position);
+                radapter.notifyItemRangeChanged(position, players.size());
+            }
+
         } catch (Exception e) { // if user doesn't exist in database:
             e.printStackTrace();
             Toast.makeText(this, players.get(position).get("Identifier").toString() + " doesn't exist",Toast.LENGTH_SHORT).show();
