@@ -21,7 +21,6 @@ public class QrInventoryController {
 
     private Integer totalScore = 0;
     private HashMap<String, Object> data = new HashMap<>();
-    private PlayerController player = PlayerController.getInstance();
     private PlayerController playerController = PlayerController.getInstance();
     private QrCodeController qrCodeController = QrCodeController.getInstance();
 
@@ -62,6 +61,7 @@ public class QrInventoryController {
                                     ((Long) currentPlayer.get("qrCount")).intValue(),
                                     ((Long)currentPlayer.get("totalScore")).intValue(),
                                     ((Long)currentPlayer.get("highestUnique")).intValue(),
+                                    (Boolean)currentPlayer.get("Owner"),
                                     (String) currentPlayer.get("id"));
                         }
                     } catch (Exception e) {
@@ -107,11 +107,37 @@ public class QrInventoryController {
                         HashMap tMap = (HashMap) dataList.get(dataList.size()-1).get("Bitmap");
                         String bitmap = (String) tMap.get(currentPlayer);
 
-                        qrInventory.add(String.valueOf(dataList.get(dataList.size()-1).get("Score"))
-                                + " "
-                                + (String) (dataList.get(dataList.size()-1).get("Identifier"))
-                                + " "
-                                + bitmap);
+                        HashMap<String, Object> currentPlayer = null;
+                        try {
+                            currentPlayer  = playerController.getPlayer(null,null,null,null);
+
+
+                            if (currentPlayer.get("DeviceId").equals(Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID))){ // if it's owner of device:
+                                if ((String) (dataList.get(dataList.size()-1).get("Content")) == null){
+                                    qrInventory.add(String.valueOf(dataList.get(dataList.size()-1).get("Score"))
+                                            + " "
+                                            + (String) (dataList.get(dataList.size()-1).get("Identifier"))
+                                            + " "
+                                            + bitmap);
+                                } else {
+                                    qrInventory.add(String.valueOf(dataList.get(dataList.size()-1).get("Score"))
+                                            + " "
+                                            + (String) (dataList.get(dataList.size()-1).get("Content"))
+                                            + " "
+                                            + bitmap);
+                                }
+
+                            } else { // if it's someone else browsing qrInventory
+                                qrInventory.add(String.valueOf(dataList.get(dataList.size()-1).get("Score"))
+                                        + " "
+                                        + (String) (dataList.get(dataList.size()-1).get("Identifier"))
+                                        + " "
+                                        + bitmap);
+                            }
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
 
                         totalScore += Integer.valueOf(String.valueOf( dataList.get(dataList.size()-1).get("Score")));
 
@@ -137,7 +163,7 @@ public class QrInventoryController {
     }
 
     public void updateQR (String qrHash, @Nullable Integer score, @Nullable ArrayList<String> location, @Nullable HashMap<String, Object> comments, @Nullable HashMap<String,String> bitmap) throws Exception {
-        qrCodeController.saveQr(qrHash,score,location,comments,bitmap);
+        qrCodeController.saveQr(qrHash,score,location,comments,bitmap,null);
     }
 
 }

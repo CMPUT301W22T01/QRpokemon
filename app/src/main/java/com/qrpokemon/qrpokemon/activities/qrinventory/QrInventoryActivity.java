@@ -3,9 +3,11 @@ package com.qrpokemon.qrpokemon.activities.qrinventory;
 import static android.view.View.VISIBLE;
 import static android.view.View.INVISIBLE;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -125,6 +127,11 @@ public class QrInventoryActivity
                 deleteButton.setVisibility(VISIBLE);
                 commentButton.setVisibility(VISIBLE);
                 showCommentsButton.setVisibility(VISIBLE);
+                Log.e("QrInventoryActivity: ","Current Player: "+hashMapOfPlayerData.toString());
+                if (!hashMapOfPlayerData.get("DeviceId").equals(Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID))){
+                    deleteButton.setVisibility(INVISIBLE);
+                    commentButton.setVisibility(INVISIBLE);
+                }
             }
         });
     }
@@ -172,7 +179,7 @@ public class QrInventoryActivity
                 // delete from Local and Firebase, update totalCount/totalNumber, update display
                 PlayerController playerController = PlayerController.getInstance();
                 try {
-                    playerController.savePlayerData(qrInventoryDataAdapter.getCount(), curTotalScore, qrHashCodes, null, null, null, false);
+                    playerController.savePlayerData(qrInventoryDataAdapter.getCount(), curTotalScore, qrHashCodes, null, null, null, null,false);
                     qrInventoryList.setAdapter(qrInventoryDataAdapter);
 
                     totalCount.setText("Total Number: " + qrInventoryDataAdapter.getCount());

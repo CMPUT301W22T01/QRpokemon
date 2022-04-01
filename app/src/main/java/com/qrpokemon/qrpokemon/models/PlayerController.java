@@ -41,6 +41,8 @@ public class PlayerController extends Observable {
             info.put("totalScore",    this.currentPlayer.getTotalScore());
             info.put("contact",       this.currentPlayer.getContactInfo());
             info.put("highestUnique", this.currentPlayer.getHighestUnique());
+            info.put("DeviceId", this.currentPlayer.getId());
+            info.put("Owner", this.currentPlayer.getOwner());
 
         } else if (IdentifierField == null) { // find player by username
             databaseProxy.getData(databaseCallback, list , player, username);
@@ -67,11 +69,12 @@ public class PlayerController extends Observable {
                             @Nullable Integer qrCount,
                             @Nullable Integer totalScore,
                             @Nullable Integer highestUnique,
+                            Boolean owner,
                             String id) {
         if (this.currentPlayer == null){
-            this.currentPlayer = new Player(username, qrInventory, contact, qrCount, totalScore, id, highestUnique);
+            this.currentPlayer = new Player(username, qrInventory, contact, qrCount, totalScore, id, highestUnique, owner);
         } else if (username != this.currentPlayer.getUsername()) { //require to switch another player:
-            this.currentPlayer = new Player(username, qrInventory, contact, qrCount, totalScore, id, highestUnique);
+            this.currentPlayer = new Player(username, qrInventory, contact, qrCount, totalScore, id, highestUnique, owner);
         }
         Log.e("PlayerController: A player is created with : ", this.currentPlayer.getUsername());
         setChanged();
@@ -94,6 +97,7 @@ public class PlayerController extends Observable {
                                @Nullable HashMap contact,
                                @Nullable Integer highestUnique,
                                @Nullable String id,
+                               @Nullable Boolean owner,
                                Boolean addIdentifier) throws Exception {
         DatabaseProxy databaseProxy = DatabaseProxy.getInstance();
         HashMap<String, Object> info = new HashMap<>();
@@ -102,17 +106,14 @@ public class PlayerController extends Observable {
         // Don't update parameter if null
         if (qrCount != null) {
             this.currentPlayer.setQrCount(qrCount);
-            info.put("qrCount", currentPlayer.getQrCount());
         }
 
         if (totalScore != null) {
             this.currentPlayer.setTotalScore(totalScore);
-            info.put("totalScore", currentPlayer.getTotalScore());
         }
 
         if (qrInventory != null) {
             this.currentPlayer.setQrInventory(qrInventory);
-            info.put("qrInventory", currentPlayer.getQrInventory());
         }
 
         if (id != null) {
@@ -122,12 +123,14 @@ public class PlayerController extends Observable {
 
         if (contact != null) {
             this.currentPlayer.setContactInfo(contact);
-            info.put("contact", currentPlayer.getContactInfo());
+        }
+
+        if (owner != null){
+            this.currentPlayer.setOwner(owner);
         }
 
         if (highestUnique != null) {
             this.currentPlayer.setHighestUnique(highestUnique);
-            info.put("highestUnique", currentPlayer.getHighestUnique());
         }
 
         info.put("qrCount",this.currentPlayer.getQrCount());
@@ -135,6 +138,7 @@ public class PlayerController extends Observable {
         info.put("qrInventory", this.currentPlayer.getQrInventory());
         info.put("contact", this.currentPlayer.getContactInfo());
         info.put("highestUnique", this.currentPlayer.getHighestUnique());
+        info.put("Owner", this.currentPlayer.getOwner());
 
         if (addIdentifier) { //ading a new user
             info.put("Identifier", currentPlayer.getUsername());

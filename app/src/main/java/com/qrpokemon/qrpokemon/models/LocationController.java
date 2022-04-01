@@ -35,11 +35,9 @@ import java.util.Map;
 
 public class LocationController implements OnMapReadyCallback, LocationListener {
 
-    private LocationRequest locationRequest;
     private FusedLocationProviderClient fusedLocationProviderClient;
     private static final int REQUEST_CODE = 101;
     private Location currentLocation = null;
-    private LocationManager locationManager;
     private SupportMapFragment supportMapFragment;
     private Context context;
     private DatabaseProxy databaseProxy = DatabaseProxy.getInstance();

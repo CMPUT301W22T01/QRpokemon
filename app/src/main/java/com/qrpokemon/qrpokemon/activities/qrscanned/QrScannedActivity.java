@@ -180,7 +180,7 @@ public class QrScannedActivity extends AppCompatActivity {
                                             highestUnique = qrScannedController.scoreCalculator(hash);
                                         }
                                         qrInventory.add(hash);
-                                        playerController.savePlayerData(qrCount, qrTotal, qrInventory, null, highestUnique, null, false);
+                                        playerController.savePlayerData(qrCount, qrTotal, qrInventory, null, highestUnique, null, null,false);
                                     }
 
                                     String currentLocation = null;
@@ -205,7 +205,7 @@ public class QrScannedActivity extends AppCompatActivity {
 //                                        Toast.makeText(QrScannedActivity.this, "Photo saved", Toast.LENGTH_SHORT).show();
                                     }
                                     //save qrcode information
-                                    qrScannedController.saveQrCode(QrScannedActivity.this, hash, qrScannedController.scoreCalculator(hash), currentLocation, bitMapString);
+                                    qrScannedController.saveQrCode(QrScannedActivity.this, hash, qrScannedController.scoreCalculator(hash), currentLocation, bitMapString, codeContent);
 
                                     // save location information
                                     locationController.saveLocation(cityName, String.valueOf(location.getLatitude()) +"," + String.valueOf(location.getLongitude()), QrScannedActivity.this, hash);

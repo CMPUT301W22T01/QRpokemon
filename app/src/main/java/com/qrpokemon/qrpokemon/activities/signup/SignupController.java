@@ -56,17 +56,17 @@ public class SignupController {
 
                         try {
                             //Create current Player class in PlayerController class
-                            playerController.setupPlayer(newUsername, new ArrayList<String>(), contact, 0,0, 0, id);
+                            playerController.setupPlayer(newUsername, new ArrayList<String>(), contact, 0,0, 0,false ,id);
 
                             // add player on firestore
-                            playerController.savePlayerData(0,0, new ArrayList<String>(), contact, 0, id, true);
+                            playerController.savePlayerData(0,0, new ArrayList<String>(), contact, 0, id,false ,true);
                         } catch (Exception e) {
                             Log.e("SignupController: ", e.toString());
                         }
 //                        Log.e("DatabaseProxy: ", "addNewPlayer");
                     } else{
                         EditText email = (EditText) ((Activity) context).findViewById(R.id.et_email);
-                        Toast.makeText(context, "Username is not unique!", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(context, "Username is not unique!", Toast.LENGTH_SHORT).show();
                     }
                 }
             };
@@ -87,7 +87,7 @@ public class SignupController {
         playerController.getPlayer(databaseCallback, result, id, "DeviceId");
     }
 
-    public void write(String username, ArrayList<String> qrInventory, HashMap<String, String> contact, Integer qrCount, Integer totalScore, Integer highestUnique, String id){
-        playerController.setupPlayer(username, qrInventory, contact, qrCount, totalScore, highestUnique, id);
+    public void write(String username, ArrayList<String> qrInventory, HashMap<String, String> contact, Integer qrCount, Integer totalScore, Integer highestUnique,Boolean owner ,String id){
+        playerController.setupPlayer(username, qrInventory, contact, qrCount, totalScore, highestUnique, owner ,id);
     }
 }
