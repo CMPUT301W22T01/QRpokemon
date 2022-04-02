@@ -106,13 +106,16 @@ public class LocationController implements OnMapReadyCallback, LocationListener 
     /**
      * A callback function, triggered once SupportMapFragment gets declared
      * It set the focus of view to current location
-     * @param googleMap
+     * @param googleMap Google map object
      */
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap) {
         LatLng here = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
         if (qrHashList != null) {
             for (Map i : qrHashList) { // loop through each qrcode
+                if (i.get("Location") == null) {
+                    continue;
+                }
                 for (String location : (ArrayList<String>) i.get("Location")) { // loop through each qrcode's location arrayList:
                     if (location != null) {
                         String[] parser = location.split(",");
