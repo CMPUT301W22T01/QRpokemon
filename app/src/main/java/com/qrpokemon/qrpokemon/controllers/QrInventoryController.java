@@ -163,7 +163,7 @@ public class QrInventoryController {
 
                         // set the value of total score
                         TextView tvScore = ((Activity) context).findViewById(R.id.tv_total_score);
-                        TextView tvCount = ((Activity) context).findViewById(R.id.tv_total_count);
+                        TextView tvCount = ((Activity) context).findViewById(R.id.tv_total_number_txt);
 
                         tvScore.setText(totalScore.toString());
                         tvCount.setText("Total Number: " + totalCount.toString());
