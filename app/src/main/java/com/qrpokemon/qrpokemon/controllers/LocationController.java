@@ -119,11 +119,13 @@ public class LocationController implements OnMapReadyCallback, LocationListener 
                 for (String location : (ArrayList<String>) i.get("Location")) { // loop through each qrcode's location arrayList:
                     if (location != null) {
                         String[] parser = location.split(",");
-                        try{
+
+                        if(i.get("Content") == "") {
+                            googleMap.addMarker(new MarkerOptions().position(new LatLng(Double.valueOf(parser[0]),Double.valueOf(parser[1]))).title((String)i.get("Identifier")));
+                        }
+                        else
+                        {
                             googleMap.addMarker(new MarkerOptions().position(new LatLng(Double.valueOf(parser[0]),Double.valueOf(parser[1]))).title((String)i.get("Content")));
-                        } catch (Exception e) {
-//                            googleMap.addMarker(new MarkerOptions().position(new LatLng(Double.valueOf(parser[0]),Double.valueOf(parser[1]))).title((String)i.get("Identifier")));
-                            e.printStackTrace();
                         }
 
                     }
