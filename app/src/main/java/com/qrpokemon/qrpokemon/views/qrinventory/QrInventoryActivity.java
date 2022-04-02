@@ -1,11 +1,9 @@
 package com.qrpokemon.qrpokemon.views.qrinventory;
 
 import static android.view.View.VISIBLE;
-import static android.view.View.INVISIBLE;
+import static android.view.View.GONE;
 
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.util.Log;
@@ -48,7 +46,6 @@ public class QrInventoryActivity
     private ListView qrInventoryList;
     private HashMap hashMapOfPlayerData, commentsOfCurQrcode;
     private Map currentQR;
-    private HashMap<String, Object> m = new HashMap<>();
     private ArrayList<String> qrHashCodes;
     private ArrayAdapter<String> qrInventoryDataAdapter;
     private QrInventoryController qrInventoryController = QrInventoryController.getInstance();
@@ -67,7 +64,7 @@ public class QrInventoryActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.qr_inventory);
 
-        totalCount = findViewById(R.id.tv_total_count);
+        totalCount = findViewById(R.id.tv_qr_count);
         totalScore = findViewById(R.id.tv_total_score);
         qrInventoryList = findViewById(R.id.QR_inventory_list);
         backButton = findViewById(R.id.bt_back);
@@ -130,8 +127,8 @@ public class QrInventoryActivity
                 showCommentsButton.setVisibility(VISIBLE);
                 Log.e("QrInventoryActivity: ","Current Player: "+hashMapOfPlayerData.toString());
                 if (!hashMapOfPlayerData.get("DeviceId").equals(Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID))){
-                    deleteButton.setVisibility(INVISIBLE);
-                    commentButton.setVisibility(INVISIBLE);
+                    deleteButton.setVisibility(GONE);
+                    commentButton.setVisibility(GONE);
                 }
             }
         });
@@ -153,7 +150,7 @@ public class QrInventoryActivity
             case R.id.bt_back:
                 try {
                     qrInventoryController.getPlayerInfo(null,true,this, this);
-                    qrInventoryTitle.setText("QrInventory");
+                    qrInventoryTitle.setText("QR Inventory");
                 } catch (Exception e) {
                     e.printStackTrace();
                     Log.e("QrInventory: ", "Error when retrieve back to current player");
@@ -184,16 +181,16 @@ public class QrInventoryActivity
                     playerController.savePlayerData(qrInventoryDataAdapter.getCount(), curTotalScore, qrHashCodes, null, null, null, null,false);
                     qrInventoryList.setAdapter(qrInventoryDataAdapter);
 
-                    totalCount.setText("Total Number: " + qrInventoryDataAdapter.getCount());
+                    totalCount.setText(qrInventoryDataAdapter.getCount());
 
                 } catch (Exception e) {
                     e.printStackTrace();
 //                    Log.e(TAG, "Error from Onclick (delete from local and firebase): " + e);
                 }
 
-                deleteButton.setVisibility(INVISIBLE);
-                commentButton.setVisibility(INVISIBLE);
-                showCommentsButton.setVisibility(INVISIBLE);
+                deleteButton.setVisibility(GONE);
+                commentButton.setVisibility(GONE);
+                showCommentsButton.setVisibility(GONE);
 
                 break;
 
@@ -374,9 +371,9 @@ public class QrInventoryActivity
                             Toast.makeText(QrInventoryActivity.this, "There is no comment to show", Toast.LENGTH_SHORT).show();
                         }
 
-                        deleteButton.setVisibility(INVISIBLE);
-                        commentButton.setVisibility(INVISIBLE);
-                        showCommentsButton.setVisibility(INVISIBLE);
+                        deleteButton.setVisibility(GONE);
+                        commentButton.setVisibility(GONE);
+                        showCommentsButton.setVisibility(GONE);
                     }
                 };
 
@@ -398,7 +395,6 @@ public class QrInventoryActivity
      * @throws Exception
      */
     public void addComment(String comment) throws Exception {
-//        DatabaseProxy databaseController = DatabaseProxy.getInstance();
         HashMap<String, HashMap> tHash = new HashMap<>();
         ArrayList<String> tList;
 
@@ -420,13 +416,12 @@ public class QrInventoryActivity
 
         // update data of Firebase
         tHash.put("Comments", commentsOfCurQrcode);
-        Log.e("QrInventoryActivity: ", (String) currentQR.toString());
+        Log.e("QrInventoryActivity: ", currentQR.toString());
         qrInventoryController.updateQR((String) currentQR.get("Identifier"), null, null, commentsOfCurQrcode, null);
-//        databaseController.writeData("QrCode", selectedHash, tHash);
 
-        deleteButton.setVisibility(INVISIBLE);
-        commentButton.setVisibility(INVISIBLE);
-        showCommentsButton.setVisibility(INVISIBLE);
+        deleteButton.setVisibility(GONE);
+        commentButton.setVisibility(GONE);
+        showCommentsButton.setVisibility(GONE);
 
     }
 
