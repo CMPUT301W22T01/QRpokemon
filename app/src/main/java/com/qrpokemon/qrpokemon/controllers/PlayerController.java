@@ -86,6 +86,43 @@ public class PlayerController extends Observable {
     }
 
     /**
+     * Save other player's data
+     * @param qrCount player's qrCount
+     * @param totalScore player's total score
+     * @param qrInventory player's qrInventory
+     * @param contact player's contact info
+     * @param highestUnique player's highest unique score
+     * @param id player's deviceID
+     * @param owner if player is an owner or not
+     * @param identifier player's username
+     * @param overwrite  whether overwrites player's data
+     * @throws Exception wrong collection name is going to throw exception
+     */
+    public void saveOtherPlayerData(Integer qrCount,
+                                    Integer totalScore,
+                                    ArrayList<String> qrInventory,
+                                    HashMap contact,
+                                    Integer highestUnique,
+                                    String id,
+                                    Boolean owner,
+                                    String identifier,
+                                    Boolean overwrite) throws Exception {
+        HashMap<String, Object> info = new HashMap<>();
+
+        info.put("Identifier", identifier);
+        info.put("qrCount",qrCount);
+        info.put("totalScore", totalScore);
+        info.put("qrInventory", qrInventory);
+        info.put("contact", contact);
+        info.put("highestUnique", highestUnique);
+        info.put("DeviceId", id);
+        info.put("Owner", owner);
+
+        databaseProxy.writeData("Player", this.currentPlayer.getUsername() ,info ,overwrite);
+    }
+
+
+    /**
      * Update/Create a player's data based on the addIdentifier boolean flag
      * @param qrCount player's qrCount
      * @param totalScore player's total Score
@@ -102,7 +139,6 @@ public class PlayerController extends Observable {
                                @Nullable String id,
                                @Nullable Boolean owner,
                                Boolean addIdentifier) throws Exception {
-        DatabaseProxy databaseProxy = DatabaseProxy.getInstance();
         HashMap<String, Object> info = new HashMap<>();
 
         // Update player's data.
