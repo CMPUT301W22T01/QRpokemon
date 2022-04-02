@@ -84,13 +84,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         adminBtn = findViewById(R.id.admin_Button);
         adminBtn.setVisibility(View.INVISIBLE);
 
-        //setup for getting location:
-        MapController mapController = MapController.getInstance();
-        LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        FusedLocationProviderClient fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
-
-        //get location in mapController, set username in main menu and check if current player is an owner
-        mapController.run(this, null, locationManager, fusedLocationProviderClient);
+//        //setup for getting location:
+//        MapController mapController = MapController.getInstance();
+//        LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+//        FusedLocationProviderClient fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
+//
+//        //get location in mapController, set username in main menu and check if current player is an owner
+//        mapController.run(this, null, locationManager, fusedLocationProviderClient);
 
 
         profileMainIv = findViewById(R.id.avatar_imageView);

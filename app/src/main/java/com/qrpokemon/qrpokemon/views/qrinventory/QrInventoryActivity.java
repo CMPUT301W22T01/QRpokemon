@@ -306,7 +306,6 @@ public class QrInventoryActivity
                                     }
                                 }
                             }
-
                         }
                     };
                     List<Map> result = new ArrayList<>();

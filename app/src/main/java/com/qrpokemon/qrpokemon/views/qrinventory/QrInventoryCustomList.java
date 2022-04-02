@@ -54,15 +54,20 @@ public class QrInventoryCustomList extends ArrayAdapter<String> {
 
         // setText
         scoreTV.setText("Score: " + tStr[0]);
-        if (tStr.length != 4){ // if code doesn't have content, show qrhash
+        if (tStr.length < 4){ // if code doesn't have content, show qrhash
             hashTV.setText(tStr[1]);
         } else { // if code has content, show content
-            hashTV.setText(tStr[3]);
+            String temp = "";
+            for (int i = 3; i < tStr.length; i++) {
+                temp +=tStr[i];
+            }
+            hashTV.setText(temp);
+            Log.e("QrInventoryCustomList: ",temp);
         }
 
 
         // setImageBitmap
-        String encodedString = tStr[tStr.length-1];
+        String encodedString = tStr[2];
         Bitmap bitmap = StringToBitMap(encodedString);
         codeIV.setImageBitmap(bitmap);
 
