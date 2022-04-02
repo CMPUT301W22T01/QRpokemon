@@ -193,8 +193,8 @@ public class QrScannedActivity extends AppCompatActivity {
                                     if (saveLocation) {
                                         //if player chooses to save location
                                         currentLocation = String.valueOf(location.getLatitude()) + "," + String.valueOf(location.getLongitude());
-//                                        Toast.makeText(QrScannedActivity.this, "LOCATION SAVED", Toast.LENGTH_SHORT).show();
-//                                        Log.e("QrScannedActivity: ",currentLocation);
+                                        // save location information
+                                        locationController.saveLocation(cityName, String.valueOf(location.getLatitude()) +"," + String.valueOf(location.getLongitude()), QrScannedActivity.this, hash);
                                     }
 
                                     if (savePhoto){
@@ -211,8 +211,6 @@ public class QrScannedActivity extends AppCompatActivity {
                                     //save qrcode information
                                     qrScannedController.saveQrCode(QrScannedActivity.this, hash, qrScannedController.scoreCalculator(hash), currentLocation, bitMapString, codeContent);
 
-                                    // save location information
-                                    locationController.saveLocation(cityName, String.valueOf(location.getLatitude()) +"," + String.valueOf(location.getLongitude()), QrScannedActivity.this, hash);
                                     Toast.makeText(QrScannedActivity.this, "QR saved", Toast.LENGTH_SHORT).show();
                                     finish();
                                 } catch (Exception e) {
@@ -274,7 +272,7 @@ public class QrScannedActivity extends AppCompatActivity {
 
                         // get location in locationController
                         locationController.run(this, null, locationManager,  fusedLocationProviderClient);
-                        
+
                         // ask permission
                         qrScannedController.checkPermission(this);
                     }

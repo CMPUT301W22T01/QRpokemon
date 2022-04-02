@@ -113,6 +113,9 @@ public class QrInventoryController {
 
                             if (currentPlayer.get("DeviceId").equals(Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID))){ // if it's owner of device:
                                 if ((String) (dataList.get(dataList.size()-1).get("Content")) == null){
+                                    if (bitmap == null) {
+                                        bitmap = "null";
+                                    }
                                     qrInventory.add(String.valueOf(dataList.get(dataList.size()-1).get("Score"))
                                             + " "
                                             + (String) (dataList.get(dataList.size()-1).get("Identifier"))
