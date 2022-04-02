@@ -168,8 +168,6 @@ public class QrScannedController {
                         e.printStackTrace();
                     }
                 }
-
-
             }
         };
 

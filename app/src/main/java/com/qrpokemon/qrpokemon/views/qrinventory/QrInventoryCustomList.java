@@ -60,7 +60,7 @@ public class QrInventoryCustomList extends ArrayAdapter<String> {
         } else { // if code has content, show content
             String temp = "";
             for (int i = 3; i < tStr.length; i++) {
-                temp +=tStr[i];
+                temp +=tStr[i] + " ";
             }
             hashTV.setText(temp);
             Log.e("QrInventoryCustomList: ",temp);
