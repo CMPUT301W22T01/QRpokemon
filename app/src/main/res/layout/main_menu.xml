@@ -20,45 +20,45 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/user_textView" />
 
-        <Button
-            android:id="@+id/Map_Button"
-            android:layout_width="286dp"
-            android:layout_height="65dp"
-            android:layout_marginTop="32dp"
-            android:background="@drawable/custom_button_main_menu"
-            android:backgroundTint="@color/gray"
-            android:text="Map"
-            android:textColor="#000000"
-            app:layout_constraintHorizontal_bias="0.504"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/QR_Inventory_Button" />
+    <Button
+        android:id="@+id/Map_Button"
+        android:layout_width="286dp"
+        android:layout_height="65dp"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/custom_button_main_menu"
+        android:backgroundTint="@color/gray"
+        android:text="Map"
+        android:textColor="#000000"
+        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/QR_Inventory_Button" />
 
-        <Button
-            android:id="@+id/Search_Button"
-            android:layout_width="286dp"
-            android:layout_height="65dp"
-            android:layout_marginTop="32dp"
-            android:background="@drawable/custom_button_main_menu"
-            android:backgroundTint="@color/gray"
-            android:text="Search"
-            android:textColor="#000000"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/Map_Button" />
+    <Button
+        android:id="@+id/Search_Button"
+        android:layout_width="286dp"
+        android:layout_height="65dp"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/custom_button_main_menu"
+        android:backgroundTint="@color/gray"
+        android:text="Search"
+        android:textColor="#000000"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Map_Button" />
 
-        <Button
-            android:id="@+id/Leaderboard_Button"
-            android:layout_width="286dp"
-            android:layout_height="65dp"
-            android:layout_marginTop="32dp"
-            android:background="@drawable/custom_button_main_menu"
-            android:backgroundTint="@color/gray"
-            android:text="Leaderboard"
-            android:textColor="#000000"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/Search_Button" />
+    <Button
+        android:id="@+id/Leaderboard_Button"
+        android:layout_width="286dp"
+        android:layout_height="65dp"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/custom_button_main_menu"
+        android:backgroundTint="@color/gray"
+        android:text="@string/leaderboard_title"
+        android:textColor="#000000"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Search_Button" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/Other_Player_Button"
@@ -66,10 +66,10 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
         android:clickable="true"
-        app:backgroundTint="@android:color/darker_gray"
+        app:backgroundTint="@color/gray"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/Leaderboard_Button"
-        app:srcCompat="@drawable/ic_user_scan" />
+        app:srcCompat="@drawable/ic_user_scan_black" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/admin_Button"
@@ -89,10 +89,10 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
         android:clickable="true"
-        app:backgroundTint="@android:color/darker_gray"
+        app:backgroundTint="@color/gray"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/Leaderboard_Button"
-        app:srcCompat="@drawable/ic_add" />
+        app:srcCompat="@drawable/ic_qr_scan_black" />
 
     <ImageView
         android:layout_height="150dp"
