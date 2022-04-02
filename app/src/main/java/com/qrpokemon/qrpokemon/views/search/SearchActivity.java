@@ -79,7 +79,6 @@ public class SearchActivity extends AppCompatActivity {
         searchBox.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
             }
 
             @Override

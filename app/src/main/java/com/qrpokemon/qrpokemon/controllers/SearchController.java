@@ -141,12 +141,24 @@ public class SearchController {
                                 }
                             }
 
-                            qMyAdapter.add(new SearchItem(
+                            SearchItem locationSearchItem = new SearchItem(
                                     (String) currentLocation.get("Identifier"),
                                     null,
                                     null,
-                                    currentQrList
-                            ));
+                                    currentQrList);
+                            int checkInside = 0;
+                            for (int i = 0; i < qMyAdapter.getCount(); i++){
+                                if (locationSearchItem.equals(qMyAdapter.getItem(i))){
+                                    checkInside = 1;
+                                }
+                            }
+                            if (checkInside == 0){
+                                qMyAdapter.add(locationSearchItem);
+                            }
+                            else{
+                                qMyAdapter.clear();
+                            }
+
                             Log.e("SearchController: ", "Qr found: " + currentQrList.toString());
                             qMyAdapter.notifyDataSetChanged();
                         }
