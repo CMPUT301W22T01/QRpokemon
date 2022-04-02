@@ -1,9 +1,16 @@
 package com.qrpokemon.qrpokemon.views.owner;
 
+import static android.view.View.INVISIBLE;
+
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Base64;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -11,30 +18,38 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.qrpokemon.qrpokemon.R;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class PlayerRecyclerAdapter extends RecyclerView.Adapter<PlayerRecyclerAdapter.ViewHolder> {
 
-    private List<Map> players;
+    private Boolean isPlayer;
+    private List<Map> items;
     private OnItemListener mOnItemListener;
 
-    public PlayerRecyclerAdapter(List<Map> players, OnItemListener onItemListener) {
-        this.players = players;
+    final private String TAG = "PlayerRecyclerAdapter";
+
+    public PlayerRecyclerAdapter(List<Map> items, Boolean isPlayer, OnItemListener onItemListener) {
+        this.items = items;
+        this.isPlayer = isPlayer;
         this.mOnItemListener = onItemListener;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        private TextView playerNameTxt;
+        private TextView itemNameTxt;
+        private ImageView imageOfQrcode;
         private OnItemListener onItemListener;
         private Button delete;
 
         public ViewHolder (final View view, OnItemListener onItemListener) {
             super(view);
 
-            this.playerNameTxt = view.findViewById(R.id.username);
+            this.itemNameTxt = view.findViewById(R.id.username);
             this.delete = view.findViewById(R.id.player_delete_btn);
             this.onItemListener = onItemListener;
+            this.imageOfQrcode = view.findViewById(R.id.iv_admin_image);
 
             this.delete.setOnClickListener(this);
             view.setOnClickListener(this);
@@ -60,16 +75,59 @@ public class PlayerRecyclerAdapter extends RecyclerView.Adapter<PlayerRecyclerAd
 
     @Override
     public void onBindViewHolder(@NonNull PlayerRecyclerAdapter.ViewHolder holder, int position) {
-        String playerName = ((String) players.get(position).get("Identifier"));
-        holder.playerNameTxt.setText(playerName);
+
+        if (isPlayer) { // if the user "click" player button
+
+            String itemName = ((String) items.get(position).get("Identifier"));
+            holder.itemNameTxt.setText(itemName);
+            holder.imageOfQrcode.setVisibility(INVISIBLE);
+
+
+        } else { // if the user click "code" button
+
+            try {
+                String itemName = ((String) items.get(position).get("Content"));
+                holder.itemNameTxt.setText(itemName);
+            } catch (Exception e) {
+                e.printStackTrace();
+                Log.e(TAG, "Error from 'clicking code', 'get content'");
+            }
+
+            try {
+                HashMap tMap = (HashMap) items.get(position).get("Bitmap");
+
+                // get all the key(player id) of the current qrCode
+                String[] tKeys;
+                ArrayList<String> playerList = new ArrayList<>();
+                tKeys = (String[]) tMap.keySet().toArray(new String[0]);
+
+                String bitmapString = (String) tMap.get(tKeys[0]);
+                Bitmap bitmap = StringToBitMap(bitmapString);
+                holder.imageOfQrcode.setImageBitmap(bitmap);
+            } catch (Exception e) {
+                e.printStackTrace();
+                Log.e(TAG, "Error from 'clicking code', 'get bitmap'");
+            }
+        }
     }
 
     @Override
     public int getItemCount() {
-        return players.size();
+        return items.size();
     }
 
     public interface OnItemListener {
         void onItemClick(int position);
+    }
+
+    public Bitmap StringToBitMap(String encodedString){
+        try {
+            byte [] encodeByte= Base64.decode(encodedString,Base64.DEFAULT);
+            Bitmap bitmap= BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
+            return bitmap;
+        } catch(Exception e) {
+            e.getMessage();
+            return null;
+        }
     }
 }

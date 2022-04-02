@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.qrpokemon.qrpokemon.R;
 import com.qrpokemon.qrpokemon.controllers.DatabaseCallback;
 import com.qrpokemon.qrpokemon.controllers.PlayerController;
@@ -26,7 +27,8 @@ public class OwnerActivity extends AppCompatActivity implements PlayerRecyclerAd
     private RecyclerView recyclerView;
     private List<Map> items;
     private PlayerRecyclerAdapter radapter;
-    private Button playerBtn, codeBtn, backBtn;
+    private Button playerBtn, codeBtn;
+    private FloatingActionButton backBtn;
     private Boolean isPlayer;
     private RecyclerView.LayoutManager layoutManager;
 
@@ -90,7 +92,7 @@ public class OwnerActivity extends AppCompatActivity implements PlayerRecyclerAd
     }
 
     private void setAdapter(List<Map> players) {
-        radapter = new PlayerRecyclerAdapter(players, this);
+        radapter = new PlayerRecyclerAdapter(players, isPlayer, this);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
 
         recyclerView.setLayoutManager(layoutManager);

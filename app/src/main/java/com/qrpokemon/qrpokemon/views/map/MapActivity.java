@@ -13,6 +13,7 @@ import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.SupportMapFragment;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.qrpokemon.qrpokemon.R;
 import com.qrpokemon.qrpokemon.controllers.MapController;
 
@@ -28,7 +29,7 @@ public class MapActivity extends AppCompatActivity  {
         setContentView(R.layout.map);
 
 
-        Button backButton = findViewById(R.id.button);
+        FloatingActionButton backButton = findViewById(R.id.button);
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

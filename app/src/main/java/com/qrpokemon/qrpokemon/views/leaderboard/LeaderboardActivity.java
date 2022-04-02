@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.qrpokemon.qrpokemon.R;
 import com.qrpokemon.qrpokemon.controllers.LeaderboardController;
 
@@ -18,7 +19,7 @@ public class LeaderboardActivity extends AppCompatActivity {
     // Init variables
     private RecyclerView leaderboardRecyclerView;
     private Spinner sortBy;
-    private ImageButton backButton;
+    private FloatingActionButton backButton;
 
     // Leaderboard variables
     private LeaderboardController leaderboardController;
