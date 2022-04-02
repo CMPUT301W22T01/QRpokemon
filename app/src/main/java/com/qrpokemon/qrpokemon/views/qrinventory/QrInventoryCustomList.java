@@ -53,16 +53,23 @@ public class QrInventoryCustomList extends ArrayAdapter<String> {
         ImageView codeIV = view.findViewById(R.id.imageView);
 
         // setText
-        hashTV.setText(tStr[1]);
         scoreTV.setText("Score: " + tStr[0]);
         if (tStr.length < 4){ // if code doesn't have content, show qrhash
-            hashTV.setText(tStr[1]);
+            if (tStr[1].length() > 16) {
+                hashTV.setText(tStr[1].substring(0, 15) + "...");
+            } else {
+                hashTV.setText(tStr[1]);
+            }
         } else { // if code has content, show content
             String temp = "";
             for (int i = 3; i < tStr.length; i++) {
-                temp +=tStr[i];
+                temp += tStr[i] + " ";
             }
-            hashTV.setText(temp);
+            if (temp.length() > 16) {
+                hashTV.setText(temp.substring(0, 15) + "...");
+            } else {
+                hashTV.setText(temp);
+            }
             Log.e("QrInventoryCustomList: ",temp);
         }
 
