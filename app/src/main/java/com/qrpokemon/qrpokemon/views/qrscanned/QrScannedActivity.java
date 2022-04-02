@@ -203,7 +203,7 @@ public class QrScannedActivity extends AppCompatActivity {
 
                                         // convert bitmap to string
                                         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-                                        bitmap.compress(Bitmap.CompressFormat.PNG,100, byteArrayOutputStream);
+                                        bitmap.compress(Bitmap.CompressFormat.PNG,100, byteArrayOutputStream); // 100 is permission code for location
                                         byte[] b = byteArrayOutputStream.toByteArray();
                                         bitMapString = Base64.encodeToString(b, Base64.DEFAULT);
 //                                        Toast.makeText(QrScannedActivity.this, "Photo saved", Toast.LENGTH_SHORT).show();
