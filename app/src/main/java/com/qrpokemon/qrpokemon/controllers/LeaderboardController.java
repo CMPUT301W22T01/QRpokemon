@@ -45,7 +45,7 @@ public class LeaderboardController {
                 sortField = null;
         }
 
-        DatabaseProxy databaseProxy = DatabaseProxy.getInstance();
+        PlayerController playerController = PlayerController.getInstance();
         DatabaseCallback callback = new DatabaseCallback(context) {
             @Override
             public void run(List<Map> playerList) {
@@ -70,8 +70,7 @@ public class LeaderboardController {
         try {
             // Fetch data and update our leaderboard list
             list.clear();
-            databaseProxy.getData(callback, new ArrayList<>(), "Player",
-                    null, sortField,"Identifier");
+            playerController.getAllPlayers(callback, new ArrayList<>(), sortField);
         } catch (Exception exception) {
             Log.e("Leaderboard Controller: ", "Database call failed");
             Log.e("Leaderboard Controller: ", exception.toString());
