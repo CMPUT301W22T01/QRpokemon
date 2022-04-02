@@ -145,6 +145,12 @@ public class QrScannedActivity extends AppCompatActivity {
                                 if (locationSave.isChecked()){
                                     saveLocation = true;
                                     cityName = locationController.getCity(QrScannedActivity.this);
+                                    //setup for getting location:
+                                    LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+                                    FusedLocationProviderClient fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(QrScannedActivity.this);
+
+                                    //get location in mapController, set username in main menu and check if current player is an owner
+                                    locationController.run(QrScannedActivity.this, null, locationManager, fusedLocationProviderClient);
                                     location = locationController.returnLocation();
                                     Log.e("QrScannedActivity: ", String.valueOf(location.getLatitude()) + String.valueOf(location.getLongitude()));
                                     Toast.makeText(QrScannedActivity.this, "Location will be saved " + String.valueOf(location.getLatitude()) + String.valueOf(location.getLongitude()), Toast.LENGTH_SHORT).show();
@@ -183,6 +189,7 @@ public class QrScannedActivity extends AppCompatActivity {
                                             highestUnique = qrScannedController.scoreCalculator(hash);
                                         }
                                         qrInventory.add(hash);
+                                        Log.e("QrScannedActivity: ","Player's qrInventory now is: " + qrInventory.toString());
                                         playerController.savePlayerData(qrCount, qrTotal, qrInventory, null, highestUnique, null, null,false);
                                     }
 
@@ -262,6 +269,14 @@ public class QrScannedActivity extends AppCompatActivity {
                     Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                     activityResultLauncher.launch(intent);
                     break;
+                }
+            case 101: // location request code
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    if (ContextCompat.checkSelfPermission(this,
+                            Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                        // ask permission
+                        qrScannedController.checkPermission(this);
+                    }
                 }
         }
     }

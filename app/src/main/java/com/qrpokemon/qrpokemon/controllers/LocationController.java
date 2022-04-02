@@ -213,7 +213,7 @@ public class LocationController implements OnMapReadyCallback, LocationListener 
             databaseProxy.getData(databaseCallback,new ArrayList<>(), "LocationIndex", cityName, null, "Identifier");
         } catch (Exception e) {
             e.printStackTrace();
-            Log.e("LocatioinController: ", "city not found!");
+            Log.e("Location Controller: ", "city not found!");
         }
 
     }

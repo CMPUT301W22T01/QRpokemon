@@ -70,6 +70,10 @@ public class MainMenuController implements Observer {
         }
     }
 
+    /**
+     * Check camera permission
+     * @param context MainActivity
+     */
     public void checkPermission(Context context) {
         qrScannedController.checkPermission(context);
     }

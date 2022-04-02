@@ -162,7 +162,6 @@ public class QrScannedController {
                     try {
                         HashMap currentPlayer = playerController.getPlayer(null,null,null,null);
                         bitmapHash.put((String) currentPlayer.get("Identifier"), bitmap);
-                        bitmapHash.put("Content", codeContent);
                         qrCodeController.saveQr(qrHash, score, location1,null ,bitmapHash,codeContent, true);
 
                     } catch (Exception e) {

@@ -43,12 +43,12 @@ public class MapController {
 
     }
 
-    public void getAllQr(DatabaseCallback databaseCallback, List<Map> result) {
-        try {
-            qrCodeController.getQR(databaseCallback, result,null);
-        } catch (Exception e) {
-            e.printStackTrace();
-            Log.e("MapController: ", "Invalid collection name");
-        }
-    }
+//    public void getAllQr(DatabaseCallback databaseCallback, List<Map> result) {
+//        try {
+//            qrCodeController.getQR(databaseCallback, result,null);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            Log.e("MapController: ", "Invalid collection name");
+//        }
+//    }
 }
