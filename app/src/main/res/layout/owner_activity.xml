@@ -33,6 +33,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
                 android:id="@+id/owner_backBtn"
+                android:background="@color/gray"
                 android:text="Back" />
 
         </LinearLayout>

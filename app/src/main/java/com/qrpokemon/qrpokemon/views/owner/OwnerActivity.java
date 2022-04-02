@@ -90,7 +90,7 @@ public class OwnerActivity extends AppCompatActivity implements PlayerRecyclerAd
     }
 
     private void setAdapter(List<Map> players) {
-        radapter = new PlayerRecyclerAdapter(players, this);
+        radapter = new PlayerRecyclerAdapter(players, isPlayer, this);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
 
         recyclerView.setLayoutManager(layoutManager);
