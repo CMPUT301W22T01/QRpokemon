@@ -226,6 +226,9 @@ public class QrScannedActivity extends AppCompatActivity {
                         Toast.makeText(QrScannedActivity.this, "No QR found!", Toast.LENGTH_SHORT).show();
                         finish();
                     }
+                } else {
+                    Toast.makeText(QrScannedActivity.this, "No QR found!", Toast.LENGTH_SHORT).show();
+                    finish();
                 }
 
             }
