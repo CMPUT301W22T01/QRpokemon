@@ -59,7 +59,7 @@ public class OwnerActivity extends AppCompatActivity implements PlayerRecyclerAd
                         }
                     }
                 };
-                playerController.getAllPlayer(databaseCallback, new ArrayList<>());
+                playerController.getAllPlayers(databaseCallback, new ArrayList<>());
             }
         });
 

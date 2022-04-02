@@ -5,6 +5,7 @@ import android.content.Context;
 import android.util.Log;
 import android.widget.ArrayAdapter;
 
+import com.qrpokemon.qrpokemon.models.Player;
 import com.qrpokemon.qrpokemon.views.search.*;
 
 import java.util.ArrayList;
@@ -16,7 +17,8 @@ import java.util.Set;
 public class SearchController {
 
     static private SearchController controllerInstance;
-
+    private LocationController locationController = LocationController.getInstance();
+    private PlayerController playerController = PlayerController.getInstance();
 
     private SearchController() {}
 
@@ -35,7 +37,8 @@ public class SearchController {
      */
     public void getPlayerSearch(Context context, String userName, ArrayAdapter<SearchItem> qMyAdapter) {
         List<Map> temp = new ArrayList<>();  // Store our db results temporarily
-        DatabaseProxy databaseProxy = DatabaseProxy.getInstance();
+//        DatabaseProxy databaseProxy = DatabaseProxy.getInstance();
+
 
         if(!userName.isEmpty()) {
             qMyAdapter.clear();
@@ -45,9 +48,6 @@ public class SearchController {
             public void run(List<Map> playerList) {
                 // Add each player to our Search list
                 //Log.e("SearchController: ", "Inside run");
-                if(!userName.isEmpty()) {
-                    qMyAdapter.clear();
-                }
                 if(!playerList.isEmpty() && !userName.isEmpty()) {
                     // clear previous search result when searching for a new thing
 
@@ -93,7 +93,8 @@ public class SearchController {
         };
 
         try {
-            databaseProxy.getData(callback, temp, "Player", null);
+            playerController.getAllPlayers(callback, temp);
+//            databaseProxy.getData(callback, temp, "Player", null);
         } catch (Exception exception) {
             Log.e("Search Controller: ", "Database call failed");
             Log.e("Search Controller: ", exception.toString());
@@ -109,11 +110,7 @@ public class SearchController {
      */
     public void getLocationSearch(Context context, String location, ArrayAdapter<SearchItem> qMyAdapter) {
         List<Map> temp = new ArrayList<>();  // Store our db results temporarily
-        DatabaseProxy databaseProxy = DatabaseProxy.getInstance();
-
-        if(!location.isEmpty()) {
-            qMyAdapter.clear();
-        }
+//        DatabaseProxy databaseProxy = DatabaseProxy.getInstance();
 
         DatabaseCallback callback = new DatabaseCallback(context) {
             @Override
@@ -146,21 +143,25 @@ public class SearchController {
                                     null,
                                     null,
                                     currentQrList);
-                            int checkInside = 0;
-                            for (int i = 0; i < qMyAdapter.getCount(); i++){
-                                if (locationSearchItem.equals(qMyAdapter.getItem(i))){
-                                    checkInside = 1;
+
+                            int checker = 0;
+                            for (int i = 0; i < qMyAdapter.getCount(); i++) {
+                                if (qMyAdapter.getItem(i) == locationSearchItem) {
+                                    checker  = 1;
+                                    break;
+
                                 }
                             }
-                            if (checkInside == 0){
-                                qMyAdapter.add(locationSearchItem);
-                            }
-                            else{
-                                qMyAdapter.clear();
-                            }
 
-                            Log.e("SearchController: ", "Qr found: " + currentQrList.toString());
-                            qMyAdapter.notifyDataSetChanged();
+                            if(checker == 0) {
+                                qMyAdapter.add(locationSearchItem);
+                                qMyAdapter.notifyDataSetChanged();
+                            }
+                            Log.e("SearchController :", locationSearchItem.toString());
+//                            else{
+//                                qMyAdapter.remove(locationSearchItem);
+//                            }
+
                         }
                     }
 
@@ -169,9 +170,9 @@ public class SearchController {
         };
 
         try {
-            databaseProxy.getData(callback, temp, "LocationIndex", null);
+            locationController.getAllLocation(callback, temp);
+//            databaseProxy.getData(callback, temp, "LocationIndex", null);
         } catch (Exception exception) {
-            Log.e("Search Controller: ", "Database call failed");
             Log.e("Search Controller: ", exception.toString());
             ((Activity) context).finish();  // Quit the activity on error
         }

@@ -154,12 +154,16 @@ public class PlayerController extends Observable {
         }
     }
 
-    public void getAllPlayer(DatabaseCallback databaseCallback, List<Map> result){
+
+    public void getAllPlayers(DatabaseCallback databaseCallback, List<Map> result, @Nullable String sortField){
         try {
-            databaseProxy.getData(databaseCallback, result, player);
+            databaseProxy.getData(databaseCallback, result, player, null, sortField, "Identifier");
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+    public void getAllPlayers(DatabaseCallback databaseCallback, List<Map> result) {
+        getAllPlayers(databaseCallback, result, null);
     }
 
     public void deletePlayer(String playerName) throws Exception {

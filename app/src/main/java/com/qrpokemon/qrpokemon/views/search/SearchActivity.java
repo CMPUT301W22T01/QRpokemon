@@ -79,20 +79,20 @@ public class SearchActivity extends AppCompatActivity {
         searchBox.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                mAdapter.clear();
             }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 //Log.e("SearchActivity: ", "count: " + count);
+                mAdapter.clear();
             }
 
             @Override
             public void afterTextChanged(Editable s) {
                 Log.e("SearchActivity: ","current input: " + s.toString());
-                listView.setAdapter(mAdapter);
                 searchController.getPlayerSearch(getApplicationContext(), s.toString(), mAdapter);
                 searchController.getLocationSearch(getApplicationContext(), s.toString(), mAdapter);
-                mAdapter.notifyDataSetChanged();
             }
         });
 
