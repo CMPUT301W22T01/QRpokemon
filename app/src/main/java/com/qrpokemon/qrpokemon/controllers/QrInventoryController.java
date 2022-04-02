@@ -20,7 +20,7 @@ import java.util.Observer;
 
 public class QrInventoryController {
 
-    private Integer totalScore = 0;
+    private Integer checker, totalScore, totalCount;
     private HashMap<String, Object> data = new HashMap<>();
     private PlayerController playerController = PlayerController.getInstance();
     private QrCodeController qrCodeController = QrCodeController.getInstance();
@@ -93,7 +93,9 @@ public class QrInventoryController {
      */
     public HashMap<String, Object> getAndSetQrCodeData(Context context, ArrayList<String> qrHashCodes, ArrayAdapter<String> qrInventory, String currentPlayer) throws Exception {
 
+        checker = 0;
         totalScore = 0;
+        totalCount = 0;
         List<Map> result = new ArrayList<Map>();
         DatabaseCallback databaseCallback = new DatabaseCallback(context) {
 
@@ -101,7 +103,8 @@ public class QrInventoryController {
             public void run(List<Map> dataList) {
 
                 if (!dataList.isEmpty()) {
-                    if (dataList != null ) {
+                    if (dataList != null && checker < dataList.size()) {
+                        checker = dataList.size();
                         data.put((String) dataList.get(dataList.size()-1).get("Identifier"), dataList);
                         ListView temp = ((Activity) context).findViewById(R.id.QR_inventory_list);
 
@@ -156,10 +159,16 @@ public class QrInventoryController {
                         }
 
                         totalScore += Integer.valueOf(String.valueOf( dataList.get(dataList.size()-1).get("Score")));
+                        totalCount += 1;
 
                         // set the value of total score
                         TextView tvScore = ((Activity) context).findViewById(R.id.tv_total_score);
+                        TextView tvCount = ((Activity) context).findViewById(R.id.tv_total_count);
+
                         tvScore.setText(totalScore.toString());
+                        tvCount.setText("Total Number: " + totalCount.toString());
+
+                        // todo change highestUnique & qrCount & totalScore
 
                         temp.setAdapter(qrInventory);
 

@@ -100,9 +100,6 @@ public class QrInventoryActivity
         // Get all hashcode of the qrcode that owned by the player
         qrHashCodes = (ArrayList<String>) hashMapOfPlayerData.get("qrInventory");
 
-        // Set the total # of the qrCodes the current user has
-        totalCount.setText("Total Number: " + qrHashCodes.size());
-
         // Get and set the data from the documents of each qrcode in ArrayList "qrHashCode"
         qrInventoryDataAdapter = new QrInventoryCustomList(this, new ArrayList<String>());
         qrInventoryList.setAdapter(qrInventoryDataAdapter);
