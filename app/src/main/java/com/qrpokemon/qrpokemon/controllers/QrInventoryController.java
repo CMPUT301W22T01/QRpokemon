@@ -163,10 +163,10 @@ public class QrInventoryController {
 
                         // set the value of total score
                         TextView tvScore = ((Activity) context).findViewById(R.id.tv_total_score);
-                        TextView tvCount = ((Activity) context).findViewById(R.id.tv_total_number_txt);
+                        TextView tvCount = ((Activity) context).findViewById(R.id.tv_qr_count);
 
                         tvScore.setText(totalScore.toString());
-                        tvCount.setText("Total Number: " + totalCount.toString());
+                        tvCount.setText(totalCount.toString());
 
                         // todo change highestUnique & qrCount & totalScore
 
