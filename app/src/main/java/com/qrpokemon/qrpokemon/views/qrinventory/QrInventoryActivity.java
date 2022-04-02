@@ -26,8 +26,10 @@ import com.qrpokemon.qrpokemon.controllers.PlayerController;
 import com.qrpokemon.qrpokemon.R;
 import com.qrpokemon.qrpokemon.controllers.QrInventoryController;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -403,6 +405,11 @@ public class QrInventoryActivity
         HashMap<String, HashMap> tHash = new HashMap<>();
         ArrayList<String> tList;
 
+        // add current date to comment
+        Date date = new Date();
+        SimpleDateFormat formatter = new SimpleDateFormat("MM-dd-yyyy HH:mm:ss");
+        comment = "[" + formatter.format(date) + "]" + " " + comment;
+
         // add the new comment into the original HashMap
         tList = (ArrayList<String>) commentsOfCurQrcode.get(currentPlayer);
         try {
@@ -413,6 +420,7 @@ public class QrInventoryActivity
         }
 
         commentsOfCurQrcode.put(currentPlayer, tList);
+
         // update data of Firebase
         tHash.put("Comments", commentsOfCurQrcode);
         Log.e("QrInventoryActivity: ", (String) currentQR.toString());
