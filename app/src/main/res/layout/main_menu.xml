@@ -101,7 +101,7 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginTop="32dp"
-        tools:srcCompat="@tools:sample/avatars"
+        android:src="@drawable/d_icon"
         app:layout_constraintTop_toTopOf="parent"/>
 
 

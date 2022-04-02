@@ -118,30 +118,37 @@ public class QrInventoryController {
                                     if (bitmap == null) {
                                         bitmap = "null";
                                     }
-                                    qrInventory.add(String.valueOf(dataList.get(dataList.size()-1).get("Score"))
-                                            + " "
-                                            + (String) (dataList.get(dataList.size()-1).get("Identifier"))
-                                            + " "
-                                            + bitmap);
+                                    if (dataList.get(dataList.size()-1).get("Identifier") != null) {
+                                        qrInventory.add(String.valueOf(dataList.get(dataList.size()-1).get("Score"))
+                                                + " "
+                                                + (String) (dataList.get(dataList.size()-1).get("Identifier"))
+                                                + " "
+                                                + bitmap);
+                                    }
                                 } else {
-                                    qrInventory.add(String.valueOf(dataList.get(dataList.size()-1).get("Score"))
-                                            + " "
-                                            + (String) (dataList.get(dataList.size()-1).get("Identifier"))
-                                            + " "
-                                            + bitmap
-                                            + " "
-                                            + (String) (dataList.get(dataList.size()-1).get("Content")));
+                                    if (dataList.get(dataList.size()-1).get("Identifier") != null) {
+                                        qrInventory.add(String.valueOf(dataList.get(dataList.size()-1).get("Score"))
+                                                + " "
+                                                + (String) (dataList.get(dataList.size()-1).get("Identifier"))
+                                                + " "
+                                                + bitmap
+                                                + " "
+                                                + (String) (dataList.get(dataList.size()-1).get("Content")));
+                                    }
                                 }
 
                             } else { // if it's someone else browsing qrInventory
                                 // Change title  of QRInventory
                                 ((TextView)((Activity)context).findViewById(R.id.QR_inventory_title)).setText((String)currentPlayer.get("Identifier"));
                                 ((TextView)((Activity)context).findViewById(R.id.QR_inventory_title)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 30);
-                                qrInventory.add(String.valueOf(dataList.get(dataList.size()-1).get("Score"))
-                                        + " "
-                                        + (String) (dataList.get(dataList.size()-1).get("Identifier"))
-                                        + " "
-                                        + bitmap);
+
+                                if (dataList.get(dataList.size()-1).get("Identifier") != null) {
+                                    qrInventory.add(String.valueOf(dataList.get(dataList.size()-1).get("Score"))
+                                            + " "
+                                            + (String) (dataList.get(dataList.size()-1).get("Identifier"))
+                                            + " "
+                                            + bitmap);
+                                }
                             }
 
                         } catch (Exception e) {
