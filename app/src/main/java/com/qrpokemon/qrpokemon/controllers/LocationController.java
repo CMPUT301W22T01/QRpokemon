@@ -170,6 +170,15 @@ public class LocationController implements OnMapReadyCallback, LocationListener 
         return cityName;
     }
 
+    /**
+     * Save qrcode by cityName/regionName
+     * Create a new city if city has no qrcode before
+     * City stores an HashMap <Location Coordinate, arrayList of qrCodes>
+     * @param cityName city Name player is currently at
+     * @param coordinate coordinate of location, in formation 'latitude, Longitude'
+     * @param context Activity calls it, mostly QrScannedActivity
+     * @param qrhash qrHashCode that is passed in
+     */
     public void saveLocation (String cityName, String coordinate, Context context, String qrhash) {
         HashMap data = new HashMap();
         DatabaseCallback databaseCallback = new DatabaseCallback(context) {
@@ -178,6 +187,7 @@ public class LocationController implements OnMapReadyCallback, LocationListener 
                 if (dataList.isEmpty()){ //this city isn't found, create a new city category
                     Log.e("LocationController: ", "City is new");
                     data.put("Identifier", cityName);
+                    qrhashList = new ArrayList<String >();
                     qrhashList.add(qrhash);
                     data.put(coordinate,qrhashList);
                     try {
