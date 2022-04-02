@@ -53,8 +53,13 @@ public class QrInventoryCustomList extends ArrayAdapter<String> {
         ImageView codeIV = view.findViewById(R.id.imageView);
 
         // setText
-        hashTV.setText(tStr[1].substring(0, 16) + "...");
         scoreTV.setText("Score: " + tStr[0]);
+        if (tStr.length != 4){ // if code doesn't have content, show qrhash
+            hashTV.setText(tStr[1]);
+        } else { // if code has content, show content
+            hashTV.setText(tStr[3]);
+        }
+
 
         // setImageBitmap
         String encodedString = tStr[tStr.length-1];

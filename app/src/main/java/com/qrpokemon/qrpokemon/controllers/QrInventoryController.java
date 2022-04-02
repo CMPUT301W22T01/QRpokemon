@@ -121,9 +121,11 @@ public class QrInventoryController {
                                 } else {
                                     qrInventory.add(String.valueOf(dataList.get(dataList.size()-1).get("Score"))
                                             + " "
-                                            + (String) (dataList.get(dataList.size()-1).get("Content"))
+                                            + (String) (dataList.get(dataList.size()-1).get("Identifier"))
                                             + " "
-                                            + bitmap);
+                                            + bitmap
+                                            + " "
+                                            + (String) (dataList.get(dataList.size()-1).get("Content")));
                                 }
 
                             } else { // if it's someone else browsing qrInventory
