@@ -26,7 +26,7 @@ public class QrInventoryController {
     private static QrInventoryController currentInstance;
     final private String TAG = "QrInventoryController";
 
-    private QrInventoryController(){}
+    protected QrInventoryController(){}
 
     public static QrInventoryController getInstance() {
         if (currentInstance == null)
