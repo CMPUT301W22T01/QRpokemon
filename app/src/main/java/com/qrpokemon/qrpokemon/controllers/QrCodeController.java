@@ -71,4 +71,12 @@ public class QrCodeController {
     public void getQR(DatabaseCallback databaseCallback, List<Map> list, String objectName) throws Exception {
         databaseProxy.getData(databaseCallback, list, "QrCode", objectName);
     }
+
+    public void deleteQr(String objectName) {
+        try {
+            databaseProxy.deleteData("QrCode", objectName);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

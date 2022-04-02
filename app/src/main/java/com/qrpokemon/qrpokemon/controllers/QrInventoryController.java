@@ -3,6 +3,8 @@ package com.qrpokemon.qrpokemon.controllers;
 import android.app.Activity;
 import android.content.Context;
 import android.provider.Settings;
+import android.util.Log;
+import android.util.TypedValue;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -61,7 +63,7 @@ public class QrInventoryController {
                                     ((Long)currentPlayer.get("totalScore")).intValue(),
                                     ((Long)currentPlayer.get("highestUnique")).intValue(),
                                     (Boolean)currentPlayer.get("Owner"),
-                                    (String) currentPlayer.get("id"));
+                                    (String) currentPlayer.get("DeviceId"));
                         }
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -109,7 +111,7 @@ public class QrInventoryController {
                         HashMap<String, Object> currentPlayer = null;
                         try {
                             currentPlayer  = playerController.getPlayer(null,null,null,null);
-
+                            Log.e("QrInventoryController: ",currentPlayer.toString());
 
                             if (currentPlayer.get("DeviceId").equals(Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID))){ // if it's owner of device:
                                 if ((String) (dataList.get(dataList.size()-1).get("Content")) == null){
@@ -132,6 +134,9 @@ public class QrInventoryController {
                                 }
 
                             } else { // if it's someone else browsing qrInventory
+                                // Change title  of QRInventory
+                                ((TextView)((Activity)context).findViewById(R.id.QR_inventory_title)).setText((String)currentPlayer.get("Identifier"));
+                                ((TextView)((Activity)context).findViewById(R.id.QR_inventory_title)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 30);
                                 qrInventory.add(String.valueOf(dataList.get(dataList.size()-1).get("Score"))
                                         + " "
                                         + (String) (dataList.get(dataList.size()-1).get("Identifier"))

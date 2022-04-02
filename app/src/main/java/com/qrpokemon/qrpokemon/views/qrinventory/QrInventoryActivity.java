@@ -40,7 +40,7 @@ public class QrInventoryActivity
 
     private String selectedHash, selectedBitmap, currentPlayer;
     private Integer selectedPosition;
-    private TextView totalScore, totalCount;
+    private TextView totalScore, totalCount, qrInventoryTitle;
     private Button ascendingButton, descendingButton;
     private FloatingActionButton backButton, deleteButton, commentButton, showCommentsButton;
     private ListView qrInventoryList;
@@ -74,6 +74,7 @@ public class QrInventoryActivity
         ascendingButton = findViewById(R.id.bt_ascending);
         commentButton = findViewById(R.id.bt_comment);
         showCommentsButton = findViewById(R.id.bt_show_comments);
+        qrInventoryTitle = findViewById(R.id.QR_inventory_title);
 
         backButton.setOnClickListener(this);
         deleteButton.setOnClickListener(this);
@@ -153,6 +154,7 @@ public class QrInventoryActivity
             case R.id.bt_back:
                 try {
                     qrInventoryController.getPlayerInfo(null,true,this, this);
+                    qrInventoryTitle.setText("QrInventory");
                 } catch (Exception e) {
                     e.printStackTrace();
                     Log.e("QrInventory: ", "Error when retrieve back to current player");
@@ -431,7 +433,7 @@ public class QrInventoryActivity
      */
     @Override
     public void update(Observable observable, Object o) {
-        Log.e("QrInventoryActivity: ", "Being notified by playerController!");
+//        Log.e("QrInventoryActivity: ", "Being notified by playerController!");
         finish();
     }
 }
