@@ -1,34 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:fillViewport="true"
-    >
+    android:id="@+id/constraint_layout_main_menu">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/constraint_layout_main_menu"
-        >
-
-
-
-
-        <Button
-            android:id="@+id/QR_Inventory_Button"
-            android:layout_width="286dp"
-            android:layout_height="65dp"
-            android:layout_marginTop="32dp"
-            android:background="@drawable/custom_button_main_menu"
-            android:backgroundTint="@color/gray"
-            android:text="QR Inventory"
-            android:textColor="#000000"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/user_textView" />
+    <Button
+        android:id="@+id/QR_Inventory_Button"
+        android:layout_width="286dp"
+        android:layout_height="65dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/custom_button_main_menu"
+        android:backgroundTint="@color/gray"
+        android:text="QR Inventory"
+        android:textColor="#000000"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/user_textView" />
 
         <Button
             android:id="@+id/Map_Button"
@@ -70,93 +60,61 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/Search_Button" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/Leaderboard_Button"
-            tools:layout_editor_absoluteX="0dp">
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/Other_Player_Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:clickable="true"
+        app:backgroundTint="@android:color/darker_gray"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/Leaderboard_Button"
+        app:srcCompat="@drawable/ic_user_scan" />
 
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/Other_Player_Button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="60dp"
-                android:layout_marginBottom="24dp"
-                android:clickable="true"
-                app:backgroundTint="@android:color/darker_gray"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/admin_Button"
-                app:layout_constraintHorizontal_bias="0.049"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/Leaderboard_Button"
-                app:layout_constraintVertical_bias="1.0"
-                app:srcCompat="@drawable/ic_user" />
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/admin_Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:clickable="true"
+        app:backgroundTint="@color/red"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/Camera_Button"
+        app:layout_constraintStart_toEndOf="@+id/Other_Player_Button"
+        app:srcCompat="@drawable/ic_admin" />
 
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/admin_Button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="60dp"
-                android:layout_marginBottom="24dp"
-                android:clickable="true"
-                app:backgroundTint="@android:color/holo_red_dark"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.498"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/Leaderboard_Button"
-                app:layout_constraintVertical_bias="0.0"
-                app:srcCompat="@drawable/ic_admin" />
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/Camera_Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:clickable="true"
+        app:backgroundTint="@android:color/darker_gray"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/Leaderboard_Button"
+        app:srcCompat="@drawable/ic_add" />
 
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/Camera_Button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="64dp"
-                android:layout_marginBottom="24dp"
-                android:clickable="true"
-                app:backgroundTint="@android:color/darker_gray"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/admin_Button"
-                app:layout_constraintTop_toBottomOf="@+id/Leaderboard_Button"
-                app:layout_constraintVertical_bias="1.0"
-                app:srcCompat="@drawable/ic_add" />
-
-        </LinearLayout>
-
-        <ImageView
-            android:layout_height="150dp"
-            android:layout_width="150dp"
-            android:id="@+id/avatar_imageView"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            android:layout_marginTop="32dp"
-            tools:srcCompat="@tools:sample/avatars"
-            app:layout_constraintTop_toTopOf="parent"/>
+    <ImageView
+        android:layout_height="150dp"
+        android:layout_width="150dp"
+        android:id="@+id/avatar_imageView"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="32dp"
+        tools:srcCompat="@tools:sample/avatars"
+        app:layout_constraintTop_toTopOf="parent"/>
 
 
-        <TextView
-            android:id="@+id/user_textView"
-            android:layout_width="286dp"
-            android:layout_height="40dp"
-            android:layout_marginTop="16dp"
-            android:text="Username"
-            android:textAlignment="center"
-            android:textSize="24sp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/avatar_imageView" />
+    <TextView
+        android:id="@+id/user_textView"
+        android:layout_width="286dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="8dp"
+        android:text="Username"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/avatar_imageView" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
-
-
-
-
-</ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
