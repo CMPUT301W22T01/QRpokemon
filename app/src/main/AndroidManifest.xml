@@ -37,7 +37,7 @@
         <activity android:name=".views.qrscanned.QrScannedActivity" />
         <activity android:name=".views.qrinventory.QrInventoryActivity" />
         <activity android:name=".views.profile.ProfileActivity" />
-        <activity android:name=".OwnerActivity"/>
+        <activity android:name=".views.owner.OwnerActivity"/>
         <activity
             android:name=".views.map.MapActivity"
             android:exported="true" />

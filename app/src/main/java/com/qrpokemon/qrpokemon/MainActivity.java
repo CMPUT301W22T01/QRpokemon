@@ -14,7 +14,6 @@ import android.content.Intent;
 
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
-import android.location.LocationManager;
 import android.os.Bundle;
 
 import android.provider.MediaStore;
@@ -24,13 +23,11 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationServices;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import com.qrpokemon.qrpokemon.controllers.MapController;
 import com.qrpokemon.qrpokemon.views.leaderboard.LeaderboardActivity;
 import com.qrpokemon.qrpokemon.views.map.*;
+import com.qrpokemon.qrpokemon.views.owner.OwnerActivity;
 import com.qrpokemon.qrpokemon.views.profile.ProfileActivity;
 import com.qrpokemon.qrpokemon.views.qrinventory.QrInventoryActivity;
 import com.qrpokemon.qrpokemon.views.qrscanned.QrScannedActivity;
@@ -84,17 +81,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         adminBtn = findViewById(R.id.admin_Button);
         adminBtn.setVisibility(View.INVISIBLE);
 
-        //setup for getting location:
-        MapController mapController = MapController.getInstance();
-        LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        FusedLocationProviderClient fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
-
-        //get location in mapController, set username in main menu and check if current player is an owner
-        mapController.run(this, null, locationManager, fusedLocationProviderClient);
-
-
         profileMainIv = findViewById(R.id.avatar_imageView);
-        profileMainIv.setImageResource(R.drawable.profile_avadar);
 
         // setting Listeners for buttons and imageView
         qrInventoryMainBt.setOnClickListener(this);

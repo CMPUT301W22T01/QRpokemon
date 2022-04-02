@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.qrpokemon.qrpokemon.R;
 import com.qrpokemon.qrpokemon.controllers.SearchController;
 
@@ -25,7 +26,7 @@ public class SearchActivity extends AppCompatActivity {
     private static final String PLAYER = "Player";
     private ArrayAdapter<SearchItem> mAdapter;
     private ArrayAdapter<String> newAdapter;
-    private Button backButton;
+    private FloatingActionButton backButton;
     private ArrayList<SearchItem> searchList;
     private SearchController searchController;
     private SearchItem selected;
@@ -78,7 +79,6 @@ public class SearchActivity extends AppCompatActivity {
         searchBox.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
             }
 
             @Override

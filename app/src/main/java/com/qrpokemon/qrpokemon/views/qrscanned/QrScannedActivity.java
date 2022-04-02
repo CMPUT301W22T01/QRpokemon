@@ -58,7 +58,7 @@ public class QrScannedActivity extends AppCompatActivity {
     private Location location;
     public static final int CAMERA_ACTION_CODE = 100;
     private QrScannedController qrScannedController = QrScannedController.getInstance();
-
+    private LocationController locationController = LocationController.getInstance();
     /**
      * open camera collaborate with player controller and map controller
      * to get current player info and called qr scanned controller to save data
@@ -70,7 +70,6 @@ public class QrScannedActivity extends AppCompatActivity {
         setContentView(R.layout.qrscanned_activity);
 
         // setup for getting location:
-        LocationController locationController  = LocationController.getInstance();
         LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         FusedLocationProviderClient fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
 
@@ -144,6 +143,7 @@ public class QrScannedActivity extends AppCompatActivity {
                             public void onClick(View v){
                                 if (locationSave.isChecked()){
                                     saveLocation = true;
+
                                     cityName = locationController.getCity(QrScannedActivity.this);
                                     location = locationController.returnLocation();
                                     Log.e("QrScannedActivity: ", String.valueOf(location.getLatitude()) + String.valueOf(location.getLongitude()));
@@ -183,6 +183,7 @@ public class QrScannedActivity extends AppCompatActivity {
                                             highestUnique = qrScannedController.scoreCalculator(hash);
                                         }
                                         qrInventory.add(hash);
+                                        Log.e("QrScannedActivity: ","Player's qrInventory now is: " + qrInventory.toString());
                                         playerController.savePlayerData(qrCount, qrTotal, qrInventory, null, highestUnique, null, null,false);
                                     }
 
@@ -192,8 +193,8 @@ public class QrScannedActivity extends AppCompatActivity {
                                     if (saveLocation) {
                                         //if player chooses to save location
                                         currentLocation = String.valueOf(location.getLatitude()) + "," + String.valueOf(location.getLongitude());
-//                                        Toast.makeText(QrScannedActivity.this, "LOCATION SAVED", Toast.LENGTH_SHORT).show();
-//                                        Log.e("QrScannedActivity: ",currentLocation);
+                                        // save location information
+                                        locationController.saveLocation(cityName, String.valueOf(location.getLatitude()) +"," + String.valueOf(location.getLongitude()), QrScannedActivity.this, hash);
                                     }
 
                                     if (savePhoto){
@@ -202,7 +203,7 @@ public class QrScannedActivity extends AppCompatActivity {
 
                                         // convert bitmap to string
                                         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-                                        bitmap.compress(Bitmap.CompressFormat.PNG,100, byteArrayOutputStream);
+                                        bitmap.compress(Bitmap.CompressFormat.PNG,100, byteArrayOutputStream); // 100 is permission code for location
                                         byte[] b = byteArrayOutputStream.toByteArray();
                                         bitMapString = Base64.encodeToString(b, Base64.DEFAULT);
 //                                        Toast.makeText(QrScannedActivity.this, "Photo saved", Toast.LENGTH_SHORT).show();
@@ -210,8 +211,6 @@ public class QrScannedActivity extends AppCompatActivity {
                                     //save qrcode information
                                     qrScannedController.saveQrCode(QrScannedActivity.this, hash, qrScannedController.scoreCalculator(hash), currentLocation, bitMapString, codeContent);
 
-                                    // save location information
-                                    locationController.saveLocation(cityName, String.valueOf(location.getLatitude()) +"," + String.valueOf(location.getLongitude()), QrScannedActivity.this, hash);
                                     Toast.makeText(QrScannedActivity.this, "QR saved", Toast.LENGTH_SHORT).show();
                                     finish();
                                 } catch (Exception e) {
@@ -227,6 +226,9 @@ public class QrScannedActivity extends AppCompatActivity {
                         Toast.makeText(QrScannedActivity.this, "No QR found!", Toast.LENGTH_SHORT).show();
                         finish();
                     }
+                } else {
+                    Toast.makeText(QrScannedActivity.this, "No QR found!", Toast.LENGTH_SHORT).show();
+                    finish();
                 }
 
             }
@@ -262,6 +264,21 @@ public class QrScannedActivity extends AppCompatActivity {
                     Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                     activityResultLauncher.launch(intent);
                     break;
+                }
+            case 101: // location request code
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    if (ContextCompat.checkSelfPermission(this,
+                            Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                        // setup for getting location:
+                        LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+                        FusedLocationProviderClient fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
+
+                        // get location in locationController
+                        locationController.run(this, null, locationManager,  fusedLocationProviderClient);
+
+                        // ask permission
+                        qrScannedController.checkPermission(this);
+                    }
                 }
         }
     }

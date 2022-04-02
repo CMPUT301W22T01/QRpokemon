@@ -26,8 +26,10 @@ import com.qrpokemon.qrpokemon.controllers.PlayerController;
 import com.qrpokemon.qrpokemon.R;
 import com.qrpokemon.qrpokemon.controllers.QrInventoryController;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -40,7 +42,7 @@ public class QrInventoryActivity
 
     private String selectedHash, selectedBitmap, currentPlayer;
     private Integer selectedPosition;
-    private TextView totalScore, totalCount;
+    private TextView totalScore, totalCount, qrInventoryTitle;
     private Button ascendingButton, descendingButton;
     private FloatingActionButton backButton, deleteButton, commentButton, showCommentsButton;
     private ListView qrInventoryList;
@@ -74,6 +76,7 @@ public class QrInventoryActivity
         ascendingButton = findViewById(R.id.bt_ascending);
         commentButton = findViewById(R.id.bt_comment);
         showCommentsButton = findViewById(R.id.bt_show_comments);
+        qrInventoryTitle = findViewById(R.id.QR_inventory_title);
 
         backButton.setOnClickListener(this);
         deleteButton.setOnClickListener(this);
@@ -153,6 +156,7 @@ public class QrInventoryActivity
             case R.id.bt_back:
                 try {
                     qrInventoryController.getPlayerInfo(null,true,this, this);
+                    qrInventoryTitle.setText("QrInventory");
                 } catch (Exception e) {
                     e.printStackTrace();
                     Log.e("QrInventory: ", "Error when retrieve back to current player");
@@ -306,7 +310,6 @@ public class QrInventoryActivity
                                     }
                                 }
                             }
-
                         }
                     };
                     List<Map> result = new ArrayList<>();
@@ -402,6 +405,11 @@ public class QrInventoryActivity
         HashMap<String, HashMap> tHash = new HashMap<>();
         ArrayList<String> tList;
 
+        // add current date to comment
+        Date date = new Date();
+        SimpleDateFormat formatter = new SimpleDateFormat("MM-dd-yyyy HH:mm:ss");
+        comment = "[" + formatter.format(date) + "]" + " " + comment;
+
         // add the new comment into the original HashMap
         tList = (ArrayList<String>) commentsOfCurQrcode.get(currentPlayer);
         try {
@@ -412,6 +420,7 @@ public class QrInventoryActivity
         }
 
         commentsOfCurQrcode.put(currentPlayer, tList);
+
         // update data of Firebase
         tHash.put("Comments", commentsOfCurQrcode);
         Log.e("QrInventoryActivity: ", (String) currentQR.toString());
@@ -432,7 +441,7 @@ public class QrInventoryActivity
      */
     @Override
     public void update(Observable observable, Object o) {
-        Log.e("QrInventoryActivity: ", "Being notified by playerController!");
+//        Log.e("QrInventoryActivity: ", "Being notified by playerController!");
         finish();
     }
 }

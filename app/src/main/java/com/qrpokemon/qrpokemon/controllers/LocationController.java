@@ -106,17 +106,28 @@ public class LocationController implements OnMapReadyCallback, LocationListener 
     /**
      * A callback function, triggered once SupportMapFragment gets declared
      * It set the focus of view to current location
-     * @param googleMap
+     * @param googleMap Google map object
      */
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap) {
         LatLng here = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
         if (qrHashList != null) {
             for (Map i : qrHashList) { // loop through each qrcode
+                if (i.get("Location") == null) {
+                    continue;
+                }
                 for (String location : (ArrayList<String>) i.get("Location")) { // loop through each qrcode's location arrayList:
                     if (location != null) {
                         String[] parser = location.split(",");
-                        googleMap.addMarker(new MarkerOptions().position(new LatLng(Double.valueOf(parser[0]),Double.valueOf(parser[1]))).title((String)i.get("Identifier")));
+
+                        if(i.get("Content") == "") {
+                            googleMap.addMarker(new MarkerOptions().position(new LatLng(Double.valueOf(parser[0]),Double.valueOf(parser[1]))).title((String)i.get("Identifier")));
+                        }
+                        else
+                        {
+                            googleMap.addMarker(new MarkerOptions().position(new LatLng(Double.valueOf(parser[0]),Double.valueOf(parser[1]))).title((String)i.get("Content")));
+                        }
+
                     }
                 }
             }
@@ -170,6 +181,15 @@ public class LocationController implements OnMapReadyCallback, LocationListener 
         return cityName;
     }
 
+    /**
+     * Save qrcode by cityName/regionName
+     * Create a new city if city has no qrcode before
+     * City stores an HashMap <Location Coordinate, arrayList of qrCodes>
+     * @param cityName city Name player is currently at
+     * @param coordinate coordinate of location, in formation 'latitude, Longitude'
+     * @param context Activity calls it, mostly QrScannedActivity
+     * @param qrhash qrHashCode that is passed in
+     */
     public void saveLocation (String cityName, String coordinate, Context context, String qrhash) {
         HashMap data = new HashMap();
         DatabaseCallback databaseCallback = new DatabaseCallback(context) {
@@ -178,6 +198,7 @@ public class LocationController implements OnMapReadyCallback, LocationListener 
                 if (dataList.isEmpty()){ //this city isn't found, create a new city category
                     Log.e("LocationController: ", "City is new");
                     data.put("Identifier", cityName);
+                    qrhashList = new ArrayList<String >();
                     qrhashList.add(qrhash);
                     data.put(coordinate,qrhashList);
                     try {
@@ -213,7 +234,7 @@ public class LocationController implements OnMapReadyCallback, LocationListener 
             databaseProxy.getData(databaseCallback,new ArrayList<>(), "LocationIndex", cityName, null, "Identifier");
         } catch (Exception e) {
             e.printStackTrace();
-            Log.e("LocatioinController: ", "city not found!");
+            Log.e("Location Controller: ", "city not found!");
         }
 
     }

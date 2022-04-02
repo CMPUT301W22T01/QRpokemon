@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.core.app.ActivityCompat;
@@ -144,8 +145,11 @@ public class QrScannedController {
                     location1.add(location);
                     HashMap<String, String> bitmapHash = (HashMap<String, String>) dataList.get(0).get("Bitmap");
 
+                    Toast.makeText(context,"This QR code is been scanned by others!", Toast.LENGTH_LONG); // notify user that this qrcode has been scanned by others
+
                     try {
                         HashMap currentPlayer = playerController.getPlayer(null,null,null,null);
+                        bitmapHash.put((String) currentPlayer.get("Identifier"), bitmap);
                         qrCodeController.saveQr(qrHash, score, location1, null, bitmapHash,null );
                         Log.e("QrScannedController","Qrcode found");
                     } catch (Exception e) {
@@ -162,15 +166,12 @@ public class QrScannedController {
                     try {
                         HashMap currentPlayer = playerController.getPlayer(null,null,null,null);
                         bitmapHash.put((String) currentPlayer.get("Identifier"), bitmap);
-                        bitmapHash.put("Content", codeContent);
                         qrCodeController.saveQr(qrHash, score, location1,null ,bitmapHash,codeContent, true);
 
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
                 }
-
-
             }
         };
 
