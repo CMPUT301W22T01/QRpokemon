@@ -1,4 +1,4 @@
-package com.qrpokemon.qrpokemon;
+package com.qrpokemon.qrpokemon.views.owner;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.qrpokemon.qrpokemon.R;
 import com.qrpokemon.qrpokemon.controllers.DatabaseCallback;
 import com.qrpokemon.qrpokemon.controllers.PlayerController;
 
