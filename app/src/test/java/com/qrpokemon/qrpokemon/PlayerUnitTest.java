@@ -17,7 +17,6 @@ public class PlayerUnitTest {
     private Player mockPlayer(){
         qrInventory.add("hash0");
         qrInventory.add("hash1");
-
         contactInfo.put("email", "abc@ualberta.ca");
         contactInfo.put("phone", "74188965532");
 
