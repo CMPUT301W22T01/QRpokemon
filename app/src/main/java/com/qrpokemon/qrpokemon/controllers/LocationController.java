@@ -120,12 +120,18 @@ public class LocationController implements OnMapReadyCallback, LocationListener 
                     if (location != null) {
                         String[] parser = location.split(",");
 
-                        if(i.get("Content") == "") {
-                            googleMap.addMarker(new MarkerOptions().position(new LatLng(Double.valueOf(parser[0]),Double.valueOf(parser[1]))).title((String)i.get("Identifier")));
-                        }
-                        else
-                        {
-                            googleMap.addMarker(new MarkerOptions().position(new LatLng(Double.valueOf(parser[0]),Double.valueOf(parser[1]))).title((String)i.get("Content")));
+                        try{
+                            String title;
+                            try {
+                                title = ((String)i.get("Content")).substring(0,5) + "...";
+
+                            } catch (Exception e) { // content is less than 5, display all content
+                                title = ((String)i.get("Content"));
+                            }
+
+                            googleMap.addMarker(new MarkerOptions().position(new LatLng(Double.valueOf(parser[0]),Double.valueOf(parser[1]))).title( title + " " + String.valueOf(i.get("Score"))));
+                        } catch (Exception e) {
+
                         }
 
                     }
