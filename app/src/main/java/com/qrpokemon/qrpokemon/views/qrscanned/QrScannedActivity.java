@@ -184,7 +184,7 @@ public class QrScannedActivity extends AppCompatActivity {
                                         }
                                         qrInventory.add(hash);
                                         Log.e("QrScannedActivity: ","Player's qrInventory now is: " + qrInventory.toString());
-                                        playerController.savePlayerData(qrCount, qrTotal, qrInventory, null, highestUnique, null, null,false);
+                                        playerController.savePlayerData(qrCount, qrTotal, qrInventory, (HashMap) player.get("contact"), highestUnique, (String) player.get("DeviceId"), (Boolean) player.get("Owner"),false);
                                     }
 
                                     String currentLocation = null;

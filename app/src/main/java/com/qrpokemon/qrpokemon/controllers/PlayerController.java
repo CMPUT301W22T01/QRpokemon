@@ -14,7 +14,6 @@ import java.util.Observable;
 
 public class PlayerController extends Observable {
     private static PlayerController currentInstance;
-    public Object savePlayerData;
     private Player currentPlayer = null;
     private String player = "Player";
     private DatabaseProxy databaseProxy = DatabaseProxy.getInstance();
@@ -79,7 +78,7 @@ public class PlayerController extends Observable {
         } else if (username != this.currentPlayer.getUsername()) { //require to switch another player:
             this.currentPlayer = new Player(username, qrInventory, contact, qrCount, totalScore, id, highestUnique, owner);
         }
-        Log.e("PlayerController: A player is created with : ", this.currentPlayer.getUsername());
+        Log.e("PlayerController: A player is created with : ", this.currentPlayer.getUsername() + this.currentPlayer.getQrInventory().toString());
         setChanged();
         notifyObservers();
 

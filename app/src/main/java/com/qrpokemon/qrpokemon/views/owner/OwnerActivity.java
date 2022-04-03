@@ -2,6 +2,7 @@ package com.qrpokemon.qrpokemon.views.owner;
 
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -22,8 +23,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Observable;
+import java.util.Observer;
 
-public class OwnerActivity extends AppCompatActivity implements PlayerRecyclerAdapter.OnItemListener {
+public class OwnerActivity extends AppCompatActivity implements PlayerRecyclerAdapter.OnItemListener, Observer {
     private PlayerController playerController = PlayerController.getInstance();
     private QrCodeController qrCodeController = QrCodeController.getInstance();
     private RecyclerView recyclerView;
@@ -119,7 +122,6 @@ public class OwnerActivity extends AppCompatActivity implements PlayerRecyclerAd
                     playerController.deletePlayer((String)items.get(position).get("Identifier"));
 
                 } else { //deleting an QRcode:
-                    //get selected qr code's item's identifier
 
                     selectedQr = (HashMap) items.get(position);
 
@@ -164,6 +166,21 @@ public class OwnerActivity extends AppCompatActivity implements PlayerRecyclerAd
                                                                 (Boolean) player.get("Owner"),
                                                                 (String) player.get("Identifier"),
                                                                 false);
+
+
+                                                        //check if it's currentplayer, if true, updates locally
+                                                        HashMap currentPlayer = playerController.getPlayer(null,null,null,null);
+                                                        if (((String) player.get("Identifier")).equals((String)player.get("Identifier"))) {
+                                                            playerController.setupPlayer( (String) currentPlayer.get("Identifier"),
+                                                                    qrInventory,
+                                                                    (HashMap) currentPlayer.get("contact"),
+                                                                    ((Long)player.get("qrCount")).intValue() -1,
+                                                                    total - ((Long)selectedQr.get("Score")).intValue(),
+                                                                    highest,
+                                                                    (Boolean) currentPlayer.get("Owner"),
+                                                                    Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID));
+                                                        }
+
                                                     } catch (Exception e) {
                                                         e.printStackTrace();
                                                     }
@@ -183,6 +200,24 @@ public class OwnerActivity extends AppCompatActivity implements PlayerRecyclerAd
                                                                 (String) player.get("Identifier"),
                                                                 false);
 
+                                                        //check if it's currentplayer, if true, updates locally
+                                                        HashMap currentPlayer = playerController.getPlayer(null,null,null,null);
+                                                        if (((String) player.get("Identifier")).equals((String) currentPlayer.get("Identifier"))) {
+//                                                            Log.e("OwnerActivity: ", "Local player is: " + currentPlayer.toString());
+                                                            playerController.addObserver(OwnerActivity.this);
+                                                            playerController.savePlayerData( ((Long)player.get("qrCount")).intValue() -1,
+                                                                    total - ((Long)selectedQr.get("Score")).intValue(),
+                                                                    qrInventory,
+                                                                    null,
+                                                                    0,
+                                                                    null,
+                                                                    null,
+                                                                    false);
+//                                                            currentPlayer = playerController.getPlayer(null,null,null,null);
+//                                                            Log.e("OwnerActivity: ", "Local player is: " + currentPlayer.toString());
+                                                        }
+
+
                                                     } catch (Exception e) {
                                                         e.printStackTrace();
                                                     }
@@ -194,14 +229,9 @@ public class OwnerActivity extends AppCompatActivity implements PlayerRecyclerAd
                                             } catch (Exception e) {
                                                 e.printStackTrace();
                                             }
-
                                         }
-
-
                                     }
-
                                 }
-
                             }
                         }
                     };
@@ -220,5 +250,17 @@ public class OwnerActivity extends AppCompatActivity implements PlayerRecyclerAd
             e.printStackTrace();
             Toast.makeText(this, items.get(position).get("Identifier").toString() + " doesn't exist",Toast.LENGTH_SHORT).show();
         }
+    }
+
+    @Override
+    public void update(Observable observable, Object o) {
+        HashMap currentPlayer = null;
+        try {
+            currentPlayer = playerController.getPlayer(null,null,null,null);
+            Log.e("OwnerActivity: ", "Local player is: " + currentPlayer.toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 }
