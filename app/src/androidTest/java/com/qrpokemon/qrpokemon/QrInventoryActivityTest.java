@@ -74,6 +74,7 @@ public class QrInventoryActivityTest {
         onView(withId(R.id.leaderboard_back)).perform(click());
         // NOTE: Espresso stays open which prevents getting the DESTROYED state
         // Therefore, check that the state was changed by the button
+
         assertNotEquals(Lifecycle.State.RESUMED, rule.getScenario().getState());
     }
     @Test
@@ -85,5 +86,20 @@ public class QrInventoryActivityTest {
     }
 
 
+
+ //       assertNotEquals(Lifecycle.State.RESUMED, activityScenarioRule.getScenario().getState());
+ //     }
+
+//    @Test
+//    public void checkQRInventory(){
+//        ListView listView = (ListView) solo.getView(R.id.QR_inventory_list);
+//        View view = listView.getAdapter().getView(0, null, listView);
+//        solo.clickOnView(view);
+//        solo.clickOnView(solo.getView(R.id.bt_comment));
+//        solo.enterText((EditText) solo.getView(R.id.edit_comment), "This is QRCode");
+//        solo.clickOnText("CONFIRM");
+//        solo.clickOnView(solo.getView(R.id.bt_show_comments));
+//        assertTrue(solo.searchText("This is QRCode"));
+//    }
 
 }

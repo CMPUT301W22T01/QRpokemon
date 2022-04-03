@@ -34,6 +34,9 @@ public class SearchActivityTest {
         Activity activity = rule.getActivity();
         solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
     }
+    /**
+     * Check the back button of the search page
+     */
     @Test
     public void checkBackButton(){
         solo.clickOnView(solo.getView(R.id.Search_Button));
@@ -44,21 +47,32 @@ public class SearchActivityTest {
         solo.waitForActivity(SearchActivity.class, 2000);
         solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
     }
+
+    /**
+     * Check the if search for player works
+     */
     @Test
     public void playerSearch() throws Exception{
         solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
         solo.clickOnView(solo.getView(R.id.Search_Button));
         solo.waitForActivity(SearchActivity.class, 2000);
         solo.assertCurrentActivity("Wrong Activity", SearchActivity.class);
-        solo.enterText((EditText) solo.getView(R.id.sv), "Heather");
+        solo.enterText((EditText) solo.getView(R.id.sv), "Krista");
         solo.waitForActivity(SearchActivity.class, 200);
-        solo.waitForText("Heather", 2, 3000);
+        solo.waitForText("Krista", 2, 3000);
+        solo.clickOnView(solo.getView(R.id.search_button));
+        solo.waitForActivity(SearchActivity.class, 2000);
 
         ListView listview = (ListView) solo.getView(R.id.search_listview);
         View view = listview.getAdapter().getView(0, null, listview);
         TextView tv = view.findViewById(R.id.tv);
-        assertEquals(tv.getText(), "Heather");
+        assertEquals(tv.getText(), "Krista");
     }
+
+
+    /**
+     * Check the if search for location works
+     */
     @Test
     public void locationSearch() throws Exception{
         solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
@@ -66,21 +80,36 @@ public class SearchActivityTest {
         solo.waitForActivity(SearchActivity.class, 2000);
         solo.assertCurrentActivity("Wrong Activity", SearchActivity.class);
         solo.enterText((EditText) solo.getView(R.id.sv), "Calgary");
-        solo.waitForText("Calgary", 1, 5000);
+        solo.waitForText("Calgary", 1, 2000);
+        solo.clickOnView(solo.getView(R.id.search_button));
+        solo.waitForActivity(SearchActivity.class, 2000);
+
         ListView listview = (ListView) solo.getView(R.id.search_listview);
         View view = listview.getAdapter().getView(0, null, listview);
         solo.clickOnView(view);
         solo.waitForText("7D75F8FA97CA6D7C7", 1, 5000);
         assertTrue(listview.getCount() > 0);
     }
+
+
+    /**
+     * Check the if partial search works
+     */
     @Test
     public void partialSearch() throws Exception{
         solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
         solo.clickOnView(solo.getView(R.id.Search_Button));
         solo.waitForActivity(SearchActivity.class, 2000);
         solo.assertCurrentActivity("Wrong Activity", SearchActivity.class);
-        solo.enterText((EditText) solo.getView(R.id.sv), "C");
+        solo.enterText((EditText) solo.getView(R.id.sv), "Calg");
         solo.waitForActivity(SearchActivity.class, 200);
+        solo.clickOnView(solo.getView(R.id.search_button));
+        solo.waitForActivity(SearchActivity.class, 2000);
+
+        ListView listview = (ListView) solo.getView(R.id.search_listview);
+        View view = listview.getAdapter().getView(0, null, listview);
+        TextView tv = view.findViewById(R.id.tv);
+        assertEquals(tv.getText(), "Calgary");
     }
 //    @Test
 //    public void testShouldShowTheItemDetailWhenAnItemIsClicked() throws Exception {

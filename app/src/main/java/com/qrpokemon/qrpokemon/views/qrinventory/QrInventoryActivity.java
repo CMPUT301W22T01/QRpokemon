@@ -47,9 +47,10 @@ public class QrInventoryActivity
     private HashMap hashMapOfPlayerData, commentsOfCurQrcode;
     private Map currentQR;
     private ArrayList<Integer> allTheScores;
-    private ArrayList<String> qrHashCodes;
+    private ArrayList<String> qrHashCodes = new ArrayList<>();
     private ArrayAdapter<String> qrInventoryDataAdapter;
     private QrInventoryController qrInventoryController = QrInventoryController.getInstance();
+    private PlayerController playerController = PlayerController.getInstance();
 
     final private String TAG = "QrInventoryActivity";
 
@@ -95,14 +96,31 @@ public class QrInventoryActivity
         currentPlayer = hashMapOfPlayerData.get("Identifier").toString();
 
         // Get all hashcode of the qrcode that owned by the player
-        qrHashCodes = (ArrayList<String>) hashMapOfPlayerData.get("qrInventory");
-
-        // Get and set the data from the documents of each qrcode in ArrayList "qrHashCode"
-        qrInventoryDataAdapter = new QrInventoryCustomList(this, new ArrayList<String>());
-        qrInventoryList.setAdapter(qrInventoryDataAdapter);
-
         try {
-            qrInventoryController.getAndSetQrCodeData(this, qrHashCodes, qrInventoryDataAdapter, currentPlayer);
+
+            // Get and set the data from the documents of each qrcode in ArrayList "qrHashCode"
+            qrInventoryDataAdapter = new QrInventoryCustomList(this, new ArrayList<String>());
+            qrInventoryList.setAdapter(qrInventoryDataAdapter);
+
+            DatabaseCallback databaseCallback = new DatabaseCallback(this) {
+                @Override
+                public void run(List<Map> dataList) {
+
+                    // Get all hashcode
+                    for (String codeIdentifier : (ArrayList<String>)dataList.get(0).get("qrInventory")) {
+                        qrHashCodes.add(codeIdentifier);
+                    }
+                    qrInventoryList.setAdapter(qrInventoryDataAdapter);
+
+                    // Get and set the data
+                    try {
+                        qrInventoryController.getAndSetQrCodeData(QrInventoryActivity.this, qrHashCodes, qrInventoryDataAdapter, currentPlayer);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            };
+            playerController.getPlayer(databaseCallback, new ArrayList<>(), currentPlayer, null);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -188,7 +206,7 @@ public class QrInventoryActivity
                 }
 
                 // get the max value in the ArrayList 'allTheScores'
-                curMaxScore = -99999;
+                curMaxScore = 0;
                 for (Integer curNum : allTheScores) {
                     if (curNum > curMaxScore) {
                         curMaxScore = curNum;
