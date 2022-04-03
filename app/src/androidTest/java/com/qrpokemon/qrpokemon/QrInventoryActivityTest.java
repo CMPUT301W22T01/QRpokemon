@@ -31,6 +31,7 @@ import com.qrpokemon.qrpokemon.controllers.QrInventoryController;
 import com.qrpokemon.qrpokemon.models.Player;
 import com.qrpokemon.qrpokemon.views.leaderboard.*;
 import com.qrpokemon.qrpokemon.views.map.MapActivity;
+import com.qrpokemon.qrpokemon.views.owner.OwnerActivity;
 import com.qrpokemon.qrpokemon.views.profile.ProfileActivity;
 import com.qrpokemon.qrpokemon.views.qrinventory.QrInventoryActivity;
 import com.qrpokemon.qrpokemon.views.search.SearchActivity;
@@ -51,8 +52,8 @@ public class QrInventoryActivityTest {
     private PlayerController playerController = PlayerController.getInstance();
 
     @Rule
-    public ActivityTestRule<QrInventoryActivity> rule =
-            new ActivityTestRule<>(QrInventoryActivity.class, true, true);
+    public ActivityTestRule<MainActivity> rule =
+            new ActivityTestRule<>(MainActivity.class, true, true);
 
     @Before
     public void setUp() throws Exception{
@@ -66,8 +67,33 @@ public class QrInventoryActivityTest {
 
     @Test
     public void checkQrInventoryButton(){
+        solo.clickOnView(solo.getView(R.id.QR_Inventory_Button));
+        solo.waitForActivity(QrInventoryActivity.class, 2000);
+        solo.assertCurrentActivity("Wrong Activity", QrInventoryActivity.class);
+
+        solo.clickOnView(solo.getView(R.id.bt_back));
+        solo.waitForActivity(QrInventoryActivity.class, 2000);
+        solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
+    }
+
+    @Test
+    public void checkDescendButton(){
+        solo.clickOnView(solo.getView(R.id.QR_Inventory_Button));
+        solo.waitForActivity(QrInventoryActivity.class, 2000);
+        solo.assertCurrentActivity("Wrong Activity", QrInventoryActivity.class);
+        solo.clickOnView(solo.getView(R.id.bt_descending));
+        solo.waitForActivity(QrInventoryActivity.class, 5000);
         solo.assertCurrentActivity("Wrong Activity", QrInventoryActivity.class);
     }
 
+    @Test
+    public void checkAscendingButton(){
+        solo.clickOnView(solo.getView(R.id.QR_Inventory_Button));
+        solo.waitForActivity(QrInventoryActivity.class, 2000);
+        solo.assertCurrentActivity("Wrong Activity", QrInventoryActivity.class);
+        solo.clickOnView(solo.getView(R.id.bt_ascending));
+        solo.waitForActivity(QrInventoryActivity.class, 5000);
+        solo.assertCurrentActivity("Wrong Activity", QrInventoryActivity.class);
+    }
 
 }
