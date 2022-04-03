@@ -181,7 +181,6 @@ public class QrInventoryActivity
                 qrInventoryDataAdapter.remove(qrInventoryDataAdapter.getItem(selectedPosition));
 
                 // change the highest unique if needed
-
                 allTheScores = new ArrayList<>();
                 for (int i = 0; i < qrInventoryDataAdapter.getCount(); i++) {
                     String s = qrInventoryDataAdapter.getItem(i);
@@ -203,7 +202,7 @@ public class QrInventoryActivity
                     playerController.savePlayerData(qrInventoryDataAdapter.getCount(), curTotalScore, qrHashCodes, null, curMaxScore, null, null,false);
                     qrInventoryList.setAdapter(qrInventoryDataAdapter);
 
-                    totalCount.setText(qrInventoryDataAdapter.getCount());
+                    totalCount.setText(String.valueOf(qrInventoryDataAdapter.getCount()));
 
                 } catch (Exception e) {
                     e.printStackTrace();

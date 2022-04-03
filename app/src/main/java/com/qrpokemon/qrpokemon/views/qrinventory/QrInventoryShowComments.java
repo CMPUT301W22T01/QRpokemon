@@ -73,6 +73,12 @@ public class QrInventoryShowComments extends AppCompatActivity implements View.O
         finish();
     }
 
+    /**
+     * Coverts a string to a bitmap
+     *
+     * @param encodedString the String needed to be converted to a bitmap
+     * @return a bit map if no exception, else null
+     */
     public Bitmap StringToBitMap(String encodedString){
         try {
             byte [] encodeByte= Base64.decode(encodedString,Base64.DEFAULT);

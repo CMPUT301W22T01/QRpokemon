@@ -168,8 +168,6 @@ public class QrInventoryController {
                         tvScore.setText(totalScore.toString());
                         tvCount.setText(totalCount.toString());
 
-                        // todo change highestUnique & qrCount & totalScore
-
                         temp.setAdapter(qrInventory);
 
                     }
@@ -182,11 +180,26 @@ public class QrInventoryController {
         return data;
     }
 
+    /**
+     * Gets all the comments of the qrCode 'hashName', and save all tha comments into List<Map> 'result'
+     *
+     * @param databaseCallback callback object.
+     * @param hashName  the qrCode which we want to get all the comments of.
+     * @param result    where we store all the comments, format: 'player'(String) : 'comments'(ArrayList<String>)
+     * @return
+     * @throws Exception
+     */
     public HashMap<String, Object> getAllComments (DatabaseCallback databaseCallback, String hashName, List<Map> result) throws Exception {
             qrCodeController.getQR(databaseCallback, result, hashName);
         return data;
     }
 
+    /**
+     * Coverts a string to a bitmap
+     *
+     * @param encodedString the String needed to be converted to a bitmap
+     * @return a bit map if no exception, else null
+     */
     public void updateQR (String qrHash, @Nullable Integer score, @Nullable ArrayList<String> location, @Nullable HashMap<String, Object> comments, @Nullable HashMap<String,String> bitmap) throws Exception {
         qrCodeController.saveQr(qrHash,score,location,comments,bitmap,null);
     }
