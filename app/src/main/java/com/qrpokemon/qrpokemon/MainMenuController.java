@@ -8,8 +8,6 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,7 +18,6 @@ import com.google.zxing.NotFoundException;
 import com.qrpokemon.qrpokemon.controllers.QrScannedController;
 import com.qrpokemon.qrpokemon.controllers.DatabaseCallback;
 import com.qrpokemon.qrpokemon.controllers.DatabaseProxy;
-import com.qrpokemon.qrpokemon.controllers.FileSystemController;
 import com.qrpokemon.qrpokemon.controllers.PlayerController;
 import com.qrpokemon.qrpokemon.views.qrinventory.QrInventoryActivity;
 
@@ -34,7 +31,6 @@ import java.util.Observer;
 public class MainMenuController implements Observer {
     private static MainMenuController currentInstance;
     private DatabaseProxy database = DatabaseProxy.getInstance();
-    private FileSystemController fileSystemController = new FileSystemController();
     private QrScannedController qrScannedController = new QrScannedController();
     private Bitmap photoBitmap;
     private String photoContent;

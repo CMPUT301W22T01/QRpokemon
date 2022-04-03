@@ -17,8 +17,7 @@ import java.util.Map;
 
 public class SignupController {
     private static SignupController currentInstance;
-    private FileSystemController fileSystemController = new FileSystemController();
-    private SignupController(){}
+    private SignupController() {}
     private PlayerController playerController = PlayerController.getInstance();
 
     public static SignupController getInstance() {

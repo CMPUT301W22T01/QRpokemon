@@ -11,7 +11,6 @@ import com.qrpokemon.qrpokemon.views.profile.ProfileActivity;
 import com.qrpokemon.qrpokemon.views.qrinventory.QrInventoryActivity;
 
 import com.qrpokemon.qrpokemon.views.search.SearchActivity;
-import com.qrpokemon.qrpokemon.controllers.FileSystemController;
 import com.robotium.solo.Solo;
 
 import org.junit.Before;
@@ -29,9 +28,6 @@ public class MainActivityTest {
     @Before
     public void setUp() throws Exception{
         solo = new Solo(InstrumentationRegistry.getInstrumentation(), rule.getActivity());
-        FileSystemController fileSystemController = new FileSystemController();
-        fileSystemController.writeToFile(solo.getCurrentActivity(), "firstRun", null);
-        fileSystemController.writeToFile(solo.getCurrentActivity(), "name", "Bob");
     }
 
     @Test

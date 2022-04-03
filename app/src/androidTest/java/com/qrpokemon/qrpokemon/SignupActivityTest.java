@@ -11,7 +11,6 @@ import androidx.test.rule.ActivityTestRule;
 
 import com.qrpokemon.qrpokemon.views.profile.ProfileActivity;
 import com.qrpokemon.qrpokemon.controllers.DatabaseProxy;
-import com.qrpokemon.qrpokemon.controllers.FileSystemController;
 import com.robotium.solo.Solo;
 
 import org.junit.*;
@@ -41,21 +40,6 @@ public class SignupActivityTest {
         databaseProxy.deleteData("Player", "ABCD");
     }
 
-    /**
-     * Check entering inputs through the EditTexts
-     */
-    @Test
-    public void enterInputs() throws Exception{
-
-        solo.enterText((EditText) solo.getView(R.id.et_name), "ABCD");
-        solo.enterText((EditText) solo.getView(R.id.et_email), "123@321.com");
-        solo.enterText((EditText) solo.getView(R.id.et_phone), "123456");
-        solo.clickOnView(solo.getView(R.id.bt_submit));
-        solo.waitForActivity(ProfileActivity.class, 2000);
-        solo.assertCurrentActivity("Not in MyprofileActivity", MainActivity.class);
-        FileSystemController fileSystemController = new FileSystemController();
-        fileSystemController.deleteFile(solo.getCurrentActivity());
-    }
     /**
      * Check if the user story US 03.01.01 is working properly
      */
@@ -90,10 +74,8 @@ public class SignupActivityTest {
         // generate qr code for the current player
         solo.clickOnButton("Create QRcode");
         // press back button to go back to main menu
-        solo.clickOnView(solo.getView(R.id.iv_back));
+        solo.clickOnView(solo.getView(R.id.bt_submit));
         solo.waitForActivity(MainActivity.class, 2000);
         solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
-        FileSystemController fileSystemController = new FileSystemController();
-        fileSystemController.deleteFile(solo.getCurrentActivity());
     }
 }
