@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <TextView
+        android:id="@+id/textView_camera_save"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Do you want to save this code into your account?" />
+
+    <TextView
+        android:id="@+id/textView_camera_save_score"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Score: "
+        android:textAlignment="center"
+        android:textSize="20sp" />
+</LinearLayout>

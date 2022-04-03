@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/txv_leaderboard"
+        android:layout_width="350dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="24dp"
+        android:text="@string/leaderboard_title"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="48sp"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Spinner
+        android:id="@+id/leaderboard_sort_selector"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:entries="@array/sort"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txv_leaderboard"
+        tools:ignore="TouchTargetSizeCheck" />
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/leaderboard_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="32dp"
+        android:clickable="true"
+        android:src="@drawable/back2"
+        app:backgroundTint="@android:color/darker_gray"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="?attr/actionModeCloseDrawable" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_leaderboard"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/tv_leaderboard_divider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_leaderboard_unique" />
+
+    <TextView
+        android:id="@+id/tv_leaderboard_rank"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:text="@string/leaderboard_rank"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/leaderboard_sort_selector" />
+
+    <TextView
+        android:id="@+id/tv_leaderboard_username"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/leaderboard_username"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toStartOf="@+id/tv_leaderboard_unique"
+        app:layout_constraintStart_toEndOf="@+id/tv_leaderboard_rank"
+        app:layout_constraintTop_toBottomOf="@+id/leaderboard_sort_selector" />
+
+    <TextView
+        android:id="@+id/tv_leaderboard_unique"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/leaderboard_unique"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toStartOf="@+id/tv_leaderboard_qrcount"
+        app:layout_constraintTop_toBottomOf="@+id/leaderboard_sort_selector" />
+
+    <TextView
+        android:id="@+id/tv_leaderboard_qrcount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/leaderboard_qrcount"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toStartOf="@+id/tv_leaderboard_score"
+        app:layout_constraintTop_toBottomOf="@+id/leaderboard_sort_selector" />
+
+    <TextView
+        android:id="@+id/tv_leaderboard_score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="12dp"
+        android:text="@string/leaderboard_score"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/leaderboard_sort_selector" />
+
+    <TextView
+        android:id="@+id/tv_leaderboard_player_rank"
+        android:layout_width="38dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="16dp"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/leaderboard_back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_leaderboard_divider"
+        tools:text="1" />
+
+    <TextView
+        android:id="@+id/tv_leaderboard_player_username"
+        android:layout_width="155dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginBottom="8dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/leaderboard_back"
+        app:layout_constraintStart_toEndOf="@+id/tv_leaderboard_player_rank"
+        tools:text="Username" />
+
+    <TextView
+        android:id="@+id/tv_leaderboard_player_unique"
+        android:layout_width="48dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="16dp"
+        android:textAlignment="textEnd"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display2"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/leaderboard_back"
+        app:layout_constraintEnd_toStartOf="@+id/tv_leaderboard_player_qrcount"
+        app:layout_constraintStart_toEndOf="@+id/tv_leaderboard_player_username"
+        app:layout_constraintTop_toBottomOf="@+id/tv_leaderboard_divider"
+        tools:text="5" />
+
+    <TextView
+        android:id="@+id/tv_leaderboard_player_score"
+        android:layout_width="48dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:textAlignment="textEnd"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display2"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/leaderboard_back"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_leaderboard_divider"
+        tools:text="999" />
+
+    <TextView
+        android:id="@+id/tv_leaderboard_player_qrcount"
+        android:layout_width="48dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="16dp"
+        android:textAlignment="textEnd"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display2"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/leaderboard_back"
+        app:layout_constraintEnd_toStartOf="@+id/tv_leaderboard_player_score"
+        app:layout_constraintTop_toBottomOf="@+id/tv_leaderboard_divider"
+        tools:text="50" />
+
+    <TextView
+        android:id="@+id/tv_leaderboard_divider"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="#424242"
+        android:text="@string/leaderboard_div_text"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@+id/tv_leaderboard_player_username"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:text="My Score" />
+</androidx.constraintlayout.widget.ConstraintLayout>

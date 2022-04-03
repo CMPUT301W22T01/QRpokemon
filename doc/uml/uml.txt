@@ -112,7 +112,7 @@ package "Controllers" {
     class PlayerController
     {
         -player: Player
-        -databaseController: DatabaseController
+        -databaseProxy: DatabaseController
 
         ' Constructor of PlayerController takes a username and pull Player from database
         +getPlayer(username: String): HashMap
@@ -136,7 +136,7 @@ package "Controllers" {
     {
         -username: String
         -locationController: LocationController
-        -databaseController: DatabaseController
+        -databaseProxy: DatabaseController
 
         ' addQrCode add a newly scanned QR code to Database and it update the geolocation index in Location Database if saved.
         +addQrCode(qrCodeHash: String, score: Integer, addLocation: Boolean)
