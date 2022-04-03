@@ -12,10 +12,6 @@ Responsibility: Ask Player to update itself with data provided
 Responsibility: Ask DatabaseController to save player records
 Responsibility: Ask DatabaseController to update player records
 
-Class: ScoreCalculator
-Collaborator: QrScannedController
-Responsibility: Calculate score from QR hash
-
 # QR Code will store all locations with usernames as keys.
 # If a user scanned a QR code but they're location is not stored, then it will
 # not appear in the database. Similar with comments.
@@ -137,9 +133,9 @@ Responsibility: Prompt message when QRcode hash not found
 Responsibility: Send user to QrInventoryActivity or MainMenuActivity
 
 Class: QrScannedController
-Collaborator: QrScannedActivity, MainMenuActivity, ScoreCalculator, QrCodeController
+Collaborator: QrScannedActivity, MainMenuActivity, QrCodeController
 Responsibility: Ask QrCodeController to save metadata specified by user
-Responsibility: Ask ScoreCalculator to calculate score for QR code
+Responsibility: Calculate score for QR code
 Responsibility: Prevent saving if QRcode hash is not found
 Responsibility: Notify QrScannedActivity if QRcode hash is not found
 
