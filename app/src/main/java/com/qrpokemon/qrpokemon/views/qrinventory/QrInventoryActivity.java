@@ -89,7 +89,6 @@ public class QrInventoryActivity
             hashMapOfPlayerData = qrInventoryController.getPlayerInfo(null);
         } catch (Exception e) {
             e.printStackTrace();
-            Log.e(TAG, e.toString());
         }
 
         // Get the identifier of the current player
@@ -126,7 +125,8 @@ public class QrInventoryActivity
                 deleteButton.setVisibility(VISIBLE);
                 commentButton.setVisibility(VISIBLE);
                 showCommentsButton.setVisibility(VISIBLE);
-                Log.e("QrInventoryActivity: ","Current Player: "+hashMapOfPlayerData.toString());
+
+                // do not let others delete or edit qrCodes
                 if (!hashMapOfPlayerData.get("DeviceId").equals(Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID))){
                     deleteButton.setVisibility(GONE);
                     commentButton.setVisibility(GONE);
@@ -196,7 +196,7 @@ public class QrInventoryActivity
                     }
                 }
 
-                // delete from Local and Firebase, update totalCount/totalNumber, update display
+                // delete from Local and Firebase, update totalCount/totalNumber/highestUnique, update display
                 PlayerController playerController = PlayerController.getInstance();
                 try {
                     playerController.savePlayerData(qrInventoryDataAdapter.getCount(), curTotalScore, qrHashCodes, null, curMaxScore, null, null,false);
@@ -208,6 +208,7 @@ public class QrInventoryActivity
                     e.printStackTrace();
                 }
 
+                // hide buttons
                 deleteButton.setVisibility(GONE);
                 commentButton.setVisibility(GONE);
                 showCommentsButton.setVisibility(GONE);
@@ -218,7 +219,6 @@ public class QrInventoryActivity
              * if the user clicked the descending button, that is, want to sort the list in descending order by score
              */
             case R.id.bt_descending:
-//                Log.e(TAG, "After clicking the DESCENDING button: " + qrInventoryDataAdapter.getCount());
 
                 qrInventoryDataAdapter.sort(new Comparator<String>() {
                     @Override
@@ -301,7 +301,6 @@ public class QrInventoryActivity
                                 if (dataList.get(0).get("Comments") == null){
                                     Log.e("QrInventory OnClick case bt_comment: ", "There is no comment for this user!");
                                 } else {
-                                    Log.e(TAG, "Function 'getAllComments' found:" + dataList.get(0).get("Comments").toString());
 
                                     HashMap<String, ArrayList<String>> tMap;
                                     String[] tKeys;
@@ -321,7 +320,6 @@ public class QrInventoryActivity
 
                                         // Store all the comments of qrCode into HashMap 'commentsOfCurQrcode'
                                         for (int i = 0; i < tMap.size(); i++) {
-    //                            Log.e(TAG, "loop: " + keys.get(i) + " " + tMap.get(keys.get(i)));
                                             commentsOfCurQrcode.put(keys.get(i), tMap.get(keys.get(i)));
                                         }
                                     } catch (Exception e) {
@@ -333,8 +331,6 @@ public class QrInventoryActivity
                     };
                     List<Map> result = new ArrayList<>();
                     qrInventoryController.getAllComments(databaseCallback, selectedHash, result);
-
-                    Log.e(TAG, "Get comment: " + commentsOfCurQrcode.toString());
 
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -368,16 +364,13 @@ public class QrInventoryActivity
                                     tMap = (HashMap<String, ArrayList<String>>) dataList.get(0).get("Comments");
                                     tKeys = tMap.keySet().toArray(new String[0]);
 
-                                    //get all data related to selected QRcode:
-                                    Log.e("QrInventory OnClick case bt_comment: ", "CurrentQR is: "+currentQR.get("Identifier").toString());
-
+                                    //get all data related to selected QrCode:
                                     for (String k : tKeys) {
                                         keys.add(k);
                                     }
 
                                     // Store all the comments of qrCode into HashMap 'commentsOfCurQrcode'
                                     for (int i = 0; i < tMap.size(); i++) {
-                                        //                            Log.e(TAG, "loop: " + keys.get(i) + " " + tMap.get(keys.get(i)));
                                         commentsOfCurQrcode.put(keys.get(i), tMap.get(keys.get(i)));
                                     }
 
@@ -391,7 +384,6 @@ public class QrInventoryActivity
                                     e.printStackTrace();
                                 }
                             }
-
 
                         } else {
                             Toast.makeText(QrInventoryActivity.this, "There is no comment to show", Toast.LENGTH_SHORT).show();
@@ -459,7 +451,6 @@ public class QrInventoryActivity
      */
     @Override
     public void update(Observable observable, Object o) {
-//        Log.e("QrInventoryActivity: ", "Being notified by playerController!");
         finish();
     }
 }

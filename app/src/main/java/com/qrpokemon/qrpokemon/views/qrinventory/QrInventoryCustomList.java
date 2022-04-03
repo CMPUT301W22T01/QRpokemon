@@ -26,6 +26,8 @@ public class QrInventoryCustomList extends ArrayAdapter<String> {
     private ArrayList<String> qrInventoryDataList;
     private Context context;
 
+    final private String TAG = "QrInventoryCustomList";
+
     public QrInventoryCustomList(Context context, ArrayList<String> qrInventoryDataList) {
         super(context, 0, qrInventoryDataList);
         this.qrInventoryDataList = qrInventoryDataList;
@@ -48,21 +50,28 @@ public class QrInventoryCustomList extends ArrayAdapter<String> {
         String[] tStr = hashAndScore.split(cut);
 
         // findView
+        TextView scannedTv = view.findViewById(R.id.tv_has_scanned);
         TextView hashTV = view.findViewById(R.id.tv_hash_code);
         TextView scoreTV = view.findViewById(R.id.tv_hash_score);
         ImageView codeIV = view.findViewById(R.id.imageView);
 
-        // setText
+        // set score
         scoreTV.setText("Score: " + tStr[0]);
-        if (tStr.length < 4){ // if code doesn't have content, show qrhash
+
+        // set text (hash / content)
+        if (tStr.length < 5){
+
+            // if code doesn't have content, show qrHash
             if (tStr[1].length() > 16) {
                 hashTV.setText(tStr[1].substring(0, 15) + "...");
             } else {
                 hashTV.setText(tStr[1]);
             }
-        } else { // if code has content, show content
+
+            // if code has content, show content
+        } else {
             String temp = "";
-            for (int i = 3; i < tStr.length; i++) {
+            for (int i = 4; i < tStr.length; i++) {
                 temp += tStr[i] + " ";
             }
             if (temp.length() > 16) {
@@ -70,7 +79,6 @@ public class QrInventoryCustomList extends ArrayAdapter<String> {
             } else {
                 hashTV.setText(temp);
             }
-//            Log.e("QrInventoryCustomList: ",temp);
         }
 
         // setImageBitmap
@@ -81,6 +89,11 @@ public class QrInventoryCustomList extends ArrayAdapter<String> {
 
         Bitmap bitmap = StringToBitMap(encodedString);
         codeIV.setImageBitmap(bitmap);
+
+        // set text that if it's also scanned by others
+        if (Integer.valueOf(tStr[3]) > 1) {
+            scannedTv.setText("This code was also scanned by others!");
+        }
 
         return view;
     }

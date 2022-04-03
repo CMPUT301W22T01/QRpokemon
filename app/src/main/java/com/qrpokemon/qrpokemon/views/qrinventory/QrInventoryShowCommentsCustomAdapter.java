@@ -14,8 +14,10 @@ import java.util.HashMap;
 
 public class QrInventoryShowCommentsCustomAdapter extends BaseExpandableListAdapter {
 
-    ArrayList<String> playerList;
-    HashMap<String, ArrayList<String>> commentsList;
+    private ArrayList<String> playerList;
+    private HashMap<String, ArrayList<String>> commentsList;
+
+    final private String TAG = "QrInventoryShowCommentsCustomAdapter";
 
     // constructor
     public QrInventoryShowCommentsCustomAdapter(ArrayList<String> playerList, HashMap<String, ArrayList<String>> commentsList) {

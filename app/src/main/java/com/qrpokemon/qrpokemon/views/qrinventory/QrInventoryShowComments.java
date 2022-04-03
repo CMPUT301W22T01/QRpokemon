@@ -25,13 +25,14 @@ import java.util.List;
 
 public class QrInventoryShowComments extends AppCompatActivity implements View.OnClickListener {
 
-    private ArrayList<String> playerList;
     private String selectedBitmap;
+    private ArrayList<String> playerList;
+    private HashMap commentsOfCurQrcode;
     private FloatingActionButton backButton;
     private ImageView codeImage;
     private ExpandableListView commentsOfPlayers;
     private QrInventoryShowCommentsCustomAdapter commentsOfPlayersAdapter;
-    private HashMap commentsOfCurQrcode;
+
     final private String TAG = "QrInventoryShowComments";
 
     @Override
@@ -47,7 +48,6 @@ public class QrInventoryShowComments extends AppCompatActivity implements View.O
 
         // get all the comments of the current selected qrCode
         commentsOfCurQrcode = (HashMap) getIntent().getExtras().get("commentsOfCurQrcode");
-        Log.e(TAG, "get comments of " + commentsOfCurQrcode.toString());
 
         // get and set the image of the selected qrCode
         selectedBitmap = (String) getIntent().getExtras().get("selectedBitmap");

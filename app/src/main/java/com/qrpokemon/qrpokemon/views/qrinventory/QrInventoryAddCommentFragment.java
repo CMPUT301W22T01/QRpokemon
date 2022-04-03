@@ -16,8 +16,12 @@ import androidx.fragment.app.DialogFragment;
 import com.qrpokemon.qrpokemon.R;
 
 public class QrInventoryAddCommentFragment extends DialogFragment {
+
     private EditText editComment;
     private OnFragmentInteractionListener listener;
+
+    final private String TAG = "QrInventoryAddCommentFragment";
+
     public interface OnFragmentInteractionListener{
         void addComment(String comment) throws Exception;
     }

@@ -111,6 +111,13 @@ public class QrInventoryController {
                         HashMap tMap = (HashMap) dataList.get(dataList.size()-1).get("Bitmap");
                         String bitmap = (String) tMap.get(currentPlayer);
 
+                        // check if the qrCode is only scanned by the current user by checking if there's only one key-val pair in tMap
+                        String[] tKeys;
+                        tKeys = (String[]) tMap.keySet().toArray(new String[0]);
+                        int numOfPeopleScanned = tKeys.length;
+
+                        Log.e(TAG, "你当前的长度： " + numOfPeopleScanned);
+
                         HashMap<String, Object> currentPlayer = null;
                         try {
                             currentPlayer  = playerController.getPlayer(null,null,null,null);
@@ -126,7 +133,9 @@ public class QrInventoryController {
                                                 + " "
                                                 + (String) (dataList.get(dataList.size()-1).get("Identifier"))
                                                 + " "
-                                                + bitmap);
+                                                + bitmap
+                                                + " "
+                                                + numOfPeopleScanned);
                                     }
                                 } else {
                                     if (dataList.get(dataList.size()-1).get("Identifier") != null) {
@@ -135,6 +144,8 @@ public class QrInventoryController {
                                                 + (String) (dataList.get(dataList.size()-1).get("Identifier"))
                                                 + " "
                                                 + bitmap
+                                                + " "
+                                                + numOfPeopleScanned
                                                 + " "
                                                 + (String) (dataList.get(dataList.size()-1).get("Content")));
                                     }
@@ -194,12 +205,6 @@ public class QrInventoryController {
         return data;
     }
 
-    /**
-     * Coverts a string to a bitmap
-     *
-     * @param encodedString the String needed to be converted to a bitmap
-     * @return a bit map if no exception, else null
-     */
     public void updateQR (String qrHash, @Nullable Integer score, @Nullable ArrayList<String> location, @Nullable HashMap<String, Object> comments, @Nullable HashMap<String,String> bitmap) throws Exception {
         qrCodeController.saveQr(qrHash,score,location,comments,bitmap,null);
     }
