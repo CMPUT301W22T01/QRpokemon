@@ -156,7 +156,6 @@ public class QrInventoryActivity
                     qrInventoryTitle.setText("QR Inventory");
                 } catch (Exception e) {
                     e.printStackTrace();
-                    Log.e("QrInventory: ", "Error when retrieve back to current player");
                 }
                 finish();
                 break;
@@ -299,7 +298,6 @@ public class QrInventoryActivity
                             if (!dataList.isEmpty()){
                                 currentQR = dataList.get(0);
                                 if (dataList.get(0).get("Comments") == null){
-                                    Log.e("QrInventory OnClick case bt_comment: ", "There is no comment for this user!");
                                 } else {
 
                                     HashMap<String, ArrayList<String>> tMap;
@@ -312,8 +310,6 @@ public class QrInventoryActivity
                                         tKeys = tMap.keySet().toArray(new String[0]);
 
                                         //get all data related to selected QRcode:
-                                        Log.e("QrInventory OnClick case bt_comment: ", "CurrentQR is: "+currentQR.get("Identifier").toString());
-
                                         for (String k : tKeys) {
                                             keys.add(k);
                                         }
@@ -352,7 +348,6 @@ public class QrInventoryActivity
 
                             if (dataList.get(0).get("Comments") == null){
                                 Toast.makeText(QrInventoryActivity.this, "There is no comment for this QR Code", Toast.LENGTH_SHORT).show();
-                                Log.e("QrInventory OnClick case bt_comment: ", "There is no comment for this user!");
 
                             } else {//there are comments to show:
                                 HashMap<String, ArrayList<String>> tMap;
@@ -434,7 +429,6 @@ public class QrInventoryActivity
 
         // update data of Firebase
         tHash.put("Comments", commentsOfCurQrcode);
-        Log.e("QrInventoryActivity: ", currentQR.toString());
         qrInventoryController.updateQR((String) currentQR.get("Identifier"), null, null, commentsOfCurQrcode, null);
 
         deleteButton.setVisibility(GONE);

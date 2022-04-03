@@ -116,12 +116,9 @@ public class QrInventoryController {
                         tKeys = (String[]) tMap.keySet().toArray(new String[0]);
                         int numOfPeopleScanned = tKeys.length;
 
-                        Log.e(TAG, "你当前的长度： " + numOfPeopleScanned);
-
                         HashMap<String, Object> currentPlayer = null;
                         try {
                             currentPlayer  = playerController.getPlayer(null,null,null,null);
-                            Log.e("QrInventoryController: ",currentPlayer.toString());
 
                             if (currentPlayer.get("DeviceId").equals(Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID))){ // if it's owner of device:
                                 if ((String) (dataList.get(dataList.size()-1).get("Content")) == null){
