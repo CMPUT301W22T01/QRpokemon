@@ -177,19 +177,19 @@ public class QrScannedActivity extends AppCompatActivity {
                                                     // if this QR code is the first time scanned by player
                                                     HashMap player = null;
                                                     try {
-                                                        player = (HashMap) playerController.getPlayer(null, null, null, null);
+                                                        player = (HashMap) dataList.get(0);
                                                     } catch (Exception e) {
                                                         e.printStackTrace();
                                                     }
-                                                    ArrayList<String> qrInventory = (ArrayList<String>) player.get("qrInventory");
+                                                    ArrayList<String> qrInventory = (ArrayList<String>) dataList.get(0).get("qrInventory");
 
                                                     // update player's total score and counts
                                                     int qrCount = qrInventory.size() + 1;
-                                                    int qrTotal = (int) player.get("totalScore") + qrScannedController.scoreCalculator(hash);
+                                                    int qrTotal = ((Long)player.get("totalScore")).intValue()+ qrScannedController.scoreCalculator(hash);
 
                                                     // update highest scores
                                                     Integer highestUnique = null;
-                                                    if ( (Integer) player.get("highestUnique") == null || qrScannedController.scoreCalculator(hash) > (int) player.get("highestUnique")) {
+                                                    if (player.get("highestUnique") == null || qrScannedController.scoreCalculator(hash) > ((Long)player.get("highestUnique")).intValue()) {
                                                         highestUnique = qrScannedController.scoreCalculator(hash);
                                                     }
                                                     qrInventory.add(hash);
