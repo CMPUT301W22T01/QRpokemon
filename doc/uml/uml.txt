@@ -1,9 +1,16 @@
 @startuml
+' Set Font Size
+!$FONT_SIZE = "32"
+skinparam defaultFontSize $FONT_SIZE
+skinparam classFontSize   $FONT_SIZE
+skinparam arrowFontSize   $FONT_SIZE
+skinparam noteFontSize    $FONT_SIZE
 
 ' Customization Settings
 skinparam dpi 300
-!pragma ratio 2.0
 skinparam classattributeiconsize 0
+skinparam style strictuml
+!pragma ratio 2.0
 ' skinparam linetype ortho
 
 ' Begin UML Here
@@ -11,15 +18,18 @@ skinparam classattributeiconsize 0
 ' Most activity functions are shown in storyboard so we will update this later
 package "Activities" {
 
-    class ProfileActivity{
+    class ProfileActivity
+    {
         -profileController: ProfileController
     }
 
-    class LeaderboardActivity{
+    class LeaderboardActivity
+    {
         -learderboardController: LeaderboardController
     }
 
-'    class OtherPlayerActivity{
+'    class OtherPlayerActivity
+'    {
 '        -otherPlayerController: OtherPlayerController
 '    }
 
@@ -43,12 +53,14 @@ package "Activities" {
         -mapController: MapController
     }
 
-    class MainMenuActivity{
+    class MainMenuActivity
+    {
         -mainMenuController: MainMenuController
     }
     note top: All Activities extend Android's Activity class (not shown for readability)
 
-    class QrScannedActivity{
+    class QrScannedActivity
+    {
         -QrScannedActivity: QrScannedController
     }
 }
@@ -266,7 +278,7 @@ package "Models" {
         +setComment(comment: String)
     }
 
-    class Database
+    interface Database <<interface>>
     note bottom: This is our\nFirebase instance.
 
     class Camera
