@@ -81,32 +81,46 @@ public class LeaderboardController {
     public void updateRank(Context context, LeaderboardList list) {
 
         // Try to get the user's player data
-        HashMap<String, Object> player;
+        PlayerController playerController = PlayerController.getInstance();
+        HashMap<String, Object> player = null;
         try {
-            PlayerController playerController = PlayerController.getInstance();
             player = playerController.getPlayer(null, null);
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
 
-            // Fetch user data
-            int rank = 0;  // Placeholder value so linter doesn't complain
-            String username = (String) player.get("Identifier");
-            int highestUnique = (int) player.get("highestUnique");
-            int qrCount = (int) player.get("qrCount");
-            int score = (int) player.get("totalScore");
+        DatabaseCallback databaseCallback = new DatabaseCallback(context) { // update user's rank if user is fetched from database
+            @Override
+            public void run(List<Map> dataList) {
+                if (!dataList.isEmpty()) {
+                    HashMap player = (HashMap) dataList.get(0);
+                    // Fetch user data
+                    int rank = 0;  // Placeholder value so linter doesn't complain
+                    String username = (String) player.get("Identifier");
+                    int highestUnique = ((Long) player.get("highestUnique")).intValue();
+                    int qrCount = ((Long) player.get("qrCount")).intValue();
+                    int score = ((Long) player.get("totalScore")).intValue();
 
-            // We're logged in so our username exists
-            for (int i = 0; i < list.size(); i++) {
-                if (list.get(i).getUsername().equals(username)) {
-                    rank = i+1;
-                    break;
+                    // We're logged in so our username exists
+                    for (int i = 0; i < list.size(); i++) {
+                        if (list.get(i).getUsername().equals(username)) {
+                            rank = i+1;
+                            break;
+                        }
+                    }
+                    // Set the appropriate text views
+                    ((LeaderboardActivity) context).setPersonalRank(rank, username, highestUnique, qrCount, score);
                 }
-            }
-            // Set the appropriate text views
-            ((LeaderboardActivity) context).setPersonalRank(rank, username, highestUnique, qrCount, score);
 
+            }
+        };
+        try {
+            playerController.getPlayer(databaseCallback, new ArrayList<>(), (String) player.get("Identifier"), null);
         } catch (Exception exception) {
             Log.e("Leaderboard Controller: ", "Failed to update rank");
             Log.e("Leaderboard Controller: ", exception.toString());
             ((Activity) context).finish();
         }
+
     }
 }
