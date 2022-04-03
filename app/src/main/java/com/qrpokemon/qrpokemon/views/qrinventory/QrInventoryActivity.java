@@ -329,7 +329,7 @@ public class QrInventoryActivity
                             currentQR = dataList.get(0);
 
                             if (dataList.get(0).get("Comments") == null){
-                                Toast.makeText(QrInventoryActivity.this, "There is no comment for this QR Code", Toast.LENGTH_SHORT);
+                                Toast.makeText(QrInventoryActivity.this, "There is no comment for this QR Code", Toast.LENGTH_SHORT).show();
                                 Log.e("QrInventory OnClick case bt_comment: ", "There is no comment for this user!");
 
                             } else {//there are comments to show:
