@@ -91,8 +91,12 @@ public class QrInventoryCustomList extends ArrayAdapter<String> {
         codeIV.setImageBitmap(bitmap);
 
         // set text that if it's also scanned by others
-        if (Integer.valueOf(tStr[3]) > 1) {
-            scannedTv.setText("This code was also scanned by others!");
+        try {
+            if (Integer.valueOf(tStr[3]) > 1) {
+                scannedTv.setText("This code was also scanned by others!");
+            }
+        } catch(Exception e) {
+            e.printStackTrace();
         }
 
         return view;
