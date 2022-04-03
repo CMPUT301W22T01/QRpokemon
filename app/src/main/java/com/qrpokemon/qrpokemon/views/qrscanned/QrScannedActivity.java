@@ -196,9 +196,11 @@ public class QrScannedActivity extends AppCompatActivity {
                                                     Log.e("QrScannedActivity: ","Player's qrInventory now is: " + qrInventory.toString());
                                                     try {
                                                         playerController.savePlayerData(qrCount, qrTotal, qrInventory, (HashMap) player.get("contact"), highestUnique, (String) player.get("DeviceId"), (Boolean) player.get("Owner"),false);
+                                                        Toast.makeText(QrScannedActivity.this, "QR saved", Toast.LENGTH_SHORT).show();
                                                     } catch (Exception e) {
                                                         e.printStackTrace();
                                                     }
+
                                                 }
                                             }
 
@@ -230,7 +232,6 @@ public class QrScannedActivity extends AppCompatActivity {
                                     //save qrcode information
                                     qrScannedController.saveQrCode(QrScannedActivity.this, hash, qrScannedController.scoreCalculator(hash), currentLocation, bitMapString, codeContent);
 
-                                    Toast.makeText(QrScannedActivity.this, "QR saved", Toast.LENGTH_SHORT).show();
                                     finish();
                                 } catch (Exception e) {
                                     e.printStackTrace();
