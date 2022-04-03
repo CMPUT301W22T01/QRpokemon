@@ -117,7 +117,7 @@ public class PlayerController extends Observable {
         info.put("DeviceId", id);
         info.put("Owner", owner);
 
-        databaseProxy.writeData("Player", this.currentPlayer.getUsername() ,info ,overwrite);
+        databaseProxy.writeData("Player", identifier ,info ,overwrite);
     }
 
 

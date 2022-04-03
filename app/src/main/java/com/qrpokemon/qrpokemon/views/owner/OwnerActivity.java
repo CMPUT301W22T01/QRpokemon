@@ -129,19 +129,18 @@ public class OwnerActivity extends AppCompatActivity implements PlayerRecyclerAd
                         @Override
                         public void run(List<Map> dataList) {
                             if (!dataList.isEmpty()) { // if there are players:
-                                Log.e("DataList has item in OwnerActiviy!","");
                                 for (Map player : dataList) { // iterate each player has involved with this qrcode:
-                                    Log.e("Player is : ", (String) player.get("Identifier"));
+
                                     ArrayList<String> qrInventory = (ArrayList<String>) player.get("qrInventory");
                                     if (qrInventory.contains((String) selectedQr.get("Identifier"))){ // if qrcode to be deleted is in this player's qrInventory:
-
+                                        Log.e("Player has this qrcode ", (String) player.get("Identifier") + " " + player.get("qrInventory").toString());
                                         //qrInvnetory
                                         qrInventory.remove((String)selectedQr.get("Identifier"));
 
 
                                         //highest unique
                                         if ((Long) selectedQr.get("Score") - (Long) player.get("highestUnique") == 0){ // save highest value here:
-
+                                            Log.e("This qrcode is player's highest score ", (String) player.get("Identifier") + " " + player.get("qrInventory").toString());
                                             highest = 0;
                                             DatabaseCallback databaseCallback1 = new DatabaseCallback(OwnerActivity.this) {
                                                 @Override
@@ -165,13 +164,13 @@ public class OwnerActivity extends AppCompatActivity implements PlayerRecyclerAd
                                                                 (String) player.get("DeviceId"),
                                                                 (Boolean) player.get("Owner"),
                                                                 (String) player.get("Identifier"),
-                                                                false);
+                                                                true);
 
 
                                                         //check if it's currentplayer, if true, updates locally
                                                         HashMap currentPlayer = playerController.getPlayer(null,null,null,null);
                                                         if (((String) player.get("Identifier")).equals((String)player.get("Identifier"))) {
-                                                            playerController.setupPlayer( (String) currentPlayer.get("Identifier"),
+                                                            playerController.setupPlayer((String) currentPlayer.get("Identifier"),
                                                                     qrInventory,
                                                                     (HashMap) currentPlayer.get("contact"),
                                                                     ((Long)player.get("qrCount")).intValue() -1,
@@ -186,8 +185,11 @@ public class OwnerActivity extends AppCompatActivity implements PlayerRecyclerAd
                                                     }
                                                 }
                                             };
+
                                             try {
+                                                Log.e("check if this qrcode is player's only qr ", (String) player.get("Identifier") + " " + player.get("qrInventory").toString());
                                                 if (qrInventory.isEmpty()) { // if qrInventory is empty already:
+                                                    Log.e("OwnerActivity: ", "player is: " + player.get("Identifier").toString() +" with qrInventory: " + player.get("qrInventory").toString());
                                                     try {
                                                         Integer total = Integer.valueOf(String.valueOf((Long) player.get("totalScore")));
                                                         playerController.saveOtherPlayerData( ((Long)player.get("qrCount")).intValue() -1,
@@ -198,12 +200,12 @@ public class OwnerActivity extends AppCompatActivity implements PlayerRecyclerAd
                                                                 (String) player.get("DeviceId"),
                                                                 (Boolean) player.get("Owner"),
                                                                 (String) player.get("Identifier"),
-                                                                false);
+                                                                true);
 
                                                         //check if it's currentplayer, if true, updates locally
                                                         HashMap currentPlayer = playerController.getPlayer(null,null,null,null);
                                                         if (((String) player.get("Identifier")).equals((String) currentPlayer.get("Identifier"))) {
-//                                                            Log.e("OwnerActivity: ", "Local player is: " + currentPlayer.toString());
+//
                                                             playerController.addObserver(OwnerActivity.this);
                                                             playerController.savePlayerData( ((Long)player.get("qrCount")).intValue() -1,
                                                                     total - ((Long)selectedQr.get("Score")).intValue(),
@@ -226,6 +228,23 @@ public class OwnerActivity extends AppCompatActivity implements PlayerRecyclerAd
                                                     qrCodeController.getQR(databaseCallback1, new ArrayList<>(),hash);
                                                     Log.e("OwnerActivity", "Changing the highest unique");
                                                 }
+                                            } catch (Exception e) {
+                                                e.printStackTrace();
+                                            }
+                                        } else { // if this is not highest scored qr for this player:
+                                            Log.e("Player doesn't have this qr as highest qr: ", player.get("Identifier") + " " + qrInventory.toString() );
+                                            // save total qrInventroy and count only
+                                            Integer total = Integer.valueOf(String.valueOf((Long) player.get("totalScore")));
+                                            try {
+                                                playerController.saveOtherPlayerData( ((Long)player.get("qrCount")).intValue() -1,
+                                                        total - ((Long)selectedQr.get("Score")).intValue(),
+                                                        qrInventory,
+                                                        (HashMap) player.get("contact"),
+                                                        ((Long) player.get("highestUnique")).intValue(),
+                                                        (String) player.get("DeviceId"),
+                                                        (Boolean) player.get("Owner"),
+                                                        (String) player.get("Identifier"),
+                                                        true);
                                             } catch (Exception e) {
                                                 e.printStackTrace();
                                             }
