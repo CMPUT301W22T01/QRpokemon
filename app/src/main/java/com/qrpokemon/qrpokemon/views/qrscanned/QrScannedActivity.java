@@ -35,6 +35,7 @@ import com.google.zxing.NotFoundException;
 
 import com.qrpokemon.qrpokemon.MainActivity;
 import com.qrpokemon.qrpokemon.R;
+import com.qrpokemon.qrpokemon.controllers.DatabaseCallback;
 import com.qrpokemon.qrpokemon.controllers.LocationController;
 import com.qrpokemon.qrpokemon.controllers.PlayerController;
 import com.qrpokemon.qrpokemon.controllers.QrScannedController;
@@ -45,6 +46,8 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class QrScannedActivity extends AppCompatActivity {
 
@@ -162,30 +165,46 @@ public class QrScannedActivity extends AppCompatActivity {
                                 try { // save user's information
                                     PlayerController playerController = PlayerController.getInstance();
 
-                                    // if th Qr code already scanned by player
-                                    if((((ArrayList<String>) (playerController.getPlayer(null, null,null,null).get("qrInventory"))).contains(hash))){
-                                        Toast.makeText(QrScannedActivity.this, "Already have this QR code", Toast.LENGTH_SHORT).show();
-                                        finish();
-                                    }
+                                    DatabaseCallback databaseCallback = new DatabaseCallback(QrScannedActivity.this) {
+                                        @Override
+                                        public void run(List<Map> dataList) {
+                                            if (!dataList.isEmpty()) { // if player found:
+                                                if(((ArrayList<String>) dataList.get(0).get("qrInventory")).contains(hash)){// if th Qr code already scanned by player
 
-                                    // if this QR code is the first time scanned by player
-                                    else {
-                                        HashMap player = (HashMap) playerController.getPlayer(null, null, null, null);
-                                        ArrayList<String> qrInventory = (ArrayList<String>) player.get("qrInventory");
+                                                    Toast.makeText(QrScannedActivity.this, "Already have this QR code", Toast.LENGTH_SHORT).show();
+                                                    finish();
+                                                } else {
+                                                    // if this QR code is the first time scanned by player
+                                                    HashMap player = null;
+                                                    try {
+                                                        player = (HashMap) playerController.getPlayer(null, null, null, null);
+                                                    } catch (Exception e) {
+                                                        e.printStackTrace();
+                                                    }
+                                                    ArrayList<String> qrInventory = (ArrayList<String>) player.get("qrInventory");
 
-                                        // update player's total score and counts
-                                        int qrCount = qrInventory.size() + 1;
-                                        int qrTotal = (int) player.get("totalScore") + qrScannedController.scoreCalculator(hash);
+                                                    // update player's total score and counts
+                                                    int qrCount = qrInventory.size() + 1;
+                                                    int qrTotal = (int) player.get("totalScore") + qrScannedController.scoreCalculator(hash);
 
-                                        // update highest scores
-                                        Integer highestUnique = null;
-                                        if ( (Integer) player.get("highestUnique") == null || qrScannedController.scoreCalculator(hash) > (int) player.get("highestUnique")) {
-                                            highestUnique = qrScannedController.scoreCalculator(hash);
+                                                    // update highest scores
+                                                    Integer highestUnique = null;
+                                                    if ( (Integer) player.get("highestUnique") == null || qrScannedController.scoreCalculator(hash) > (int) player.get("highestUnique")) {
+                                                        highestUnique = qrScannedController.scoreCalculator(hash);
+                                                    }
+                                                    qrInventory.add(hash);
+                                                    Log.e("QrScannedActivity: ","Player's qrInventory now is: " + qrInventory.toString());
+                                                    try {
+                                                        playerController.savePlayerData(qrCount, qrTotal, qrInventory, (HashMap) player.get("contact"), highestUnique, (String) player.get("DeviceId"), (Boolean) player.get("Owner"),false);
+                                                    } catch (Exception e) {
+                                                        e.printStackTrace();
+                                                    }
+                                                }
+                                            }
+
                                         }
-                                        qrInventory.add(hash);
-                                        Log.e("QrScannedActivity: ","Player's qrInventory now is: " + qrInventory.toString());
-                                        playerController.savePlayerData(qrCount, qrTotal, qrInventory, (HashMap) player.get("contact"), highestUnique, (String) player.get("DeviceId"), (Boolean) player.get("Owner"),false);
-                                    }
+                                    };
+                                    playerController.getPlayer(databaseCallback, new ArrayList<>(), (String) playerController.getPlayer(null, null,null,null).get("Identifier"), null);
 
                                     String currentLocation = null;
                                     Bitmap bitmap = null;
