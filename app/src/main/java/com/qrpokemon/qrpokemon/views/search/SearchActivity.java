@@ -30,6 +30,7 @@ public class SearchActivity extends AppCompatActivity {
     private ArrayList<SearchItem> searchList;
     private SearchController searchController;
     private SearchItem selected;
+    private Button searchButton;
 
     /**
      * Init Listview EditText object and set up listeners
@@ -44,6 +45,7 @@ public class SearchActivity extends AppCompatActivity {
 
         ListView listView = findViewById(R.id.search_listview);
         backButton = findViewById(R.id.button);
+        searchButton = findViewById(R.id.search_button);
 
 
         // Create and fill our list with player data
@@ -51,7 +53,7 @@ public class SearchActivity extends AppCompatActivity {
         searchController = SearchController.getInstance();
 
         mAdapter = new SearchList(this, searchList);
-        listView.setAdapter(mAdapter);
+
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -75,26 +77,37 @@ public class SearchActivity extends AppCompatActivity {
         EditText searchBox = findViewById(R.id.sv);
 
 
-
-        searchBox.addTextChangedListener(new TextWatcher() {
+        searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            public void onClick(View view) {
                 mAdapter.clear();
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                //Log.e("SearchActivity: ", "count: " + count);
-                mAdapter.clear();
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                Log.e("SearchActivity: ","current input: " + s.toString());
-                searchController.getPlayerSearch(getApplicationContext(), s.toString(), mAdapter);
-                searchController.getLocationSearch(getApplicationContext(), s.toString(), mAdapter);
+                listView.setAdapter(mAdapter);
+                searchController.getPlayerSearch(getApplicationContext(), searchBox.getText().toString(), mAdapter);
+                searchController.getLocationSearch(getApplicationContext(), searchBox.getText().toString(), mAdapter);
             }
         });
+
+////these code can update the search list while typing, but the list can not update properly if user type too fast
+//        searchBox.addTextChangedListener(new TextWatcher() {
+//            @Override
+//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+//                mAdapter.clear();
+//            }
+//
+//            @Override
+//            public void onTextChanged(CharSequence s, int start, int before, int count) {
+//                //Log.e("SearchActivity: ", "count: " + count);
+//                mAdapter.clear();
+//            }
+//
+//            @Override
+//            public void afterTextChanged(Editable s) {
+//                listView.setAdapter(mAdapter);
+//                Log.e("SearchActivity: ","current input: " + s.toString());
+//                searchController.getPlayerSearch(getApplicationContext(), s.toString(), mAdapter);
+//                searchController.getLocationSearch(getApplicationContext(), s.toString(), mAdapter);
+//            }
+//        });
 
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override

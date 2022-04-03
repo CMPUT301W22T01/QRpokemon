@@ -50,7 +50,7 @@ public class SearchController {
                 //Log.e("SearchController: ", "Inside run");
                 if(!playerList.isEmpty() && !userName.isEmpty()) {
                     // clear previous search result when searching for a new thing
-
+                    qMyAdapter.clear();
                     for (Map player : playerList){
 
                         ArrayList<String> currentQrList = new ArrayList<String>();
@@ -111,6 +111,10 @@ public class SearchController {
     public void getLocationSearch(Context context, String location, ArrayAdapter<SearchItem> qMyAdapter) {
         List<Map> temp = new ArrayList<>();  // Store our db results temporarily
 //        DatabaseProxy databaseProxy = DatabaseProxy.getInstance();
+
+        if(!location.isEmpty()) {
+            qMyAdapter.clear();
+        }
 
         DatabaseCallback callback = new DatabaseCallback(context) {
             @Override

@@ -68,7 +68,7 @@ public class ProfileActivityTest {
         solo.waitForActivity(ProfileActivity.class, 2000);
         solo.assertCurrentActivity("Wrong Activity", ProfileActivity.class);
 
-        solo.clickOnView(solo.getView(R.id.iv_back));
+        solo.clickOnView(solo.getView(R.id.profile_back));
         solo.waitForActivity(ProfileActivity.class, 2000);
         solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
     }
