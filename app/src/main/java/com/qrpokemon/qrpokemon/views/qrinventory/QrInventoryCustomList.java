@@ -73,8 +73,8 @@ public class QrInventoryCustomList extends ArrayAdapter<String> {
             Log.e("QrInventoryCustomList: ",temp);
         }
 
-        String encodedString = ""; // user has no photo in default
         // setImageBitmap
+        String encodedString = ""; // user has no photo in default
         if (tStr[2] != "null") { // if user saves a photo, display his/her photo:
             encodedString = tStr[2];
         }

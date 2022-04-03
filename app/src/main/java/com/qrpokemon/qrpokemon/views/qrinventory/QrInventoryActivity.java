@@ -39,13 +39,14 @@ public class QrInventoryActivity
         implements View.OnClickListener, QrInventoryAddCommentFragment.OnFragmentInteractionListener, Observer {
 
     private String selectedHash, selectedBitmap, currentPlayer;
-    private Integer selectedPosition;
+    private Integer selectedPosition, curMaxScore;
     private TextView totalScore, totalCount, qrInventoryTitle;
     private Button ascendingButton, descendingButton;
     private FloatingActionButton backButton, deleteButton, commentButton, showCommentsButton;
     private ListView qrInventoryList;
     private HashMap hashMapOfPlayerData, commentsOfCurQrcode;
     private Map currentQR;
+    private ArrayList<Integer> allTheScores;
     private ArrayList<String> qrHashCodes;
     private ArrayAdapter<String> qrInventoryDataAdapter;
     private QrInventoryController qrInventoryController = QrInventoryController.getInstance();
@@ -146,7 +147,9 @@ public class QrInventoryActivity
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            // if the player clicked the back button, that is, want to go back to main menu
+            /**
+             * if the player clicked the back button, that is, want to go back to main menu
+             */
             case R.id.bt_back:
                 try {
                     qrInventoryController.getPlayerInfo(null,true,this, this);
@@ -158,7 +161,9 @@ public class QrInventoryActivity
                 finish();
                 break;
 
-            // if the player clicked the delete button, that is, want to delete one of his/her qrCode
+            /**
+             * if the player clicked the delete button, that is, want to delete one of his/her qrCode
+             */
             case R.id.bt_delete:
 
                 // deducted the current score from the total score
@@ -175,17 +180,33 @@ public class QrInventoryActivity
                 qrHashCodes.remove(selectedHash);
                 qrInventoryDataAdapter.remove(qrInventoryDataAdapter.getItem(selectedPosition));
 
+                // change the highest unique if needed
+
+                allTheScores = new ArrayList<>();
+                for (int i = 0; i < qrInventoryDataAdapter.getCount(); i++) {
+                    String s = qrInventoryDataAdapter.getItem(i);
+                    String[] ttStr = s.split(" ");
+                    allTheScores.add(Integer.valueOf(ttStr[0]));
+                }
+
+                // get the max value in the ArrayList 'allTheScores'
+                curMaxScore = -99999;
+                for (Integer curNum : allTheScores) {
+                    if (curNum > curMaxScore) {
+                        curMaxScore = curNum;
+                    }
+                }
+
                 // delete from Local and Firebase, update totalCount/totalNumber, update display
                 PlayerController playerController = PlayerController.getInstance();
                 try {
-                    playerController.savePlayerData(qrInventoryDataAdapter.getCount(), curTotalScore, qrHashCodes, null, null, null, null,false);
+                    playerController.savePlayerData(qrInventoryDataAdapter.getCount(), curTotalScore, qrHashCodes, null, curMaxScore, null, null,false);
                     qrInventoryList.setAdapter(qrInventoryDataAdapter);
 
                     totalCount.setText(qrInventoryDataAdapter.getCount());
 
                 } catch (Exception e) {
                     e.printStackTrace();
-//                    Log.e(TAG, "Error from Onclick (delete from local and firebase): " + e);
                 }
 
                 deleteButton.setVisibility(GONE);
@@ -194,7 +215,9 @@ public class QrInventoryActivity
 
                 break;
 
-            // if the user clicked the descending button, that is, want to sort the list in descending order by score
+            /**
+             * if the user clicked the descending button, that is, want to sort the list in descending order by score
+             */
             case R.id.bt_descending:
 //                Log.e(TAG, "After clicking the DESCENDING button: " + qrInventoryDataAdapter.getCount());
 
@@ -226,9 +249,10 @@ public class QrInventoryActivity
 
                 break;
 
-            // if the user clicked the descending button, that is, want to sort the list in descending order by score
+            /**
+             * if the user clicked the descending button, that is, want to sort the list in descending order by score
+             */
             case R.id.bt_ascending:
-//                Log.e(TAG, "After clicking the ASCENDING button: " + qrInventoryDataAdapter.getCount());
 
                 qrInventoryDataAdapter.sort(new Comparator<String>() {
                     @Override
@@ -258,7 +282,9 @@ public class QrInventoryActivity
 
                 break;
 
-            // if the user clicked the comment button, that is, the player want to add a comment to one of his/her qrCode
+            /**
+             * if the user clicked the comment button, that is, the player want to add a comment to one of his/her qrCode
+             */
             case R.id.bt_comment:
                 commentsOfCurQrcode = new HashMap<String, ArrayList<String>>();
                 // first, get all the comments that that qrCode('selectedHash') has
@@ -317,10 +343,11 @@ public class QrInventoryActivity
 
                 break;
 
-            // if the user clicked the show comments button, that is, the player want to see all the comments of the code
+            /**
+             * if the user clicked the show comments button, that is, the player want to see all the comments of the code
+             */
             case R.id.bt_show_comments:
                 commentsOfCurQrcode = new HashMap<String, ArrayList<String>>();
-                // todo setVisibility
                 DatabaseCallback databaseCallback = new DatabaseCallback(this) {
                     @Override
                     public void run(List<Map> dataList) {
