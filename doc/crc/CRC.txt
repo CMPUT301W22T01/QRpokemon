@@ -47,10 +47,8 @@ Responsibility: Notify user if username is invalid
 Responsibility: Send user to MainMenuActivity
 
 Class: SignupController
-Collaborator: SignupActivity, Player, PlayerController, RestoreSession, FileSystemController
+Collaborator: SignupActivity, Player, PlayerController, RestoreSession
 Responsibility: Create a Player class and ask PlayerController to save
-Responsibility: Ask FileSystemController to find local session file 
-Responsibility: Ask FileSystemController to save local session file 
 Responsibility: Ask DatabaseController to save validated user data  
 Responsibility: Ask DatabaseController to find input username
 Responsibility: Send validation result to SignupActivity
@@ -179,15 +177,6 @@ Class: Database
 Collaborator: DatabaseController, QrCode, Player, QrCodeController
 Responsibility: Store QrCode
 Responsibility: Store Player
-
-Class: FileSystemController
-Collaborator: FileSys
-Responsibility: Write local files to FileSys
-Responsibility: Read files from FileSys
-
-Class: FileSys
-Collaborator: FileSystemController
-Responsibility: Store local files
 
 Class: SearchActivity
 Collaborator: SearchController, MainMenuActivity, OtherPlayerActivity

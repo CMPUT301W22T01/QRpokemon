@@ -199,14 +199,6 @@ package "Controllers" {
         deleteData(String collection, String objectName)
     }
 
-    class FileSystemController
-    {
-        -filename: String
-
-        +readToFile(filename: String): String
-        +writeToFile(filename: String, data: String)
-    }
-
     class QrAnalyzer
     {
         -image: Image
@@ -259,9 +251,6 @@ package "Models" {
         +setQrInventory(qrInventory: String[])
         +getQrInventory(): String[]
     }
-
-    class FileSystem{}
-    note bottom: This is our local filesystem
 
     class QrCode
     {
@@ -336,9 +325,6 @@ MainMenuController "1" o-- "1" PlayerController #blue: Get current player
 MainMenuController "1" o-l- "1" QrCodeController: Verify & identify\n QR Hash
 MainMenuActivity "1" o-- "1" MainMenuController
 
-FileSystemController "1" --> "1" FileSystem: "Read/Write data"
-SignupController "1" --> "1" FileSystemController: "Read or save\n session data"
-
 QrInventoryController "1" o-- "1" PlayerController
 ' QrInventoryController "1" o-- "1" QrCodeController 
 
@@ -365,11 +351,9 @@ SearchActivity "1" -> "1" OtherPlayerActivity: Opens profile
 
 ' Layout Connections
 CameraController -[hidden]l- LocationController
-FileSystemController -[hidden]r- DatabaseController
 ' LocationController -[hidden]l- DatabaseController
 QrCodeController -[hidden]- PlayerController
 ' QrCode -[hidden]left- Database
 ' QrCode -[hidden]left- Player
-' QrCode -[hidden]left- FileSystem
 ' QrCode -[hidden]left- Camera
 @enduml
