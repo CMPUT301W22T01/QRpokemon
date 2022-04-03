@@ -79,7 +79,7 @@ public class QrInventoryActivityTest {
         // NOTE: Espresso stays open which prevents getting the DESTROYED state
         // Therefore, check that the state was changed by the button
  //       assertNotEquals(Lifecycle.State.RESUMED, activityScenarioRule.getScenario().getState());
-      }
+ //     }
 
 //    @Test
 //    public void checkQRInventory(){
