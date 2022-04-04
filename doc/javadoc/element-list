@@ -1,0 +1,11 @@
+com.qrpokemon.qrpokemon
+com.qrpokemon.qrpokemon.controllers
+com.qrpokemon.qrpokemon.models
+com.qrpokemon.qrpokemon.views.leaderboard
+com.qrpokemon.qrpokemon.views.map
+com.qrpokemon.qrpokemon.views.owner
+com.qrpokemon.qrpokemon.views.profile
+com.qrpokemon.qrpokemon.views.qrinventory
+com.qrpokemon.qrpokemon.views.qrscanned
+com.qrpokemon.qrpokemon.views.search
+com.qrpokemon.qrpokemon.views.signup

@@ -46,6 +46,7 @@ public class QrScannedController {
      * Analyze the photo user passed in
      * @param bitmap photo current player takes
      * @return A string decoded from QRhash found in photo
+     * @throws NotFoundException throws an error if qrcode isn't found
      */
     public String analyzeImage(Bitmap bitmap) throws NotFoundException {
         // convert bitmap to string

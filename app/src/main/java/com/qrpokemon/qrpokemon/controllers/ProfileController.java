@@ -63,7 +63,6 @@ public class ProfileController {
     /**
      * get the phone number of the current user
      * @return a String of the user phone number
-     * @throws Exception if player doens't have a phone number
      */
     public static String getPlayerPhone(){
         String playerPhone;

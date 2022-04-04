@@ -45,8 +45,8 @@ public class PlayerRecyclerAdapter extends RecyclerView.Adapter<PlayerRecyclerAd
 
         /**
          * Hold information on different area in one Recycler view item
-         * @param view
-         * @param onItemListener
+         * @param view current View
+         * @param onItemListener Listener for items clicked
          */
         public ViewHolder (final View view, OnItemListener onItemListener) {
             super(view);
@@ -123,7 +123,7 @@ public class PlayerRecyclerAdapter extends RecyclerView.Adapter<PlayerRecyclerAd
 
     /**
      * Count the total number of elements in this view
-     * @return
+     * @return size of the items in view
      */
     @Override
     public int getItemCount() {

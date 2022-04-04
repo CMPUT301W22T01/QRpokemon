@@ -8,7 +8,7 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
-import com.qrpokemon.qrpokemon.R;
+//import com.qrpokemon.qrpokemon.R;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -35,6 +35,7 @@ public class SignupController {
      * @param newUsername New player's name
      * @param email player entered email
      * @param phone player entered phone
+     * @param id player's DeviceId
      * @throws Exception if collection not in correct range
      */
     public void addNewPlayer(Context context, String newUsername, @Nullable String email, @Nullable String phone, String id) throws Exception {
@@ -75,7 +76,7 @@ public class SignupController {
     /**
      * Invoke PlayerController to get player with DeviceId given
      * @param databaseCallback Callback function for DatabaseProxy
-     * @param result Result List<Map>, contains player's info
+     * @param result Result List(Map), contains player's info
      * @param id DeviceId
      * @throws Exception if collection name is wrong inside PlayerController class.
      */
@@ -86,7 +87,7 @@ public class SignupController {
     /**
      * update a player on local and database on startup
      * @param username username of current player
-     * @param qrInventory Inventory(ArrayList<String>) of current player
+     * @param qrInventory Inventory(ArrayList(String)) of current player
      * @param contact contact info (HashMap) of current player
      * @param qrCount Integer of total count of current player
      * @param totalScore Integer that represents total score current player

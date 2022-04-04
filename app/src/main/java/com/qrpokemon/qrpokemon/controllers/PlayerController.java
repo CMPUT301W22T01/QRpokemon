@@ -64,6 +64,9 @@ public class PlayerController extends Observable {
      * @param contact player's contact info
      * @param qrCount player's qrcount number
      * @param totalScore player's Score so far
+     * @param highestUnique player's higest score for unique qrcode
+     * @param owner A boolean whether this player is an owner
+     * @param id A String for DeviceId
      */
     public void setupPlayer(String username,
                             @Nullable ArrayList<String> qrInventory,
@@ -194,7 +197,7 @@ public class PlayerController extends Observable {
     /**
      * Grab all players in Player collection from Firestore database
      * @param databaseCallback a call back function once it retries result from Firestore
-     * @param result data found form Firestore will be contained in List<Map>
+     * @param result data found form Firestore will be contained in List(Map)
      * @param sortField A string indicates that how the data will be sorted by
      */
     public void getAllPlayers(DatabaseCallback databaseCallback, List<Map> result, @Nullable String sortField){

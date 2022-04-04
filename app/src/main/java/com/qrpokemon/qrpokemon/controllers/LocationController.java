@@ -176,6 +176,7 @@ public class LocationController implements OnMapReadyCallback, LocationListener 
 
     /**
      * A getter method for city details of current Location
+     * @param context Activity which calls LocationController
      * @return A string represents City name
      */
     public String getCity(Context context) {
@@ -202,7 +203,7 @@ public class LocationController implements OnMapReadyCallback, LocationListener 
     /**
      * Save qrcode by cityName/regionName
      * Create a new city if city has no qrcode before
-     * City stores an HashMap <Location Coordinate, arrayList of qrCodes>
+     * City stores an HashMap Location Coordinate, arrayList of qrCodes
      * @param cityName city Name player is currently at
      * @param coordinate coordinate of location, in formation 'latitude, Longitude'
      * @param context Activity calls it, mostly QrScannedActivity
@@ -260,7 +261,7 @@ public class LocationController implements OnMapReadyCallback, LocationListener 
     /**
      * Get all location data from LocationIndex collection on Firestore
      * @param databaseCallback callback function once it retries all info from Firestore
-     * @param temp a List<Map> that contains all location info found on Firestore
+     * @param temp a List(Map) that contains all location info found on Firestore
      */
     public void getAllLocation(DatabaseCallback databaseCallback , List<Map> temp) {
         try {

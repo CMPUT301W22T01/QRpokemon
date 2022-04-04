@@ -194,11 +194,11 @@ public class QrInventoryController {
     }
 
     /**
-     * Gets all the comments of the qrCode 'hashName', and save all tha comments into List<Map> 'result'
+     * Gets all the comments of the qrCode 'hashName', and save all tha comments into List(Map) 'result'
      *
      * @param databaseCallback callback object.
      * @param hashName  the qrCode which we want to get all the comments of.
-     * @param result    where we store all the comments, format: 'player'(String) : 'comments'(ArrayList<String>)
+     * @param result    where we store all the comments, format: 'player'(String) : 'comments'(ArrayList(String))
      * @return A hashMap that represents comments of this qrcode
      * @throws Exception throws Exception if collection name is incorrect
      */

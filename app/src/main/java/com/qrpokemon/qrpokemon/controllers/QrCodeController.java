@@ -80,7 +80,7 @@ public class QrCodeController {
     /**
      * Get a specific qrcode by qrhash
      * @param databaseCallback A callback function when data is retrieved from Firestore database
-     * @param list A List<Map> object that contains result from Firestore
+     * @param list A List(Map) object that contains result from Firestore
      * @param objectName Hash of qrcode
      * @throws Exception throws Exception if collection name is incorrect
      */
