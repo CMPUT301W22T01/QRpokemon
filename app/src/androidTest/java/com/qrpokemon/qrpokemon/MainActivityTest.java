@@ -5,13 +5,12 @@ import android.app.Activity;
 import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.rule.ActivityTestRule;
 
-import com.qrpokemon.qrpokemon.activities.leaderboard.LeaderboardActivity;
-import com.qrpokemon.qrpokemon.activities.map.MapActivity;
-import com.qrpokemon.qrpokemon.activities.profile.ProfileActivity;
-import com.qrpokemon.qrpokemon.activities.qrinventory.QrInventoryActivity;
+import com.qrpokemon.qrpokemon.views.leaderboard.LeaderboardActivity;
+import com.qrpokemon.qrpokemon.views.map.MapActivity;
+import com.qrpokemon.qrpokemon.views.profile.ProfileActivity;
+import com.qrpokemon.qrpokemon.views.qrinventory.QrInventoryActivity;
 
-import com.qrpokemon.qrpokemon.activities.search.SearchActivity;
-import com.qrpokemon.qrpokemon.models.FileSystemController;
+import com.qrpokemon.qrpokemon.views.search.SearchActivity;
 import com.robotium.solo.Solo;
 
 import org.junit.Before;
@@ -29,9 +28,6 @@ public class MainActivityTest {
     @Before
     public void setUp() throws Exception{
         solo = new Solo(InstrumentationRegistry.getInstrumentation(), rule.getActivity());
-        FileSystemController fileSystemController = new FileSystemController();
-        fileSystemController.writeToFile(solo.getCurrentActivity(), "firstRun", null);
-        fileSystemController.writeToFile(solo.getCurrentActivity(), "name", "Bob");
     }
 
     @Test
@@ -65,7 +61,7 @@ public class MainActivityTest {
     @Test
     public void checkSearchButton() {
         solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
-        solo.clickOnButton("SEARCH"); //Click on SEARCH Button
+        solo.clickOnView(solo.getView(R.id.Search_Button)); //Click on SEARCH Button
         solo.assertCurrentActivity("Wrong Activity", SearchActivity.class);
     }
 

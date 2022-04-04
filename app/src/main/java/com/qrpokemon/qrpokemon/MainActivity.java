@@ -14,8 +14,6 @@ import android.content.Intent;
 
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.location.LocationManager;
 import android.os.Bundle;
 
 import android.provider.MediaStore;
@@ -25,30 +23,21 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationServices;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.qrpokemon.qrpokemon.activities.leaderboard.LeaderboardActivity;
-import com.qrpokemon.qrpokemon.activities.map.MapActivity;
-import com.qrpokemon.qrpokemon.activities.map.MapController;
-import com.qrpokemon.qrpokemon.activities.profile.ProfileActivity;
-import com.qrpokemon.qrpokemon.activities.qrinventory.QrInventoryActivity;
-import com.qrpokemon.qrpokemon.activities.qrscanned.QrScannedActivity;
-import com.qrpokemon.qrpokemon.activities.search.SearchActivity;
-import com.qrpokemon.qrpokemon.activities.signup.SignupActivity;
 
-import java.io.UnsupportedEncodingException;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
+import com.qrpokemon.qrpokemon.views.leaderboard.LeaderboardActivity;
+import com.qrpokemon.qrpokemon.views.map.*;
+import com.qrpokemon.qrpokemon.views.owner.OwnerActivity;
+import com.qrpokemon.qrpokemon.views.profile.ProfileActivity;
+import com.qrpokemon.qrpokemon.views.qrinventory.QrInventoryActivity;
+import com.qrpokemon.qrpokemon.views.qrscanned.QrScannedActivity;
+import com.qrpokemon.qrpokemon.views.search.SearchActivity;
+import com.qrpokemon.qrpokemon.views.signup.SignupActivity;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private Intent intent;
-    private Button qrInventoryMainBt;
-    private Button mapMainBt;
-    private Button searchMainBt;
-    private Button leaderboardMainBt;
-    private FloatingActionButton otherProfileBt;
-    private FloatingActionButton cameraMainBt;
+    private Button qrInventoryMainBt, mapMainBt, searchMainBt, leaderboardMainBt;
+    private FloatingActionButton otherProfileBt, cameraMainBt, adminBtn;
     private ImageView profileMainIv;
     private MainMenuController mainMenuController = MainMenuController.getInstance();
     private static final int CAMERA_ACTION_CODE = 100;
@@ -89,18 +78,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         leaderboardMainBt = findViewById(R.id.Leaderboard_Button);
         cameraMainBt = findViewById(R.id.Camera_Button);
         otherProfileBt = findViewById(R.id.Other_Player_Button);
-
-        //setup for getting location:
-        MapController mapController = MapController.getInstance();
-        LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        FusedLocationProviderClient fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
-
-        //get location in mapController
-        mapController.run(this, null, locationManager, fusedLocationProviderClient);
-
+        adminBtn = findViewById(R.id.admin_Button);
+        adminBtn.setVisibility(View.INVISIBLE);
 
         profileMainIv = findViewById(R.id.avatar_imageView);
-        profileMainIv.setImageResource(R.drawable.profile_avadar);
 
         // setting Listeners for buttons and imageView
         qrInventoryMainBt.setOnClickListener(this);
@@ -110,6 +91,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         cameraMainBt.setOnClickListener(this);
         profileMainIv.setOnClickListener(this);
         otherProfileBt.setOnClickListener(this);
+        adminBtn.setOnClickListener(this);
 
         activityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
             @Override
@@ -135,26 +117,37 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 intent = new Intent(MainActivity.this, QrInventoryActivity.class);
                 startActivity(intent);
                 break;
+
             case R.id.Map_Button:           // open Map Activity
                 intent = new Intent(MainActivity.this, MapActivity.class);
                 startActivity(intent);
                 break;
+
             case R.id.Search_Button:        // open Search Activity
                 Intent intent = new Intent(MainActivity.this, SearchActivity.class);
                 startActivity(intent);
                 break;
+
             case R.id.Leaderboard_Button:   // open Leaderboard Activity
                 intent = new Intent(MainActivity.this, LeaderboardActivity.class);
                 startActivity(intent);
                 break;
+
             case R.id.Camera_Button:        // open Camera Activity
                 intent = new Intent(this, QrScannedActivity.class);
                 startActivity(intent);
                 break;
+
             case R.id.avatar_imageView:     // open Profile Activity
                 intent = new Intent(MainActivity.this, ProfileActivity.class);
                 startActivity(intent);
                 break;
+
+            case R.id.admin_Button:
+                intent = new Intent(this, OwnerActivity.class);
+                startActivity(intent);
+                break;
+
             case R.id.Other_Player_Button:  // open Inventory Activity
                 if (ContextCompat.checkSelfPermission(this,
                         Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
@@ -171,12 +164,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults){
+    /**
+     * Ask permission for device to open camera
+     * @param requestCode 100 permission code
+     * @param permissions the array of permission app asked
+     * @param grantResults the result of permission asked
+     */
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         Log.e("MainMenuController: ", "Request now has the result");
-        switch (requestCode){
+        switch (requestCode) {
             case CAMERA_ACTION_CODE:
-                if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     // Pop camera
                     Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                     activityResultLauncher.launch(intent);

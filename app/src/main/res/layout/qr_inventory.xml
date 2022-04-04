@@ -9,7 +9,7 @@
     <TextView
         android:id="@+id/QR_inventory_title"
         android:layout_width="380dp"
-        android:layout_height="94dp"
+        android:layout_height="61dp"
         android:layout_marginStart="4dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="4dp"
@@ -24,54 +24,129 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/tv_total_score_msg"
-        android:layout_width="106dp"
+        android:id="@+id/tv_total_score"
+        android:layout_width="0dp"
         android:layout_height="30dp"
-        android:layout_marginStart="14dp"
+        android:text="0"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tv_total_score_txt"
+        app:layout_constraintEnd_toStartOf="@+id/tv_total_number_txt"
+        app:layout_constraintStart_toEndOf="@+id/tv_total_score_txt" />
+
+    <TextView
+        android:id="@+id/tv_total_score_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_marginTop="18dp"
         android:text="Total Score: "
-        android:textAlignment="center"
-        android:textAllCaps="false"
         android:textColor="@color/black"
         android:textIsSelectable="false"
         android:textSize="19sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/bt_descending"
         app:layout_constraintTop_toBottomOf="@+id/QR_inventory_title" />
 
     <TextView
-        android:id="@+id/tv_total_count"
-        android:layout_width="200dp"
+        android:id="@+id/tv_total_number_txt"
+        android:layout_width="wrap_content"
         android:layout_height="30dp"
+        android:layout_marginTop="18dp"
+        android:gravity="start"
         android:text="Total Number: "
-        android:textAlignment="center"
+        android:textAlignment="textStart"
         android:textAllCaps="false"
         android:textColor="@color/black"
         android:textIsSelectable="false"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintBaseline_toBaselineOf="@+id/tv_total_score_msg"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintStart_toStartOf="@+id/bt_ascending"
+        app:layout_constraintTop_toBottomOf="@+id/QR_inventory_title" />
+
+    <TextView
+        android:id="@+id/tv_qr_count"
+        android:layout_width="0dp"
+        android:layout_height="30dp"
+        android:textAlignment="textStart"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tv_total_number_txt"
+        app:layout_constraintTop_toTopOf="@+id/tv_total_number_txt"
+        tools:text="0" />
+
+    <Button
+        android:id="@+id/bt_descending"
+        android:layout_width="137dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/custom_button_main_menu"
+        android:text="Descending"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_total_score_txt" />
+
+    <Button
+        android:id="@+id/bt_ascending"
+        android:layout_width="137dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/custom_button_main_menu"
+        android:text="Ascending"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_total_number_txt" />
 
     <ListView
         android:id="@+id/QR_inventory_list"
-        android:layout_width="394dp"
-        android:layout_height="465dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="56dp"
-        android:layout_marginEnd="4dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
         android:choiceMode="singleChoice"
         android:listSelector="#999999"
+        app:layout_constraintBottom_toTopOf="@+id/bt_back"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.076"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_total_score_msg" />
+        app:layout_constraintTop_toBottomOf="@+id/bt_descending"></ListView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/bt_show_comments"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
+        android:clickable="true"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/bt_comment"
+        app:layout_constraintEnd_toEndOf="@+id/QR_inventory_list"
+        app:srcCompat="@android:drawable/stat_notify_chat"
+        tools:visibility="visible" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/bt_comment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:clickable="true"
+        android:visibility="gone"
+        app:backgroundTint="#6fbbd3"
+        app:layout_constraintBottom_toBottomOf="@+id/QR_inventory_list"
+        app:layout_constraintEnd_toEndOf="@+id/QR_inventory_list"
+        app:srcCompat="@android:drawable/ic_menu_edit"
+        tools:visibility="visible" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/bt_back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="24dp"
         android:clickable="true"
+        android:src="@drawable/back2"
         app:backgroundTint="@android:color/darker_gray"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -82,78 +157,13 @@
         android:id="@+id/bt_delete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="4dp"
+        android:layout_marginStart="16dp"
         android:clickable="true"
-        android:visibility="invisible"
+        android:visibility="gone"
         app:backgroundTint="#ff0000"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="?attr/actionModeCutDrawable" />
-
-    <Button
-        android:id="@+id/bt_descending"
-        android:layout_width="137dp"
-        android:layout_height="35dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="12dp"
-        android:background="@drawable/custom_button_main_menu"
-        android:text="Descending"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/QR_inventory_list"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_total_score_msg" />
-
-    <Button
-        android:id="@+id/bt_ascending"
-        android:layout_width="137dp"
-        android:layout_height="35dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="12dp"
-        android:background="@drawable/custom_button_main_menu"
-        android:text="Ascending"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/QR_inventory_list"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_total_count" />
-
-    <TextView
-        android:id="@+id/tv_total_score"
-        android:layout_width="87dp"
-        android:layout_height="30dp"
-        android:text="0"
-        android:textColor="@color/black"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintBaseline_toBaselineOf="@+id/tv_total_score_msg"
-        app:layout_constraintEnd_toStartOf="@+id/tv_total_count"
-        app:layout_constraintStart_toEndOf="@+id/tv_total_score_msg" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/bt_comment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginBottom="4dp"
-        android:clickable="true"
-        android:visibility="invisible"
-        app:backgroundTint="#6fbbd3"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@android:drawable/ic_menu_edit" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/bt_show_comments"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginBottom="4dp"
-        android:clickable="true"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/bt_comment"
-        app:srcCompat="@android:drawable/stat_notify_chat" />
+        app:layout_constraintBottom_toBottomOf="@+id/QR_inventory_list"
+        app:layout_constraintStart_toStartOf="@+id/QR_inventory_list"
+        app:srcCompat="?attr/actionModeCutDrawable"
+        tools:visibility="visible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

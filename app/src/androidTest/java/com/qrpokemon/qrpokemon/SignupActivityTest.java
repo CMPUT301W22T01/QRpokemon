@@ -1,4 +1,5 @@
 package com.qrpokemon.qrpokemon;
+
 import static org.junit.Assert.assertEquals;
 
 import android.app.Activity;
@@ -8,10 +9,10 @@ import android.widget.TextView;
 import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.rule.ActivityTestRule;
 
-import com.qrpokemon.qrpokemon.activities.profile.ProfileActivity;
-import com.qrpokemon.qrpokemon.models.DatabaseController;
-import com.qrpokemon.qrpokemon.models.FileSystemController;
+import com.qrpokemon.qrpokemon.views.profile.ProfileActivity;
+import com.qrpokemon.qrpokemon.controllers.DatabaseProxy;
 import com.robotium.solo.Solo;
+
 import org.junit.*;
 
 /**
@@ -21,7 +22,7 @@ import org.junit.*;
  */
 public class SignupActivityTest {
     private Solo solo;
-    private DatabaseController databaseController = DatabaseController.getInstance();
+    private DatabaseProxy databaseProxy = DatabaseProxy.getInstance();
     @Rule
     public ActivityTestRule<MainActivity> rule = new ActivityTestRule<>(MainActivity.class, true, true);
 
@@ -36,31 +37,18 @@ public class SignupActivityTest {
 
         // Asserts that the current activity is the SignupActivity
         solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
-        databaseController.deleteData("Player", "ABCD");
+        databaseProxy.deleteData("Player", "Heather");
     }
 
-    /**
-     * Check entering inputs through the EditTexts
-     */
-    @Test
-    public void enterInputs() throws Exception{
-
-        solo.enterText((EditText) solo.getView(R.id.et_name), "ABCD");
-        solo.enterText((EditText) solo.getView(R.id.et_email), "123@321.com");
-        solo.enterText((EditText) solo.getView(R.id.et_phone), "123456");
-        solo.clickOnView(solo.getView(R.id.bt_submit));
-        solo.waitForActivity(ProfileActivity.class, 2000);
-        solo.assertCurrentActivity("Not in MyprofileActivity", MainActivity.class);
-        FileSystemController fileSystemController = new FileSystemController();
-        fileSystemController.deleteFile(solo.getCurrentActivity());
-    }
     /**
      * Check if the user story US 03.01.01 is working properly
+     * check if the sign up page successfully added a player
+     * check if the information entered in sign up page is the same as the display in profile
      */
     @Test
     public void testUS_03_01_01() throws Exception{
 
-        databaseController.deleteData("Player", "Heather");
+        databaseProxy.deleteData("Player", "Heather");
         // enter user information in signup page
         solo.enterText((EditText) solo.getView(R.id.et_name), "Heather");
         solo.enterText((EditText) solo.getView(R.id.et_email), "123@gmail.com");
@@ -88,10 +76,8 @@ public class SignupActivityTest {
         // generate qr code for the current player
         solo.clickOnButton("Create QRcode");
         // press back button to go back to main menu
-        solo.clickOnView(solo.getView(R.id.iv_back));
+        solo.clickOnView(solo.getView(R.id.profile_back));
         solo.waitForActivity(MainActivity.class, 2000);
         solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
-        FileSystemController fileSystemController = new FileSystemController();
-        fileSystemController.deleteFile(solo.getCurrentActivity());
     }
 }

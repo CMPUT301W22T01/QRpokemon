@@ -93,7 +93,7 @@
         <LinearLayout
             android:id="@+id/linearlayout2"
             android:layout_width="402dp"
-            android:layout_height="397dp"
+            android:layout_height="385dp"
             android:layout_marginTop="24dp"
 
             app:layout_constraintEnd_toEndOf="parent"
@@ -108,16 +108,19 @@
                 android:orientation="vertical" />
         </LinearLayout>
 
+
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/floatingActionButton3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="4dp"
+            android:layout_marginBottom="32dp"
             android:clickable="true"
+            android:src="@drawable/back2"
             app:backgroundTint="@android:color/darker_gray"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearlayout2"
             app:srcCompat="?attr/actionModeCloseDrawable" />
 
 

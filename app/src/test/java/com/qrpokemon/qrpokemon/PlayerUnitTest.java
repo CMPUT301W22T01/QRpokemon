@@ -17,11 +17,10 @@ public class PlayerUnitTest {
     private Player mockPlayer(){
         qrInventory.add("hash0");
         qrInventory.add("hash1");
-
         contactInfo.put("email", "abc@ualberta.ca");
         contactInfo.put("phone", "74188965532");
 
-        return new Player("Hatsune", qrInventory, contactInfo, 100, 100, "aaabbb", 100);
+        return new Player("Hatsune", qrInventory, contactInfo, 100, 100, "aaabbb", 100, false);
     }
 
     @Test

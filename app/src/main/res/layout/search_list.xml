@@ -22,7 +22,7 @@
     <TextView
         android:id="@+id/tv"
         android:layout_width="268dp"
-        android:layout_height="40dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
         android:layout_marginTop="8dp"
         android:text="Qr Code"

@@ -1,7 +1,6 @@
 package com.qrpokemon.qrpokemon;
-import static org.hamcrest.CoreMatchers.is;
+
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 import android.app.Activity;
 import android.view.View;
@@ -12,8 +11,9 @@ import android.widget.TextView;
 import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.rule.ActivityTestRule;
 
-import com.qrpokemon.qrpokemon.activities.search.SearchActivity;
+import com.qrpokemon.qrpokemon.views.search.SearchActivity;
 import com.robotium.solo.Solo;
+
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -34,6 +34,9 @@ public class SearchActivityTest {
         Activity activity = rule.getActivity();
         solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
     }
+    /**
+     * Check the back button of the search page
+     */
     @Test
     public void checkBackButton(){
         solo.clickOnView(solo.getView(R.id.Search_Button));
@@ -44,43 +47,71 @@ public class SearchActivityTest {
         solo.waitForActivity(SearchActivity.class, 2000);
         solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
     }
+
+    /**
+     * Check the if search for player works
+     */
     @Test
     public void playerSearch() throws Exception{
         solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
         solo.clickOnView(solo.getView(R.id.Search_Button));
         solo.waitForActivity(SearchActivity.class, 2000);
         solo.assertCurrentActivity("Wrong Activity", SearchActivity.class);
-        solo.enterText((EditText) solo.getView(R.id.sv), "Heather");
+        solo.enterText((EditText) solo.getView(R.id.sv), "Krista");
         solo.waitForActivity(SearchActivity.class, 200);
-        solo.waitForText("Heather", 2, 3000);
+        solo.waitForText("Krista", 2, 3000);
+        solo.clickOnView(solo.getView(R.id.search_button));
+        solo.waitForActivity(SearchActivity.class, 2000);
 
         ListView listview = (ListView) solo.getView(R.id.search_listview);
         View view = listview.getAdapter().getView(0, null, listview);
         TextView tv = view.findViewById(R.id.tv);
-        assertEquals(tv.getText(), "Heather");
+        assertEquals(tv.getText(), "Krista");
     }
+
+
+    /**
+     * Check the if search for location works
+     * this test assumes Edmonton is in the location list
+     */
     @Test
     public void locationSearch() throws Exception{
         solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
         solo.clickOnView(solo.getView(R.id.Search_Button));
         solo.waitForActivity(SearchActivity.class, 2000);
         solo.assertCurrentActivity("Wrong Activity", SearchActivity.class);
-        solo.enterText((EditText) solo.getView(R.id.sv), "Calgary");
-        solo.waitForText("Calgary", 1, 5000);
+        solo.enterText((EditText) solo.getView(R.id.sv), "Edmonton");
+        solo.waitForText("Edmonton", 1, 2000);
+        solo.clickOnView(solo.getView(R.id.search_button));
+        solo.waitForActivity(SearchActivity.class, 2000);
+
         ListView listview = (ListView) solo.getView(R.id.search_listview);
         View view = listview.getAdapter().getView(0, null, listview);
         solo.clickOnView(view);
         solo.waitForText("7D75F8FA97CA6D7C7", 1, 5000);
         assertTrue(listview.getCount() > 0);
     }
+
+
+    /**
+     * Check the if partial search works
+     * this test assumes Edmonton is in the location list
+     */
     @Test
     public void partialSearch() throws Exception{
         solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
         solo.clickOnView(solo.getView(R.id.Search_Button));
         solo.waitForActivity(SearchActivity.class, 2000);
         solo.assertCurrentActivity("Wrong Activity", SearchActivity.class);
-        solo.enterText((EditText) solo.getView(R.id.sv), "C");
+        solo.enterText((EditText) solo.getView(R.id.sv), "Edmonto");
         solo.waitForActivity(SearchActivity.class, 200);
+        solo.clickOnView(solo.getView(R.id.search_button));
+        solo.waitForActivity(SearchActivity.class, 2000);
+
+        ListView listview = (ListView) solo.getView(R.id.search_listview);
+        View view = listview.getAdapter().getView(0, null, listview);
+        TextView tv = view.findViewById(R.id.tv);
+        assertEquals(tv.getText(), "Edmonton");
     }
 //    @Test
 //    public void testShouldShowTheItemDetailWhenAnItemIsClicked() throws Exception {

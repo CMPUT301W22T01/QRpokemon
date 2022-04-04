@@ -12,14 +12,17 @@ public class Player {
     private Integer totalScore;
     private String id;
     private Integer highestUnique;
+    private Boolean owner;
 
-    public Player(String username, ArrayList<String> qrInventory, HashMap contactInfo, Integer qrCount, Integer totalScore, String id, Integer highestUnique) {
+    public Player(String username, ArrayList<String> qrInventory, HashMap contactInfo, Integer qrCount, Integer totalScore, String id, Integer highestUnique, Boolean owner) {
         this.username = username;
         this.id = id;
         this.qrInventory = qrInventory;
         this.contactInfo = contactInfo;
+        this.highestUnique = highestUnique;
         this.qrCount = qrCount;
         this.totalScore = totalScore;
+        this.owner = owner;
     }
 
     public String getId() {
@@ -30,8 +33,16 @@ public class Player {
         this.id = id;
     }
 
-    public Integer getHighest() {
+    public Integer getHighestUnique() {
         return highestUnique;
+    }
+
+    public Boolean getOwner() {
+        return owner;
+    }
+
+    public void setOwner(Boolean owner) {
+        this.owner = owner;
     }
 
     public void setHighestUnique(Integer highestUnique) {

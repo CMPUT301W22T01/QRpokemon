@@ -31,20 +31,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.leaderboard.LeaderboardActivity"/>
-        <activity android:name=".activities.signup.SignupActivity"/>
-        <activity android:name=".activities.signup.RestoreSession"/>
+        <activity android:name=".views.leaderboard.LeaderboardActivity"/>
+        <activity android:name=".views.signup.SignupActivity"/>
+        <activity android:name=".views.signup.RestoreSession"/>
+        <activity android:name=".views.qrscanned.QrScannedActivity" />
+        <activity android:name=".views.qrinventory.QrInventoryActivity" />
+        <activity android:name=".views.profile.ProfileActivity" />
+        <activity android:name=".views.owner.OwnerActivity"/>
         <activity
-            android:name=".activities.signup.SignupActivity"
-            tools:ignore="DuplicateActivity" />
-        <activity android:name=".activities.qrscanned.QrScannedActivity" />
-        <activity android:name=".activities.qrinventory.QrInventoryActivity" />
-        <activity android:name=".activities.profile.ProfileActivity" />
-        <activity
-            android:name=".activities.map.MapActivity"
+            android:name=".views.map.MapActivity"
             android:exported="true" />
-        <activity android:name=".activities.search.SearchActivity" />
-        <activity android:name=".activities.qrinventory.QrInventoryShowComments"/>
+        <activity android:name=".views.search.SearchActivity" />
+        <activity android:name=".views.qrinventory.QrInventoryShowComments"/>
     </application>
 
 </manifest>
