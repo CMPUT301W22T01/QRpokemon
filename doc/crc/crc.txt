@@ -1,42 +1,47 @@
 Class: Player
-Collaborator: Database, DatabaseController
+Collaborator: Database, DatabaseProxy
 Responsibility: Store username
 Responsibility: Store qrInventory
 Responsibility: Store contact
+Responsibility: Store DeviceId
 Responsibility: Store statistics
 
 Class: PlayerController
-Collaborator: DatabaseController, Player
-Responsibility: Get Player from DatabaseController
+Collaborator: DatabaseProxy, Player
+Responsibility: Get Player(s) from DatabaseProxy
 Responsibility: Ask Player to update itself with data provided
-Responsibility: Ask DatabaseController to save player records
-Responsibility: Ask DatabaseController to update player records
+Responsibility: Ask DatabaseProxy to delete a player
+Responsibility: Ask DatabaseProxy to update player records
 
 # QR Code will store all locations with usernames as keys.
 # If a user scanned a QR code but they're location is not stored, then it will
 # not appear in the database. Similar with comments.
 Class: QrCode
-Collaborator: DatabaseController, QrCodeController
+Collaborator: DatabaseProxy, QrCodeController
 Responsibility: Store geolocation
+Responsibility: Store photo
 Responsibility: Store QR hash
 Responsibility: Store comments
+Responsibility: Store statistics
 
 Class: QrCodeController
-Collaborator: DatabaseController, QrCode, LocationController, QrScannedController
-Responsibility: Ask QrCode to update itself
-Responsibility: Get QrCode from DatabaseController
-Responsibility: Ask DatabaseController to update & save QrCode
+Collaborator: DatabaseProxy, QrCode, LocationController, QrScannedController, QrInventoryController, LocationController
+Responsibility: Get QrCode(s) from DatabaseProxy
+Responsibility: Ask DatabaseProxy to update & save QrCode
 Responsibility: Get geolocation from LocationController
 Responsibility: Get Qrcode score from QrScannedController
 
 Class: LocationController
-Collaborator: DatabaseController, MapController, QrScannedController
+Collaborator: DatabaseProxy, QrCodeController, MapController, QrScannedController
 Responsibility: Get location data 
 Responsibility: Get Qr hashes at location
+Responsibility: Add markers for currentplayer's location and QR code's location
+Responsibility: Prepare Map
+Responsibility: Request geolocation permission from user
 
 Class: SignupActivity
 Collaborator: SignupController, MainMenuActivity
-Responsibility: Display signup page
+Responsibility: Display signup messages
 Responsibility: Send user input to SignupController
 Responsibility: Send action when button pressed
 Responsibility: Notify user if username is invalid
@@ -44,35 +49,25 @@ Responsibility: Send user to MainMenuActivity
 
 Class: SignupController
 Collaborator: SignupActivity, Player, PlayerController, RestoreSession
-Responsibility: Create a Player class and ask PlayerController to save
-Responsibility: Ask DatabaseController to save validated user data  
-Responsibility: Ask DatabaseController to find input username
+Responsibility: Ask PlayerController to save player locally and on cloud
 Responsibility: Send validation result to SignupActivity
+Responsibility: Ask PlayerController to check DeviceId
+Responsibility: Ask PlayerController to check uniqueness of username
 Responsibility: Run RestoreSession when "Restore" text is pressed
 
 Class: MainMenuActivity
-Collaborator: MainMenuController, RestoreSession, QrInventoryActivity, MapActivity, OtherPlayerActivity, QrScannedActivity, ProfileActivity, LeaderboardActivity
+Collaborator: MainMenuController, RestoreSession, QrInventoryActivity, MapActivity, QrScannedActivity, ProfileActivity, LeaderboardActivity
 Responsibility: Send button pressed to MainMenuController
 Responsibility: Display main menu
 Responsibility: Prompt message when user is not found
 Responsibility: Send user to other Activities
 
 Class: MainMenuController
-Collaborator: MainMenuActivity, SignupController, CameraController, QrCodeController
-Responsibility: Call CameraController
-Responsibility: Ask QrCodeController to check if QR hash is in database for players
+Collaborator: MainMenuActivity, SignupController, QrScannedController, QrCodeController, PlayerController
+Responsibility: Ask currentplayer's information via PlayerController
 Responsibility: Notify MainMenuActivity if user not found
-
-Class: OtherPlayerActivity
-Collaborator: MainMenuController, OtherPlayerController
-Responsibility: Display player information
-Responsibility: Display player inventory
-Responsibility: Send user input to OtherPlayerController
-
-Class: OtherPlayerController
-Collaborator: Player, OtherPlayerActivity, PlayerController
-Responsibility: Get Player from PlayerController
-Responsibility: Update comment from OtherPlayerActivity to PlayerController
+Responsibility: Check permission for camera
+Responsibility: Ask QrScannedController to pop camera
 
 # The QR code for logging on other device is on top left as an "avatar"
 # The QR code for sharing to be scanned by other users needs to be pressed a button links to it
@@ -80,13 +75,12 @@ Class: ProfileActivity
 Collaborator: ProfileController, MainMenuActivity
 Responsibility: Display the profile page
 Responsibility: Send button pressed to ProfileController
-Responsibility: Display a dialog with sharing QR code on it
 Responsibility: Display login QR code
 
 Class: ProfileController
 Collaborator: ProfileActivity, PlayerController
-Responsibility: Get username and contact information from inventory
-Responsibility: Get login and sharing QR code for this specific player from PlayerController
+Responsibility: Get username and contact information via PlayerController
+Responsibility: Generate user's qrcode
 
 Class: LeaderboardActivity
 Collaborator: LeaderboardController, MainMenuActivity
@@ -95,23 +89,25 @@ Responsibility: Send button pressed to LeaderboardController (sort by button)
 Responsibility: Display the rank of the user himself
 
 Class: LeaderboardController
-Collaborator: LeaderboardActivity, DatabaseController
-Responsibility: Get scores from the DatabaseController
-Responsibility: Sort the leaderboard
-Responsibility: Change the sort of the rank chosen by user
-Responsibility: Find the rank of the user himself
+Collaborator: LeaderboardActivity, DatabaseProxy
+Responsibility: Get scores from the DatabaseProxy
+Responsibility: Ask PlayerController to sort player
+Responsibility: Ask PlayerController to get all players information
+Responsibility: Find & estimate the rank of the user himself
 
 Class: MapActivity
 Collaborator: MapController, MainMenuActivity
 Responsibility: Display map
-Responsibility: Display gamewide user location
 Responsibility: Display QR codes' location
+Responsibility: Display QR codes' content
 Responsibility: Display QR codes' score
+Responsibility: Send button pressed to MapController
 
 Class: MapController
-Collaborator: MapActivity, LoscationController
+Collaborator: MapActivity, LocationController
 Responsibility: Ask LocationController to read scanned QR code locations, QR code hash and player locations
-Responsibility: Send QR locations, QR hashes and player locations to MapActivity
+Responsibility: Send QR locations, QR hashes and player location to MapActivity
+Responsibility: Ask LocationController to display map and update map with qrcode's location
 
 Class: QrInventoryActivity
 Collaborator: MainMenuController
@@ -120,68 +116,55 @@ Responsibility: Send button pressed to QrInventoryController
 Responsibility: Send comment QrInventoryController
 
 Class: QrInventoryController
-Collaborator: PlayerController, QrInventoryActivity, OtherPlayerActivity
-Responsibility: Ask player inventory data from PlayerController
-Responsibility: Ask PlayerController to update player inventory data
+Collaborator: PlayerController, QrInventoryActivity
+Responsibility: Update other player's data from PlayerController
+Responsibility: Ask player data from PlayerController
+Responsibility: Ask PlayerController to update player data
+Responsibility: Update scores of player
 Responsibility: Add/Update comment to player inventory 
 
 Class: QrScannedActivity
 Collaborator:  QrScannedController,  MainMenuActivity, QrInventoryActivity
 Responsibility: Send button pressed to QrScannedController
-Responsibility: Display new QR scanned page
+Responsibility: Display new QR scanned photo
 Responsibility: Prompt message when QRcode hash not found
-Responsibility: Send user to QrInventoryActivity or MainMenuActivity
+Responsibility: Send user back to MainMenuActivity
 
 Class: QrScannedController
-Collaborator: QrScannedActivity, MainMenuActivity, QrCodeController
+Collaborator: QrScannedActivity, MainMenuController, QrCodeController, Camera
 Responsibility: Ask QrCodeController to save metadata specified by user
 Responsibility: Calculate score for QR code
+Responsibility: Analyze QR code from image
+Responsibility: Receive image from camera
+Responsibility: Pop camera
 Responsibility: Prevent saving if QRcode hash is not found
 Responsibility: Notify QrScannedActivity if QRcode hash is not found
 
-Class: QrAnalyzer
-Collaborator: QrScannedController
-Responsibility: Analyze QR code from image
-Responsibility: Raise error when QRcode hash not found from image
-Responsibility: Return QR hash
-
 Class: RestoreSession
-Collaborator: QrAnalyzer, MainMenuActivity, CameraController, PlayerController, SignupController
-Responsibility: Ask CameraController to take picture
+Collaborator: QrScannedController, MainMenuActivity, QrScannedController, PlayerController, SignupController
+Responsibility: Ask QrScannedController to take picture
 Responsibility: Load Player from PlayerController  # PlayerController should handle errors
 Responsibility: Send User to MainMenuActivity
-Responsibility: Raise error if user not found
-
-Class: CameraController
-Collaborator: RestoreSession, MainMenuController, Camera
-Responsibility: Open Camera
-Responsibility: Pipe image from Camera to QrAnalyzer
-Responsibility: Raise error from QrAnalyzer if QR hash not found
-Responsibility: Return QR hash from QrAnalyzer
+Responsibility: Notify user if no qr found
 
 Class: Camera
-Collaborator: CameraController
+Collaborator: QrScannedController
 Responsibility: Take picture
 Responsibility: Return picture
 
-Class: DatabaseController
-Collaborator: Database, QrCodeController, PlayerController, Player, QrCode, RestoreSession, QrScannedController, LeaderboardController, SignupController
+Class: DatabaseProxy
+Collaborator: QrCodeController, PlayerController, Player, QrCode, RestoreSession, QrScannedController, LeaderboardController, SignupController
 Responsibility: Write data to Database
 Responsibility: Read data from Database
 
-Class: Database
-Collaborator: DatabaseController, QrCode, Player, QrCodeController
-Responsibility: Store QrCode
-Responsibility: Store Player
-
 Class: SearchActivity
-Collaborator: SearchController, MainMenuActivity, OtherPlayerActivity
+Collaborator: SearchController, MainMenuActivity
 Responsibility: Display Search page
+Responsibility: Display qrcode by searching geolocation
 Responsibility: Send user input to SearchController
-Responsibility: Send user to OtherPlayerActivity
 
 Class: SearchController
-Collaborator: LocationController, DatabaseController, PlayerController
-Responsibility: Get username and contact information form DatabaseController
-Responsibility: Get geolocation from LocationController
+Collaborator: LocationController, PlayerController, LocationController
+Responsibility: Get username and contact information form PlayerController
+Responsibility: Ask geolocation collections from LocationController
 Responsibility: Display the search result
