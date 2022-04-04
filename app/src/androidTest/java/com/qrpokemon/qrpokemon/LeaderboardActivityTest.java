@@ -83,6 +83,10 @@ public class LeaderboardActivityTest {
                 // We need to test after it's guaranteed that the list updated
                 assertEquals(1, ((LeaderboardActivity) context).getItemCount());
             }
+
+            @Override
+            public void updateRank(Context context, LeaderboardList list) {
+            }
         }
 
         // Override the leaderboard controller so we can insert our own values
@@ -117,6 +121,10 @@ public class LeaderboardActivityTest {
 
                 // We need to test after it's guaranteed that the list updated
                 assertEquals(100, ((LeaderboardActivity) context).getItemCount());
+            }
+
+            @Override
+            public void updateRank(Context context, LeaderboardList list) {
             }
         }
 
