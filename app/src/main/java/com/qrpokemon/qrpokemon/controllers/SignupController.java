@@ -61,12 +61,12 @@ public class SignupController {
                         }
 //                        Log.e("DatabaseProxy: ", "addNewPlayer");
                     } else{
-                        EditText email = (EditText) ((Activity) context).findViewById(R.id.et_email);
-//                        Toast.makeText(context, "Username is not unique!", Toast.LENGTH_SHORT).show();
+//                        EditText email = (EditText) ((Activity) context).findViewById(R.id.et_email);
+                        Toast.makeText(context, "Username is not unique!", Toast.LENGTH_SHORT).show();
                     }
                 }
             };
-            playerController.getPlayer(databaseCallback, result, id, "DeviceId");
+            playerController.getPlayer(databaseCallback, result, newUsername, "Identifier");
         } catch (Exception e) {
             e.printStackTrace();
         }
