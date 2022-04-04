@@ -103,10 +103,8 @@ public class LeaderboardController {
 
                     // We're logged in so our username exists
                     for (int i = 0; i < list.size(); i++) {
-                        if (list.get(i).getUsername().equals(username)) {
-                            rank = i+1;
+                        if (list.get(i).getUsername().equals(username))
                             break;
-                        }
                     }
                     // Set the appropriate text views
                     ((LeaderboardActivity) context).setPersonalRank(rank, username, highestUnique, qrCount, score);

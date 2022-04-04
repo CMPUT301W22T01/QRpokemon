@@ -125,18 +125,16 @@
 
     <TextView
         android:id="@+id/tv_leaderboard_player_rank"
-        android:layout_width="38dp"
+        android:layout_width="40dp"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginBottom="16dp"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@+id/leaderboard_back"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_leaderboard_player_username"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_leaderboard_divider"
-        tools:text="1" />
+        app:layout_constraintTop_toTopOf="@+id/tv_leaderboard_player_username"
+        tools:text="Top\n1000+" />
 
     <TextView
         android:id="@+id/tv_leaderboard_player_username"

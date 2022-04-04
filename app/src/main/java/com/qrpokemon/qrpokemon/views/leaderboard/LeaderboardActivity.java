@@ -83,7 +83,21 @@ public class LeaderboardActivity extends AppCompatActivity {
     }
 
     public void setPersonalRank(int rank, String username, int highestUnique, int qrCount, int score) {
-        playerRank.setText(String.valueOf(rank));
+        String rankText;
+        if (rank < 10) {
+            rankText = "Top\n10";
+        } else if (rank < 20) {
+            rankText = "Top\n20";
+        } else if (rank < 50) {
+            rankText = "Top\n50";
+        } else if (rank < 100) {
+                rankText = "Top\n100";
+        } else if (rank < 500) {
+            rankText = "Top\n500";
+        } else {
+            rankText = "Top\n1000+";
+        }
+        playerRank.setText(rankText);
         playerUsername.setText(username);
         playerHighestUnique.setText(String.valueOf(highestUnique));
         playerQrCount.setText(String.valueOf(qrCount));
