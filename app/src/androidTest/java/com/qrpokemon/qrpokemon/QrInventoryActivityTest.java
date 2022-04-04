@@ -96,4 +96,40 @@ public class QrInventoryActivityTest {
         solo.assertCurrentActivity("Wrong Activity", QrInventoryActivity.class);
     }
 
+    @Test
+    public void checkDeleteButton(){
+        solo.clickOnView(solo.getView(R.id.QR_Inventory_Button));
+        solo.waitForActivity(QrInventoryActivity.class, 2000);
+        solo.assertCurrentActivity("Wrong Activity", QrInventoryActivity.class);
+        solo.clickOnView(solo.getView(R.id.QR_inventory_list));
+        solo.waitForActivity(QrInventoryActivity.class, 2000);
+        solo.assertCurrentActivity("Wrong Activity", QrInventoryActivity.class);
+
+        solo.clickOnView(solo.getView(R.id.bt_delete));
+        solo.waitForActivity(QrInventoryActivity.class, 2000);
+        solo.assertCurrentActivity("Wrong Activity", QrInventoryActivity.class);
+    }
+
+    @Test
+    public void checkLeaveComment(){
+        solo.clickOnView(solo.getView(R.id.QR_Inventory_Button));
+        solo.waitForActivity(QrInventoryActivity.class, 2000);
+        solo.clickOnView(solo.getView(R.id.QR_inventory_list));
+        solo.waitForActivity(QrInventoryActivity.class, 2000);
+        solo.clickOnView(solo.getView(R.id.bt_comment));
+        solo.waitForActivity(QrInventoryActivity.class, 2000);
+        solo.assertCurrentActivity("Wrong Activity", QrInventoryActivity.class);
+    }
+
+    @Test
+    public void checkShowComment(){
+        solo.clickOnView(solo.getView(R.id.QR_Inventory_Button));
+        solo.waitForActivity(QrInventoryActivity.class, 2000);
+        solo.clickOnView(solo.getView(R.id.QR_inventory_list));
+        solo.waitForActivity(QrInventoryActivity.class, 2000);
+        solo.clickOnView(solo.getView(R.id.bt_show_comments));
+        solo.waitForActivity(QrInventoryActivity.class, 2000);
+    }
+
+
 }
