@@ -15,11 +15,16 @@ import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import com.qrpokemon.qrpokemon.controllers.LeaderboardController;
+import com.qrpokemon.qrpokemon.controllers.PlayerController;
 import com.qrpokemon.qrpokemon.views.leaderboard.*;
 
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 @RunWith(AndroidJUnit4.class)
 public class LeaderboardActivityTest {
@@ -37,6 +42,15 @@ public class LeaderboardActivityTest {
     @Rule
     public ActivityScenarioRule<LeaderboardActivity> activityRule =
             new ActivityScenarioRule<>(LeaderboardActivity.class);
+
+    @Before
+    public void setup() {
+        // Make our mock player the current player
+        PlayerController playerController = PlayerController.getInstance();
+        playerController.setupPlayer(mockItem.getUsername(), new ArrayList<>(), new HashMap(),
+                mockItem.getTotalScore(), mockItem.getTotalScore(), mockItem.getHighestUnique(),
+                false, "id");
+    }
 
     /**
      * Checks that the back button closes the activity
@@ -65,7 +79,6 @@ public class LeaderboardActivityTest {
                 list.clear();
                 list.add(mockItem);
                 list.notifyListUpdate();
-
 
                 // We need to test after it's guaranteed that the list updated
                 assertEquals(1, ((LeaderboardActivity) context).getItemCount());
@@ -144,7 +157,7 @@ public class LeaderboardActivityTest {
                         mockItem.getHighestUnique(), mockItem.getQrQuantity(), mockItem.getTotalScore());
 
                 // Checking here ensures the data has updated
-                onView(withId(R.id.tv_leaderboard_player_rank)).check(matches(withText(mockItem.getRank())));
+                onView(withId(R.id.tv_leaderboard_player_rank)).check(matches(withText("Top\n10")));
                 onView(withId(R.id.tv_leaderboard_player_username)).check(matches(withText(mockItem.getUsername())));
                 onView(withId(R.id.tv_leaderboard_player_unique)).check(matches(withText(mockItem.getHighestUnique())));
                 onView(withId(R.id.tv_leaderboard_player_qrcount)).check(matches(withText(mockItem.getQrQuantity())));
