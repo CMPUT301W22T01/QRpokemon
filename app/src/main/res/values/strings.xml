@@ -24,6 +24,6 @@
     <string name="qr_code">QR code</string>
     <string name="arrow">⇦</string>
     <string name="details">Details</string>
-    <string name="qrHash">QrHash:</string>
+    <string name="qrHash">Code content: </string>
     <string name="title_activity_maps">MapsActivity</string>
 </resources>
