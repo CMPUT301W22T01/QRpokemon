@@ -91,7 +91,6 @@ package "Controllers" {
 
     class ProfileController
     {
-        -activity: Activity
         -playerController: PlayerController
 
         +getPlayerName(): String
@@ -290,60 +289,59 @@ package "Models" {
 
 ProfileActivity "1" o-- "1" ProfileController
 
-ProfileController "1" o-- "1" PlayerController : Get Current \nPlayer 
+ProfileController "1" o-- "1" PlayerController #orange: <color:orange>Get current\n<color:orange>player 
 
 LeaderboardActivity "1" o-- "1" LeaderboardController
 LeaderboardController "1" o-- "1" PlayerController
 ' LeaderboardController "1" -> "1" OtherPlayerController: Get players
 
 SignupActivity "1" o-- "1" SignupController
-SignupController "1" -> "1" PlayerController #red: Create & load\nnew player
-PlayerController "1" *-- "1" Player #blue
-PlayerController "1" --> "*" DatabaseProxy: Get\nPlayers
+SignupController "1" -> "1" PlayerController #red: <color:red>Create & load\n<color:red>new player
+PlayerController "1" *-- "1" Player
+PlayerController "1" --> "*" DatabaseProxy: Get\nplayers
 
 ' OtherPlayerActivity "1" o-> "1" OtherPlayerController
 ' OtherPlayerController --> PlayerController: Gets player
 ' OtherPlayerActivity "1" o-> "1" OtherPlayerController: Updates\n comment
 ' OtherPlayerController --> QrCodeController: Adds comment
 
-SignupController --> RestoreSession: \nAsk to handle\nreturning player
-SignupController --> "1" DatabaseProxy #green: <color:green>Check username\n<color:green>uniqueness
-QrScannedController ->  RestoreSession: Return QR hash
-RestoreSession  o-u> PlayerController: "\n\nGet current\nplayer"
-RestoreSession  -> QrScannedController: "Ask to\n open camera"
-MainMenuActivity <-- RestoreSession: "Send user to"
+SignupActivity --> RestoreSession #red: \n\n\n<color:red>Handle\n<color:red>returning\n<color:red>player
+SignupController --> "1" DatabaseProxy #green: <color:green>Check\n<color:green>username\n<color:green>uniqueness
+RestoreSession  o--> PlayerController #blue: "<color:blue>Get\n<color:blue>current\n<color:blue>player"
+RestoreSession --> QrScannedController: Get QR\nhash
+MainMenuActivity <-- RestoreSession: \n\nSend\nuser\nto
 ' CameraController --> QrAnalyzer: Get hash from image
 ' QrAnalyzer --up> CameraController: Return hash
 
 QrInventoryActivity "1" o-- "1" QrInventoryController
-QrInventoryController "1" o-- "1" QrCodeController
+QrInventoryController "1" o-- "1" QrCodeController #green
 QrCodeController "1" o-> "1" QrCode: Create &\nUpdate comment
 note bottom on link: We create/update\none at a time
-QrCodeController "1" --> "1" DatabaseProxy: Get/Save\nQrCode(s)
+QrCodeController "1" --> "1" DatabaseProxy: \tGet/Save\n\tQrCode(s)
 QrCodeController "1" o-- "1" LocationController: Get Location
 
-SearchController "1" --> "1" PlayerController: Get usernames
+SearchController "\t1" --> "\t1" PlayerController: Get usernames
 ' FIX: We shouldn't need an entire player object. Just a db call for usernames
 SearchController "1" --> "\t1" LocationController: Get QR\nlocations 
-SearchController "1" --o "1" SearchActivity
+SearchActivity "1" o-- "1" SearchController
 
 LocationController "1" -> "1" DatabaseProxy: Get location data
 LocationController "1" <-- " 1" MapController: Asks for location data
 
-DatabaseProxy "\t\t1" o-- "\t\t1" Database
-QrScannedController "1" o-- "1" MainMenuController: Get QR\nHash
+DatabaseProxy "1" o-- "1" Database
+MainMenuController "1" o->  "1" QrScannedController #purple: <color:purple>Get QR\n<color:purple>Hash
 MainMenuController "1" o--> "1" PlayerController : Get current\nplayer
-MainMenuController "1" o-> "1" QrCodeController: \n\nVerify & identify\n QR Hash
+MainMenuController "1" o-> "1" QrCodeController: Verify & identify\n QR Hash
 MainMenuActivity "1" o-- "1" MainMenuController
 
 QrInventoryController "1" o-- "1" PlayerController
 ' QrInventoryController "1" o-- "1" QrCodeController 
 
 QrScannedController "1" --> "1" PlayerController: Get Player
-QrScannedController "1" --> "1" QrCodeController: Save new QR Code
-QrScannedController "1" --o "1" QrScannedActivity
+QrScannedController "1" --> "1" QrCodeController: Save new\nQR Code
+QrScannedActivity "1" o-- "1" QrScannedController #red
 
-MainMenuActivity "1" <-- "1" SignupActivity
+MainMenuActivity "1" --> "1" SignupActivity: Send\nnew\nuser
 MainMenuActivity "1" --> "1" QrScannedActivity
 MainMenuActivity "1" --> "1" QrInventoryActivity
 MainMenuActivity "1" --> "1" MapActivity
@@ -352,25 +350,23 @@ MainMenuActivity "1" --> "1" ProfileActivity
 MainMenuActivity "1" --> "1" LeaderboardActivity
 MainMenuActivity "1" --> "1" SearchActivity
 
-QrScannedController "1" --> "1" Camera: opens
-QrScannedController "1" <-- "1" Camera: return photo
-MapActivity "1" o-- "1" MapController #blue
+QrScannedController "1" --> "1" Camera: Get photo
+MapActivity "1" o-- "1" MapController
 
-SearchActivity "1" --> "1" SearchController
 ' TODO: Open QrInventory
 ' SearchActivity "1" -> "1" OtherPlayerActivity: Opens profile
 
 ' Layout Connections
 PlayerController -[hidden]- QrScannedController
-PlayerController -[hidden]- RestoreSession
 DatabaseProxy -[hidden]l- QrScannedController
 ' DatabaseProxy -[hidden]- QrAnalyzer
-' QrAnalyzer -[hidden]- Player
+MapController -[hidden]- Player
 PlayerController -[hidden]- QrCodeController
 SignupActivity -[hidden]- SearchActivity
 SignupActivity -[hidden]- ProfileActivity
-SignupActivity -[hidden]- QrScannedActivity
-SignupActivity -[hidden]- MapActivity
-SearchActivity -[hidden]- QrScannedActivity
+SignupActivity -[hidden]- QrInventoryActivity
+RestoreSession -[hidden]- SearchActivity
+RestoreSession -[hidden]- LeaderboardActivity
+QrScannedActivity -[hidden]- SearchActivity
 Player -[hidden]- QrCode
 @enduml
