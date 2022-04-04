@@ -78,47 +78,40 @@ public class LeaderboardController {
         }
     }
 
+    /**
+     * Get the player's ranking and call LeaderboardActivity to set the views
+     * @param context An Android context
+     * @param list
+     */
     public void updateRank(Context context, LeaderboardList list) {
-
-        // Try to get the user's player data
-        PlayerController playerController = PlayerController.getInstance();
-        HashMap<String, Object> player = null;
         try {
-            player = playerController.getPlayer(null, null);
-        } catch (Exception exception) {
-            exception.printStackTrace();
-        }
+            // Fetch user data
+            PlayerController playerController = PlayerController.getInstance();
+            HashMap<String, Object> player = playerController.getPlayer(null, null);
+            String username = (String) player.get("Identifier");
 
-        DatabaseCallback databaseCallback = new DatabaseCallback(context) { // update user's rank if user is fetched from database
-            @Override
-            public void run(List<Map> dataList) {
-                if (!dataList.isEmpty()) {
-                    HashMap player = (HashMap) dataList.get(0);
-                    // Fetch user data
-                    int rank = 0;  // Placeholder value so linter doesn't complain
-                    String username = (String) player.get("Identifier");
-                    int highestUnique = ((Long) player.get("highestUnique")).intValue();
-                    int qrCount = ((Long) player.get("qrCount")).intValue();
-                    int score = ((Long) player.get("totalScore")).intValue();
+            for (int i = 0; i < list.size(); i++) {
+                // We're logged in so our username should exist
+                if (list.get(i).getUsername().equals(username)) {
+                    // Get our rank and ensure we have the latest player data by fetching ourselves
+                    // from the leaderboard
+                    int highestUnique = list.get(i).getHighestUnique();
+                    int qrCount = list.get(i).getQrQuantity();
+                    int totalScore = list.get(i).getTotalScore();
 
-                    // We're logged in so our username exists
-                    for (int i = 0; i < list.size(); i++) {
-                        if (list.get(i).getUsername().equals(username))
-                            break;
-                    }
                     // Set the appropriate text views
-                    ((LeaderboardActivity) context).setPersonalRank(rank, username, highestUnique, qrCount, score);
+                    ((LeaderboardActivity) context).setPersonalRank(i, username, highestUnique, qrCount, totalScore);
+                    return;
                 }
-
             }
-        };
-        try {
-            playerController.getPlayer(databaseCallback, new ArrayList<>(), (String) player.get("Identifier"), null);
+
+            // We couldn't find our player :(
+            throw new Exception("Current player missing in database");
         } catch (Exception exception) {
             Log.e("Leaderboard Controller: ", "Failed to update rank");
             Log.e("Leaderboard Controller: ", exception.toString());
+            exception.printStackTrace();
             ((Activity) context).finish();
         }
-
     }
 }
