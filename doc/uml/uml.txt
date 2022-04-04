@@ -1,16 +1,17 @@
 @startuml
 ' Set Font Size
-!$FONT_SIZE = "32"
-skinparam defaultFontSize $FONT_SIZE
-skinparam classFontSize   $FONT_SIZE
-skinparam arrowFontSize   $FONT_SIZE
-skinparam noteFontSize    $FONT_SIZE
+' !$FONT_SIZE = "60"
+' skinparam defaultFontSize $FONT_SIZE
+' skinparam classFontSize   $FONT_SIZE
+' skinparam arrowFontSize   $FONT_SIZE
+' skinparam noteFontSize    $FONT_SIZE
+' skinparam packageFontSize 82
 
 ' Customization Settings
-skinparam dpi 300
+skinparam dpi 100
 skinparam classattributeiconsize 0
 skinparam style strictuml
-!pragma ratio 2.0
+' !pragma ratio 2.0
 ' skinparam linetype ortho
 
 ' Begin UML Here
@@ -168,20 +169,20 @@ package "Controllers" {
         }
     }
 
+    class PlayerController
+    {
+        -player: Player
+        -databaseProxy: DatabaseController
+
+        ' Constructor of PlayerController takes a username and pull Player from database
+        +getPlayer(username: String): HashMap
+        ' We will use a HashMap to send all the player's data as there would be
+        ' too many parameters otherwise.
+        ' Additionally, it would allow us to send NULL to specify unchanged parameters.
+        +savePlayerData(count:Integer, totalScore: Integer, playerData: HashMap)
+    }
+
     together {
-        class PlayerController
-        {
-            -player: Player
-            -databaseProxy: DatabaseController
-
-            ' Constructor of PlayerController takes a username and pull Player from database
-            +getPlayer(username: String): HashMap
-            ' We will use a HashMap to send all the player's data as there would be
-            ' too many parameters otherwise.
-            ' Additionally, it would allow us to send NULL to specify unchanged parameters.
-            +savePlayerData(count:Integer, totalScore: Integer, playerData: HashMap)
-        }
-
         class RestoreSession
         {
             -userHash: String
@@ -290,15 +291,14 @@ package "Models" {
 ' Relationships Between Classes '
 '''''''''''''''''''''''''''''''''
 
-' ProfileController "1" *-up- "1" ProfileActivity
-ProfileActivity --> ProfileController: Send player info
+ProfileActivity o-- ProfileController
 
 LeaderboardActivity "1" o-- "1" LeaderboardController
 LeaderboardController "1" o-- "1" PlayerController
 ' LeaderboardController "1" -> "1" OtherPlayerController: Get players
 
 SignupActivity "1" o-- "1" SignupController
-SignupController "1" o-> "1" PlayerController: Create & load\nnew player
+SignupController "1" -> "1" PlayerController: Create & load\nnew player
 PlayerController "1" *-- "1" Player
 PlayerController "1" --> "*" DatabaseController: Get Players
 
@@ -310,16 +310,16 @@ PlayerController "1" --> "*" DatabaseController: Get Players
 SignupController --> RestoreSession: "Ask to handle\nreturning player"
 SignupController --> DatabaseController: "\nCheck username\nuniqueness"
 CameraController ->  RestoreSession: Return QR hash
-RestoreSession  o-> PlayerController: "Get current player"
+RestoreSession  o-u> PlayerController: "Get current player"
 RestoreSession  -> CameraController: "Ask to\n open camera"
 MainMenuActivity <-- RestoreSession: "Send user to"
 CameraController --> QrAnalyzer: Get hash from image
 ' QrAnalyzer --up> CameraController: Return hash
 
 QrInventoryActivity "1" o-- "1" QrInventoryController
-QrInventoryController "1" o-left "1" QrCodeController
+QrInventoryController "1" o-- "1" QrCodeController
 QrCodeController "1" o-> "1" QrCode #green: Create &\nUpdate comment
-note right on link: We create/update\none at a time
+note bottom on link: We create/update\none at a time
 QrCodeController "1" --> "1" DatabaseController: Get & Save\nQrCode(s)
 QrCodeController "1" o-- "1" LocationController: Get Location
 
@@ -328,11 +328,11 @@ SearchController "1" --> "1" PlayerController: Get usernames
 SearchController "1" --> "1" LocationController: Get QR\nlocations 
 
 LocationController "1" -> "1" DatabaseController: Get location data
-MapController "1" -> "1" LocationController: Asks for location data
+LocationController "1" <-- "1" MapController: Asks for location data
 
 DatabaseController "1" o-- "1" Database
-MainMenuController "1" o-- "1" CameraController: Get QR Hash
-MainMenuController "1" o-- "1" PlayerController: Get current player
+MainMenuController "1" o-- "1" CameraController: Get QR\nHash
+MainMenuController "1" o-- "1" PlayerController: Get current\nplayer
 MainMenuController "1" o-d- "1" QrCodeController: Verify & identify\n QR Hash
 MainMenuActivity "1" o-- "1" MainMenuController
 
@@ -354,17 +354,23 @@ MainMenuActivity "1" --> "1" SearchActivity
 
 CameraController "1" --> "1" Camera: opens
 
-MapActivity "1" --> "1" MapController
+MapActivity "1" o-- "1" MapController #blue
 
 SearchActivity "1" --> "1" SearchController
 ' TODO: Open QrInventory
 ' SearchActivity "1" -> "1" OtherPlayerActivity: Opens profile
 
 ' Layout Connections
-CameraController -[hidden]l- LocationController
-' LocationController -[hidden]l- DatabaseController
+PlayerController -[hidden]- CameraController
+PlayerController -[hidden]- RestoreSession
+DatabaseController -[hidden]l- CameraController
+DatabaseController -[hidden]- QrAnalyzer
+QrAnalyzer -[hidden]- Player
 QrCodeController -[hidden]- PlayerController
-' QrCode -[hidden]left- Database
-' QrCode -[hidden]left- Player
-' QrCode -[hidden]left- Camera
+SignupActivity -[hidden]- SearchActivity
+SignupActivity -[hidden]- ProfileActivity
+SignupActivity -[hidden]- QrScannedActivity
+SignupActivity -[hidden]- MapActivity
+SearchActivity -[hidden]- QrScannedActivity
+Player -[hidden]- QrCode
 @enduml
