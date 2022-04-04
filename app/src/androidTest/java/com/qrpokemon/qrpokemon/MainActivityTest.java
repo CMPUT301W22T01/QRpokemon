@@ -61,7 +61,7 @@ public class MainActivityTest {
     @Test
     public void checkSearchButton() {
         solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
-        solo.clickOnButton("SEARCH"); //Click on SEARCH Button
+        solo.clickOnView(solo.getView(R.id.Search_Button)); //Click on SEARCH Button
         solo.assertCurrentActivity("Wrong Activity", SearchActivity.class);
     }
 

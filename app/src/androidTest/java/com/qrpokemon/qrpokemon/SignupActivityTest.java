@@ -37,11 +37,13 @@ public class SignupActivityTest {
 
         // Asserts that the current activity is the SignupActivity
         solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
-        databaseProxy.deleteData("Player", "ABCD");
+        databaseProxy.deleteData("Player", "Heather");
     }
 
     /**
      * Check if the user story US 03.01.01 is working properly
+     * check if the sign up page successfully added a player
+     * check if the information entered in sign up page is the same as the display in profile
      */
     @Test
     public void testUS_03_01_01() throws Exception{
@@ -74,7 +76,7 @@ public class SignupActivityTest {
         // generate qr code for the current player
         solo.clickOnButton("Create QRcode");
         // press back button to go back to main menu
-        solo.clickOnView(solo.getView(R.id.bt_submit));
+        solo.clickOnView(solo.getView(R.id.profile_back));
         solo.waitForActivity(MainActivity.class, 2000);
         solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
     }

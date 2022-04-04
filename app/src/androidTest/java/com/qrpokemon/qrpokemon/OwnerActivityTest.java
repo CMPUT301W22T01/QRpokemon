@@ -16,6 +16,7 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
+// this test will only work when the current player is the owner
 public class OwnerActivityTest {
     private Solo solo;
     private PlayerController playerController = PlayerController.getInstance();
