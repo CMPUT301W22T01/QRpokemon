@@ -54,6 +54,7 @@ public class RestoreSession extends AppCompatActivity {
                     } catch (NotFoundException e) {
                         e.printStackTrace();
                         Toast.makeText(RestoreSession.this, "QRcode Not found",Toast.LENGTH_SHORT).show();
+                        finish();
                     }
                     MessageDigest messageDigest;
                     try {
@@ -90,6 +91,8 @@ public class RestoreSession extends AppCompatActivity {
                         e.printStackTrace();
                         finish();
                     }
+                } else {
+                    finish();
                 }
 
             }

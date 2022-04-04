@@ -132,11 +132,11 @@ public class QrScannedActivity extends AppCompatActivity {
                             @Override
                             public void onClick(View v){
                                 if (photoSave.isChecked()){
-                                    Toast.makeText(QrScannedActivity.this, "QR code will be saved", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(QrScannedActivity.this, "Photo will be saved", Toast.LENGTH_SHORT).show();
                                     savePhoto = true;
                                 } else {
                                     savePhoto = false;
-                                    Toast.makeText(QrScannedActivity.this, "QR code won't be saved", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(QrScannedActivity.this, "Photo won't be saved", Toast.LENGTH_SHORT).show();
                                 }
                             }
                         });
