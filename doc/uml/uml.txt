@@ -298,19 +298,19 @@ LeaderboardController "1" o-- "1" PlayerController
 ' LeaderboardController "1" -> "1" OtherPlayerController: Get players
 
 SignupActivity "1" o-- "1" SignupController
-SignupController "1" -> "1" PlayerController: Create & load\nnew player
-PlayerController "1" *-- "1" Player
-PlayerController "1" --> "*" DatabaseController: Get Players
+SignupController "1" -> "1" PlayerController #red: Create & load\nnew player
+PlayerController "1" *-- "1" Player #blue
+PlayerController "1" --> "*" DatabaseController: Get\nPlayers
 
 ' OtherPlayerActivity "1" o-> "1" OtherPlayerController
 ' OtherPlayerController --> PlayerController: Gets player
 ' OtherPlayerActivity "1" o-> "1" OtherPlayerController: Updates\n comment
 ' OtherPlayerController --> QrCodeController: Adds comment
 
-SignupController --> RestoreSession: "Ask to handle\nreturning player"
-SignupController --> DatabaseController: "\nCheck username\nuniqueness"
+SignupController --> RestoreSession: \nAsk to handle\nreturning player
+SignupController --> "1" DatabaseController #green: <color:green>Check username\n<color:green>uniqueness
 CameraController ->  RestoreSession: Return QR hash
-RestoreSession  o-u> PlayerController: "Get current player"
+RestoreSession  o-u> PlayerController: "\n\nGet current\nplayer"
 RestoreSession  -> CameraController: "Ask to\n open camera"
 MainMenuActivity <-- RestoreSession: "Send user to"
 CameraController --> QrAnalyzer: Get hash from image
@@ -318,22 +318,22 @@ CameraController --> QrAnalyzer: Get hash from image
 
 QrInventoryActivity "1" o-- "1" QrInventoryController
 QrInventoryController "1" o-- "1" QrCodeController
-QrCodeController "1" o-> "1" QrCode #green: Create &\nUpdate comment
+QrCodeController "1" o-> "1" QrCode: Create &\nUpdate comment
 note bottom on link: We create/update\none at a time
-QrCodeController "1" --> "1" DatabaseController: Get & Save\nQrCode(s)
+QrCodeController "1" --> "1" DatabaseController: Get/Save\nQrCode(s)
 QrCodeController "1" o-- "1" LocationController: Get Location
 
 SearchController "1" --> "1" PlayerController: Get usernames
 ' FIX: We shouldn't need an entire player object. Just a db call for usernames
-SearchController "1" --> "1" LocationController: Get QR\nlocations 
+SearchController "1" --> "\t1" LocationController: Get QR\nlocations 
 
 LocationController "1" -> "1" DatabaseController: Get location data
-LocationController "1" <-- "1" MapController: Asks for location data
+LocationController "1" <-- " 1" MapController: Asks for location data
 
-DatabaseController "1" o-- "1" Database
+DatabaseController "\t\t1" o-- "\t\t1" Database
 MainMenuController "1" o-- "1" CameraController: Get QR\nHash
-MainMenuController "1" o-- "1" PlayerController: Get current\nplayer
-MainMenuController "1" o-d- "1" QrCodeController: Verify & identify\n QR Hash
+MainMenuController "1" o--> "1" PlayerController : Get current\nplayer
+MainMenuController "1" o-> "1" QrCodeController: \n\nVerify & identify\n QR Hash
 MainMenuActivity "1" o-- "1" MainMenuController
 
 QrInventoryController "1" o-- "1" PlayerController
