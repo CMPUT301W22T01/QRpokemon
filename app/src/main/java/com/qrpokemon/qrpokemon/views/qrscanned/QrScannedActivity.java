@@ -62,11 +62,7 @@ public class QrScannedActivity extends AppCompatActivity {
     public static final int CAMERA_ACTION_CODE = 100;
     private QrScannedController qrScannedController = QrScannedController.getInstance();
     private LocationController locationController = LocationController.getInstance();
-    /**
-     * open camera collaborate with player controller and map controller
-     * to get current player info and called qr scanned controller to save data
-     * @param savedInstanceState
-     */
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

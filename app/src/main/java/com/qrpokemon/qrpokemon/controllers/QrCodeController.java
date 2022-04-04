@@ -26,8 +26,17 @@ public class QrCodeController {
         return currentInstance;
     }
 
-    // Todo: Waiting for more implementation, currently not used
-
+    /**
+     * Create/Update a qrcode to Firestore database based on information given
+     * @param qrHash hash of qrcode
+     * @param score score of qrcode
+     * @param location location where qr code is scanned
+     * @param comments comments of this qrcode
+     * @param bitmap photo of this qrcode, a HashMap which has key of username and value is the photo captured by that user
+     * @param codeContent The message of this qr code
+     * @param newCode if this is a new qrcode to Firestore database
+     * @throws Exception throws Exception if collection name is incorrect
+     */
     public void saveQr(String qrHash, @Nullable Integer score, @Nullable ArrayList<String> location,
                        @Nullable HashMap<String, Object> comments, @Nullable HashMap<String,String> bitmap,@Nullable String codeContent, Boolean newCode) throws Exception {
 
@@ -68,10 +77,21 @@ public class QrCodeController {
         saveQr(qrHash,score,location,comments,bitmap,codeContent,false);
     }
 
+    /**
+     * Get a specific qrcode by qrhash
+     * @param databaseCallback A callback function when data is retrieved from Firestore database
+     * @param list A List<Map> object that contains result from Firestore
+     * @param objectName Hash of qrcode
+     * @throws Exception throws Exception if collection name is incorrect
+     */
     public void getQR(DatabaseCallback databaseCallback, List<Map> list, String objectName) throws Exception {
         databaseProxy.getData(databaseCallback, list, "QrCode", objectName);
     }
 
+    /**
+     * Delete a qrcode by it's unique hash
+     * @param objectName qrhash of this qrcode
+     */
     public void deleteQr(String objectName) {
         try {
             databaseProxy.deleteData("QrCode", objectName);

@@ -83,6 +83,17 @@ public class SignupController {
         playerController.getPlayer(databaseCallback, result, id, "DeviceId");
     }
 
+    /**
+     * update a player on local and database on startup
+     * @param username username of current player
+     * @param qrInventory Inventory(ArrayList<String>) of current player
+     * @param contact contact info (HashMap) of current player
+     * @param qrCount Integer of total count of current player
+     * @param totalScore Integer that represents total score current player
+     * @param highestUnique Integer that represents highest score of a unique qrcode
+     * @param owner A boolean variable indicates if this player is the owner
+     * @param id DeviceId of current player
+     */
     public void write(String username, ArrayList<String> qrInventory, HashMap<String, String> contact, Integer qrCount, Integer totalScore, Integer highestUnique,Boolean owner ,String id){
         playerController.setupPlayer(username, qrInventory, contact, qrCount, totalScore, highestUnique, owner ,id);
     }

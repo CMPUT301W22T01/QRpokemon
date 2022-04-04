@@ -43,6 +43,11 @@ public class PlayerRecyclerAdapter extends RecyclerView.Adapter<PlayerRecyclerAd
         private OnItemListener onItemListener;
         private Button delete;
 
+        /**
+         * Hold information on different area in one Recycler view item
+         * @param view
+         * @param onItemListener
+         */
         public ViewHolder (final View view, OnItemListener onItemListener) {
             super(view);
 
@@ -73,6 +78,11 @@ public class PlayerRecyclerAdapter extends RecyclerView.Adapter<PlayerRecyclerAd
         return new ViewHolder(itemView, mOnItemListener);
     }
 
+    /**
+     * The holder that binds the element that being hold, it has it's index on Recycler view
+     * @param holder A ViewHolder object
+     * @param position The position of this item in Recycler view
+     */
     @Override
     public void onBindViewHolder(@NonNull PlayerRecyclerAdapter.ViewHolder holder, int position) {
 
@@ -111,6 +121,10 @@ public class PlayerRecyclerAdapter extends RecyclerView.Adapter<PlayerRecyclerAd
         }
     }
 
+    /**
+     * Count the total number of elements in this view
+     * @return
+     */
     @Override
     public int getItemCount() {
         return items.size();
@@ -120,6 +134,11 @@ public class PlayerRecyclerAdapter extends RecyclerView.Adapter<PlayerRecyclerAd
         void onItemClick(int position);
     }
 
+    /**
+     * convert string to Bitmap image for display
+     * @param encodedString bitmap string
+     * @return Bitmap image
+     */
     public Bitmap StringToBitMap(String encodedString){
         try {
             byte [] encodeByte= Base64.decode(encodedString,Base64.DEFAULT);

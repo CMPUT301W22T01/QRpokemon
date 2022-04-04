@@ -108,6 +108,11 @@ public class MainMenuController implements Observer {
         playerController.getPlayer(databaseCallback, dataList,photoContent,"Identifier");
     }
 
+    /**
+     * Item that being observed is finished
+     * @param observable playerController class
+     * @param o MainMenuController
+     */
     @Override
     public void update(Observable observable, Object o) {
         HashMap temp = new HashMap();

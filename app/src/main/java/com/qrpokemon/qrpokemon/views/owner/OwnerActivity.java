@@ -98,6 +98,10 @@ public class OwnerActivity extends AppCompatActivity implements PlayerRecyclerAd
 
     }
 
+    /**
+     * Set items to be displayed for owner on Recycler view
+     * @param players Items that will be displayed on Recycler view
+     */
     private void setAdapter(List<Map> players) {
         radapter = new PlayerRecyclerAdapter(players, isPlayer, this);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());

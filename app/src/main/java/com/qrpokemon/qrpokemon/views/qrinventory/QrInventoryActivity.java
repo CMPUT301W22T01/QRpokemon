@@ -423,7 +423,7 @@ public class QrInventoryActivity
      * to and call this function, then it writes the new arrayList of comments of that qrCode ('selectedHash')
      * for the current player into Firebase.
      * @param comment comment that player just entered
-     * @throws Exception
+     * @throws Exception if collection name is invalid
      */
     public void addComment(String comment) throws Exception {
         HashMap<String, HashMap> tHash = new HashMap<>();

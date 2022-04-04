@@ -61,7 +61,6 @@ public class SearchActivity extends AppCompatActivity {
                 try {
                     selected = (SearchItem) adapterView.getItemAtPosition(i);
                     if (!selected.getQrList().isEmpty()) {
-//                        mAdapter.clear();
                         newAdapter = new SearchQrList(getApplicationContext(), selected.getQrList());
                         listView.setAdapter(newAdapter);
 
@@ -86,28 +85,6 @@ public class SearchActivity extends AppCompatActivity {
                 searchController.getLocationSearch(getApplicationContext(), searchBox.getText().toString(), mAdapter);
             }
         });
-
-////these code can update the search list while typing, but the list can not update properly if user type too fast
-//        searchBox.addTextChangedListener(new TextWatcher() {
-//            @Override
-//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-//                mAdapter.clear();
-//            }
-//
-//            @Override
-//            public void onTextChanged(CharSequence s, int start, int before, int count) {
-//                //Log.e("SearchActivity: ", "count: " + count);
-//                mAdapter.clear();
-//            }
-//
-//            @Override
-//            public void afterTextChanged(Editable s) {
-//                listView.setAdapter(mAdapter);
-//                Log.e("SearchActivity: ","current input: " + s.toString());
-//                searchController.getPlayerSearch(getApplicationContext(), s.toString(), mAdapter);
-//                searchController.getLocationSearch(getApplicationContext(), s.toString(), mAdapter);
-//            }
-//        });
 
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override

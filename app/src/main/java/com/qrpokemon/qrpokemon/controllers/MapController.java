@@ -24,6 +24,13 @@ public class MapController {
         return currentInstance;
     }
 
+    /**
+     * Finds a qr code an pass it's location to location controller therefore display it on MapActivity
+     * @param contextActivity MapActivity
+     * @param supportMapFragmentActivity MapActivity that has a map fragment
+     * @param locationManager Handles location passed from GPS
+     * @param fusedLocationProviderClientActivity Client whom location needs to be recorded
+     */
     public void run(Context contextActivity, @Nullable SupportMapFragment supportMapFragmentActivity, LocationManager locationManager, FusedLocationProviderClient fusedLocationProviderClientActivity) {
         DatabaseCallback databaseCallback = new DatabaseCallback(contextActivity) {
             @Override
@@ -43,12 +50,4 @@ public class MapController {
 
     }
 
-//    public void getAllQr(DatabaseCallback databaseCallback, List<Map> result) {
-//        try {
-//            qrCodeController.getQR(databaseCallback, result,null);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            Log.e("MapController: ", "Invalid collection name");
-//        }
-//    }
 }

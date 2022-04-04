@@ -110,6 +110,13 @@ public class RestoreSession extends AppCompatActivity {
         }
     }
 
+    /**
+     * Receive user's decision on whether gives a camera permission
+     * pop camera if permission is granted
+     * @param requestCode 100 is camera request code
+     * @param permissions All permission asked
+     * @param grantResults Result of request
+     */
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);

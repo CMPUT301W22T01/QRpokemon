@@ -131,6 +131,7 @@ public class QrScannedController {
      * @param score score of this QR code
      * @param location Location of where this QR is captured
      * @param bitmap A small size photo of this QR code.
+     * @param codeContent the message for this QR code
      * @throws Exception getQR() may throw exception, but highly unlikely since the error is raised
      * from DatabaseProxy complaining about incorrect collection name
      */

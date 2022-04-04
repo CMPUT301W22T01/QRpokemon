@@ -45,6 +45,13 @@ public class MapActivity extends AppCompatActivity  {
         mapController.run(this, supportMapFragment, locationManager,  fusedLocationProviderClient);
     }
 
+    /**
+     * Receive user's decision on whether gives a location permission
+     * get Geolocation if permission is granted
+     * @param requestCode 101 is location request code
+     * @param permissions All permission asked
+     * @param grantResults Result of request
+     */
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);

@@ -164,6 +164,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
+    /**
+     * Ask permission for device to open camera
+     * @param requestCode 100 permission code
+     * @param permissions the array of permission app asked
+     * @param grantResults the result of permission asked
+     */
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         Log.e("MainMenuController: ", "Request now has the result");

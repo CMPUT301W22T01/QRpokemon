@@ -52,6 +52,15 @@ public class LocationController implements OnMapReadyCallback, LocationListener 
         return currentInstance;
     }
 
+    /**
+     * Checks location permission and opens google map
+     * If permission is invalid, will ask user for location permission
+     * @param contextActivity Activity whichever calls it
+     * @param supportMapFragmentActivity Activity whichever supports map
+     * @param locationManager Location manager that handles location info
+     * @param fusedLocationProviderClientActivity Client that access location
+     * @param qrList a list of qrcode will be displayed on map can be null for no qr code
+     */
     public void run(Context contextActivity, @Nullable SupportMapFragment supportMapFragmentActivity, LocationManager locationManager, FusedLocationProviderClient fusedLocationProviderClientActivity, @Nullable List<Map> qrList) {
         qrHashList = qrList;
         context = contextActivity;
@@ -143,7 +152,10 @@ public class LocationController implements OnMapReadyCallback, LocationListener 
         Log.e("onMapReady: ", "Map is now ready");
     }
 
-
+    /**
+     * Update location once GPS has responded to request
+     * @param location Location object contains location info for current GPS location.
+     */
     @Override
     public void onLocationChanged(@NonNull Location location) {
         if (currentLocation == null){
@@ -245,6 +257,11 @@ public class LocationController implements OnMapReadyCallback, LocationListener 
         }
     }
 
+    /**
+     * Get all location data from LocationIndex collection on Firestore
+     * @param databaseCallback callback function once it retries all info from Firestore
+     * @param temp a List<Map> that contains all location info found on Firestore
+     */
     public void getAllLocation(DatabaseCallback databaseCallback , List<Map> temp) {
         try {
             databaseProxy.getData(databaseCallback, temp,"LocationIndex");

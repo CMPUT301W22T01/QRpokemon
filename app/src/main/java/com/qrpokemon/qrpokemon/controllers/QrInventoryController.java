@@ -40,8 +40,11 @@ public class QrInventoryController {
     /**
      * Get and return all the data of "currentPlayer" from local file.
      * @param currentPlayer The identifier of the current player
+     * @param otherPlayer if this is asking for other player's data
+     * @param context Activity whichever calls this method
+     * @param o An Activity waiting for this method to be finished
      * @return all the information of the current player's document, which is a hashMap
-     * @throws Exception if collection is incorrect or player doesn't found
+     * @throws Exception if collection name is incorrect
      */
     public HashMap<String, Object> getPlayerInfo (String currentPlayer, Boolean otherPlayer, @Nullable Context context , @Nullable Observer o) throws Exception {
         if (otherPlayer){ // if this qrInventory currently serving for other player, fetch original player before head back
@@ -85,8 +88,10 @@ public class QrInventoryController {
     /**
      * Get a series of hash codes of qrcode, which is stored in argument "qrHashCodes", then put
      * all the documents of those hash codes from collection "QrCode".
+     * It updates player's qrInventory from Firestore to local and displays it on QrInventoryActivity
      * @param context       current activity
      * @param qrHashCodes   an ArrayList which has all the qrCodes owned by the current player
+     * @param qrInventory   an ArrayList of qrInventory of current player
      * @param currentPlayer String of the current player
      * @return              the document of a qrHash
      * @throws Exception if collection name is incorrect
@@ -194,14 +199,23 @@ public class QrInventoryController {
      * @param databaseCallback callback object.
      * @param hashName  the qrCode which we want to get all the comments of.
      * @param result    where we store all the comments, format: 'player'(String) : 'comments'(ArrayList<String>)
-     * @return
-     * @throws Exception
+     * @return A hashMap that represents comments of this qrcode
+     * @throws Exception throws Exception if collection name is incorrect
      */
     public HashMap<String, Object> getAllComments (DatabaseCallback databaseCallback, String hashName, List<Map> result) throws Exception {
             qrCodeController.getQR(databaseCallback, result, hashName);
         return data;
     }
 
+    /**
+     * update a qr's information to Firestore
+     * @param qrHash hash of current qr code
+     * @param score score of this qrcode
+     * @param location location where this qrcode is scanned
+     * @param comments comments on this qr code made by player(s)
+     * @param bitmap photo(s) of this qrcode
+     * @throws Exception throws Exception if collection name is incorrect
+     */
     public void updateQR (String qrHash, @Nullable Integer score, @Nullable ArrayList<String> location, @Nullable HashMap<String, Object> comments, @Nullable HashMap<String,String> bitmap) throws Exception {
         qrCodeController.saveQr(qrHash,score,location,comments,bitmap,null);
     }

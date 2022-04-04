@@ -85,7 +85,7 @@ public class PlayerController extends Observable {
     }
 
     /**
-     * Save other player's data
+     * Save other player's data on Firestore
      * @param qrCount player's qrCount
      * @param totalScore player's total score
      * @param qrInventory player's qrInventory
@@ -127,6 +127,9 @@ public class PlayerController extends Observable {
      * @param totalScore player's total Score
      * @param qrInventory an Arraylist of qrHashes
      * @param contact contact info for player
+     * @param highestUnique highest score from a unique qrcode
+     * @param id DeviceId of the given user
+     * @param owner a Boolean variable indicates if this is an owner
      * @param addIdentifier if true create a new player in database, update a user otherwise
      * @throws Exception if collection is invalid
      */
@@ -183,13 +186,17 @@ public class PlayerController extends Observable {
             databaseProxy.writeData("Player", this.currentPlayer.getUsername() ,info ,true);
 
         } else { //update a user
-//            Log.e("PlayerController: ", "User at savePlayerData is: "+ this.currentPlayer.getUsername());
             databaseProxy.writeData("Player", this.currentPlayer.getUsername() ,info ,false);
             Log.e("PlayerController: ", this.currentPlayer.getQrInventory().toString());
         }
     }
 
-
+    /**
+     * Grab all players in Player collection from Firestore database
+     * @param databaseCallback a call back function once it retries result from Firestore
+     * @param result data found form Firestore will be contained in List<Map>
+     * @param sortField A string indicates that how the data will be sorted by
+     */
     public void getAllPlayers(DatabaseCallback databaseCallback, List<Map> result, @Nullable String sortField){
         try {
             databaseProxy.getData(databaseCallback, result, player, null, sortField, "Identifier");
@@ -201,6 +208,11 @@ public class PlayerController extends Observable {
         getAllPlayers(databaseCallback, result, null);
     }
 
+    /**
+     * Delete a player with given username
+     * @param playerName username indicates which user will be deleted
+     * @throws Exception raise exception if collection name is incorrect
+     */
     public void deletePlayer(String playerName) throws Exception {
         databaseProxy.deleteData(player, playerName);
     }
