@@ -50,7 +50,7 @@ public class SearchController {
                 //Log.e("SearchController: ", "Inside run");
                 if(!playerList.isEmpty() && !userName.isEmpty()) {
                     // clear previous search result when searching for a new thing
-                    qMyAdapter.clear();
+//                    qMyAdapter.clear();
                     for (Map player : playerList){
 
                         ArrayList<String> currentQrList = new ArrayList<String>();
@@ -148,19 +148,10 @@ public class SearchController {
                                     null,
                                     currentQrList);
 
-                            int checker = 0;
-                            for (int i = 0; i < qMyAdapter.getCount(); i++) {
-                                if (qMyAdapter.getItem(i) == locationSearchItem) {
-                                    checker  = 1;
-                                    break;
 
-                                }
-                            }
+                            qMyAdapter.add(locationSearchItem);
+                            qMyAdapter.notifyDataSetChanged();
 
-                            if(checker == 0) {
-                                qMyAdapter.add(locationSearchItem);
-                                qMyAdapter.notifyDataSetChanged();
-                            }
                             Log.e("SearchController :", locationSearchItem.toString());
 //                            else{
 //                                qMyAdapter.remove(locationSearchItem);
