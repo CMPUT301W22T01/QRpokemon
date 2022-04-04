@@ -213,10 +213,12 @@ public class LocationController implements OnMapReadyCallback, LocationListener 
                         e.printStackTrace();
                     }
                 } else { // There is qrcode in this city:
-                    data.put("Identifier", cityName);
+
                     Log.e("LocationController: ", "There is qr code in this city");
                     Map cityInfo = dataList.get(0);
-                    if (cityInfo.get(coordinate) == null) {} // there is no qr code at this location:
+                    if (cityInfo.get(coordinate) == null) {// there is no qr code at this location:
+                        qrhashList = new ArrayList<String>();
+                    }
                     else { // There is qr code at this location, append them in the same list which identified by gps location.
                         Log.e("LocationController: ", "There is qr code at the same location!");
                         qrhashList = (ArrayList<String>) cityInfo.get(coordinate);
@@ -224,12 +226,11 @@ public class LocationController implements OnMapReadyCallback, LocationListener 
 
                     // update qrhash list at this location
                     qrhashList.add(qrhash);
-                    data.put(coordinate,qrhashList);
-                    // save this location info to city's information
                     cityInfo.put(coordinate,qrhashList);
+
                     Log.e("LocationController: ", "Location is now saved with :"+qrhashList.toString());
                     try { //Save City with modified information
-                        databaseProxy.writeData("LocationIndex",cityName, data, true);
+                        databaseProxy.writeData("LocationIndex",cityName, (HashMap) cityInfo, true);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
